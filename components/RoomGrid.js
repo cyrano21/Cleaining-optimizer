@@ -1,104 +1,76 @@
+// components/RoomGrid.js
 import React from "react";
 
-const RoomGrid = ({ rooms, onRoomClick, onRoomAction }) => {
-  const getRoomColor = (room) => {
-    if (room.isBarred) return "bg-red-500";
-    switch (room.status) {
-      case "departure":
-        return "bg-orange-500";
-      case "stay":
-        return room.isStarred ? "bg-yellow-500" : "bg-green-500";
-      case "clean":
-        return "bg-white";
-      case "dnd":
-        return "bg-purple-500";
-      case "refused":
-        return "bg-pink-500";
-      default:
-        return "bg-gray-200";
-    }
-  };
-
+export default function RoomGrid({
+  rooms,
+  onRoomClick,
+  toggleStar,
+  handleNoteChange,
+  selectedNote,
+  manualAssignmentActive,
+  selectedEmployee,
+}) {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
+      <h2 className="text-2xl font-bold mb-4 text-indigo-600">
         État des chambres
       </h2>
-      <div className="grid grid-cols-3 gap-2 h-[calc(100vh-200px)] overflow-y-auto">
+      <div className="grid grid-cols-5 gap-2 overflow-y-auto max-h-96">
         {rooms.map((room) => (
-          <button
+          <div
             key={room.number}
+            className={`flex flex-col border border-gray-300 rounded-lg overflow-hidden ${
+              room.state === "Départ"
+                ? "bg-pink-200"
+                : room.state === "Recouche"
+                ? "bg-green-200"
+                : "bg-white"
+            } ${manualAssignmentActive ? "cursor-pointer" : ""}`}
             onClick={() => onRoomClick(room.number)}
-            className={`${getRoomColor(
-              room
-            )} p-2 rounded-md shadow hover:shadow-lg transition-shadow duration-200 relative`}
           >
-            <span className="font-bold">{room.number}</span>
-            <span className="text-xs block">{room.type}</span>
-            {room.isControlled && (
-              <span className="absolute top-0 right-0 text-xs">✓</span>
-            )}
-            {room.isStarred && (
-              <span className="absolute bottom-0 right-0 text-xs">⭐</span>
-            )}
-            {room.notes && (
-              <span className="text-xs block truncate">{room.notes}</span>
-            )}
-          </button>
+            <div className="p-2 text-center font-bold">{room.number}</div>
+            <div className="flex-grow p-2 text-xs">
+              <div className="border-b border-gray-300">{room.type}</div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600">
+                  {room.assignedTo ||
+                    (manualAssignmentActive ? "Assigner" : "")}
+                </span>
+                {room.state === "Recouche" && (
+                  <span
+                    className={`cursor-pointer ${
+                      room.star ? "text-yellow-500" : "text-gray-300"
+                    }`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleStar(room.number);
+                    }}
+                  >
+                    ★
+                  </span>
+                )}
+              </div>
+              <div className="mt-1">
+                <select
+                  className="w-full text-xs border rounded"
+                  value={selectedNote[room.number] || ""}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleNoteChange(room.number, e.target.value);
+                  }}
+                >
+                  <option value="">Sélectionner une note</option>
+                  <option value="DND">DND</option>
+                  <option value="Refus">Refus</option>
+                  <option value="Départ tardif">Départ tardif</option>
+                  <option value="LP">LP</option>
+                  <option value="Autres">Autres</option>
+                </select>
+              </div>
+            </div>
+          </div>
         ))}
-      </div>
-      <div className="mt-4 space-x-2">
-        <button
-          onClick={() => onRoomAction("departure")}
-          className="bg-orange-500 text-white px-2 py-1 rounded"
-        >
-          Départ
-        </button>
-        <button
-          onClick={() => onRoomAction("stay")}
-          className="bg-green-500 text-white px-2 py-1 rounded"
-        >
-          Recouche
-        </button>
-        <button
-          onClick={() => onRoomAction("clean")}
-          className="bg-white border border-gray-300 px-2 py-1 rounded"
-        >
-          Propre
-        </button>
-        <button
-          onClick={() => onRoomAction("dnd")}
-          className="bg-purple-500 text-white px-2 py-1 rounded"
-        >
-          DND
-        </button>
-        <button
-          onClick={() => onRoomAction("refused")}
-          className="bg-pink-500 text-white px-2 py-1 rounded"
-        >
-          Refus
-        </button>
-        <button
-          onClick={() => onRoomAction("control")}
-          className="bg-blue-500 text-white px-2 py-1 rounded"
-        >
-          Contrôle
-        </button>
-        <button
-          onClick={() => onRoomAction("star")}
-          className="bg-yellow-500 text-white px-2 py-1 rounded"
-        >
-          ⭐
-        </button>
-        <button
-          onClick={() => onRoomAction("bar")}
-          className="bg-red-500 text-white px-2 py-1 rounded"
-        >
-          Barrer
-        </button>
       </div>
     </div>
   );
-};
-
-export default RoomGrid;
+}

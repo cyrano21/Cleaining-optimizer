@@ -1,1 +1,0 @@
-// Fonctions utilitaires pour la distribution
