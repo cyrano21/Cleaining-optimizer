@@ -1,10 +1,8 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-
 export default function RoomGrid({
   rooms,
   onRoomClick,
   toggleStar,
+  toggleRoomChecked,
   handleNoteChange,
   selectedNote,
   manualAssignmentActive,
@@ -15,11 +13,6 @@ export default function RoomGrid({
       <h2 className="text-2xl font-bold mb-4 text-indigo-600">
         État des chambres
       </h2>
-      {manualAssignmentActive && selectedEmployee && (
-        <p className="mb-4 text-sm text-indigo-600">
-          Assignation manuelle active pour : {selectedEmployee}
-        </p>
-      )}
       <div className="grid grid-cols-5 gap-2 overflow-y-auto max-h-96">
         {rooms.map((room) => (
           <div
@@ -30,11 +23,7 @@ export default function RoomGrid({
                 : room.state === "Recouche"
                 ? "bg-green-200"
                 : "bg-white"
-            } ${manualAssignmentActive ? "cursor-pointer" : ""} ${
-              room.assignedTo === selectedEmployee
-                ? "ring-2 ring-indigo-500"
-                : ""
-            }`}
+            } ${room.checked ? "border-4 border-blue-500" : ""}`}
             onClick={() => onRoomClick(room.number)}
           >
             <div className="p-2 text-center font-bold">{room.number}</div>
@@ -76,6 +65,17 @@ export default function RoomGrid({
                   <option value="Autres">Autres</option>
                 </select>
               </div>
+              <button
+                className={`mt-1 w-full text-xs py-1 px-2 rounded ${
+                  room.checked ? "bg-blue-500 text-white" : "bg-gray-200"
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleRoomChecked(room.number);
+                }}
+              >
+                {room.checked ? "Contrôlée" : "Marquer comme contrôlée"}
+              </button>
             </div>
           </div>
         ))}

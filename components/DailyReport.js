@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useMemo } from "react";
 
 export default function DailyReport({ rooms, selectedNote }) {

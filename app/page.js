@@ -983,6 +983,15 @@ export default function HomePage() {
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(""); // Ajout de cet état
 
+
+  const toggleRoomChecked = (roomNumber) => {
+    setRooms((prevRooms) =>
+      prevRooms.map((room) =>
+        room.number === roomNumber ? { ...room, checked: !room.checked } : room
+      )
+    );
+  };
+
   useEffect(() => {
     // Charger les données sauvegardées au démarrage
     const savedRooms = localStorage.getItem("rooms");
@@ -1113,6 +1122,7 @@ export default function HomePage() {
             selectedNote={selectedNote}
             manualAssignmentActive={manualAssignmentActive}
             selectedEmployee={selectedEmployee}
+            toggleRoomChecked={toggleRoomChecked}
           />
           <ManualAssignment
             staff={staffList}
