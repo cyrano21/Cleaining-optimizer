@@ -1,5 +1,3 @@
-// components/RoomGrid.js
-
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -21,7 +19,7 @@ export default function RoomGrid({
     return [];
   };
 
-  const handleRoomClick = (e, room) => {
+  const handleRoomClickInternal = (e, room) => {
     // Vérifier si le clic provient d'un élément interactif
     if (
       e.target.tagName === "INPUT" ||
@@ -62,7 +60,7 @@ export default function RoomGrid({
                 ? "ring-2 ring-indigo-500"
                 : ""
             }`}
-            onClick={(e) => handleRoomClick(e, room)}
+            onClick={(e) => handleRoomClickInternal(e, room)}
           >
             <div className="p-1 sm:p-2 text-center font-bold text-xs sm:text-sm">
               {room.number}
@@ -124,12 +122,23 @@ export default function RoomGrid({
   );
 }
 
+// Validation des props
 RoomGrid.propTypes = {
-  rooms: PropTypes.array.isRequired,
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      type: PropTypes.string,
+      notes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+      assignedTo: PropTypes.string,
+      checked: PropTypes.bool.isRequired,
+      star: PropTypes.bool,
+    })
+  ).isRequired,
   onRoomClick: PropTypes.func.isRequired,
   toggleStar: PropTypes.func.isRequired,
   toggleRoomChecked: PropTypes.func.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
   manualAssignmentActive: PropTypes.bool.isRequired,
-  selectedEmployee: PropTypes.string,
+  selectedEmployee: PropTypes.string.isRequired,
 };

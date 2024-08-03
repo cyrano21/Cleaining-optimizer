@@ -1,7 +1,5 @@
-// components/DailyReport.js
-
 import React, { useMemo } from "react";
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"; // Importer PropTypes pour la validation
 
 export default function DailyReport({ rooms }) {
   const reportData = useMemo(() => {
@@ -84,6 +82,17 @@ export default function DailyReport({ rooms }) {
   );
 }
 
+// Validation des props
 DailyReport.propTypes = {
-  rooms: PropTypes.array.isRequired,
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      type: PropTypes.string,
+      notes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+      assignedTo: PropTypes.string,
+      checked: PropTypes.bool.isRequired,
+      star: PropTypes.bool,
+    })
+  ).isRequired,
 };

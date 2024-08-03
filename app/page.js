@@ -1,4 +1,3 @@
-// app/page.js
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -979,8 +978,9 @@ const defaultRooms = [
 export default function HomePage() {
   const [rooms, setRooms] = useState(defaultRooms);
   const [staffList, setStaffList] = useState([]);
+  // const [selectedNotes, setSelectedNotes] = useState({}); // Supprimé car inutilisé
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState(""); // Correction de setSelectedNote
   const [activeTab, setActiveTab] = useState("rooms");
 
   const toggleRoomChecked = (roomNumber) => {
