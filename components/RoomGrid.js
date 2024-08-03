@@ -32,13 +32,13 @@ export default function RoomGrid({
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-2 sm:p-4 md:p-6 border-t-4 border-indigo-500">
-      <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-indigo-600">
-        État des chambres
+    <div className="bg-white shadow-lg rounded-lg p-2 sm:p-3 md:p-4 border-t-4 border-indigo-500">
+      <h2 className="text-lg sm:text-xl font-bold mb-2 text-indigo-600">
+        Chambres
       </h2>
       {manualAssignmentActive && selectedEmployee && (
-        <p className="text-sm text-indigo-600 mb-2">
-          Assignation en cours : {selectedEmployee}
+        <p className="text-sm text-indigo-600 mb-1">
+          Assignation : {selectedEmployee}
         </p>
       )}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 sm:gap-2 overflow-y-auto max-h-[calc(100vh-200px)]">

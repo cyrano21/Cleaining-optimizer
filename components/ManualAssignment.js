@@ -59,15 +59,27 @@ export default function ManualAssignment({
     return notes;
   };
 
+  // Calculer le nombre total de chambres assignées à chaque employé
+  const getTotalRoomsAssigned = (employeeName) => {
+    return rooms.filter((room) => room.assignedTo === employeeName).length;
+  };
+
+  // Calculer le nombre total de chambres dans chaque état pour chaque employé
+  const getRoomCountByState = (employeeName, state) => {
+    return rooms.filter(
+      (room) => room.assignedTo === employeeName && room.state === state
+    ).length;
+  };
+
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
-      <h2 className="text-2xl font-bold mb-4 text-indigo-600">
+    <div className="bg-white shadow-lg rounded-lg p-4 border-t-4 border-indigo-500">
+      <h2 className="text-xl font-bold mb-2 text-indigo-600">
         Assignation manuelle
       </h2>
 
       {/* Bouton pour activer l'assignation manuelle */}
       <button
-        className={`mb-4 p-2 rounded ${
+        className={`mb-2 p-1 rounded ${
           manualAssignmentActive
             ? "bg-red-500 text-white"
             : "bg-blue-500 text-white"
@@ -75,20 +87,20 @@ export default function ManualAssignment({
         onClick={toggleManualAssignment}
       >
         {manualAssignmentActive
-          ? "Désactiver l'assignation manuelle"
-          : "Activer l'assignation manuelle"}
+          ? "Désactiver l'assignation"
+          : "Activer l'assignation"}
       </button>
 
       {/* Sélection de l'employé */}
       {manualAssignmentActive && (
-        <div className="mb-4">
-          <label className="block mb-2 font-semibold text-gray-700">
+        <div className="mb-2">
+          <label className="block mb-1 font-semibold text-gray-700">
             Sélectionnez un employé :
           </label>
           <select
             value={selectedEmployee}
             onChange={(e) => setSelectedEmployee(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-1 border rounded"
           >
             <option value="">Choisissez un employé</option>
             {staff.map((staffMember) => (
@@ -101,17 +113,33 @@ export default function ManualAssignment({
       )}
 
       {/* Liste des chambres assignées */}
-      <div className="space-y-4">
+      <div className="space-y-2">
         {staff.map((staffMember) => (
-          <div key={staffMember.name}>
-            <span className="font-bold text-lg">{staffMember.name}</span>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mt-2">
+          <div key={staffMember.name} className="flex flex-col">
+            <div className="font-bold text-sm mb-1 text-indigo-700">
+              {staffMember.name} -{" "}
+              <span className="text-indigo-900">
+                Chambres: {getTotalRoomsAssigned(staffMember.name)}
+              </span>{" "}
+              <span className="text-gray-600">
+                (Libre: {getRoomCountByState(staffMember.name, "Libre")},{" "}
+                <span className="text-pink-500">
+                  Départ: {getRoomCountByState(staffMember.name, "Départ")}
+                </span>
+                ,{" "}
+                <span className="text-green-500">
+                  Recouche: {getRoomCountByState(staffMember.name, "Recouche")}
+                </span>
+                )
+              </span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1">
               {rooms
                 .filter((room) => room.assignedTo === staffMember.name)
                 .map((room) => (
                   <div
                     key={room.number}
-                    className={`p-2 border rounded ${
+                    className={`p-1 border rounded ${
                       room.state === "Départ"
                         ? "bg-pink-100"
                         : room.state === "Recouche"
@@ -120,7 +148,7 @@ export default function ManualAssignment({
                     } ${room.checked ? "border-2 border-blue-500" : ""}`}
                     onClick={() => handleRoomClick(room.number)}
                   >
-                    <div className="font-semibold">{room.number}</div>
+                    <div className="font-semibold text-xs">{room.number}</div>
                     {room.state === "Recouche" && room.star && (
                       <span className="text-yellow-500">★</span>
                     )}
@@ -141,7 +169,7 @@ export default function ManualAssignment({
                     )}
                     {/* Bouton pour désassigner la chambre */}
                     <button
-                      className="mt-2 p-1 bg-red-400 text-white text-xs rounded"
+                      className="mt-1 p-1 bg-red-400 text-white text-xs rounded"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleUnassign(room.number);
@@ -158,17 +186,17 @@ export default function ManualAssignment({
 
       {/* Option pour réassigner si une chambre est désassignée */}
       {reassignMode && selectedRoom && (
-        <div className="mt-4 p-4 bg-yellow-100 rounded-lg">
-          <h3 className="text-lg font-semibold text-yellow-600">
+        <div className="mt-2 p-2 bg-yellow-100 rounded-lg">
+          <h3 className="text-sm font-semibold text-yellow-600">
             Réassigner la chambre {selectedRoom}
           </h3>
-          <label className="block mb-2 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold text-gray-700">
             Choisissez un employé pour réassigner :
           </label>
           <select
             value={reassignEmployee}
             onChange={(e) => setReassignEmployee(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-1 border rounded"
           >
             <option value="Marie">Marie</option>
             {staff
@@ -180,13 +208,13 @@ export default function ManualAssignment({
               ))}
           </select>
           <button
-            className="mt-2 p-2 bg-green-500 text-white rounded"
+            className="mt-1 p-1 bg-green-500 text-white rounded"
             onClick={() => handleReassign(selectedRoom)}
           >
             Réassigner à {reassignEmployee}
           </button>
           <button
-            className="mt-2 ml-2 p-2 bg-gray-500 text-white rounded"
+            className="mt-1 ml-1 p-1 bg-gray-500 text-white rounded"
             onClick={() => {
               setReassignMode(false);
               setSelectedRoom(null);
