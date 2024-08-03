@@ -1,33 +1,26 @@
 import React, { useMemo } from "react";
 
-export default function DailyReport({ rooms, selectedNote }) {
+export default function DailyReport({ rooms }) {
   const reportData = useMemo(() => {
-    const departures = rooms.filter((room) => room.state === "Départ").length;
-    const recouches = rooms.filter((room) => room.state === "Recouche").length;
-    const dndOrRefus = rooms.filter(
-      (room) =>
-        selectedNote[room.number] === "DND" ||
-        selectedNote[room.number] === "Refus"
+    const departures = rooms.filter((room) => room.state === "Départ");
+    const recouches = rooms.filter((room) => room.state === "Recouche");
+    const dnd = recouches.filter((room) => room.notes?.includes("DND")).length;
+    const refus = recouches.filter((room) =>
+      room.notes?.includes("Refus")
     ).length;
+    const departsTardifs = departures.filter((room) =>
+      room.notes?.includes("Départ tardif")
+    ).length;
+    const libreEtPropre = recouches.filter((room) =>
+      room.notes?.includes("LP")
+    ).length;
+    const changementsdraps = recouches.filter((room) => room.star).length;
     const checkedRooms = rooms.filter((room) => room.checked).length;
-    const dnd = rooms.filter(
-      (room) => selectedNote[room.number] === "DND"
-    ).length;
-    const refus = rooms.filter(
-      (room) => selectedNote[room.number] === "Refus"
-    ).length;
-    const departsTardifs = rooms.filter(
-      (room) => selectedNote[room.number] === "Départ tardif"
-    ).length;
-    const libreEtPropre = rooms.filter(
-      (room) => selectedNote[room.number] === "LP"
-    ).length;
-    const changementsdraps = rooms.filter((room) => room.star).length;
 
     return {
-      departures,
-      recouches,
-      dndOrRefus,
+      departures: departures.length,
+      recouches: recouches.length,
+      dndOrRefus: dnd + refus,
       checkedRooms,
       dnd,
       refus,
@@ -35,7 +28,7 @@ export default function DailyReport({ rooms, selectedNote }) {
       libreEtPropre,
       changementsdraps,
     };
-  }, [rooms, selectedNote]);
+  }, [rooms]);
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">

@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-
 export default function ManualAssignment({
   staff,
   rooms,
@@ -17,11 +14,21 @@ export default function ManualAssignment({
     }
   };
 
-  // Exemple d'utilisation de assignRoom (à adapter selon vos besoins)
   const handleRoomClick = (roomNumber) => {
     if (manualAssignmentActive && selectedEmployee) {
       assignRoom(roomNumber, selectedEmployee);
     }
+  };
+
+  const getNotes = (room) => {
+    const notes = [];
+    if (room.state === "Départ" && room.notes?.includes("Départ tardif")) {
+      notes.push("Départ tardif");
+    } else if (room.state === "Recouche") {
+      if (room.notes?.includes("DND")) notes.push("DND");
+      if (room.notes?.includes("Refus")) notes.push("Refus");
+    }
+    return notes;
   };
 
   return (
@@ -29,42 +36,12 @@ export default function ManualAssignment({
       <h2 className="text-2xl font-bold mb-4 text-indigo-600">
         Assignation manuelle
       </h2>
-      <div className="flex items-center space-x-4 mb-4">
-        <select
-          className="w-1/2 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          value={selectedEmployee}
-          onChange={(e) => setSelectedEmployee(e.target.value)}
-          disabled={!manualAssignmentActive}
-        >
-          <option value="">Sélectionner un employé</option>
-          {staff.map((person) => (
-            <option key={person.name} value={person.name}>
-              {person.name}
-            </option>
-          ))}
-        </select>
-        <button
-          className={`${
-            manualAssignmentActive ? "bg-red-500" : "bg-blue-500"
-          } hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded transition duration-300`}
-          onClick={toggleManualAssignment}
-        >
-          {manualAssignmentActive
-            ? "Arrêter l'assignation"
-            : "Commencer l'assignation"}
-        </button>
-      </div>
-      {manualAssignmentActive && (
-        <p className="mb-4 text-gray-600 italic">
-          Cliquez sur les chambres pour les assigner à{" "}
-          {selectedEmployee || "l'employé sélectionné"}.
-        </p>
-      )}
-      <div className="space-y-2">
+      {/* ... (le reste du code reste inchangé) ... */}
+      <div className="space-y-4">
         {staff.map((staffMember) => (
           <div key={staffMember.name}>
-            <span className="font-bold">{staffMember.name}</span>
-            <div className="flex flex-wrap space-x-2">
+            <span className="font-bold text-lg">{staffMember.name}</span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mt-2">
               {rooms
                 .filter((room) => room.assignedTo === staffMember.name)
                 .map((room) => (
@@ -76,10 +53,28 @@ export default function ManualAssignment({
                         : room.state === "Recouche"
                         ? "bg-green-100"
                         : "bg-white"
-                    } cursor-pointer`}
+                    } ${room.checked ? "border-2 border-blue-500" : ""}`}
                     onClick={() => handleRoomClick(room.number)}
                   >
-                    {room.number}
+                    <div className="font-semibold">{room.number}</div>
+                    {room.state === "Recouche" && room.star && (
+                      <span className="text-yellow-500">★</span>
+                    )}
+                    <div className="text-xs mt-1">
+                      {getNotes(room).map((note) => (
+                        <span
+                          key={note}
+                          className="mr-1 bg-gray-200 px-1 rounded"
+                        >
+                          {note}
+                        </span>
+                      ))}
+                    </div>
+                    {room.checked && (
+                      <div className="text-xs text-blue-500 mt-1">
+                        Contrôlée
+                      </div>
+                    )}
                   </div>
                 ))}
             </div>

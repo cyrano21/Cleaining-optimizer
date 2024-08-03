@@ -979,10 +979,10 @@ const defaultRooms = [
 export default function HomePage() {
   const [rooms, setRooms] = useState(defaultRooms);
   const [staffList, setStaffList] = useState([]);
-  const [selectedNote, setSelectedNote] = useState({});
+  const [selectedNotes, setSelectedNotes] = useState({});
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(""); // Ajout de cet état
-
+  const [activeTab, setActiveTab] = useState("rooms");
 
   const toggleRoomChecked = (roomNumber) => {
     setRooms((prevRooms) =>
@@ -1031,15 +1031,27 @@ export default function HomePage() {
               default:
                 newState = "Libre";
             }
-            return { ...room, state: newState };
+            // Réinitialiser les notes et l'état vérifié lors du changement d'état
+            return {
+              ...room,
+              state: newState,
+              notes: [],
+              checked: false,
+              star: newState === "Recouche" ? room.star : false,
+            };
           }
           return room;
         })
       );
     }
   };
+
   const addStaff = (name, contractType, preferredFloor) => {
-    if (!staffList.some((staff) => staff.name === name)) {
+    if (
+      !staffList.some(
+        (staff) => staff.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       setStaffList([...staffList, { name, contractType, preferredFloor }]);
     } else {
       alert("Un employé avec ce nom existe déjà.");
@@ -1047,6 +1059,14 @@ export default function HomePage() {
   };
 
   const assignRoom = (roomNumber, employeeName) => {
+    const employeeAlreadyAssigned = rooms.some(
+      (room) => room.assignedTo === employeeName
+    );
+    if (employeeAlreadyAssigned) {
+      alert("Cet employé est déjà assigné à une chambre.");
+      return;
+    }
+
     setRooms((prevRooms) =>
       prevRooms.map((room) =>
         room.number === roomNumber
@@ -1059,13 +1079,40 @@ export default function HomePage() {
   const toggleStar = (roomNumber) => {
     setRooms((prevRooms) =>
       prevRooms.map((room) =>
-        room.number === roomNumber ? { ...room, star: !room.star } : room
+        room.number === roomNumber && room.state === "Recouche"
+          ? { ...room, star: !room.star }
+          : room
       )
     );
   };
 
-  const handleNoteChange = (roomNumber, note) => {
-    setSelectedNote((prev) => ({ ...prev, [roomNumber]: note }));
+  const handleNoteChange = (roomNumber, note, isChecked) => {
+    setRooms((prevRooms) =>
+      prevRooms.map((room) => {
+        if (room.number === roomNumber) {
+          let newNotes = [...(room.notes || [])];
+          if (isChecked) {
+            // Vérifications pour l'ajout de notes
+            if (room.state === "Départ") {
+              if (note === "Départ tardif" && !newNotes.includes(note)) {
+                newNotes.push(note);
+              }
+            } else if (room.state === "Recouche") {
+              if (
+                ["DND", "Refus", "LP"].includes(note) &&
+                !newNotes.includes(note)
+              ) {
+                newNotes = [note]; // Une seule de ces notes à la fois
+              }
+            }
+          } else {
+            newNotes = newNotes.filter((n) => n !== note);
+          }
+          return { ...room, notes: newNotes };
+        }
+        return room;
+      })
+    );
   };
 
   const handleImport = async (file) => {
@@ -1107,22 +1154,41 @@ export default function HomePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8 text-indigo-700">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-indigo-700">
         Hôtel Cleaning Optimizer Pro
       </h1>
+
+      {/* Navigation pour petits écrans */}
+      <div className="md:hidden mb-4 flex justify-center">
+        <select
+          value={activeTab}
+          onChange={(e) => setActiveTab(e.target.value)}
+          className="w-full max-w-xs p-2 border rounded-md"
+        >
+          <option value="rooms">Chambres</option>
+          <option value="staff">Personnel</option>
+          <option value="reports">Rapports</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="space-y-8">
+        {/* Colonne des chambres */}
+        <div
+          className={`space-y-8 ${
+            activeTab !== "rooms" ? "hidden md:block" : ""
+          }`}
+        >
           <ImportData onImport={handleImport} />
           <RoomGrid
             rooms={rooms}
             onRoomClick={handleRoomClick}
             toggleStar={toggleStar}
+            toggleRoomChecked={toggleRoomChecked}
             staffList={staffList}
             handleNoteChange={handleNoteChange}
-            selectedNote={selectedNote}
+            selectedNotes={selectedNotes}
             manualAssignmentActive={manualAssignmentActive}
             selectedEmployee={selectedEmployee}
-            toggleRoomChecked={toggleRoomChecked}
           />
           <ManualAssignment
             staff={staffList}
@@ -1134,7 +1200,13 @@ export default function HomePage() {
             setSelectedEmployee={setSelectedEmployee}
           />
         </div>
-        <div className="space-y-8">
+
+        {/* Colonne du personnel */}
+        <div
+          className={`space-y-8 ${
+            activeTab !== "staff" ? "hidden md:block" : ""
+          }`}
+        >
           <StaffManagement staffList={staffList} addStaff={addStaff} />
           <RoomDistribution
             rooms={rooms}
@@ -1142,9 +1214,15 @@ export default function HomePage() {
             staffList={staffList}
           />
         </div>
-        <div className="space-y-8">
+
+        {/* Colonne des rapports */}
+        <div
+          className={`space-y-8 ${
+            activeTab !== "reports" ? "hidden md:block" : ""
+          }`}
+        >
           <RoomSearch rooms={rooms} />
-          <DailyReport rooms={rooms} selectedNote={selectedNote} />
+          <DailyReport rooms={rooms} selectedNotes={selectedNotes} />
           <Controls onReset={handleReset} onGenerateReport={generateReport} />
         </div>
       </div>

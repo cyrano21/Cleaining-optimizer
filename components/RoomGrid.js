@@ -1,19 +1,45 @@
+// Composant RoomGrid mis à jour
 export default function RoomGrid({
   rooms,
   onRoomClick,
   toggleStar,
   toggleRoomChecked,
   handleNoteChange,
-  selectedNote,
   manualAssignmentActive,
   selectedEmployee,
 }) {
+  const getNoteOptions = (room) => {
+    if (room.state === "Départ") {
+      return ["Départ tardif"];
+    } else if (room.state === "Recouche") {
+      return ["DND", "Refus"];
+    }
+    return [];
+  };
+
+  const handleRoomClick = (e, room) => {
+    // Vérifier si le clic provient d'un élément interactif
+    if (
+      e.target.tagName === "INPUT" ||
+      e.target.tagName === "BUTTON" ||
+      e.target.tagName === "SELECT"
+    ) {
+      return; // Ne rien faire si le clic vient d'un input, bouton ou select
+    }
+    onRoomClick(room.number);
+  };
+
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
-      <h2 className="text-2xl font-bold mb-4 text-indigo-600">
+    <div className="bg-white shadow-lg rounded-lg p-2 sm:p-4 md:p-6 border-t-4 border-indigo-500">
+      <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-indigo-600">
         État des chambres
       </h2>
-      <div className="grid grid-cols-5 gap-2 overflow-y-auto max-h-96">
+      {manualAssignmentActive && selectedEmployee && (
+        <p className="text-sm text-indigo-600 mb-2">
+          Assignation en cours : {selectedEmployee}
+        </p>
+      )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 sm:gap-2 overflow-y-auto max-h-[calc(100vh-200px)]">
         {rooms.map((room) => (
           <div
             key={room.number}
@@ -23,14 +49,23 @@ export default function RoomGrid({
                 : room.state === "Recouche"
                 ? "bg-green-200"
                 : "bg-white"
-            } ${room.checked ? "border-4 border-blue-500" : ""}`}
-            onClick={() => onRoomClick(room.number)}
+            } ${room.checked ? "border-2 border-blue-500" : ""}
+            ${
+              manualAssignmentActive && !room.assignedTo ? "cursor-pointer" : ""
+            }
+            ${
+              room.assignedTo === selectedEmployee
+                ? "ring-2 ring-indigo-500"
+                : ""
+            }`}
+            onClick={(e) => handleRoomClick(e, room)}
           >
-            <div className="p-2 text-center font-bold">{room.number}</div>
-            <div className="flex-grow p-2 text-xs">
-              <div className="border-b border-gray-300">{room.type}</div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">
+            <div className="p-1 sm:p-2 text-center font-bold text-xs sm:text-sm">
+              {room.number}
+            </div>
+            <div className="flex-grow p-1 sm:p-2 text-xs">
+              <div className="flex justify-between items-center mt-1">
+                <span className="text-xs sm:text-sm text-gray-600 truncate">
                   {room.assignedTo ||
                     (manualAssignmentActive ? "Assigner" : "")}
                 </span>
@@ -48,34 +83,35 @@ export default function RoomGrid({
                   </span>
                 )}
               </div>
-              <div className="mt-1">
-                <select
-                  className="w-full text-xs border rounded"
-                  value={selectedNote[room.number] || ""}
-                  onChange={(e) => {
+              <div className="mt-1 space-y-1">
+                {getNoteOptions(room).map((note) => (
+                  <label key={note} className="flex items-center text-xs">
+                    <input
+                      type="checkbox"
+                      checked={room.notes?.includes(note) || false}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        handleNoteChange(room.number, note, e.target.checked);
+                      }}
+                      className="mr-1 h-3 w-3"
+                    />
+                    <span className="truncate">{note}</span>
+                  </label>
+                ))}
+              </div>
+              {(room.state === "Départ" || room.state === "Recouche") && (
+                <button
+                  className={`mt-1 w-full text-xs py-1 px-1 rounded ${
+                    room.checked ? "bg-blue-500 text-white" : "bg-gray-200"
+                  }`}
+                  onClick={(e) => {
                     e.stopPropagation();
-                    handleNoteChange(room.number, e.target.value);
+                    toggleRoomChecked(room.number);
                   }}
                 >
-                  <option value="">Sélectionner une note</option>
-                  <option value="DND">DND</option>
-                  <option value="Refus">Refus</option>
-                  <option value="Départ tardif">Départ tardif</option>
-                  <option value="LP">LP</option>
-                  <option value="Autres">Autres</option>
-                </select>
-              </div>
-              <button
-                className={`mt-1 w-full text-xs py-1 px-2 rounded ${
-                  room.checked ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleRoomChecked(room.number);
-                }}
-              >
-                {room.checked ? "Contrôlée" : "Marquer comme contrôlée"}
-              </button>
+                  {room.checked ? "Contrôlée" : "Contrôler"}
+                </button>
+              )}
             </div>
           </div>
         ))}
