@@ -1,4 +1,8 @@
-// Composant RoomGrid mis à jour
+// components/RoomGrid.js
+
+import React from "react";
+import PropTypes from "prop-types";
+
 export default function RoomGrid({
   rooms,
   onRoomClick,
@@ -119,3 +123,13 @@ export default function RoomGrid({
     </div>
   );
 }
+
+RoomGrid.propTypes = {
+  rooms: PropTypes.array.isRequired,
+  onRoomClick: PropTypes.func.isRequired,
+  toggleStar: PropTypes.func.isRequired,
+  toggleRoomChecked: PropTypes.func.isRequired,
+  handleNoteChange: PropTypes.func.isRequired,
+  manualAssignmentActive: PropTypes.bool.isRequired,
+  selectedEmployee: PropTypes.string,
+};

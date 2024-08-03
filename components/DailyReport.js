@@ -1,4 +1,7 @@
+// components/DailyReport.js
+
 import React, { useMemo } from "react";
+import PropTypes from "prop-types";
 
 export default function DailyReport({ rooms }) {
   const reportData = useMemo(() => {
@@ -80,3 +83,7 @@ export default function DailyReport({ rooms }) {
     </div>
   );
 }
+
+DailyReport.propTypes = {
+  rooms: PropTypes.array.isRequired,
+};

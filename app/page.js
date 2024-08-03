@@ -979,9 +979,8 @@ const defaultRooms = [
 export default function HomePage() {
   const [rooms, setRooms] = useState(defaultRooms);
   const [staffList, setStaffList] = useState([]);
-  const [selectedNotes, setSelectedNotes] = useState({});
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState(""); // Ajout de cet état
+  const [selectedEmployee, setSelectedEmployee] = useState("");
   const [activeTab, setActiveTab] = useState("rooms");
 
   const toggleRoomChecked = (roomNumber) => {
@@ -1059,19 +1058,19 @@ export default function HomePage() {
   };
 
   const assignRoom = (roomNumber, employeeName) => {
-    const employeeAlreadyAssigned = rooms.some(
-      (room) => room.assignedTo === employeeName
-    );
-    if (employeeAlreadyAssigned) {
-      alert("Cet employé est déjà assigné à une chambre.");
-      return;
-    }
-
     setRooms((prevRooms) =>
       prevRooms.map((room) =>
         room.number === roomNumber
           ? { ...room, assignedTo: employeeName }
           : room
+      )
+    );
+  };
+
+  const unassignRoom = (roomNumber) => {
+    setRooms((prevRooms) =>
+      prevRooms.map((room) =>
+        room.number === roomNumber ? { ...room, assignedTo: null } : room
       )
     );
   };
@@ -1133,7 +1132,6 @@ export default function HomePage() {
     ) {
       setRooms(defaultRooms);
       setStaffList([]);
-      setSelectedNote({});
       localStorage.clear();
     }
   };
@@ -1186,7 +1184,6 @@ export default function HomePage() {
             toggleRoomChecked={toggleRoomChecked}
             staffList={staffList}
             handleNoteChange={handleNoteChange}
-            selectedNotes={selectedNotes}
             manualAssignmentActive={manualAssignmentActive}
             selectedEmployee={selectedEmployee}
           />
@@ -1194,6 +1191,7 @@ export default function HomePage() {
             staff={staffList}
             rooms={rooms}
             assignRoom={assignRoom}
+            unassignRoom={unassignRoom}
             manualAssignmentActive={manualAssignmentActive}
             setManualAssignmentActive={setManualAssignmentActive}
             selectedEmployee={selectedEmployee}
@@ -1222,7 +1220,7 @@ export default function HomePage() {
           }`}
         >
           <RoomSearch rooms={rooms} />
-          <DailyReport rooms={rooms} selectedNotes={selectedNotes} />
+          <DailyReport rooms={rooms} />
           <Controls onReset={handleReset} onGenerateReport={generateReport} />
         </div>
       </div>
