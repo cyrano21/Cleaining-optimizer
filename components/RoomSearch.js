@@ -1,4 +1,4 @@
-// components/RoomSearch.js
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 
 const RoomSearch = ({ rooms }) => {
@@ -51,4 +51,5 @@ const RoomSearch = ({ rooms }) => {
     </div>
   );
 };
+
 export default RoomSearch;

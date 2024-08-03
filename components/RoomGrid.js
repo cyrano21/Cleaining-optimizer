@@ -1,4 +1,4 @@
-// components/RoomGrid.js
+/* eslint-disable react/prop-types */
 import React from "react";
 
 export default function RoomGrid({
@@ -15,6 +15,11 @@ export default function RoomGrid({
       <h2 className="text-2xl font-bold mb-4 text-indigo-600">
         État des chambres
       </h2>
+      {manualAssignmentActive && selectedEmployee && (
+        <p className="mb-4 text-sm text-indigo-600">
+          Assignation manuelle active pour : {selectedEmployee}
+        </p>
+      )}
       <div className="grid grid-cols-5 gap-2 overflow-y-auto max-h-96">
         {rooms.map((room) => (
           <div
@@ -25,7 +30,11 @@ export default function RoomGrid({
                 : room.state === "Recouche"
                 ? "bg-green-200"
                 : "bg-white"
-            } ${manualAssignmentActive ? "cursor-pointer" : ""}`}
+            } ${manualAssignmentActive ? "cursor-pointer" : ""} ${
+              room.assignedTo === selectedEmployee
+                ? "ring-2 ring-indigo-500"
+                : ""
+            }`}
             onClick={() => onRoomClick(room.number)}
           >
             <div className="p-2 text-center font-bold">{room.number}</div>

@@ -1,4 +1,4 @@
-// components/StaffManagement.js
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 
 export default function StaffManagement({ staffList, addStaff }) {
