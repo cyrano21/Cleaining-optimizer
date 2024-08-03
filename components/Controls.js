@@ -1,4 +1,4 @@
-// components/Controls.js
+/* eslint-disable react/prop-types */
 import React from "react";
 
 const Controls = ({ onReset, onGenerateReport }) => {
@@ -10,7 +10,7 @@ const Controls = ({ onReset, onGenerateReport }) => {
           onClick={onReset}
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
         >
-          Réinitialiser l'application
+          Réinitialiser l&apos;application
         </button>
         <button
           onClick={onGenerateReport}

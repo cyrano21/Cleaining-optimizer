@@ -1,16 +1,42 @@
-// components/DailyReport.js
-import React from "react";
+/* eslint-disable react/prop-types */
+import React, { useMemo } from "react";
 
 export default function DailyReport({ rooms, selectedNote }) {
-  const totalRooms = rooms.length;
-  const departures = rooms.filter((room) => room.state === "Départ").length;
-  const recouches = rooms.filter((room) => room.state === "Recouche").length;
-  const dndOrRefus = rooms.filter(
-    (room) =>
-      selectedNote[room.number] === "DND" ||
-      selectedNote[room.number] === "Refus"
-  ).length;
-  const checkedRooms = rooms.filter((room) => room.checked).length;
+  const reportData = useMemo(() => {
+    const departures = rooms.filter((room) => room.state === "Départ").length;
+    const recouches = rooms.filter((room) => room.state === "Recouche").length;
+    const dndOrRefus = rooms.filter(
+      (room) =>
+        selectedNote[room.number] === "DND" ||
+        selectedNote[room.number] === "Refus"
+    ).length;
+    const checkedRooms = rooms.filter((room) => room.checked).length;
+    const dnd = rooms.filter(
+      (room) => selectedNote[room.number] === "DND"
+    ).length;
+    const refus = rooms.filter(
+      (room) => selectedNote[room.number] === "Refus"
+    ).length;
+    const departsTardifs = rooms.filter(
+      (room) => selectedNote[room.number] === "Départ tardif"
+    ).length;
+    const libreEtPropre = rooms.filter(
+      (room) => selectedNote[room.number] === "LP"
+    ).length;
+    const changementsdraps = rooms.filter((room) => room.star).length;
+
+    return {
+      departures,
+      recouches,
+      dndOrRefus,
+      checkedRooms,
+      dnd,
+      refus,
+      departsTardifs,
+      libreEtPropre,
+      changementsdraps,
+    };
+  }, [rooms, selectedNote]);
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
@@ -26,14 +52,14 @@ export default function DailyReport({ rooms, selectedNote }) {
             <p className="font-bold text-indigo-600">
               Date: {new Date().toLocaleDateString()}
             </p>
-            <p className="text-pink-500">Départs: {departures}</p>
-            <p className="text-green-500">Recouches: {recouches}</p>
-            <p className="text-red-500">DND/Refus: {dndOrRefus}</p>
+            <p className="text-pink-500">Départs: {reportData.departures}</p>
+            <p className="text-green-500">Recouches: {reportData.recouches}</p>
+            <p className="text-red-500">DND/Refus: {reportData.dndOrRefus}</p>
             <p className="font-semibold">
-              Total à nettoyer: {departures + recouches}
+              Total à nettoyer: {reportData.departures + reportData.recouches}
             </p>
             <p className="font-semibold text-blue-500">
-              Chambres nettoyées: {checkedRooms}
+              Chambres nettoyées: {reportData.checkedRooms}
             </p>
           </div>
         </div>
@@ -42,40 +68,19 @@ export default function DailyReport({ rooms, selectedNote }) {
             Rapport détaillé
           </h3>
           <div className="space-y-2 text-lg">
-            <p className="text-red-500">
-              DND:{" "}
-              {
-                rooms.filter((room) => selectedNote[room.number] === "DND")
-                  .length
-              }
-            </p>
-            <p className="text-red-500">
-              Refus:{" "}
-              {
-                rooms.filter((room) => selectedNote[room.number] === "Refus")
-                  .length
-              }
-            </p>
+            <p className="text-red-500">DND: {reportData.dnd}</p>
+            <p className="text-red-500">Refus: {reportData.refus}</p>
             <p className="text-yellow-500">
-              Départs tardifs:{" "}
-              {
-                rooms.filter(
-                  (room) => selectedNote[room.number] === "Départ tardif"
-                ).length
-              }
+              Départs tardifs: {reportData.departsTardifs}
             </p>
             <p className="text-blue-500">
-              Libre et Propre:{" "}
-              {
-                rooms.filter((room) => selectedNote[room.number] === "LP")
-                  .length
-              }
+              Libre et Propre: {reportData.libreEtPropre}
             </p>
             <p className="text-purple-500">
-              Changements de draps: {rooms.filter((room) => room.star).length}
+              Changements de draps: {reportData.changementsdraps}
             </p>
             <p className="text-green-500">
-              Chambres contrôlées: {checkedRooms}
+              Chambres contrôlées: {reportData.checkedRooms}
             </p>
           </div>
         </div>

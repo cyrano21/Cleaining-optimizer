@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
 export default function ManualAssignment({
@@ -13,6 +14,13 @@ export default function ManualAssignment({
     setManualAssignmentActive((prev) => !prev);
     if (!manualAssignmentActive) {
       setSelectedEmployee(""); // Réinitialiser l'employé sélectionné lors de l'activation
+    }
+  };
+
+  // Exemple d'utilisation de assignRoom (à adapter selon vos besoins)
+  const handleRoomClick = (roomNumber) => {
+    if (manualAssignmentActive && selectedEmployee) {
+      assignRoom(roomNumber, selectedEmployee);
     }
   };
 
@@ -68,7 +76,8 @@ export default function ManualAssignment({
                         : room.state === "Recouche"
                         ? "bg-green-100"
                         : "bg-white"
-                    }`}
+                    } cursor-pointer`}
+                    onClick={() => handleRoomClick(room.number)}
                   >
                     {room.number}
                   </div>

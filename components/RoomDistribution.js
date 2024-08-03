@@ -1,10 +1,10 @@
-// components/RoomDistribution.js
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState, useCallback } from "react";
 
 const RoomDistribution = ({ rooms, setRooms, staffList }) => {
   const [distributionList, setDistributionList] = useState([]);
 
-  const distributeRooms = () => {
+  const distributeRooms = useCallback(() => {
     const roomsToDistribute = rooms.filter(
       (room) =>
         (room.state === "Départ" || room.state === "Recouche") &&
@@ -13,28 +13,26 @@ const RoomDistribution = ({ rooms, setRooms, staffList }) => {
     const availableStaff = [...staffList];
 
     const updatedRooms = rooms.map((room) => {
-      if (roomsToDistribute.includes(room)) {
-        if (availableStaff.length > 0) {
-          const staffIndex = Math.floor(Math.random() * availableStaff.length);
-          const selectedStaff = availableStaff[staffIndex];
+      if (roomsToDistribute.includes(room) && availableStaff.length > 0) {
+        const staffIndex = Math.floor(Math.random() * availableStaff.length);
+        const selectedStaff = availableStaff[staffIndex];
 
-          // Préférence pour l'étage
-          const preferredStaff = availableStaff.find(
-            (staff) => staff.preferredFloor === room.number.charAt(0)
-          );
+        // Préférence pour l'étage
+        const preferredStaff = availableStaff.find(
+          (staff) => staff.preferredFloor === room.number.charAt(0)
+        );
 
-          const assignedStaff = preferredStaff || selectedStaff;
-          availableStaff.splice(availableStaff.indexOf(assignedStaff), 1);
+        const assignedStaff = preferredStaff || selectedStaff;
+        availableStaff.splice(availableStaff.indexOf(assignedStaff), 1);
 
-          return { ...room, assignedTo: assignedStaff.name };
-        }
+        return { ...room, assignedTo: assignedStaff.name };
       }
       return room;
     });
 
     setRooms(updatedRooms);
     setDistributionList(updatedRooms.filter((room) => room.assignedTo));
-  };
+  }, [rooms, setRooms, staffList]);
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
