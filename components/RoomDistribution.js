@@ -35,7 +35,7 @@ const RoomDistribution = ({ rooms, setRooms, staffList }) => {
   }, [rooms, setRooms, staffList]);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
+    <div className="segment bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-bold mb-4 text-indigo-600">
         Distribution des chambres
       </h2>

@@ -1,9 +1,46 @@
 /* styles/globals.css */
+
+/* Assurez-vous d'avoir configuré Tailwind CSS correctement */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f9fafb;
+    background-image: url("/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    /* Assurez-vous que le corps couvre tout l'écran */
+}
+
+
+.segment {
+    backdrop-filter: blur(5px);
+    /* Flou sur l'arrière-plan */
+    background-color: rgba(255, 255, 255, 0.6);
+    /* Couleur de fond semi-transparente */
+    border-radius: 8px;
+    /* Bords arrondis pour un meilleur style */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Ombre légère pour l'élément */
+    padding: 1rem;
+    /* Espacement interne pour le contenu */
+    transition: backdrop-filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+    /* Transitions */
+}
+
+.segment:hover {
+    backdrop-filter: blur(3px);
+    /* Réduction du flou au survol */
+    transform: translateY(-2px);
+    /* Léger déplacement vers le haut */
+}
+
+/* Classe pour l'ombre du texte */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    /* Ombre subtile pour le texte */
 }

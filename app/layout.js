@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import "../styles/globals.css";
+import "./globals.css";
 
 export const metadata = {
   title: "Hotel Cleaning Management",
@@ -9,6 +9,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

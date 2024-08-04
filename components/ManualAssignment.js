@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 
 export default function ManualAssignment({
   staff,
@@ -72,7 +73,12 @@ export default function ManualAssignment({
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4 border-t-4 border-indigo-500">
+    <motion.div
+      className="segment bg-white shadow-lg rounded-lg p-4 border-t-4 border-indigo-500"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <h2 className="text-xl font-bold mb-2 text-indigo-600">
         Assignation manuelle
       </h2>
@@ -83,7 +89,7 @@ export default function ManualAssignment({
           manualAssignmentActive
             ? "bg-red-500 text-white"
             : "bg-blue-500 text-white"
-        }`}
+        } hover:bg-opacity-80 transition-all duration-200`}
         onClick={toggleManualAssignment}
       >
         {manualAssignmentActive
@@ -93,14 +99,19 @@ export default function ManualAssignment({
 
       {/* Sélection de l'employé */}
       {manualAssignmentActive && (
-        <div className="mb-2">
+        <motion.div
+          className="mb-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <label className="block mb-1 font-semibold text-gray-700">
             Sélectionnez un employé :
           </label>
           <select
             value={selectedEmployee}
             onChange={(e) => setSelectedEmployee(e.target.value)}
-            className="w-full p-1 border rounded"
+            className="w-full p-1 border rounded focus:outline-none focus:ring focus:border-indigo-500 transition-all duration-200"
           >
             <option value="">Choisissez un employé</option>
             {staff.map((staffMember) => (
@@ -109,13 +120,19 @@ export default function ManualAssignment({
               </option>
             ))}
           </select>
-        </div>
+        </motion.div>
       )}
 
       {/* Liste des chambres assignées */}
       <div className="space-y-2">
         {staff.map((staffMember) => (
-          <div key={staffMember.name} className="flex flex-col">
+          <motion.div
+            key={staffMember.name}
+            className="flex flex-col"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <div className="font-bold text-sm mb-1 text-indigo-700">
               {staffMember.name} -{" "}
               <span className="text-indigo-900">
@@ -137,7 +154,7 @@ export default function ManualAssignment({
               {rooms
                 .filter((room) => room.assignedTo === staffMember.name)
                 .map((room) => (
-                  <div
+                  <motion.div
                     key={room.number}
                     className={`p-1 border rounded ${
                       room.state === "Départ"
@@ -145,8 +162,12 @@ export default function ManualAssignment({
                         : room.state === "Recouche"
                         ? "bg-green-100"
                         : "bg-white"
-                    } ${room.checked ? "border-2 border-blue-500" : ""}`}
+                    } ${
+                      room.checked ? "border-2 border-blue-500" : ""
+                    } hover:shadow-md transition-shadow duration-200`}
                     onClick={() => handleRoomClick(room.number)}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <div className="font-semibold text-xs">{room.number}</div>
                     {room.state === "Recouche" && room.star && (
@@ -169,7 +190,7 @@ export default function ManualAssignment({
                     )}
                     {/* Bouton pour désassigner la chambre */}
                     <button
-                      className="mt-1 p-1 bg-red-400 text-white text-xs rounded"
+                      className="mt-1 p-1 bg-red-400 text-white text-xs rounded hover:bg-red-500 transition-colors duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleUnassign(room.number);
@@ -177,16 +198,21 @@ export default function ManualAssignment({
                     >
                       Désassigner
                     </button>
-                  </div>
+                  </motion.div>
                 ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
       {/* Option pour réassigner si une chambre est désassignée */}
       {reassignMode && selectedRoom && (
-        <div className="mt-2 p-2 bg-yellow-100 rounded-lg">
+        <motion.div
+          className="mt-2 p-2 bg-yellow-100 rounded-lg"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <h3 className="text-sm font-semibold text-yellow-600">
             Réassigner la chambre {selectedRoom}
           </h3>
@@ -196,7 +222,7 @@ export default function ManualAssignment({
           <select
             value={reassignEmployee}
             onChange={(e) => setReassignEmployee(e.target.value)}
-            className="w-full p-1 border rounded"
+            className="w-full p-1 border rounded focus:outline-none focus:ring focus:border-indigo-500 transition-all duration-200"
           >
             <option value="Marie">Marie</option>
             {staff
@@ -208,13 +234,13 @@ export default function ManualAssignment({
               ))}
           </select>
           <button
-            className="mt-1 p-1 bg-green-500 text-white rounded"
+            className="mt-1 p-1 bg-green-500 text-white rounded hover:bg-green-600 transition-all duration-200"
             onClick={() => handleReassign(selectedRoom)}
           >
             Réassigner à {reassignEmployee}
           </button>
           <button
-            className="mt-1 ml-1 p-1 bg-gray-500 text-white rounded"
+            className="mt-1 ml-1 p-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition-all duration-200"
             onClick={() => {
               setReassignMode(false);
               setSelectedRoom(null);
@@ -223,9 +249,9 @@ export default function ManualAssignment({
           >
             Annuler
           </button>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
