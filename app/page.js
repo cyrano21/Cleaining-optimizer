@@ -1347,10 +1347,29 @@ export default function HomePage() {
   const [selectedFloor, setSelectedFloor] = useState("All");
   const [reportedErrors, setReportedErrors] = useState([]);
   const [resolvedErrors, setResolvedErrors] = useState([]);
-  const [activeGouvernanteSection, setActiveGouvernanteSection] =
-    useState("assign");
+  const [selectedErrorRoom, setSelectedErrorRoom] = useState("");
+  const [selectedErrorState, setSelectedErrorState] = useState("");
 
-  // Fonction pour basculer l'état "nettoyée" et réinitialiser si nécessaire
+  // Utilisation de localStorage pour la persistance de l'état
+  useEffect(() => {
+    const savedRooms = localStorage.getItem("rooms");
+    const savedStaff = localStorage.getItem("staff");
+    const savedErrors = localStorage.getItem("reportedErrors");
+    const savedResolvedErrors = localStorage.getItem("resolvedErrors");
+
+    if (savedRooms) setRooms(JSON.parse(savedRooms));
+    if (savedStaff) setStaffList(JSON.parse(savedStaff));
+    if (savedErrors) setReportedErrors(JSON.parse(savedErrors));
+    if (savedResolvedErrors) setResolvedErrors(JSON.parse(savedResolvedErrors));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+    localStorage.setItem("staff", JSON.stringify(staffList));
+    localStorage.setItem("reportedErrors", JSON.stringify(reportedErrors));
+    localStorage.setItem("resolvedErrors", JSON.stringify(resolvedErrors));
+  }, [rooms, staffList, reportedErrors, resolvedErrors]);
+
   const toggleRoomChecked = (roomNumber) => {
     setRooms((prevRooms) =>
       prevRooms.map((room) =>
@@ -1358,11 +1377,7 @@ export default function HomePage() {
           ? {
               ...room,
               checked: !room.checked,
-              // Réinitialiser l'état si décoché
-              state: !room.checked ? "Libre" : room.state,
-              notes: !room.checked ? [] : room.notes,
-              controlled: !room.checked ? false : room.controlled,
-              cleaningQuality: !room.checked ? "" : room.cleaningQuality,
+              state: room.state === "Départ" ? "Recouche" : room.state,
             }
           : room
       )
@@ -1532,20 +1547,32 @@ export default function HomePage() {
     );
   };
 
+  const getUserFloor = (userRole) => {
+    // Supposons que le rôle de l'utilisateur soit au format "nom-étage"
+    const parts = userRole.split("-");
+    return parts.length > 1 ? parts[1] : null;
+  };
+
+  const getFloorRooms = (floor) => {
+    return rooms.filter((room) => room.number.startsWith(floor));
+  };
+
   const reportError = (roomNumber, errorState) => {
     const room = rooms.find((room) => room.number === roomNumber);
     if (room) {
       const error = {
         roomNumber,
         errorState,
-        maid: selectedEmployee,
+        maid: userRole,
       };
       setReportedErrors([...reportedErrors, error]);
       alert("Erreur rapportée. La gouvernante sera informée.");
+      setSelectedErrorRoom("");
+      setSelectedErrorState("");
     }
   };
 
-  const handleNewAssignment = (errorIndex, newRoomNumber) => {
+  const handleNewAssignment = (errorIndex, newRoomNumber, maidName) => {
     const updatedErrors = [...reportedErrors];
     const error = updatedErrors[errorIndex];
 
@@ -1561,17 +1588,15 @@ export default function HomePage() {
         })
       );
 
-      const jeanneRooms = rooms.filter(
-        (room) => room.assignedTo === error.maid
-      );
+      const maidRooms = rooms.filter((room) => room.assignedTo === error.maid);
 
-      if (jeanneRooms.length > 0) {
-        const roomToReassign = jeanneRooms[0];
+      if (maidRooms.length > 0) {
+        const roomToReassign = maidRooms[0];
 
         setRooms((prevRooms) =>
           prevRooms.map((room) =>
             room.number === roomToReassign.number
-              ? { ...room, assignedTo: "Marie" }
+              ? { ...room, assignedTo: maidName } // Réattribuer la chambre
               : room
           )
         );
@@ -1598,20 +1623,6 @@ export default function HomePage() {
                   notes: [
                     ...(room.notes || []),
                     `Chambre réattribuée à ${error.maid}.`,
-                  ],
-                }
-              : room
-          )
-        );
-
-        setRooms((prevRooms) =>
-          prevRooms.map((room) =>
-            room.number === roomToReassign.number
-              ? {
-                  ...room,
-                  notes: [
-                    ...(room.notes || []),
-                    `Chambre réattribuée à Marie.`,
                   ],
                 }
               : room
@@ -1659,18 +1670,6 @@ export default function HomePage() {
     alert("Rapport généré. Veuillez consulter la console pour les détails.");
   };
 
-  useEffect(() => {
-    const savedRooms = localStorage.getItem("rooms");
-    const savedStaff = localStorage.getItem("staff");
-    if (savedRooms) setRooms(JSON.parse(savedRooms));
-    if (savedStaff) setStaffList(JSON.parse(savedStaff));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("rooms", JSON.stringify(rooms));
-    localStorage.setItem("staff", JSON.stringify(staffList));
-  }, [rooms, staffList]);
-
   const getFloors = () => {
     const floorSet = new Set(rooms.map((room) => room.number.charAt(0)));
     return Array.from(floorSet);
@@ -1680,6 +1679,14 @@ export default function HomePage() {
     selectedFloor === "All"
       ? rooms
       : rooms.filter((room) => room.number.startsWith(selectedFloor));
+
+  // Filtrer les chambres assignées à l'employé actuel (femme de chambre)
+  const assignedRooms = rooms.filter((room) => room.assignedTo === userRole);
+
+  // Obtenir les chambres de l'étage pour l'erreur
+  const floorRooms = rooms.filter((room) =>
+    selectedFloor === "All" ? true : room.number.startsWith(selectedFloor)
+  );
 
   return (
     <div className="container mx-auto w-full px-4 py-8 max-w-screen-xl">
@@ -1695,7 +1702,11 @@ export default function HomePage() {
           className="w-full max-w-xs p-2 border rounded-md text-xl"
         >
           <option value="gouvernante">Gouvernante</option>
-          <option value="femmeDeChambre">Femme de Chambre</option>
+          {staffList.map((staff) => (
+            <option key={staff.name} value={staff.name}>
+              {staff.name}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -1721,27 +1732,10 @@ export default function HomePage() {
         <RoomSearch rooms={rooms} />
       </div>
 
-      {/* Sous-sélection pour Gouvernante sur mobile uniquement */}
-      {userRole === "gouvernante" && (
-        <div className="block md:hidden flex justify-center mb-4">
-          <select
-            value={activeGouvernanteSection}
-            onChange={(e) => setActiveGouvernanteSection(e.target.value)}
-            className="w-full max-w-xs p-2 border rounded-md text-xl"
-          >
-            <option value="assign">Assignation & Gestion du Personnel</option>
-            <option value="distribution">Distribution des Chambres</option>
-            <option value="report">Rapport et Contrôles</option>
-            <option value="errors">Gestion des Erreurs</option>
-          </select>
-        </div>
-      )}
-
       {/* Conteneur principal pour tous les composants */}
       <div className="space-y-8">
-        {/* Affichage des chambres */}
         <RoomGrid
-          rooms={filteredRooms}
+          rooms={userRole === "gouvernante" ? filteredRooms : assignedRooms} // Affiche les chambres assignées uniquement
           onRoomClick={handleRoomClick}
           toggleStar={toggleStar}
           toggleRoomChecked={toggleRoomChecked}
@@ -1754,93 +1748,156 @@ export default function HomePage() {
           userRole={userRole}
           handleCleaningQuality={handleCleaningQuality}
           reportError={reportError}
+          floorRooms={floorRooms} // Passer les chambres de l'étage
         />
 
-        {/* Section Assignation et Gestion du Personnel */}
-        {userRole === "gouvernante" &&
-          activeGouvernanteSection === "assign" && (
-            <div className="space-y-8">
-              <h2 className="text-xl font-bold text-center mb-4">
-                Gestion du Personnel et Assignation
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <ManualAssignment
-                  staff={staffList}
-                  rooms={rooms}
-                  assignRoom={assignRoom}
-                  manualAssignmentActive={manualAssignmentActive}
-                  setManualAssignmentActive={setManualAssignmentActive}
-                  selectedEmployee={selectedEmployee}
-                  setSelectedEmployee={setSelectedEmployee}
-                  unassignRoom={unassignRoom}
-                />
-
-                <StaffManagement staffList={staffList} addStaff={addStaff} />
-              </div>
-            </div>
-          )}
-
-        {/* Section Distribution des Chambres */}
-        {userRole === "gouvernante" &&
-          activeGouvernanteSection === "distribution" && (
-            <RoomDistribution
+        {userRole === "gouvernante" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ManualAssignment
+              staff={staffList}
               rooms={rooms}
-              setRooms={setRooms}
-              staffList={staffList}
+              assignRoom={assignRoom}
+              manualAssignmentActive={manualAssignmentActive}
+              setManualAssignmentActive={setManualAssignmentActive}
+              selectedEmployee={selectedEmployee}
+              setSelectedEmployee={setSelectedEmployee}
+              unassignRoom={unassignRoom}
             />
-          )}
 
-        {/* Section Rapport et Contrôles */}
-        {userRole === "gouvernante" &&
-          activeGouvernanteSection === "report" && (
-            <div className="grid grid-cols-1 gap-4">
-              <DailyReport rooms={rooms} />
-              <Controls
-                onReset={handleReset}
-                onGenerateReport={generateReport}
-              />
-            </div>
-          )}
-
-        {/* Section Gestion des Erreurs */}
-        {userRole === "gouvernante" &&
-          activeGouvernanteSection === "errors" && (
-            <ErrorManagement
+            <StaffManagement
               rooms={rooms}
               staffList={staffList}
-              reportedErrors={reportedErrors}
-              handleNewAssignment={handleNewAssignment}
-              resolvedErrors={resolvedErrors}
+              addStaff={addStaff}
             />
-          )}
+          </div>
+        )}
 
-        {/* Section Résumé des Erreurs pour Femme de Chambre */}
-        {userRole === "femmeDeChambre" && (
-          <div className="mt-8 bg-white shadow-lg rounded-lg p-4 border-t-4 border-green-500">
-            <h2 className="text-2xl font-bold text-green-600 mb-4">
-              Résumé des Erreurs
+        {userRole === "gouvernante" && (
+          <RoomDistribution
+            rooms={rooms}
+            setRooms={setRooms}
+            staffList={staffList}
+          />
+        )}
+
+        {userRole === "gouvernante" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <DailyReport rooms={rooms} />
+            <Controls onReset={handleReset} onGenerateReport={generateReport} />
+          </div>
+        )}
+
+        {userRole === "gouvernante" && (
+          <ErrorManagement
+            rooms={rooms}
+            staffList={staffList}
+            reportedErrors={reportedErrors}
+            resolvedErrors={resolvedErrors}
+            setRooms={setRooms} // Assurez-vous que cette ligne est présente
+            setReportedErrors={setReportedErrors}
+            setResolvedErrors={setResolvedErrors}
+          />
+        )}
+
+        {/* Section des erreurs pour chaque femme de chambre */}
+        {userRole !== "gouvernante" && (
+          <div className="mt-8 bg-white shadow-lg rounded-lg p-4 border-t-4 border-red-500">
+            <h2 className="text-2xl font-bold text-red-600 mb-4">
+              Erreurs de Nettoyage
             </h2>
-            {resolvedErrors.length === 0 ? (
-              <p className="text-gray-700">Aucune erreur résolue.</p>
-            ) : (
-              resolvedErrors.map((resolvedError, index) => (
-                <div
-                  key={index}
-                  className="p-4 mb-4 border rounded bg-green-100 border-green-500"
-                >
-                  <p className="text-sm font-semibold text-green-800">
-                    Chambre: {resolvedError.roomNumber} corrigée.
-                  </p>
-                  <p className="text-sm text-green-800">
-                    Nouvelle chambre assignée: {resolvedError.newRoomNumber}
-                  </p>
-                  <p className="text-sm text-green-800">
-                    Femme de Chambre: {resolvedError.maid}
-                  </p>
+
+            {userRole !== "gouvernante" ? (
+              <div>
+                {/* Affichage des erreurs rapportées par cette femme de chambre */}
+                {reportedErrors
+                  .filter((error) => error.maid === userRole)
+                  .map((error, index) => (
+                    <div
+                      key={index}
+                      className="p-4 mb-4 border rounded bg-red-100 border-red-500"
+                    >
+                      <p className="text-sm font-semibold text-red-800">
+                        Chambre en Erreur : {error.roomNumber} (État:{" "}
+                        {error.errorState})
+                      </p>
+                      <p className="text-sm text-red-800">
+                        Statut : En attente de résolution
+                      </p>
+                    </div>
+                  ))}
+
+                {/* Formulaire pour rapporter une nouvelle erreur */}
+                <div className="mt-4 p-4 border-t-2 border-red-500">
+                  <h3 className="text-lg font-semibold text-red-500 mb-2">
+                    Rapporter une erreur
+                  </h3>
+                  <div className="mb-2">
+                    <label className="block text-sm font-semibold text-gray-700">
+                      Chambre nettoyée par erreur :
+                    </label>
+                    <select
+                      value={selectedErrorRoom}
+                      onChange={(e) => setSelectedErrorRoom(e.target.value)}
+                      className="w-full p-1 border rounded"
+                    >
+                      <option value="">Sélectionner une chambre</option>
+                      {rooms.map((room) => (
+                        <option key={room.number} value={room.number}>
+                          {room.number}{" "}
+                          {room.assignedTo === userRole ? "(Assignée)" : ""}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="mb-2">
+                    <label className="block text-sm font-semibold text-gray-700">
+                      État de la chambre :
+                    </label>
+                    <select
+                      value={selectedErrorState}
+                      onChange={(e) => setSelectedErrorState(e.target.value)}
+                      className="w-full p-1 border rounded"
+                    >
+                      <option value="">Sélectionner un état</option>
+                      <option value="Libre">Libre</option>
+                      <option value="Départ">Départ</option>
+                      <option value="Recouche">Recouche</option>
+                    </select>
+                  </div>
+                  <button
+                    className="mt-2 w-full bg-red-500 text-white p-2 rounded"
+                    onClick={() =>
+                      reportError(selectedErrorRoom, selectedErrorState)
+                    }
+                  >
+                    Soumettre l'erreur
+                  </button>
                 </div>
-              ))
+              </div>
+            ) : (
+              <ErrorManagement
+                rooms={rooms}
+                staffList={staffList}
+                reportedErrors={reportedErrors}
+                resolvedErrors={resolvedErrors}
+                setRooms={setRooms}
+                setReportedErrors={setReportedErrors}
+                setResolvedErrors={setResolvedErrors}
+              />
             )}
           </div>
+        )}
+
+        {userRole === "gouvernante" && (
+          <ErrorManagement
+            rooms={rooms}
+            staffList={staffList}
+            reportedErrors={reportedErrors}
+            resolvedErrors={resolvedErrors}
+            setRooms={setRooms}
+            setReportedErrors={setReportedErrors}
+            setResolvedErrors={setResolvedErrors}
+          />
         )}
       </div>
     </div>

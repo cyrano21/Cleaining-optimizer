@@ -1,17 +1,90 @@
-// components/ErrorManagement.js
-
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function ErrorManagement({
   rooms,
   staffList,
   reportedErrors,
-  handleNewAssignment,
   resolvedErrors,
+  setRooms,
+  setReportedErrors,
+  setResolvedErrors,
 }) {
-  // Séparer les chambres en catégories selon leur état
-  const recoucheRooms = rooms.filter((room) => room.state === "Recouche");
-  const departRooms = rooms.filter((room) => room.state === "Départ");
+  const [manualReassignment, setManualReassignment] = useState({});
+
+  const handleResolveError = (errorIndex) => {
+    const error = reportedErrors[errorIndex];
+
+    // Tentative de résolution automatique
+    const roomToReassign = rooms.find(
+      (room) =>
+        room.assignedTo === error.maid &&
+        room.number !== error.roomNumber &&
+        !room.checked
+    );
+
+    if (roomToReassign) {
+      // Résolution automatique possible
+      setRooms((prevRooms) => {
+        return prevRooms.map((room) => {
+          if (room.number === error.roomNumber) {
+            return { ...room, assignedTo: error.maid, checked: true };
+          } else if (room.number === roomToReassign.number) {
+            return { ...room, assignedTo: null };
+          }
+          return room;
+        });
+      });
+
+      // Ajouter l'erreur résolue
+      const resolvedError = {
+        ...error,
+        reassignedRoom: roomToReassign.number,
+      };
+      setResolvedErrors((prev) => [...prev, resolvedError]);
+
+      // Supprimer l'erreur résolue des erreurs signalées
+      setReportedErrors((prev) => prev.filter((_, i) => i !== errorIndex));
+    } else {
+      // Résolution automatique impossible, demander à la gouvernante de choisir
+      alert(
+        "Résolution automatique impossible. Veuillez choisir manuellement une chambre à réassigner."
+      );
+      setManualReassignment({ ...manualReassignment, [errorIndex]: "" });
+    }
+  };
+
+  const handleManualReassignment = (errorIndex, newRoomNumber) => {
+    const error = reportedErrors[errorIndex];
+
+    setRooms((prevRooms) => {
+      return prevRooms.map((room) => {
+        if (room.number === error.roomNumber) {
+          return { ...room, assignedTo: error.maid, checked: true };
+        } else if (room.number === newRoomNumber) {
+          return { ...room, assignedTo: null };
+        }
+        return room;
+      });
+    });
+
+    // Ajouter l'erreur résolue
+    const resolvedError = {
+      ...error,
+      reassignedRoom: newRoomNumber,
+    };
+    setResolvedErrors((prev) => [...prev, resolvedError]);
+
+    // Supprimer l'erreur résolue des erreurs signalées
+    setReportedErrors((prev) => prev.filter((_, i) => i !== errorIndex));
+
+    // Réinitialiser l'état de réassignation manuelle
+    setManualReassignment((prev) => {
+      const newState = { ...prev };
+      delete newState[errorIndex];
+      return newState;
+    });
+  };
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-red-500">
@@ -31,162 +104,65 @@ export default function ErrorManagement({
               Chambre en Erreur : {error.roomNumber} (État: {error.errorState})
             </p>
             <p className="text-sm text-red-800">
-              Femme de Chambre: {error.maid}
+              Nettoyée par erreur par : {error.maid}
             </p>
 
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              {/* Colonne Recouche */}
-              <div>
-                <h3 className="text-lg font-semibold text-indigo-600 mb-2">
-                  Recouche
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {/* Chambres déjà attribuées */}
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-700">
-                      Attribuées
-                    </h4>
-                    {recoucheRooms
-                      .filter((room) => room.assignedTo && !room.checked)
-                      .map((room) => (
-                        <div
-                          key={room.number}
-                          className="p-2 border rounded bg-white shadow"
-                        >
-                          <p className="text-sm text-gray-700">
-                            {room.number} - {room.assignedTo} - {room.state}
-                          </p>
-                          <button
-                            className="text-xs text-blue-600 mt-1"
-                            onClick={() =>
-                              handleNewAssignment(index, room.number)
-                            }
-                          >
-                            Réattribuer
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                  {/* Chambres non attribuées */}
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-700">
-                      Non Attribuées
-                    </h4>
-                    {recoucheRooms
-                      .filter((room) => !room.assignedTo && !room.checked)
-                      .map((room) => (
-                        <div
-                          key={room.number}
-                          className="p-2 border rounded bg-white shadow"
-                        >
-                          <p className="text-sm text-gray-700">
-                            {room.number} - {room.state}
-                          </p>
-                          <button
-                            className="text-xs text-blue-600 mt-1"
-                            onClick={() =>
-                              handleNewAssignment(index, room.number)
-                            }
-                          >
-                            Attribuer
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                </div>
+            {manualReassignment[index] !== undefined ? (
+              <div className="mt-2">
+                <select
+                  value={manualReassignment[index]}
+                  onChange={(e) =>
+                    setManualReassignment({
+                      ...manualReassignment,
+                      [index]: e.target.value,
+                    })
+                  }
+                  className="w-full p-1 border rounded mb-2"
+                >
+                  <option value="">
+                    Sélectionner une chambre à réassigner
+                  </option>
+                  {rooms
+                    .filter((room) => !room.checked && room.assignedTo === null)
+                    .map((room) => (
+                      <option key={room.number} value={room.number}>
+                        {room.number}
+                      </option>
+                    ))}
+                </select>
+                <button
+                  className="bg-green-500 text-white p-2 rounded w-full"
+                  onClick={() =>
+                    handleManualReassignment(index, manualReassignment[index])
+                  }
+                  disabled={!manualReassignment[index]}
+                >
+                  Confirmer la réassignation
+                </button>
               </div>
-
-              {/* Colonne Départ */}
-              <div>
-                <h3 className="text-lg font-semibold text-indigo-600 mb-2">
-                  Départ
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {/* Chambres déjà attribuées */}
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-700">
-                      Attribuées
-                    </h4>
-                    {departRooms
-                      .filter((room) => room.assignedTo && !room.checked)
-                      .map((room) => (
-                        <div
-                          key={room.number}
-                          className="p-2 border rounded bg-white shadow"
-                        >
-                          <p className="text-sm text-gray-700">
-                            {room.number} - {room.assignedTo} - {room.state}
-                          </p>
-                          <button
-                            className="text-xs text-blue-600 mt-1"
-                            onClick={() =>
-                              handleNewAssignment(index, room.number)
-                            }
-                          >
-                            Réattribuer
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                  {/* Chambres non attribuées */}
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-700">
-                      Non Attribuées
-                    </h4>
-                    {departRooms
-                      .filter((room) => !room.assignedTo && !room.checked)
-                      .map((room) => (
-                        <div
-                          key={room.number}
-                          className="p-2 border rounded bg-white shadow"
-                        >
-                          <p className="text-sm text-gray-700">
-                            {room.number} - {room.state}
-                          </p>
-                          <button
-                            className="text-xs text-blue-600 mt-1"
-                            onClick={() =>
-                              handleNewAssignment(index, room.number)
-                            }
-                          >
-                            Attribuer
-                          </button>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            ) : (
+              <button
+                className="mt-2 bg-green-500 text-white p-2 rounded w-full"
+                onClick={() => handleResolveError(index)}
+              >
+                Résoudre l'erreur
+              </button>
+            )}
           </div>
         ))
       )}
 
-      {/* Résumé des erreurs résolues */}
-      <div className="mt-8">
-        <h3 className="text-lg font-bold text-green-600 mb-4">
-          Résumé des Erreurs Résolues
-        </h3>
-        {resolvedErrors.length === 0 ? (
-          <p className="text-gray-700">Aucune erreur résolue.</p>
-        ) : (
-          resolvedErrors.map((resolvedError, index) => (
-            <div
-              key={index}
-              className="p-4 mb-4 border rounded bg-green-100 border-green-500"
-            >
-              <p className="text-sm font-semibold text-green-800">
-                Chambre: {resolvedError.roomNumber} corrigée.
-              </p>
-              <p className="text-sm text-green-800">
-                Nouvelle chambre assignée: {resolvedError.newRoomNumber}
-              </p>
-              <p className="text-sm text-green-800">
-                Femme de Chambre: {resolvedError.maid}
-              </p>
-            </div>
-          ))
-        )}
-      </div>
+      {/* ... Affichage des erreurs résolues ... */}
     </div>
   );
 }
+
+ErrorManagement.propTypes = {
+  rooms: PropTypes.array.isRequired,
+  staffList: PropTypes.array.isRequired,
+  reportedErrors: PropTypes.array.isRequired,
+  resolvedErrors: PropTypes.array.isRequired,
+  setRooms: PropTypes.func.isRequired,
+  setReportedErrors: PropTypes.func.isRequired,
+  setResolvedErrors: PropTypes.func.isRequired,
+};

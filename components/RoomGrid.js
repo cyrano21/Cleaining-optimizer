@@ -1,5 +1,4 @@
-// components/RoomGrid.js
-
+// RoomGrid.js
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -15,8 +14,8 @@ export default function RoomGrid({
   handleLateDepartureTimeChange,
   handleNotesChange,
   handleCleaningQuality,
-  userRole,
-  reportError,
+  userRole, // Rôle de l'utilisateur
+  reportError, // Fonction pour signaler une erreur
 }) {
   const [selectedRoomError, setSelectedRoomError] = useState("");
   const [errorState, setErrorState] = useState("");
@@ -47,6 +46,19 @@ export default function RoomGrid({
     }
   };
 
+  const getQualityColor = (quality) => {
+    switch (quality) {
+      case "bien":
+        return "bg-green-200";
+      case "moyennement":
+        return "bg-orange-200";
+      case "mal":
+        return "bg-red-200";
+      default:
+        return "bg-gray-200";
+    }
+  };
+
   const handleReportError = () => {
     if (!selectedRoomError || !errorState) {
       alert("Veuillez sélectionner une chambre et son état.");
@@ -70,7 +82,7 @@ export default function RoomGrid({
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 sm:p-4 md:p-6 lg:p-8 xl:p-10 border-t-4 border-indigo-500 w-full max-w-screen-xl mx-auto my-8 segment">
-      <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-indigo-600 text-shadow">
+      <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-indigo-600">
         État des chambres
       </h2>
       {manualAssignmentActive && selectedEmployee && (
@@ -135,7 +147,7 @@ export default function RoomGrid({
                         e.stopPropagation();
                         handleNoteChange(room.number, note, e.target.checked);
                       }}
-                      className="mr-1 h-3 w-3 accent-indigo-500 cursor-pointer"
+                      className="mr-1 h-3 w-3"
                       disabled={userRole !== "gouvernante" || room.checked} // Désactiver si la chambre est nettoyée
                     />
                     <span className="truncate">{note}</span>
@@ -185,32 +197,20 @@ export default function RoomGrid({
               ) : (
                 // Bouton pour marquer comme nettoyée pour la femme de chambre
                 <button
-                  className={`mt-1 w-full text-xs py-1 px-1 rounded transition-colors duration-200 ${
+                  className={`mt-1 w-full text-xs py-1 px-1 rounded ${
                     room.checked
                       ? "bg-blue-500 text-white"
                       : room.controlled
                       ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                      : "bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-900"
+                      : "bg-gray-200"
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleRoomChecked(room.number);
                   }}
-                  disabled={room.controlled} // Désactiver si la chambre est contrôlée
+                  disabled={room.checked || room.controlled} // Désactiver si la chambre est nettoyée ou contrôlée
                 >
                   {room.checked ? "Nettoyée" : "Marquer Nettoyée"}
-                </button>
-              )}
-              {/* Bouton pour annuler si marqué comme nettoyée */}
-              {userRole === "femmeDeChambre" && room.checked && (
-                <button
-                  className="mt-1 w-full text-xs py-1 px-1 rounded bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleRoomChecked(room.number); // Réinitialiser l'état de la chambre
-                  }}
-                >
-                  Annuler
                 </button>
               )}
               {/* Indicateur de chambre contrôlée */}
@@ -224,10 +224,8 @@ export default function RoomGrid({
               {/* Bouton pour marquer comme contrôlée pour la gouvernante */}
               {userRole === "gouvernante" && room.checked && (
                 <button
-                  className={`mt-1 w-full text-xs py-1 px-1 rounded transition-colors duration-200 ${
-                    room.controlled
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-900"
+                  className={`mt-1 w-full text-xs py-1 px-1 rounded ${
+                    room.controlled ? "bg-green-500 text-white" : "bg-gray-200"
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -245,7 +243,7 @@ export default function RoomGrid({
                     className={`w-6 h-6 rounded-full ${
                       room.cleaningQuality === "bien"
                         ? "bg-green-500"
-                        : "bg-gray-200 hover:bg-gray-300"
+                        : "bg-gray-200"
                     }`}
                     title="Bien Nettoyée"
                     onClick={() => handleCleaningQuality(room.number, "bien")}
@@ -254,7 +252,7 @@ export default function RoomGrid({
                     className={`w-6 h-6 rounded-full ${
                       room.cleaningQuality === "moyennement"
                         ? "bg-orange-500"
-                        : "bg-gray-200 hover:bg-gray-300"
+                        : "bg-gray-200"
                     }`}
                     title="Moyennement Nettoyée"
                     onClick={() =>
@@ -265,7 +263,7 @@ export default function RoomGrid({
                     className={`w-6 h-6 rounded-full ${
                       room.cleaningQuality === "mal"
                         ? "bg-red-500"
-                        : "bg-gray-200 hover:bg-gray-300"
+                        : "bg-gray-200"
                     }`}
                     title="Mal Nettoyée"
                     onClick={() => handleCleaningQuality(room.number, "mal")}
@@ -289,7 +287,7 @@ export default function RoomGrid({
             <select
               value={errorFloor}
               onChange={(e) => setErrorFloor(e.target.value)}
-              className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
+              className="w-full p-1 border rounded"
             >
               <option value="All">Tous les étages</option>
               {getFloors().map((floor) => (
@@ -306,7 +304,7 @@ export default function RoomGrid({
             <select
               value={selectedRoomError}
               onChange={(e) => setSelectedRoomError(e.target.value)}
-              className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
+              className="w-full p-1 border rounded"
             >
               <option value="">Sélectionner une chambre</option>
               {filteredErrorRooms.map((room) => (
@@ -323,7 +321,7 @@ export default function RoomGrid({
             <select
               value={errorState}
               onChange={(e) => setErrorState(e.target.value)}
-              className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
+              className="w-full p-1 border rounded"
             >
               <option value="">Sélectionner un état</option>
               <option value="Libre">Libre</option>
@@ -332,7 +330,7 @@ export default function RoomGrid({
             </select>
           </div>
           <button
-            className="mt-2 w-full bg-red-500 hover:bg-red-600 text-white p-2 rounded transition-colors duration-200"
+            className="mt-2 w-full bg-red-500 text-white p-2 rounded"
             onClick={handleReportError}
           >
             Soumettre l'erreur
@@ -353,23 +351,23 @@ RoomGrid.propTypes = {
       notes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
       assignedTo: PropTypes.string,
       checked: PropTypes.bool.isRequired,
-      controlled: PropTypes.bool,
+      controlled: PropTypes.bool, // Ajout de la propriété controlled
       star: PropTypes.bool,
-      customNotes: PropTypes.string,
-      lateDepartureTime: PropTypes.string,
-      cleaningQuality: PropTypes.string,
+      customNotes: PropTypes.string, // Ajout des notes personnalisées
+      lateDepartureTime: PropTypes.string, // Ajout pour l'heure de départ tardif
+      cleaningQuality: PropTypes.string, // Ajout pour la qualité de nettoyage
     })
   ).isRequired,
   onRoomClick: PropTypes.func.isRequired,
   toggleStar: PropTypes.func.isRequired,
   toggleRoomChecked: PropTypes.func.isRequired,
-  toggleRoomControlled: PropTypes.func.isRequired,
+  toggleRoomControlled: PropTypes.func.isRequired, // Ajout de la validation de la fonction
   handleNoteChange: PropTypes.func.isRequired,
   manualAssignmentActive: PropTypes.bool.isRequired,
   selectedEmployee: PropTypes.string.isRequired,
   handleLateDepartureTimeChange: PropTypes.func.isRequired,
   handleNotesChange: PropTypes.func.isRequired,
-  userRole: PropTypes.string.isRequired,
-  handleCleaningQuality: PropTypes.func.isRequired,
-  reportError: PropTypes.func.isRequired,
+  userRole: PropTypes.string.isRequired, // Validation du rôle de l'utilisateur
+  handleCleaningQuality: PropTypes.func.isRequired, // Validation pour la fonction de qualité de nettoyage
+  reportError: PropTypes.func.isRequired, // Validation pour la fonction de rapport d'erreurs
 };
