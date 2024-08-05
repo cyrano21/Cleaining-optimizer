@@ -1347,7 +1347,10 @@ export default function HomePage() {
   const [selectedFloor, setSelectedFloor] = useState("All");
   const [reportedErrors, setReportedErrors] = useState([]);
   const [resolvedErrors, setResolvedErrors] = useState([]);
+  const [activeGouvernanteSection, setActiveGouvernanteSection] =
+    useState("assign");
 
+  // Fonction pour basculer l'état "nettoyée" et réinitialiser si nécessaire
   const toggleRoomChecked = (roomNumber) => {
     setRooms((prevRooms) =>
       prevRooms.map((room) =>
@@ -1355,7 +1358,11 @@ export default function HomePage() {
           ? {
               ...room,
               checked: !room.checked,
-              state: room.state === "Départ" ? "Recouche" : room.state,
+              // Réinitialiser l'état si décoché
+              state: !room.checked ? "Libre" : room.state,
+              notes: !room.checked ? [] : room.notes,
+              controlled: !room.checked ? false : room.controlled,
+              cleaningQuality: !room.checked ? "" : room.cleaningQuality,
             }
           : room
       )
@@ -1675,27 +1682,29 @@ export default function HomePage() {
       : rooms.filter((room) => room.number.startsWith(selectedFloor));
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto w-full px-4 py-8 max-w-screen-xl">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-indigo-700">
         Hôtel Cleaning Optimizer Pro
       </h1>
 
+      {/* Sélection du rôle de l'utilisateur */}
       <div className="flex justify-center mb-4">
         <select
           value={userRole}
           onChange={(e) => setUserRole(e.target.value)}
-          className="w-full max-w-xs p-2 border rounded-md"
+          className="w-full max-w-xs p-2 border rounded-md text-xl"
         >
           <option value="gouvernante">Gouvernante</option>
           <option value="femmeDeChambre">Femme de Chambre</option>
         </select>
       </div>
 
+      {/* Sélection de l'étage */}
       <div className="flex justify-center mb-4">
         <select
           value={selectedFloor}
           onChange={(e) => setSelectedFloor(e.target.value)}
-          className="w-full max-w-xs p-2 border rounded-md"
+          className="w-full max-w-xs p-2 border rounded-md text-xl"
         >
           <option value="All">Tous les étages</option>
           {getFloors().map((floor) => (
@@ -1706,109 +1715,134 @@ export default function HomePage() {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div
-          className={`space-y-8 ${
-            activeTab !== "rooms" ? "hidden md:block" : ""
-          }`}
-        >
-          {userRole === "gouvernante" && <ImportData onImport={handleImport} />}
-          <RoomGrid
-            rooms={filteredRooms}
-            onRoomClick={handleRoomClick}
-            toggleStar={toggleStar}
-            toggleRoomChecked={toggleRoomChecked}
-            toggleRoomControlled={toggleRoomControlled}
-            handleNoteChange={handleNoteChange}
-            manualAssignmentActive={manualAssignmentActive}
-            selectedEmployee={selectedEmployee}
-            handleLateDepartureTimeChange={handleLateDepartureTimeChange}
-            handleNotesChange={handleNotesChange}
-            userRole={userRole}
-            handleCleaningQuality={handleCleaningQuality}
-            reportError={reportError}
-          />
-          {userRole === "gouvernante" && (
-            <ManualAssignment
-              staff={staffList}
-              rooms={rooms}
-              assignRoom={assignRoom}
-              manualAssignmentActive={manualAssignmentActive}
-              setManualAssignmentActive={setManualAssignmentActive}
-              selectedEmployee={selectedEmployee}
-              setSelectedEmployee={setSelectedEmployee}
-              unassignRoom={unassignRoom}
-            />
-          )}
-        </div>
+      {/* Importation et Recherche en haut de la page */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {userRole === "gouvernante" && <ImportData onImport={handleImport} />}
+        <RoomSearch rooms={rooms} />
+      </div>
 
-        <div
-          className={`space-y-8 ${
-            activeTab !== "staff" ? "hidden md:block" : ""
-          }`}
-        >
-          {userRole === "gouvernante" && (
-            <StaffManagement staffList={staffList} addStaff={addStaff} />
+      {/* Sous-sélection pour Gouvernante sur mobile uniquement */}
+      {userRole === "gouvernante" && (
+        <div className="block md:hidden flex justify-center mb-4">
+          <select
+            value={activeGouvernanteSection}
+            onChange={(e) => setActiveGouvernanteSection(e.target.value)}
+            className="w-full max-w-xs p-2 border rounded-md text-xl"
+          >
+            <option value="assign">Assignation & Gestion du Personnel</option>
+            <option value="distribution">Distribution des Chambres</option>
+            <option value="report">Rapport et Contrôles</option>
+            <option value="errors">Gestion des Erreurs</option>
+          </select>
+        </div>
+      )}
+
+      {/* Conteneur principal pour tous les composants */}
+      <div className="space-y-8">
+        {/* Affichage des chambres */}
+        <RoomGrid
+          rooms={filteredRooms}
+          onRoomClick={handleRoomClick}
+          toggleStar={toggleStar}
+          toggleRoomChecked={toggleRoomChecked}
+          toggleRoomControlled={toggleRoomControlled}
+          handleNoteChange={handleNoteChange}
+          manualAssignmentActive={manualAssignmentActive}
+          selectedEmployee={selectedEmployee}
+          handleLateDepartureTimeChange={handleLateDepartureTimeChange}
+          handleNotesChange={handleNotesChange}
+          userRole={userRole}
+          handleCleaningQuality={handleCleaningQuality}
+          reportError={reportError}
+        />
+
+        {/* Section Assignation et Gestion du Personnel */}
+        {userRole === "gouvernante" &&
+          activeGouvernanteSection === "assign" && (
+            <div className="space-y-8">
+              <h2 className="text-xl font-bold text-center mb-4">
+                Gestion du Personnel et Assignation
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ManualAssignment
+                  staff={staffList}
+                  rooms={rooms}
+                  assignRoom={assignRoom}
+                  manualAssignmentActive={manualAssignmentActive}
+                  setManualAssignmentActive={setManualAssignmentActive}
+                  selectedEmployee={selectedEmployee}
+                  setSelectedEmployee={setSelectedEmployee}
+                  unassignRoom={unassignRoom}
+                />
+
+                <StaffManagement staffList={staffList} addStaff={addStaff} />
+              </div>
+            </div>
           )}
-          {userRole === "gouvernante" && (
+
+        {/* Section Distribution des Chambres */}
+        {userRole === "gouvernante" &&
+          activeGouvernanteSection === "distribution" && (
             <RoomDistribution
               rooms={rooms}
               setRooms={setRooms}
               staffList={staffList}
             />
           )}
-        </div>
 
-        <div
-          className={`space-y-8 ${
-            activeTab !== "reports" ? "hidden md:block" : ""
-          }`}
-        >
-          <RoomSearch rooms={rooms} />
-          {userRole === "gouvernante" && <DailyReport rooms={rooms} />}
-          {userRole === "gouvernante" && (
-            <Controls onReset={handleReset} onGenerateReport={generateReport} />
+        {/* Section Rapport et Contrôles */}
+        {userRole === "gouvernante" &&
+          activeGouvernanteSection === "report" && (
+            <div className="grid grid-cols-1 gap-4">
+              <DailyReport rooms={rooms} />
+              <Controls
+                onReset={handleReset}
+                onGenerateReport={generateReport}
+              />
+            </div>
           )}
-        </div>
+
+        {/* Section Gestion des Erreurs */}
+        {userRole === "gouvernante" &&
+          activeGouvernanteSection === "errors" && (
+            <ErrorManagement
+              rooms={rooms}
+              staffList={staffList}
+              reportedErrors={reportedErrors}
+              handleNewAssignment={handleNewAssignment}
+              resolvedErrors={resolvedErrors}
+            />
+          )}
+
+        {/* Section Résumé des Erreurs pour Femme de Chambre */}
+        {userRole === "femmeDeChambre" && (
+          <div className="mt-8 bg-white shadow-lg rounded-lg p-4 border-t-4 border-green-500">
+            <h2 className="text-2xl font-bold text-green-600 mb-4">
+              Résumé des Erreurs
+            </h2>
+            {resolvedErrors.length === 0 ? (
+              <p className="text-gray-700">Aucune erreur résolue.</p>
+            ) : (
+              resolvedErrors.map((resolvedError, index) => (
+                <div
+                  key={index}
+                  className="p-4 mb-4 border rounded bg-green-100 border-green-500"
+                >
+                  <p className="text-sm font-semibold text-green-800">
+                    Chambre: {resolvedError.roomNumber} corrigée.
+                  </p>
+                  <p className="text-sm text-green-800">
+                    Nouvelle chambre assignée: {resolvedError.newRoomNumber}
+                  </p>
+                  <p className="text-sm text-green-800">
+                    Femme de Chambre: {resolvedError.maid}
+                  </p>
+                </div>
+              ))
+            )}
+          </div>
+        )}
       </div>
-
-      {userRole === "gouvernante" && (
-        <ErrorManagement
-          rooms={rooms}
-          staffList={staffList}
-          reportedErrors={reportedErrors}
-          handleNewAssignment={handleNewAssignment}
-          resolvedErrors={resolvedErrors}
-        />
-      )}
-
-      {userRole === "femmeDeChambre" && (
-        <div className="mt-8 bg-white shadow-lg rounded-lg p-4 border-t-4 border-green-500">
-          <h2 className="text-2xl font-bold text-green-600 mb-4">
-            Résumé des Erreurs
-          </h2>
-          {resolvedErrors.length === 0 ? (
-            <p className="text-gray-700">Aucune erreur résolue.</p>
-          ) : (
-            resolvedErrors.map((resolvedError, index) => (
-              <div
-                key={index}
-                className="p-4 mb-4 border rounded bg-green-100 border-green-500"
-              >
-                <p className="text-sm font-semibold text-green-800">
-                  Chambre: {resolvedError.roomNumber} corrigée.
-                </p>
-                <p className="text-sm text-green-800">
-                  Nouvelle chambre assignée: {resolvedError.newRoomNumber}
-                </p>
-                <p className="text-sm text-green-800">
-                  Femme de Chambre: {resolvedError.maid}
-                </p>
-              </div>
-            ))
-          )}
-        </div>
-      )}
     </div>
   );
 }
