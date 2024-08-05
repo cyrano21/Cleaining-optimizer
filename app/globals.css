@@ -1,10 +1,6 @@
-/* styles/globals.css */
-
-/* Assurez-vous d'avoir configuré Tailwind CSS correctement */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 body {
     font-family: 'Inter', sans-serif;
@@ -13,34 +9,82 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
-    /* Assurez-vous que le corps couvre tout l'écran */
 }
-
 
 .segment {
     backdrop-filter: blur(5px);
-    /* Flou sur l'arrière-plan */
-    background-color: rgba(255, 255, 255, 0.6);
-    /* Couleur de fond semi-transparente */
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
-    /* Bords arrondis pour un meilleur style */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Ombre légère pour l'élément */
     padding: 1rem;
-    /* Espacement interne pour le contenu */
     transition: backdrop-filter 0.3s ease-in-out, transform 0.3s ease-in-out;
-    /* Transitions */
 }
 
 .segment:hover {
     backdrop-filter: blur(3px);
-    /* Réduction du flou au survol */
     transform: translateY(-2px);
-    /* Léger déplacement vers le haut */
 }
 
 /* Classe pour l'ombre du texte */
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    /* Ombre subtile pour le texte */
+}
+
+/* Styles supplémentaires pour améliorer la lisibilité */
+
+/* Couleurs pour les états des chambres */
+.bg-pink-100 {
+    background-color: rgba(255, 182, 193, 0.9);
+    /* Assurez-vous que le fond est assez opaque */
+}
+
+.bg-green-100 {
+    background-color: rgba(144, 238, 144, 0.9);
+    /* Assurez-vous que le fond est assez opaque */
+}
+
+.bg-white {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Assurez-vous que le fond est assez opaque */
+}
+
+/* Texte des boutons */
+button {
+    transition: background-color 0.2s ease;
+}
+
+/* Bordures et couleurs des boutons */
+button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Amélioration de la lisibilité pour le texte clair */
+.text-indigo-600 {
+    color: #3b82f6;
+    /* Teinte indigo plus sombre pour le texte */
+}
+
+.text-gray-600 {
+    color: #4b5563;
+    /* Teinte grise plus sombre pour le texte */
+}
+
+.text-pink-500 {
+    color: #ec4899;
+    /* Teinte rose plus vive */
+}
+
+.text-green-500 {
+    color: #10b981;
+    /* Teinte verte plus vive */
+}
+
+.text-red-500 {
+    color: #ef4444;
+    /* Teinte rouge plus vive */
+}
+
+.text-blue-500 {
+    color: #3b82f6;
+    /* Teinte bleue plus vive */
 }

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 export default function ManualAssignment({
   staff,
   rooms,
+  setRooms, // Ajout de la fonction setRooms
   assignRoom,
   unassignRoom,
   manualAssignmentActive,
@@ -60,9 +61,49 @@ export default function ManualAssignment({
     return notes;
   };
 
+  // Fonction pour gérer le changement de notes des objets oubliés ou autres
+  const handleNotesChange = (roomNumber, newNote) => {
+    setRooms((prevRooms) =>
+      prevRooms.map((room) =>
+        room.number === roomNumber ? { ...room, customNotes: newNote } : room
+      )
+    );
+  };
+
+  // Fonction pour gérer l'heure de départ tardif
+  const handleLateDepartureTimeChange = (roomNumber, time) => {
+    setRooms((prevRooms) =>
+      prevRooms.map((room) =>
+        room.number === roomNumber ? { ...room, lateDepartureTime: time } : room
+      )
+    );
+  };
+
   // Calculer le nombre total de chambres assignées à chaque employé
   const getTotalRoomsAssigned = (employeeName) => {
     return rooms.filter((room) => room.assignedTo === employeeName).length;
+  };
+
+  // Calculer le nombre de chambres "Recouche" pour chaque employé (y compris DND/Refus)
+  const getRecoucheCount = (employeeName) => {
+    return rooms.filter(
+      (room) => room.assignedTo === employeeName && room.state === "Recouche"
+    ).length;
+  };
+
+  // Calculer le nombre de chambres "DND" et "Refus" pour chaque employé (sous-catégorie de Recouche)
+  const getDNDCount = (employeeName) => {
+    return rooms.filter(
+      (room) =>
+        room.assignedTo === employeeName &&
+        room.state === "Recouche" &&
+        (room.notes?.includes("DND") || room.notes?.includes("Refus"))
+    ).length;
+  };
+
+  // Calculer le nombre total de chambres "Recouche" faites (non DND/Refus) pour chaque employé
+  const getEffectiveRecoucheCount = (employeeName) => {
+    return getRecoucheCount(employeeName) - getDNDCount(employeeName);
   };
 
   // Calculer le nombre total de chambres dans chaque état pour chaque employé
@@ -79,7 +120,7 @@ export default function ManualAssignment({
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <h2 className="text-xl font-bold mb-2 text-indigo-600">
+      <h2 className="text-xl font-bold mb-2 text-indigo-600 text-shadow">
         Assignation manuelle
       </h2>
 
@@ -105,7 +146,7 @@ export default function ManualAssignment({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold text-gray-700 text-shadow">
             Sélectionnez un employé :
           </label>
           <select
@@ -133,7 +174,7 @@ export default function ManualAssignment({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="font-bold text-sm mb-1 text-indigo-700">
+            <div className="font-bold text-sm mb-1 text-indigo-700 text-shadow">
               {staffMember.name} -{" "}
               <span className="text-indigo-900">
                 Chambres: {getTotalRoomsAssigned(staffMember.name)}
@@ -145,7 +186,10 @@ export default function ManualAssignment({
                 </span>
                 ,{" "}
                 <span className="text-green-500">
-                  Recouche: {getRoomCountByState(staffMember.name, "Recouche")}
+                  Recouche: {getEffectiveRecoucheCount(staffMember.name)}{" "}
+                  <span className="text-red-500">
+                    (DND/Refus: {getDNDCount(staffMember.name)})
+                  </span>
                 </span>
                 )
               </span>
@@ -169,11 +213,13 @@ export default function ManualAssignment({
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="font-semibold text-xs">{room.number}</div>
+                    <div className="font-semibold text-xs text-shadow">
+                      {room.number}
+                    </div>
                     {room.state === "Recouche" && room.star && (
-                      <span className="text-yellow-500">★</span>
+                      <span className="text-yellow-500 text-shadow">★</span>
                     )}
-                    <div className="text-xs mt-1">
+                    <div className="text-xs mt-1 text-shadow">
                       {getNotes(room).map((note) => (
                         <span
                           key={note}
@@ -184,10 +230,40 @@ export default function ManualAssignment({
                       ))}
                     </div>
                     {room.checked && (
-                      <div className="text-xs text-blue-500 mt-1">
+                      <div className="text-xs text-blue-500 mt-1 text-shadow">
                         Contrôlée
                       </div>
                     )}
+                    {/* Ajouter un champ pour les notes des objets oubliés ou autres */}
+                    <textarea
+                      className="w-full p-1 mt-1 text-xs border rounded resize-none focus:outline-none focus:ring focus:border-indigo-500"
+                      placeholder="Notes (objets oubliés, problèmes, etc.)"
+                      value={room.customNotes || ""}
+                      onChange={(e) =>
+                        handleNotesChange(room.number, e.target.value)
+                      }
+                      rows={2}
+                    ></textarea>
+                    {/* Afficher un champ pour l'heure de départ tardif si applicable */}
+                    {room.state === "Départ" &&
+                      room.notes?.includes("Départ tardif") && (
+                        <div className="mt-2">
+                          <label className="block text-xs font-semibold text-gray-700">
+                            Heure de départ :
+                          </label>
+                          <input
+                            type="time"
+                            className="w-full p-1 text-xs border rounded focus:outline-none focus:ring focus:border-indigo-500"
+                            value={room.lateDepartureTime || ""}
+                            onChange={(e) =>
+                              handleLateDepartureTimeChange(
+                                room.number,
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      )}
                     {/* Bouton pour désassigner la chambre */}
                     <button
                       className="mt-1 p-1 bg-red-400 text-white text-xs rounded hover:bg-red-500 transition-colors duration-200"
@@ -273,6 +349,8 @@ ManualAssignment.propTypes = {
       assignedTo: PropTypes.string,
       checked: PropTypes.bool.isRequired,
       star: PropTypes.bool,
+      customNotes: PropTypes.string, // Ajout des notes personnalisées
+      lateDepartureTime: PropTypes.string, // Ajout pour l'heure de départ tardif
     })
   ).isRequired,
   assignRoom: PropTypes.func.isRequired,
@@ -281,4 +359,5 @@ ManualAssignment.propTypes = {
   setManualAssignmentActive: PropTypes.func.isRequired,
   selectedEmployee: PropTypes.string.isRequired,
   setSelectedEmployee: PropTypes.func.isRequired,
+  setRooms: PropTypes.func.isRequired, // Assurez-vous que setRooms est passé comme prop
 };
