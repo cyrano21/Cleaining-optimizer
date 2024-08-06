@@ -1340,7 +1340,7 @@ const defaultRooms = [
 
 export default function HomePage() {
   const [rooms, setRooms] = useState(defaultRooms);
-  const [searchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]); // Ajouté setSearchResults
   const [staffList, setStaffList] = useState([]);
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState("");
@@ -1548,25 +1548,11 @@ export default function HomePage() {
     );
   };
 
-  //const getUserFloor = (userRole) => {
-  // Supposons que le rôle de l'utilisateur soit au format "nom-étage"
-  //const parts = userRole.split("-");
-  //return parts.length > 1 ? parts[1] : null;
-  //};
-
-  //const getFloorRooms = (floor) => {
-  // return rooms.filter((room) => room.number.startsWith(floor));
-  //};
-
   const handleSearch = (searchTerm) => {
+    // Définir handleSearch
     const results = performSearch(rooms, searchTerm);
     setSearchResults(results);
   };
-
-  // const performManualSearch = (searchTerm) => {
-  //const results = performSearch(rooms, searchTerm);
-  // setSearchResults(results);
-  // };
 
   const reportError = (roomNumber, errorState) => {
     const room = rooms.find((room) => room.number === roomNumber);
