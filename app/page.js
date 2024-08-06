@@ -8,7 +8,7 @@ import StaffManagement from "../components/StaffManagement";
 import RoomDistribution from "../components/RoomDistribution";
 import ManualAssignment from "../components/ManualAssignment";
 import RoomSearch from "../components/RoomSearch";
-import { performSearch } from "../utils/hotelUtils";
+import { performSearch } from "../utils/searchUtils";
 import DailyReport from "../components/DailyReport";
 import Controls from "../components/Controls";
 import ErrorManagement from "../components/ErrorManagement";
@@ -1548,24 +1548,24 @@ export default function HomePage() {
     );
   };
 
-  const getUserFloor = (userRole) => {
-    // Supposons que le rôle de l'utilisateur soit au format "nom-étage"
-    const parts = userRole.split("-");
-    return parts.length > 1 ? parts[1] : null;
-  };
+  //const getUserFloor = (userRole) => {
+  // Supposons que le rôle de l'utilisateur soit au format "nom-étage"
+  //const parts = userRole.split("-");
+  //return parts.length > 1 ? parts[1] : null;
+  //};
 
-  const getFloorRooms = (floor) => {
-    return rooms.filter((room) => room.number.startsWith(floor));
-  };
+  //const getFloorRooms = (floor) => {
+  // return rooms.filter((room) => room.number.startsWith(floor));
+  //};
 
-  const handleSearch = (results) => {
-    setSearchResults(results);
-  };
+  //const handleSearch = (results) => {
+  // setSearchResults(results);
+  // };
 
-  const performManualSearch = (searchTerm) => {
-    const results = performSearch(rooms, searchTerm);
-    setSearchResults(results);
-  };
+  // const performManualSearch = (searchTerm) => {
+  //const results = performSearch(rooms, searchTerm);
+  // setSearchResults(results);
+  // };
 
   const reportError = (roomNumber, errorState) => {
     const room = rooms.find((room) => room.number === roomNumber);
@@ -1582,80 +1582,10 @@ export default function HomePage() {
     }
   };
 
-  const handleNewAssignment = (errorIndex, newRoomNumber, maidName) => {
-    const updatedErrors = [...reportedErrors];
-    const error = updatedErrors[errorIndex];
-
-    if (error) {
-      setRooms((prevRooms) =>
-        prevRooms.map((room) => {
-          if (room.number === newRoomNumber) {
-            return { ...room, assignedTo: error.maid };
-          } else if (room.number === error.roomNumber) {
-            return { ...room, assignedTo: null };
-          }
-          return room;
-        })
-      );
-
-      const maidRooms = rooms.filter((room) => room.assignedTo === error.maid);
-
-      if (maidRooms.length > 0) {
-        const roomToReassign = maidRooms[0];
-
-        setRooms((prevRooms) =>
-          prevRooms.map((room) =>
-            room.number === roomToReassign.number
-              ? { ...room, assignedTo: maidName } // Réattribuer la chambre
-              : room
-          )
-        );
-
-        setRooms((prevRooms) =>
-          prevRooms.map((room) =>
-            room.number === error.roomNumber
-              ? {
-                  ...room,
-                  notes: [
-                    ...(room.notes || []),
-                    `Erreur signalée par ${error.maid}.`,
-                  ],
-                }
-              : room
-          )
-        );
-
-        setRooms((prevRooms) =>
-          prevRooms.map((room) =>
-            room.number === newRoomNumber
-              ? {
-                  ...room,
-                  notes: [
-                    ...(room.notes || []),
-                    `Chambre réattribuée à ${error.maid}.`,
-                  ],
-                }
-              : room
-          )
-        );
-
-        updatedErrors.splice(errorIndex, 1);
-        setReportedErrors(updatedErrors);
-
-        const resolvedError = {
-          ...error,
-          newRoomNumber,
-          roomToReassign: roomToReassign.number,
-        };
-        setResolvedErrors([...resolvedErrors, resolvedError]);
-      }
-    }
-  };
-
   const handleReset = () => {
     if (
       confirm(
-        "Êtes-vous sûr de vouloir réinitialiser l'application ? Toutes les données seront perdues."
+        "Êtes-vous sûr de vouloir réinitialiser l&apos;application ? Toutes les données seront perdues."
       )
     ) {
       setRooms(defaultRooms);

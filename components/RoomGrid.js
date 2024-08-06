@@ -1,4 +1,3 @@
-// RoomGrid.js
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -31,16 +30,14 @@ export default function RoomGrid({
   };
 
   const handleRoomClickInternal = (e, room) => {
-    // Vérifier si le clic provient d'un élément interactif
     if (
       e.target.tagName === "INPUT" ||
       e.target.tagName === "BUTTON" ||
       e.target.tagName === "SELECT" ||
       e.target.tagName === "TEXTAREA"
     ) {
-      return; // Ne rien faire si le clic vient d'un input, bouton, select ou textarea
+      return;
     }
-    // Autoriser uniquement les gouvernantes à modifier l'état de la chambre
     if (userRole === "gouvernante" && !room.checked) {
       onRoomClick(room.number);
     }
@@ -49,11 +46,11 @@ export default function RoomGrid({
   const getQualityColor = (quality) => {
     switch (quality) {
       case "bien":
-        return "bg-green-200";
+        return "bg-green-500";
       case "moyennement":
-        return "bg-orange-200";
+        return "bg-orange-500";
       case "mal":
-        return "bg-red-200";
+        return "bg-red-500";
       default:
         return "bg-gray-200";
     }
@@ -124,10 +121,9 @@ export default function RoomGrid({
                   <span
                     className={`cursor-pointer ${
                       room.star ? "text-yellow-500" : "text-gray-300"
-                    } ${room.checked ? "pointer-events-none opacity-50" : ""}`} // Désactiver l'étoile si la chambre est nettoyée
+                    } ${room.checked ? "pointer-events-none opacity-50" : ""}`}
                     onClick={(e) => {
                       if (!room.checked) {
-                        // Ne pas permettre le clic si la chambre est nettoyée
                         e.stopPropagation();
                         toggleStar(room.number);
                       }
@@ -148,7 +144,7 @@ export default function RoomGrid({
                         handleNoteChange(room.number, note, e.target.checked);
                       }}
                       className="mr-1 h-3 w-3"
-                      disabled={userRole !== "gouvernante" || room.checked} // Désactiver si la chambre est nettoyée
+                      disabled={userRole !== "gouvernante" || room.checked}
                     />
                     <span className="truncate">{note}</span>
                   </label>
@@ -170,20 +166,18 @@ export default function RoomGrid({
                           e.target.value
                         )
                       }
-                      disabled={userRole !== "gouvernante" || room.checked} // Désactiver si la chambre est nettoyée
+                      disabled={userRole !== "gouvernante" || room.checked}
                     />
                   </div>
                 )}
-              {/* Ajouter un champ pour les notes des objets oubliés ou autres */}
               <textarea
                 className="w-full p-1 mt-1 text-xs border rounded resize-none focus:outline-none focus:ring focus:border-indigo-500"
                 placeholder="Notes (objets oubliés, problèmes, etc.)"
                 value={room.customNotes || ""}
                 onChange={(e) => handleNotesChange(room.number, e.target.value)}
                 rows={2}
-                disabled={userRole === "femmeDeChambre" && room.controlled} // La femme de chambre ne peut pas modifier les notes si la chambre est contrôlée
+                disabled={userRole === "femmeDeChambre" && room.controlled}
               ></textarea>
-              {/* Indicateur de chambre nettoyée */}
               {userRole === "gouvernante" ? (
                 <p
                   className={`mt-1 text-xs p-1 rounded ${
@@ -195,7 +189,6 @@ export default function RoomGrid({
                   {room.checked ? "Nettoyée" : "Non Nettoyée"}
                 </p>
               ) : (
-                // Bouton pour marquer comme nettoyée pour la femme de chambre
                 <button
                   className={`mt-1 w-full text-xs py-1 px-1 rounded ${
                     room.checked
@@ -208,12 +201,11 @@ export default function RoomGrid({
                     e.stopPropagation();
                     toggleRoomChecked(room.number);
                   }}
-                  disabled={room.checked || room.controlled} // Désactiver si la chambre est nettoyée ou contrôlée
+                  disabled={room.checked || room.controlled}
                 >
                   {room.checked ? "Nettoyée" : "Marquer Nettoyée"}
                 </button>
               )}
-              {/* Indicateur de chambre contrôlée */}
               <div
                 className={`mt-1 text-xs p-1 rounded ${
                   room.controlled ? "bg-green-500 text-white" : "bg-gray-200"
@@ -221,7 +213,6 @@ export default function RoomGrid({
               >
                 {room.controlled ? "Contrôlée" : "Non Contrôlée"}
               </div>
-              {/* Bouton pour marquer comme contrôlée pour la gouvernante */}
               {userRole === "gouvernante" && room.checked && (
                 <button
                   className={`mt-1 w-full text-xs py-1 px-1 rounded ${
@@ -231,43 +222,27 @@ export default function RoomGrid({
                     e.stopPropagation();
                     toggleRoomControlled(room.number);
                   }}
-                  disabled={room.controlled} // Désactiver le bouton si la chambre est déjà contrôlée
+                  disabled={room.controlled}
                 >
                   {room.controlled ? "Déjà Contrôlée" : "Marquer Contrôlée"}
                 </button>
               )}
-              {/* Options de qualité du nettoyage (seulement pour la gouvernante) */}
               {userRole === "gouvernante" && room.controlled && (
                 <div className="mt-2 flex justify-around">
-                  <button
-                    className={`w-6 h-6 rounded-full ${
-                      room.cleaningQuality === "bien"
-                        ? "bg-green-500"
-                        : "bg-gray-200"
-                    }`}
-                    title="Bien Nettoyée"
-                    onClick={() => handleCleaningQuality(room.number, "bien")}
-                  />
-                  <button
-                    className={`w-6 h-6 rounded-full ${
-                      room.cleaningQuality === "moyennement"
-                        ? "bg-orange-500"
-                        : "bg-gray-200"
-                    }`}
-                    title="Moyennement Nettoyée"
-                    onClick={() =>
-                      handleCleaningQuality(room.number, "moyennement")
-                    }
-                  />
-                  <button
-                    className={`w-6 h-6 rounded-full ${
-                      room.cleaningQuality === "mal"
-                        ? "bg-red-500"
-                        : "bg-gray-200"
-                    }`}
-                    title="Mal Nettoyée"
-                    onClick={() => handleCleaningQuality(room.number, "mal")}
-                  />
+                  {["bien", "moyennement", "mal"].map((quality) => (
+                    <button
+                      key={quality}
+                      className={`w-6 h-6 rounded-full ${getQualityColor(
+                        room.cleaningQuality === quality ? quality : ""
+                      )}`}
+                      title={`${
+                        quality.charAt(0).toUpperCase() + quality.slice(1)
+                      } Nettoyée`}
+                      onClick={() =>
+                        handleCleaningQuality(room.number, quality)
+                      }
+                    />
+                  ))}
                 </div>
               )}
             </div>
@@ -279,7 +254,6 @@ export default function RoomGrid({
           <h3 className="text-lg font-semibold text-red-500 mb-2">
             Rapporter une erreur
           </h3>
-          {/* Sélection de l'étage */}
           <div className="mb-2">
             <label className="block text-sm font-semibold text-gray-700">
               Sélectionner un étage :
@@ -341,7 +315,6 @@ export default function RoomGrid({
   );
 }
 
-// Validation des props
 RoomGrid.propTypes = {
   rooms: PropTypes.arrayOf(
     PropTypes.shape({
@@ -351,23 +324,23 @@ RoomGrid.propTypes = {
       notes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
       assignedTo: PropTypes.string,
       checked: PropTypes.bool.isRequired,
-      controlled: PropTypes.bool, // Ajout de la propriété controlled
+      controlled: PropTypes.bool,
       star: PropTypes.bool,
-      customNotes: PropTypes.string, // Ajout des notes personnalisées
-      lateDepartureTime: PropTypes.string, // Ajout pour l'heure de départ tardif
-      cleaningQuality: PropTypes.string, // Ajout pour la qualité de nettoyage
+      customNotes: PropTypes.string,
+      lateDepartureTime: PropTypes.string,
+      cleaningQuality: PropTypes.string,
     })
   ).isRequired,
   onRoomClick: PropTypes.func.isRequired,
   toggleStar: PropTypes.func.isRequired,
   toggleRoomChecked: PropTypes.func.isRequired,
-  toggleRoomControlled: PropTypes.func.isRequired, // Ajout de la validation de la fonction
+  toggleRoomControlled: PropTypes.func.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
   manualAssignmentActive: PropTypes.bool.isRequired,
   selectedEmployee: PropTypes.string.isRequired,
   handleLateDepartureTimeChange: PropTypes.func.isRequired,
   handleNotesChange: PropTypes.func.isRequired,
-  userRole: PropTypes.string.isRequired, // Validation du rôle de l'utilisateur
-  handleCleaningQuality: PropTypes.func.isRequired, // Validation pour la fonction de qualité de nettoyage
-  reportError: PropTypes.func.isRequired, // Validation pour la fonction de rapport d'erreurs
+  userRole: PropTypes.string.isRequired,
+  handleCleaningQuality: PropTypes.func.isRequired,
+  reportError: PropTypes.func.isRequired,
 };

@@ -11,7 +11,7 @@ export default function ErrorManagement({
   const handleResolveError = (errorIndex) => {
     const error = reportedErrors[errorIndex];
 
-    // 1. Attribuer la chambre nettoyée par erreur à la femme de chambre qui l'a nettoyée
+    // 1. Attribuer la chambre nettoyée par erreur à la femme de chambre qui l&apos;a nettoyée
     setRooms((prevRooms) => {
       return prevRooms.map((room) => {
         if (room.number === error.roomNumber) {
@@ -21,7 +21,7 @@ export default function ErrorManagement({
       });
     });
 
-    // 2. Trouver une chambre à retirer à la femme de chambre qui a fait l'erreur
+    // 2. Trouver une chambre à retirer à la femme de chambre qui a fait l&apos;erreur
     const roomToReassign = rooms.find(
       (room) =>
         room.assignedTo === error.maid && room.number !== error.roomNumber
@@ -42,7 +42,7 @@ export default function ErrorManagement({
         });
       });
 
-      // 4. Ajouter l'erreur résolue
+      // 4. Ajouter l&apos;erreur résolue
       const resolvedError = {
         ...error,
         reassignedRoom: roomToReassign.number,
