@@ -8,7 +8,7 @@ import StaffManagement from "../components/StaffManagement";
 import RoomDistribution from "../components/RoomDistribution";
 import ManualAssignment from "../components/ManualAssignment";
 import RoomSearch from "../components/RoomSearch";
-import { performSearch } from "../utils/searchUtils";
+//import { performSearch } from "../utils/searchUtils";
 import DailyReport from "../components/DailyReport";
 import Controls from "../components/Controls";
 import ErrorManagement from "../components/ErrorManagement";
@@ -1340,7 +1340,7 @@ const defaultRooms = [
 
 export default function HomePage() {
   const [rooms, setRooms] = useState(defaultRooms);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults] = useState([]);
   const [staffList, setStaffList] = useState([]);
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState("");
@@ -1558,9 +1558,10 @@ export default function HomePage() {
   // return rooms.filter((room) => room.number.startsWith(floor));
   //};
 
-  //const handleSearch = (results) => {
-  // setSearchResults(results);
-  // };
+  const handleSearch = (searchTerm) => {
+    const results = performSearch(rooms, searchTerm);
+    setSearchResults(results);
+  };
 
   // const performManualSearch = (searchTerm) => {
   //const results = performSearch(rooms, searchTerm);
