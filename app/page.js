@@ -8,7 +8,7 @@ import StaffManagement from "../components/StaffManagement";
 import RoomDistribution from "../components/RoomDistribution";
 import ManualAssignment from "../components/ManualAssignment";
 import RoomSearch from "../components/RoomSearch";
-//import { performSearch } from "../utils/searchUtils";
+import { performSearch } from "../utils/searchUtils";
 import DailyReport from "../components/DailyReport";
 import Controls from "../components/Controls";
 import ErrorManagement from "../components/ErrorManagement";
@@ -1806,7 +1806,7 @@ export default function HomePage() {
                       reportError(selectedErrorRoom, selectedErrorState)
                     }
                   >
-                    Soumettre l'erreur
+                    Soumettre l&apos;erreur
                   </button>
                 </div>
               </div>
