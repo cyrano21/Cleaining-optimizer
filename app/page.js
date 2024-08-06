@@ -8,6 +8,7 @@ import StaffManagement from "../components/StaffManagement";
 import RoomDistribution from "../components/RoomDistribution";
 import ManualAssignment from "../components/ManualAssignment";
 import RoomSearch from "../components/RoomSearch";
+import { performSearch } from "./searchUtils";
 import DailyReport from "../components/DailyReport";
 import Controls from "../components/Controls";
 import ErrorManagement from "../components/ErrorManagement";
@@ -1339,10 +1340,10 @@ const defaultRooms = [
 
 export default function HomePage() {
   const [rooms, setRooms] = useState(defaultRooms);
+  const [searchResults, setSearchResults] = useState([]);
   const [staffList, setStaffList] = useState([]);
   const [manualAssignmentActive, setManualAssignmentActive] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState("");
-  const [activeTab, setActiveTab] = useState("rooms");
   const [userRole, setUserRole] = useState("gouvernante");
   const [selectedFloor, setSelectedFloor] = useState("All");
   const [reportedErrors, setReportedErrors] = useState([]);
@@ -1557,6 +1558,15 @@ export default function HomePage() {
     return rooms.filter((room) => room.number.startsWith(floor));
   };
 
+  const handleSearch = (results) => {
+    setSearchResults(results);
+  };
+
+  const performManualSearch = (searchTerm) => {
+    const results = performSearch(rooms, searchTerm);
+    setSearchResults(results);
+  };
+
   const reportError = (roomNumber, errorState) => {
     const room = rooms.find((room) => room.number === roomNumber);
     if (room) {
@@ -1729,7 +1739,16 @@ export default function HomePage() {
       {/* Importation et Recherche en haut de la page */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         {userRole === "gouvernante" && <ImportData onImport={handleImport} />}
-        <RoomSearch rooms={rooms} />
+        <RoomSearch rooms={rooms} onSearch={handleSearch} />
+        {/* Affichage des résultats de recherche */}
+        <div>
+          {searchResults.map((room) => (
+            <div key={room.number}>
+              Chambre {room.number} - État: {room.state} - Employé:{" "}
+              {room.assignedTo || "Non attribué"}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Conteneur principal pour tous les composants */}

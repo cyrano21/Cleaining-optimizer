@@ -1,18 +1,14 @@
-/* eslint-disable react/prop-types */
+// RoomSearch.js
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { performSearch } from "./searchUtils";
 
-const RoomSearch = ({ rooms }) => {
+const RoomSearch = ({ rooms, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = () => {
-    const results = rooms.filter(
-      (room) =>
-        room.number.includes(searchQuery) ||
-        (room.assignedTo &&
-          room.assignedTo.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-    setSearchResults(results);
+    const results = performSearch(rooms, searchQuery);
+    onSearch(results);
   };
 
   return (
@@ -25,7 +21,8 @@ const RoomSearch = ({ rooms }) => {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Numéro de chambre ou nom d'employé"
+          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+          placeholder="Numéro de chambre, nom d'employé ou étage (ex: 3)"
           className="w-2/3 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button
@@ -35,21 +32,19 @@ const RoomSearch = ({ rooms }) => {
           Rechercher
         </button>
       </div>
-      <div className="mt-4 max-h-48 overflow-y-auto">
-        {searchResults.map((room) => (
-          <div
-            key={room.number}
-            className="flex justify-between items-center p-2 border-b"
-          >
-            <span>
-              Chambre {room.number} - État: {room.state} - Employé:{" "}
-              {room.assignedTo || "Non attribué"}
-            </span>
-          </div>
-        ))}
-      </div>
     </div>
   );
+};
+
+RoomSearch.propTypes = {
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      assignedTo: PropTypes.string,
+    })
+  ).isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default RoomSearch;

@@ -14,8 +14,8 @@ export default function RoomGrid({
   handleLateDepartureTimeChange,
   handleNotesChange,
   handleCleaningQuality,
-  userRole, // Rôle de l'utilisateur
-  reportError, // Fonction pour signaler une erreur
+  userRole,
+  reportError,
 }) {
   const [selectedRoomError, setSelectedRoomError] = useState("");
   const [errorState, setErrorState] = useState("");
@@ -67,7 +67,7 @@ export default function RoomGrid({
     reportError(selectedRoomError, errorState);
     setSelectedRoomError("");
     setErrorState("");
-    setErrorFloor("All"); // Reset the floor selection after reporting an error
+    setErrorFloor("All");
   };
 
   const getFloors = () => {
@@ -333,7 +333,7 @@ export default function RoomGrid({
             className="mt-2 w-full bg-red-500 text-white p-2 rounded"
             onClick={handleReportError}
           >
-            Soumettre l'erreur
+            Soumettre l&apos;erreur
           </button>
         </div>
       )}

@@ -1,89 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 export default function ErrorManagement({
   rooms,
-  staffList,
   reportedErrors,
-  resolvedErrors,
   setRooms,
   setReportedErrors,
   setResolvedErrors,
 }) {
-  const [manualReassignment, setManualReassignment] = useState({});
-
   const handleResolveError = (errorIndex) => {
     const error = reportedErrors[errorIndex];
 
-    // Tentative de résolution automatique
-    const roomToReassign = rooms.find(
-      (room) =>
-        room.assignedTo === error.maid &&
-        room.number !== error.roomNumber &&
-        !room.checked
-    );
-
-    if (roomToReassign) {
-      // Résolution automatique possible
-      setRooms((prevRooms) => {
-        return prevRooms.map((room) => {
-          if (room.number === error.roomNumber) {
-            return { ...room, assignedTo: error.maid, checked: true };
-          } else if (room.number === roomToReassign.number) {
-            return { ...room, assignedTo: null };
-          }
-          return room;
-        });
-      });
-
-      // Ajouter l'erreur résolue
-      const resolvedError = {
-        ...error,
-        reassignedRoom: roomToReassign.number,
-      };
-      setResolvedErrors((prev) => [...prev, resolvedError]);
-
-      // Supprimer l'erreur résolue des erreurs signalées
-      setReportedErrors((prev) => prev.filter((_, i) => i !== errorIndex));
-    } else {
-      // Résolution automatique impossible, demander à la gouvernante de choisir
-      alert(
-        "Résolution automatique impossible. Veuillez choisir manuellement une chambre à réassigner."
-      );
-      setManualReassignment({ ...manualReassignment, [errorIndex]: "" });
-    }
-  };
-
-  const handleManualReassignment = (errorIndex, newRoomNumber) => {
-    const error = reportedErrors[errorIndex];
-
+    // 1. Attribuer la chambre nettoyée par erreur à la femme de chambre qui l'a nettoyée
     setRooms((prevRooms) => {
       return prevRooms.map((room) => {
         if (room.number === error.roomNumber) {
           return { ...room, assignedTo: error.maid, checked: true };
-        } else if (room.number === newRoomNumber) {
-          return { ...room, assignedTo: null };
         }
         return room;
       });
     });
 
-    // Ajouter l'erreur résolue
-    const resolvedError = {
-      ...error,
-      reassignedRoom: newRoomNumber,
-    };
-    setResolvedErrors((prev) => [...prev, resolvedError]);
+    // 2. Trouver une chambre à retirer à la femme de chambre qui a fait l'erreur
+    const roomToReassign = rooms.find(
+      (room) =>
+        room.assignedTo === error.maid && room.number !== error.roomNumber
+    );
 
-    // Supprimer l'erreur résolue des erreurs signalées
-    setReportedErrors((prev) => prev.filter((_, i) => i !== errorIndex));
+    if (roomToReassign) {
+      // 3. Attribuer cette chambre à la femme de chambre originale
+      const originalMaid = rooms.find(
+        (room) => room.number === error.roomNumber
+      )?.assignedTo;
 
-    // Réinitialiser l'état de réassignation manuelle
-    setManualReassignment((prev) => {
-      const newState = { ...prev };
-      delete newState[errorIndex];
-      return newState;
-    });
+      setRooms((prevRooms) => {
+        return prevRooms.map((room) => {
+          if (room.number === roomToReassign.number) {
+            return { ...room, assignedTo: originalMaid };
+          }
+          return room;
+        });
+      });
+
+      // 4. Ajouter l'erreur résolue
+      const resolvedError = {
+        ...error,
+        reassignedRoom: roomToReassign.number,
+        originalMaid: originalMaid,
+      };
+      setResolvedErrors((prev) => [...prev, resolvedError]);
+
+      // 5. Supprimer l'erreur résolue des erreurs signalées
+      setReportedErrors((prev) => prev.filter((_, i) => i !== errorIndex));
+    } else {
+      alert(
+        "Impossible de résoudre l&apos;erreur : pas de chambre à réassigner."
+      );
+    }
   };
 
   return (
@@ -106,62 +79,22 @@ export default function ErrorManagement({
             <p className="text-sm text-red-800">
               Nettoyée par erreur par : {error.maid}
             </p>
-
-            {manualReassignment[index] !== undefined ? (
-              <div className="mt-2">
-                <select
-                  value={manualReassignment[index]}
-                  onChange={(e) =>
-                    setManualReassignment({
-                      ...manualReassignment,
-                      [index]: e.target.value,
-                    })
-                  }
-                  className="w-full p-1 border rounded mb-2"
-                >
-                  <option value="">
-                    Sélectionner une chambre à réassigner
-                  </option>
-                  {rooms
-                    .filter((room) => !room.checked && room.assignedTo === null)
-                    .map((room) => (
-                      <option key={room.number} value={room.number}>
-                        {room.number}
-                      </option>
-                    ))}
-                </select>
-                <button
-                  className="bg-green-500 text-white p-2 rounded w-full"
-                  onClick={() =>
-                    handleManualReassignment(index, manualReassignment[index])
-                  }
-                  disabled={!manualReassignment[index]}
-                >
-                  Confirmer la réassignation
-                </button>
-              </div>
-            ) : (
-              <button
-                className="mt-2 bg-green-500 text-white p-2 rounded w-full"
-                onClick={() => handleResolveError(index)}
-              >
-                Résoudre l'erreur
-              </button>
-            )}
+            <button
+              className="mt-2 bg-green-500 text-white p-2 rounded"
+              onClick={() => handleResolveError(index)}
+            >
+              Résoudre l&apos;erreur
+            </button>
           </div>
         ))
       )}
-
-      {/* ... Affichage des erreurs résolues ... */}
     </div>
   );
 }
 
 ErrorManagement.propTypes = {
   rooms: PropTypes.array.isRequired,
-  staffList: PropTypes.array.isRequired,
   reportedErrors: PropTypes.array.isRequired,
-  resolvedErrors: PropTypes.array.isRequired,
   setRooms: PropTypes.func.isRequired,
   setReportedErrors: PropTypes.func.isRequired,
   setResolvedErrors: PropTypes.func.isRequired,
