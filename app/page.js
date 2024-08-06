@@ -8,7 +8,7 @@ import StaffManagement from "../components/StaffManagement";
 import RoomDistribution from "../components/RoomDistribution";
 import ManualAssignment from "../components/ManualAssignment";
 import RoomSearch from "../components/RoomSearch";
-import { performSearch } from "./searchUtils";
+import { performSearch } from "../utils/hotelUtils";
 import DailyReport from "../components/DailyReport";
 import Controls from "../components/Controls";
 import ErrorManagement from "../components/ErrorManagement";

@@ -1,7 +1,7 @@
 // RoomSearch.js
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { performSearch } from "./searchUtils";
+import { performSearch } from "../utils/searchUtils";
 
 const RoomSearch = ({ rooms, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
