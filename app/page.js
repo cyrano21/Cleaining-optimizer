@@ -1374,13 +1374,7 @@ export default function HomePage() {
   const toggleRoomChecked = (roomNumber) => {
     setRooms((prevRooms) =>
       prevRooms.map((room) =>
-        room.number === roomNumber
-          ? {
-              ...room,
-              checked: !room.checked,
-              state: room.state === "Départ" ? "Recouche" : room.state,
-            }
-          : room
+        room.number === roomNumber ? { ...room, checked: !room.checked } : room
       )
     );
   };
