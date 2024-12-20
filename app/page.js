@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from "react";
 import RoomGrid from "../components/RoomGrid";
-import ImportData from "../components/ImportData";
 import StaffManagement from "../components/StaffManagement";
 import RoomDistribution from "../components/RoomDistribution";
 import ManualAssignment from "../components/ManualAssignment";
@@ -1504,44 +1503,36 @@ export default function HomePage() {
     );
   };
 
-  const handleImport = async (file) => {
+  const handleImport = async (importedData) => {
     try {
-      const importedRooms = await analyzeRoomData(file);
-      setRooms(importedRooms);
+      // Fusionner les données importées avec les données existantes
+      const mergedRooms = [...rooms];
+      
+      importedData.forEach(importedRoom => {
+        const existingRoomIndex = mergedRooms.findIndex(
+          room => room.number === importedRoom.number
+        );
+        
+        if (existingRoomIndex !== -1) {
+          // Mettre à jour la chambre existante
+          mergedRooms[existingRoomIndex] = {
+            ...mergedRooms[existingRoomIndex],
+            ...importedRoom
+          };
+        } else {
+          // Ajouter la nouvelle chambre
+          mergedRooms.push(importedRoom);
+        }
+      });
+      
+      // Mettre à jour l'état et le localStorage
+      setRooms(mergedRooms);
+      localStorage.setItem('roomsData', JSON.stringify(mergedRooms));
+      
     } catch (error) {
-      console.error("Erreur lors de l'importation:", error);
-      alert("Une erreur est survenue lors de l'importation du fichier.");
+      console.error('Erreur lors de l\'importation:', error);
+      // Gérer l'erreur si nécessaire
     }
-  };
-
-  const handleImportComplete = (importedData) => {
-    // Fusionner les données importées avec les données existantes
-    const newRooms = rooms.map(existingRoom => {
-      const importedRoom = importedData.find(
-        room => room.number === existingRoom.number
-      );
-      if (importedRoom) {
-        return {
-          ...existingRoom,
-          ...importedRoom,
-          notes: [...(existingRoom.notes || []), ...(importedRoom.notes || [])]
-        };
-      }
-      return existingRoom;
-    });
-
-    // Ajouter les nouvelles chambres qui n'existaient pas
-    importedData.forEach(importedRoom => {
-      if (!newRooms.some(room => room.number === importedRoom.number)) {
-        newRooms.push({
-          ...importedRoom,
-          notes: importedRoom.notes || []
-        });
-      }
-    });
-
-    setRooms(newRooms);
-    localStorage.setItem('roomsData', JSON.stringify(newRooms));
   };
 
   const addStaff = (name, contractType, preferredFloor) => {
@@ -1767,7 +1758,7 @@ export default function HomePage() {
 
       {/* Importation et Recherche en haut de la page */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        {userRole === "gouvernante" && <DataImport onImportComplete={handleImportComplete} />}
+        <DataImport onImportComplete={handleImport} />
         <RoomSearch rooms={rooms} onSearch={handleSearch} />
         {/* Affichage des résultats de recherche */}
         <div>
