@@ -1623,6 +1623,7 @@ export default function HomePage() {
           className="w-full max-w-xs p-2 border rounded-md text-xl"
         >
           <option value="gouvernante">Gouvernante</option>
+          <option value="femme_de_chambre">Femme de chambre</option>
           {staffList.map((staff) => (
             <option key={staff.name} value={staff.name}>
               {staff.name}
@@ -1665,7 +1666,11 @@ export default function HomePage() {
       {/* Conteneur principal pour tous les composants */}
       <div className="space-y-8">
         <RoomGrid
-          rooms={userRole === "gouvernante" ? filteredRooms : assignedRooms} // Affiche les chambres assignées uniquement
+          rooms={
+            userRole === "gouvernante" || userRole === "femme_de_chambre"
+              ? filteredRooms
+              : assignedRooms
+          }
           onRoomClick={handleRoomClick}
           toggleStar={toggleStar}
           toggleRoomChecked={toggleRoomChecked}
