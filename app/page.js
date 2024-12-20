@@ -13,6 +13,8 @@ import DailyReport from "../components/DailyReport";
 import Controls from "../components/Controls";
 import ErrorManagement from "../components/ErrorManagement";
 import { analyzeRoomData } from "../utils/hotelUtils";
+import { jsPDF } from 'jspdf';
+import DataImport from "../components/DataImport";
 
 // Initialisation des chambres avec les données par défaut
 const defaultRooms = [
@@ -1351,25 +1353,43 @@ export default function HomePage() {
   const [selectedErrorRoom, setSelectedErrorRoom] = useState("");
   const [selectedErrorState, setSelectedErrorState] = useState("");
 
-  // Utilisation de localStorage pour la persistance de l'état
+  // Chargement initial des données depuis le localStorage
   useEffect(() => {
-    const savedRooms = localStorage.getItem("rooms");
-    const savedStaff = localStorage.getItem("staff");
-    const savedErrors = localStorage.getItem("reportedErrors");
-    const savedResolvedErrors = localStorage.getItem("resolvedErrors");
+    const savedRooms = localStorage.getItem('roomsData');
+    const savedReportedErrors = localStorage.getItem('reportedErrors');
+    const savedResolvedErrors = localStorage.getItem('resolvedErrors');
+    const savedStaffList = localStorage.getItem('staffList');
 
-    if (savedRooms) setRooms(JSON.parse(savedRooms));
-    if (savedStaff) setStaffList(JSON.parse(savedStaff));
-    if (savedErrors) setReportedErrors(JSON.parse(savedErrors));
-    if (savedResolvedErrors) setResolvedErrors(JSON.parse(savedResolvedErrors));
+    if (savedRooms) {
+      setRooms(JSON.parse(savedRooms));
+    }
+    if (savedReportedErrors) {
+      setReportedErrors(JSON.parse(savedReportedErrors));
+    }
+    if (savedResolvedErrors) {
+      setResolvedErrors(JSON.parse(savedResolvedErrors));
+    }
+    if (savedStaffList) {
+      setStaffList(JSON.parse(savedStaffList));
+    }
   }, []);
 
+  // Sauvegarde des données quand elles changent
   useEffect(() => {
-    localStorage.setItem("rooms", JSON.stringify(rooms));
-    localStorage.setItem("staff", JSON.stringify(staffList));
-    localStorage.setItem("reportedErrors", JSON.stringify(reportedErrors));
-    localStorage.setItem("resolvedErrors", JSON.stringify(resolvedErrors));
-  }, [rooms, staffList, reportedErrors, resolvedErrors]);
+    localStorage.setItem('roomsData', JSON.stringify(rooms));
+  }, [rooms]);
+
+  useEffect(() => {
+    localStorage.setItem('reportedErrors', JSON.stringify(reportedErrors));
+  }, [reportedErrors]);
+
+  useEffect(() => {
+    localStorage.setItem('resolvedErrors', JSON.stringify(resolvedErrors));
+  }, [resolvedErrors]);
+
+  useEffect(() => {
+    localStorage.setItem('staffList', JSON.stringify(staffList));
+  }, [staffList]);
 
   const toggleRoomChecked = (roomNumber) => {
     setRooms((prevRooms) =>
@@ -1494,6 +1514,36 @@ export default function HomePage() {
     }
   };
 
+  const handleImportComplete = (importedData) => {
+    // Fusionner les données importées avec les données existantes
+    const newRooms = rooms.map(existingRoom => {
+      const importedRoom = importedData.find(
+        room => room.number === existingRoom.number
+      );
+      if (importedRoom) {
+        return {
+          ...existingRoom,
+          ...importedRoom,
+          notes: [...(existingRoom.notes || []), ...(importedRoom.notes || [])]
+        };
+      }
+      return existingRoom;
+    });
+
+    // Ajouter les nouvelles chambres qui n'existaient pas
+    importedData.forEach(importedRoom => {
+      if (!newRooms.some(room => room.number === importedRoom.number)) {
+        newRooms.push({
+          ...importedRoom,
+          notes: importedRoom.notes || []
+        });
+      }
+    });
+
+    setRooms(newRooms);
+    localStorage.setItem('roomsData', JSON.stringify(newRooms));
+  };
+
   const addStaff = (name, contractType, preferredFloor) => {
     if (
       !staffList.some(
@@ -1564,16 +1614,12 @@ export default function HomePage() {
   };
 
   const handleReset = () => {
-    if (
-      confirm(
-        "Êtes-vous sûr de vouloir réinitialiser l&apos;application ? Toutes les données seront perdues."
-      )
-    ) {
+    if (userRole === "gouvernante") {
+      localStorage.clear();
       setRooms(defaultRooms);
-      setStaffList([]);
       setReportedErrors([]);
       setResolvedErrors([]);
-      localStorage.clear();
+      setStaffList([]);
     }
   };
 
@@ -1608,6 +1654,77 @@ export default function HomePage() {
   const floorRooms = rooms.filter((room) =>
     selectedFloor === "All" ? true : room.number.startsWith(selectedFloor)
   );
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const today = new Date().toLocaleDateString('fr-FR');
+    
+    // Configuration initiale du PDF
+    doc.setFont('helvetica');
+    doc.setFontSize(16);
+    
+    // Titre
+    doc.text(`Rapport de Nettoyage - ${today}`, 20, 20);
+    doc.setFontSize(12);
+    
+    // Informations de l'employé
+    doc.text(`Employé: ${userRole}`, 20, 35);
+    
+    // En-tête du tableau
+    let y = 50;
+    doc.text('Chambre', 20, y);
+    doc.text('État', 60, y);
+    doc.text('Notes', 100, y);
+    doc.line(20, y + 2, 190, y + 2);
+    
+    // Ne montrer que les chambres assignées à l'utilisateur actuel
+    const userRooms = rooms.filter(room => room.assignedTo === userRole);
+    
+    // Contenu du tableau
+    y += 10;
+    userRooms.forEach((room) => {
+      if (y > 270) { // Nouvelle page si nécessaire
+        doc.addPage();
+        y = 20;
+      }
+      
+      doc.text(room.number.toString(), 20, y);
+      doc.text(room.state, 60, y);
+      
+      // Gérer les notes longues
+      const notes = room.notes.join(', ');
+      if (notes.length > 40) {
+        doc.text(notes.substring(0, 40) + '...', 100, y);
+      } else {
+        doc.text(notes || '-', 100, y);
+      }
+      
+      y += 7;
+    });
+    
+    // Ajouter la section des erreurs si présente
+    const userErrors = reportedErrors.filter(error => error.maid === userRole);
+    
+    if (userErrors.length > 0) {
+      y += 10;
+      doc.setFontSize(14);
+      doc.text('Erreurs Signalées:', 20, y);
+      doc.setFontSize(12);
+      y += 10;
+      
+      userErrors.forEach(error => {
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+        doc.text(`Chambre ${error.roomNumber} - ${error.errorState}`, 20, y);
+        y += 7;
+      });
+    }
+    
+    // Sauvegarder le PDF avec le nom de l'utilisateur
+    doc.save(`rapport-nettoyage-${userRole}-${today}.pdf`);
+  };
 
   return (
     <div className="container mx-auto w-full px-4 py-8 max-w-screen-xl">
@@ -1650,7 +1767,7 @@ export default function HomePage() {
 
       {/* Importation et Recherche en haut de la page */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        {userRole === "gouvernante" && <ImportData onImport={handleImport} />}
+        {userRole === "gouvernante" && <DataImport onImportComplete={handleImportComplete} />}
         <RoomSearch rooms={rooms} onSearch={handleSearch} />
         {/* Affichage des résultats de recherche */}
         <div>
@@ -1666,11 +1783,7 @@ export default function HomePage() {
       {/* Conteneur principal pour tous les composants */}
       <div className="space-y-8">
         <RoomGrid
-          rooms={
-            userRole === "gouvernante" || userRole === "femme_de_chambre"
-              ? filteredRooms
-              : assignedRooms
-          }
+          rooms={userRole === "gouvernante" ? filteredRooms : assignedRooms}
           onRoomClick={handleRoomClick}
           toggleStar={toggleStar}
           toggleRoomChecked={toggleRoomChecked}
@@ -1683,157 +1796,151 @@ export default function HomePage() {
           userRole={userRole}
           handleCleaningQuality={handleCleaningQuality}
           reportError={reportError}
-          floorRooms={floorRooms} // Passer les chambres de l'étage
+          floorRooms={floorRooms}
         />
 
+        {/* Interface Gouvernante */}
         {userRole === "gouvernante" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ManualAssignment
-              staff={staffList}
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ManualAssignment
+                staff={staffList}
+                rooms={rooms}
+                assignRoom={assignRoom}
+                manualAssignmentActive={manualAssignmentActive}
+                setManualAssignmentActive={setManualAssignmentActive}
+                selectedEmployee={selectedEmployee}
+                setSelectedEmployee={setSelectedEmployee}
+                unassignRoom={unassignRoom}
+              />
+
+              <StaffManagement
+                rooms={rooms}
+                staffList={staffList}
+                addStaff={addStaff}
+              />
+            </div>
+
+            <RoomDistribution
               rooms={rooms}
-              assignRoom={assignRoom}
-              manualAssignmentActive={manualAssignmentActive}
-              setManualAssignmentActive={setManualAssignmentActive}
-              selectedEmployee={selectedEmployee}
-              setSelectedEmployee={setSelectedEmployee}
-              unassignRoom={unassignRoom}
+              setRooms={setRooms}
+              staffList={staffList}
             />
 
-            <StaffManagement
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <DailyReport rooms={rooms} />
+              <Controls onReset={handleReset} onGenerateReport={generateReport} />
+            </div>
+
+            <ErrorManagement
               rooms={rooms}
               staffList={staffList}
-              addStaff={addStaff}
+              reportedErrors={reportedErrors}
+              resolvedErrors={resolvedErrors}
+              setRooms={setRooms}
+              setReportedErrors={setReportedErrors}
+              setResolvedErrors={setResolvedErrors}
+              userRole={userRole}
             />
-          </div>
+          </>
         )}
 
-        {userRole === "gouvernante" && (
-          <RoomDistribution
-            rooms={rooms}
-            setRooms={setRooms}
-            staffList={staffList}
-          />
-        )}
-
-        {userRole === "gouvernante" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <DailyReport rooms={rooms} />
-            <Controls onReset={handleReset} onGenerateReport={generateReport} />
-          </div>
-        )}
-
-        {userRole === "gouvernante" && (
-          <ErrorManagement
-            rooms={rooms}
-            staffList={staffList}
-            reportedErrors={reportedErrors}
-            resolvedErrors={resolvedErrors}
-            setRooms={setRooms} // Assurez-vous que cette ligne est présente
-            setReportedErrors={setReportedErrors}
-            setResolvedErrors={setResolvedErrors}
-          />
-        )}
-
-        {/* Section des erreurs pour chaque femme de chambre */}
+        {/* Interface Femme de Chambre */}
         {userRole !== "gouvernante" && (
           <div className="mt-8 bg-white shadow-lg rounded-lg p-4 border-t-4 border-red-500">
             <h2 className="text-2xl font-bold text-red-600 mb-4">
               Erreurs de Nettoyage
             </h2>
 
-            {userRole !== "gouvernante" ? (
-              <div>
-                {/* Affichage des erreurs rapportées par cette femme de chambre */}
-                {reportedErrors
-                  .filter((error) => error.maid === userRole)
-                  .map((error, index) => (
-                    <div
-                      key={index}
-                      className="p-4 mb-4 border rounded bg-red-100 border-red-500"
-                    >
-                      <p className="text-sm font-semibold text-red-800">
-                        Chambre en Erreur : {error.roomNumber} (État:{" "}
-                        {error.errorState})
-                      </p>
-                      <p className="text-sm text-red-800">
-                        Statut : En attente de résolution
-                      </p>
-                    </div>
-                  ))}
-
-                {/* Formulaire pour rapporter une nouvelle erreur */}
-                <div className="mt-4 p-4 border-t-2 border-red-500">
-                  <h3 className="text-lg font-semibold text-red-500 mb-2">
-                    Rapporter une erreur
-                  </h3>
-                  <div className="mb-2">
-                    <label className="block text-sm font-semibold text-gray-700">
-                      Chambre nettoyée par erreur :
-                    </label>
-                    <select
-                      value={selectedErrorRoom}
-                      onChange={(e) => setSelectedErrorRoom(e.target.value)}
-                      className="w-full p-1 border rounded"
-                    >
-                      <option value="">Sélectionner une chambre</option>
-                      {rooms.map((room) => (
-                        <option key={room.number} value={room.number}>
-                          {room.number}{" "}
-                          {room.assignedTo === userRole ? "(Assignée)" : ""}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="mb-2">
-                    <label className="block text-sm font-semibold text-gray-700">
-                      État de la chambre :
-                    </label>
-                    <select
-                      value={selectedErrorState}
-                      onChange={(e) => setSelectedErrorState(e.target.value)}
-                      className="w-full p-1 border rounded"
-                    >
-                      <option value="">Sélectionner un état</option>
-                      <option value="Libre">Libre</option>
-                      <option value="Départ">Départ</option>
-                      <option value="Recouche">Recouche</option>
-                    </select>
-                  </div>
-                  <button
-                    className="mt-2 w-full bg-red-500 text-white p-2 rounded"
-                    onClick={() =>
-                      reportError(selectedErrorRoom, selectedErrorState)
-                    }
+            <div>
+              {/* Affichage des erreurs rapportées par cette femme de chambre */}
+              {reportedErrors
+                .filter((error) => error.maid === userRole)
+                .map((error, index) => (
+                  <div
+                    key={index}
+                    className="p-4 mb-4 border rounded bg-red-100 border-red-500"
                   >
-                    Soumettre l&apos;erreur
-                  </button>
+                    <p className="text-sm font-semibold text-red-800">
+                      Chambre en Erreur : {error.roomNumber} (État:{" "}
+                      {error.errorState})
+                    </p>
+                    <p className="text-sm text-red-800">
+                      Statut : En attente de résolution
+                    </p>
+                  </div>
+                ))}
+
+              {/* Formulaire pour rapporter une nouvelle erreur */}
+              <div className="mt-4 p-4 border-t-2 border-red-500">
+                <h3 className="text-lg font-semibold text-red-500 mb-2">
+                  Rapporter une erreur
+                </h3>
+                <div className="mb-2">
+                  <label className="block text-sm font-semibold text-gray-700">
+                    Chambre nettoyée par erreur :
+                  </label>
+                  <select
+                    value={selectedErrorRoom}
+                    onChange={(e) => setSelectedErrorRoom(e.target.value)}
+                    className="w-full p-1 border rounded"
+                  >
+                    <option value="">Sélectionner une chambre</option>
+                    {rooms.map((room) => (
+                      <option key={room.number} value={room.number}>
+                        {room.number}{" "}
+                        {room.assignedTo === userRole ? "(Assignée)" : ""}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+                <div className="mb-2">
+                  <label className="block text-sm font-semibold text-gray-700">
+                    État de la chambre :
+                  </label>
+                  <select
+                    value={selectedErrorState}
+                    onChange={(e) => setSelectedErrorState(e.target.value)}
+                    className="w-full p-1 border rounded"
+                  >
+                    <option value="">Sélectionner un état</option>
+                    <option value="Libre">Libre</option>
+                    <option value="Départ">Départ</option>
+                    <option value="Recouche">Recouche</option>
+                  </select>
+                </div>
+                <button
+                  className="mt-2 w-full bg-red-500 text-white p-2 rounded"
+                  onClick={() => reportError(selectedErrorRoom, selectedErrorState)}
+                >
+                  Soumettre l&apos;erreur
+                </button>
               </div>
-            ) : (
-              <ErrorManagement
-                rooms={rooms}
-                staffList={staffList}
-                reportedErrors={reportedErrors}
-                resolvedErrors={resolvedErrors}
-                setRooms={setRooms}
-                setReportedErrors={setReportedErrors}
-                setResolvedErrors={setResolvedErrors}
-              />
-            )}
+            </div>
           </div>
         )}
-
-        {userRole === "gouvernante" && (
-          <ErrorManagement
-            rooms={rooms}
-            staffList={staffList}
-            reportedErrors={reportedErrors}
-            resolvedErrors={resolvedErrors}
-            setRooms={setRooms}
-            setReportedErrors={setReportedErrors}
-            setResolvedErrors={setResolvedErrors}
-          />
-        )}
+      </div>
+      <div className="fixed bottom-4 right-4">
+        <button
+          onClick={generatePDF}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center space-x-2"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          <span>Télécharger le Rapport</span>
+        </button>
       </div>
     </div>
   );

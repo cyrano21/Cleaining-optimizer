@@ -97,11 +97,9 @@ export default function RoomGrid({
                 : room.state === "Recouche"
                 ? "bg-green-200"
                 : "bg-white"
-            } ${room.checked ? "border-2 border-blue-500" : ""}
-            ${
+            } ${room.checked ? "border-2 border-blue-500" : ""} ${
               manualAssignmentActive && !room.assignedTo ? "cursor-pointer" : ""
-            }
-            ${
+            } ${
               room.assignedTo === selectedEmployee
                 ? "ring-2 ring-indigo-500"
                 : ""
@@ -112,6 +110,11 @@ export default function RoomGrid({
               {room.number}
             </div>
             <div className="flex-grow p-1 sm:p-2 text-xs">
+              <div className="flex justify-between items-center">
+                <span className="text-xs sm:text-sm font-semibold text-gray-800 truncate text-shadow">
+                  {room.state}
+                </span>
+              </div>
               <div className="flex justify-between items-center mt-1">
                 <span className="text-xs sm:text-sm text-gray-600 truncate text-shadow">
                   {room.assignedTo ||
