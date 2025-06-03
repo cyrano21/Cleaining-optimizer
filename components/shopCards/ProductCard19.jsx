@@ -4,18 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { useContextElement } from "@/context/Context";
 import Link from "next/link";
-export default function ProductCard19({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
-  
-  useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
-  }, [product]);
+export default function ProductCard19({ product, white = true }) {
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const {
     setQuickViewItem,
     addProductToCart,

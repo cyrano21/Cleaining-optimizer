@@ -5,17 +5,7 @@ import Image from "next/image";
 import { useContextElement } from "@/context/Context";
 import Link from "next/link";
 export default function ProductCard11({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
-  
-  useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
-  }, [product]);
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,
@@ -35,8 +25,6 @@ export default function ProductCard11({ product }) {
             src={currentImage}
             width={360}
             height={360}
-            loading="eager"
-            quality={80}
           />
           <Image
             className="lazyload img-hover"
@@ -45,8 +33,6 @@ export default function ProductCard11({ product }) {
             src={product.imgHoverSrc}
             width={360}
             height={360}
-            loading="lazy"
-            quality={80}
           />
         </Link>
         <div className="list-product-btn absolute-2">
@@ -129,8 +115,6 @@ export default function ProductCard11({ product }) {
                 src={color.imgSrc}
                 width={360}
                 height={360}
-                loading="lazy"
-                quality={80}
               />
             </li>
           ))}

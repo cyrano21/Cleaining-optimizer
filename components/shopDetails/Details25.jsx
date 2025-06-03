@@ -185,14 +185,9 @@ export default function Details25({ product }) {
                   </div>
                   <div className="tf-product-bundle-wrap">
                     <div className="title">Pairs well with</div>
-                    <div className="tf-product-form-bundle">                      <div className="tf-bundle-products">
-                        {bundleproducts.map((product, i) => {
-                          // Vérification de sécurité pour éviter les href undefined
-                          if (!product || !product.id) {
-                            return null;
-                          }
-                          
-                          return (
+                    <div className="tf-product-form-bundle">
+                      <div className="tf-bundle-products">
+                        {bundleproducts.map((product, i) => (
                           <div
                             key={product.id}
                             className={`tf-bundle-product-item item-has-checkox check ${
@@ -220,11 +215,11 @@ export default function Details25({ product }) {
                                 <div className="price">
                                   ${product.price.toFixed(2)}
                                 </div>{" "}
-                                {/* Format price */}                              </div>
+                                {/* Format price */}
+                              </div>
                             </div>
                           </div>
-                          );
-                        })}
+                        ))}
                       </div>
                     </div>
                   </div>

@@ -4,11 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 export default function ProductCard27({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,
@@ -18,9 +14,7 @@ export default function ProductCard27({ product }) {
     isAddedtoCompareItem,
   } = useContextElement();
   useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
+    setCurrentImage(product.imgSrc);
   }, [product]);
   return (
     <div className="card-product style-8 border-0 bg_grey-11">

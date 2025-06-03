@@ -43,14 +43,9 @@ export default function Sidebar() {
           <span>Sale products</span>
           <span className="icon icon-arrow-up" />
         </div>
-        <div id="sale-products" className="collapse show">          <div className="widget-featured-products mb_36">
-            {featuredProducts.map((product, index) => {
-              // Vérification de sécurité pour éviter les href undefined
-              if (!product || !product.id) {
-                return null;
-              }
-              
-              return (
+        <div id="sale-products" className="collapse show">
+          <div className="widget-featured-products mb_36">
+            {featuredProducts.map((product, index) => (
               <div className="featured-product-item" key={index}>
                 <Link
                   href={`/product-detail/${product.id}`}
@@ -74,8 +69,7 @@ export default function Sidebar() {
                   <span className="price">${product.price.toFixed(2)}</span>
                 </div>
               </div>
-              );
-            })}
+            ))}
           </div>
         </div>
       </div>

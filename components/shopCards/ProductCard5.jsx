@@ -1,21 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useContextElement } from "@/context/Context";
 import CountdownComponent from "../common/Countdown";
 export const ProductCard5 = ({ product }) => {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
-  
-  useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
-  }, [product]);
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,

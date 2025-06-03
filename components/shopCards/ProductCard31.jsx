@@ -5,11 +5,7 @@ import Link from "next/link";
 import { useContextElement } from "@/context/Context";
 import CountdownComponent from "../common/Countdown";
 export const ProductCard31 = ({ product }) => {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,

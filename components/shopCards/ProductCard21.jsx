@@ -5,11 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContextElement } from "@/context/Context";
 export default function ProductCard21({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const {
     setQuickViewItem,
     quickAddItem,
@@ -18,9 +14,7 @@ export default function ProductCard21({ product }) {
     isAddedtoCompareItem,
   } = useContextElement();
   useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
+    setCurrentImage(product.imgSrc);
   }, [product]);
 
   return (

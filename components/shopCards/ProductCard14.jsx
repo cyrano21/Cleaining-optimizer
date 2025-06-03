@@ -5,11 +5,7 @@ import Image from "next/image";
 import { useContextElement } from "@/context/Context";
 import Link from "next/link";
 export default function ProductCard14({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,
@@ -19,9 +15,7 @@ export default function ProductCard14({ product }) {
     isAddedtoCompareItem,
   } = useContextElement();
   useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
+    setCurrentImage(product.imgSrc);
   }, [product]);
 
   return (
@@ -30,26 +24,20 @@ export default function ProductCard14({ product }) {
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
             className="lazyload img-product"
-            data-src={currentImage}
+            data-src={product.imgSrc}
+            alt={product.title}
             src={currentImage}
-            alt="img-product"
-            width={400}
-            height={400}
-            loading="eager"
-            quality={80}
+            width={360}
+            height={270}
           />
-          {product.hoverImage && (
-            <Image
-              className="lazyload img-product-hover"
-              data-src={product.hoverImage}
-              src={product.hoverImage}
-              alt="img-product"
-              width={400}
-              height={400}
-              loading="lazy"
-              quality={80}
-            />
-          )}
+          <Image
+            className="lazyload img-hover"
+            data-src={product.imgHoverSrc}
+            alt={product.title}
+            src={product.imgHoverSrc}
+            width={360}
+            height={270}
+          />
         </Link>
         <div className="list-product-btn absolute-2">
           <a
@@ -132,8 +120,6 @@ export default function ProductCard14({ product }) {
                   src={color.imgSrc}
                   width={360}
                   height={270}
-                  loading="lazy"
-                  quality={80}
                 />
               </li>
             ))}

@@ -2,19 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-// Import CSS files directly with relative paths
-import "../public/fonts/fonts.css";
-import "../public/fonts/font-icons.css";
-import "../public/css/bootstrap.min.css";
-import "../public/css/swiper-bundle.min.css";
-import "../public/css/animate.css";
-import "../public/scss/app.scss";
-import "../public/scss/rtl.scss";
-import "../public/scss/custom.scss";
+import "../public/scss/main.scss";
 import "photoswipe/dist/photoswipe.css";
 import "rc-slider/assets/index.css";
-
-// Import components
 import HomesModal from "@/components/modals/HomesModal";
 import Context from "@/context/Context";
 import QuickView from "@/components/modals/QuickView";
@@ -43,9 +33,6 @@ import RtlToggle from "@/components/common/RtlToggle";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  // State to track touch capability
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side
@@ -54,29 +41,6 @@ export default function RootLayout({ children }) {
       });
     }
   }, []);
-  // Handle touch detection on client side only
-  useEffect(() => {
-    // Check if device supports touch
-    const checkTouch = () => {
-      return (
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-      );
-    };
-
-    const isTouchCapable = checkTouch();
-    setIsTouchDevice(isTouchCapable);
-    
-    // Update the html class after hydration to avoid mismatch
-    const htmlElement = document.documentElement;
-    if (isTouchCapable) {
-      htmlElement.classList.remove("no-touch");
-    } else {
-      htmlElement.classList.add("no-touch");
-    }
-  }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector("header");
@@ -88,10 +52,12 @@ export default function RootLayout({ children }) {
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function to remove event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
 
   const [scrollDirection, setScrollDirection] = useState("down");
 
@@ -186,28 +152,21 @@ export default function RootLayout({ children }) {
 
     initializeDirection();
   }, []); // Only runs once on component mount
+
   return (
-    <html lang="en" className="no-touch">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content="Ecomus - Ultimate eCommerce React NextJs Bootstrap Template"
-        />
-        <link rel="icon" href="/favicon.ico" />
-        <title>
-          Ecomus - Ultimate eCommerce React NextJs Bootstrap Template
-        </title>
-      </head>
-      <body>
+    <html lang="en">
+      <body className="preload-wrapper">
+        <div className="preload preload-container" id="preloader">
+          <div className="preload-logo">
+            <div className="spinner"></div>
+          </div>
+        </div>{" "}
         <Context>
-          {children}
-          <HomesModal />
-          <QuickView />
-          <ProductSidebar />
+          <div id="wrapper">{children}</div>
+          <RtlToggle />
+          <HomesModal /> <QuickView />
           <QuickAdd />
+          <ProductSidebar />
           <Compare />
           <ShopCart />
           <AskQuestion />
@@ -223,10 +182,9 @@ export default function RootLayout({ children }) {
           <ToolbarBottom />
           <ToolbarShop />
           <NewsletterModal />
-          <ShareModal />
-          <ScrollTop />
-          <RtlToggle />
+          <ShareModal />{" "}
         </Context>
+        <ScrollTop />
       </body>
     </html>
   );

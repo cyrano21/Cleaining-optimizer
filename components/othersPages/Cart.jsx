@@ -61,13 +61,8 @@ export default function Cart() {
                     <th>Total</th>
                   </tr>
                 </thead>
-                <tbody>                  {cartProducts.map((elm, i) => {
-                    // Vérification de sécurité pour éviter les href undefined
-                    if (!elm || !elm.id) {
-                      return null;
-                    }
-                    
-                    return (
+                <tbody>
+                  {cartProducts.map((elm, i) => (
                     <tr key={i} className="tf-cart-item file-delete">
                       <td className="tf-cart-item_product">
                         <Link
@@ -164,10 +159,10 @@ export default function Cart() {
                           style={{ minWidth: "60px" }}
                         >
                           ${(elm.price * elm.quantity).toFixed(2)}
-                        </div>                      </td>
+                        </div>
+                      </td>
                     </tr>
-                    );
-                  })}
+                  ))}
                 </tbody>
               </table>
               {!cartProducts.length && (

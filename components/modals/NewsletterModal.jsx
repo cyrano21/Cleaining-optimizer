@@ -79,13 +79,10 @@ export default function NewsletterModal() {
             <Image
               className="lazyload"
               data-src="/images/item/banner-newleter.jpg"
-              src="/images/item/banner-newleter.jpg"
               alt="home-01"
               width={938}
               height={538}
-              priority={true}
-              loading="eager"
-              quality={90}
+              src="/images/item/banner-newleter.jpg"
             />
             <span
               className="icon icon-close btn-hide-popup"
@@ -93,7 +90,7 @@ export default function NewsletterModal() {
             />
           </div>
           <div className="modal-bottom">
-            <h4 className="text-center">Don't miss out</h4>
+            <h4 className="text-center">Don’t miss out</h4>
             <h6 className="text-center">
               Be the first one to get the new product at early bird prices.
             </h6>

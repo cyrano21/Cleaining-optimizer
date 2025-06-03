@@ -22,13 +22,9 @@ export default function Compare() {
         <div>
           <div className="tf-compare-table">
             <div className="tf-compare-row tf-compare-grid">
-              <div className="tf-compare-col d-md-block d-none" />              {items.map((elm, i) => {
-                // Vérification de sécurité pour éviter les href undefined
-                if (!elm || !elm.id) {
-                  return null;
-                }
-                
-                return (
+              <div className="tf-compare-col d-md-block d-none" />
+
+              {items.map((elm, i) => (
                 <div key={i} className="tf-compare-col">
                   <div className="tf-compare-item">
                     <div
@@ -80,10 +76,10 @@ export default function Compare() {
                         <i className="icon icon-bag" />
                         <span>QUICK ADD</span>
                       </a>
-                    </div>                  </div>
+                    </div>
+                  </div>
                 </div>
-                );
-              })}
+              ))}
             </div>
             <div className="tf-compare-row tf-compare-grid">
               <div className="tf-compare-col tf-compare-field d-md-block d-none">

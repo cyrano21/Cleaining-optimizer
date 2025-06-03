@@ -6,12 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CountdownComponent from "../common/Countdown";
 export default function Productcart3({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,
@@ -22,9 +17,7 @@ export default function Productcart3({ product }) {
   } = useContextElement();
 
   useEffect(() => {
-    if (product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
+    setCurrentImage(product.imgSrc);
   }, [product]);
 
   return (

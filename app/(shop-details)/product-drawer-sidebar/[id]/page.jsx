@@ -16,14 +16,9 @@ export const metadata = {
 };
 import { allProducts } from "@/data/products";
 import ProductSinglePrevNext from "@/components/common/ProductSinglePrevNext";
-export default async function page({ params }) {
-  const { id } = await params;
-  
-  // Convert id to number for proper comparison and ensure it's valid
-  const productId = parseInt(id) || 1;
-  
-  // Find product with proper type checking
-  const product = allProducts.find((elm) => elm.id === productId) || allProducts[0];
+export default async function page({ params }) {const { id } = await params
+  const product =
+    allProducts.filter((elm) => elm.id == id)[0] || allProducts[0];
   return (
     <>
       <Header2 />

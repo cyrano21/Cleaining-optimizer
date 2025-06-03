@@ -67,32 +67,27 @@ export default function ShopCart() {
             <div className="tf-mini-cart-wrap">
               <div className="tf-mini-cart-main">
                 <div className="tf-mini-cart-sroll">
-                  <div className="tf-mini-cart-items">                    {cartProducts.map((elm, i) => {
-                      // Vérification de sécurité pour éviter les href undefined
-                      if (!elm || !elm.id) {
-                        return null;
-                      }
-                      
-                      return (
-                        <div key={i} className="tf-mini-cart-item">
-                          <div className="tf-mini-cart-image">
-                            <Link href={`/product-detail/${elm.id}`}>
-                              <Image
-                                alt="image"
-                                src={elm.imgSrc}
-                                width={668}
-                                height={932}
-                                style={{ objectFit: "cover" }}
-                              />
-                            </Link>
-                          </div>
-                          <div className="tf-mini-cart-info">
-                            <Link
-                              className="title link"
-                              href={`/product-detail/${elm.id}`}
-                            >
-                              {elm.title}
-                            </Link>
+                  <div className="tf-mini-cart-items">
+                    {cartProducts.map((elm, i) => (
+                      <div key={i} className="tf-mini-cart-item">
+                        <div className="tf-mini-cart-image">
+                          <Link href={`/product-detail/${elm.id}`}>
+                            <Image
+                              alt="image"
+                              src={elm.imgSrc}
+                              width={668}
+                              height={932}
+                              style={{ objectFit: "cover" }}
+                            />
+                          </Link>
+                        </div>
+                        <div className="tf-mini-cart-info">
+                          <Link
+                            className="title link"
+                            href={`/product-detail/${elm.id}`}
+                          >
+                            {elm.title}
+                          </Link>
                           <div className="meta-variant">Light gray</div>
                           <div className="price fw-6">
                             ${elm.price?.toFixed(2)}
@@ -131,11 +126,11 @@ export default function ShopCart() {
                               onClick={() => removeItem(elm.id)}
                             >
                               Remove
-                            </div>                          </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      );
-                    })}
+                    ))}
 
                     {!cartProducts.length && (
                       <div className="container">
@@ -170,39 +165,35 @@ export default function ShopCart() {
                         clickable: true,
                         clickable: true,
                         el: ".spdsc1",
-                      }}                      className="swiper tf-cart-slide"
+                      }}
+                      className="swiper tf-cart-slide"
                     >
-                      {products1.slice(0, 2).map((elm, i) => {
-                        // Vérification de sécurité pour éviter les href undefined
-                        if (!elm || !elm.id) {
-                          return null;
-                        }
-                        
-                        return (
-                          <SwiperSlide key={i} className="swiper-slide">
-                            <div className="tf-minicart-recommendations-item">
-                              <div className="tf-minicart-recommendations-item-image">
-                                <Link href={`/product-detail/${elm.id}`}>
-                                  <Image
-                                    alt="image"
-                                    src={elm.imgSrc}
-                                    width={720}
-                                    height={1005}
-                                  />
-                                </Link>
-                              </div>
-                              <div className="tf-minicart-recommendations-item-infos flex-grow-1">
-                                <Link
-                                  className="title"
-                                  href={`/product-detail/${elm.id}`}
-                                >
-                                  {elm.title}
-                                </Link>
+                      {products1.slice(0, 2).map((elm, i) => (
+                        <SwiperSlide key={i} className="swiper-slide">
+                          <div className="tf-minicart-recommendations-item">
+                            <div className="tf-minicart-recommendations-item-image">
+                              <Link href={`/product-detail/${elm.id}`}>
+                                <Image
+                                  alt="image"
+                                  src={elm.imgSrc}
+                                  width={720}
+                                  height={1005}
+                                />
+                              </Link>
+                            </div>
+                            <div className="tf-minicart-recommendations-item-infos flex-grow-1">
+                              <Link
+                                className="title"
+                                href={`/product-detail/${1}`}
+                              >
+                                {elm.title}
+                              </Link>
                               <div className="price">
                                 ${elm.price.toFixed(2)}
                               </div>
                             </div>
-                            <div className="tf-minicart-recommendations-item-quickview">                              <a
+                            <div className="tf-minicart-recommendations-item-quickview">
+                              <a
                                 href="#quick_view"
                                 data-bs-toggle="modal"
                                 onClick={() => setQuickViewItem(elm)}
@@ -210,10 +201,10 @@ export default function ShopCart() {
                               >
                                 <span className="icon icon-view" />
                               </a>
-                            </div>                          </div>
+                            </div>
+                          </div>
                         </SwiperSlide>
-                        );
-                      })}
+                      ))}
                     </Swiper>
                   </div>
                 </div>

@@ -7,12 +7,6 @@ import React from "react";
 
 export default function LookbookComponent({ product = lookbookProducts[0] }) {
   const { setQuickViewItem } = useContextElement();
-  
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  
   return (
     <li>
       <div className="lookbook-product">

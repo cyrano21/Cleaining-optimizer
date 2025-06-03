@@ -32,13 +32,8 @@ export default function Compare() {
                   <div className="tf-compare-head">
                     <div className="title">Compare Products</div>
                   </div>
-                  <div className="tf-compare-offcanvas">                    {items.map((elm, i) => {
-                      // Vérification de sécurité pour éviter les href undefined
-                      if (!elm || !elm.id) {
-                        return null;
-                      }
-                      
-                      return (
+                  <div className="tf-compare-offcanvas">
+                    {items.map((elm, i) => (
                       <div key={i} className="tf-compare-item">
                         <div className="position-relative">
                           <div
@@ -56,11 +51,11 @@ export default function Compare() {
                               style={{ objectFit: "contain" }}
                               width={720}
                               height={1005}
-                            />                          </Link>
+                            />
+                          </Link>
                         </div>
                       </div>
-                    );
-                    })}
+                    ))}
                   </div>
                   <div className="tf-compare-buttons">
                     <div className="tf-compare-buttons-wrap">

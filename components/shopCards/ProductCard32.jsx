@@ -4,18 +4,11 @@ import React from "react";
 import Image from "next/image";
 import { useContextElement } from "@/context/Context";
 import Link from "next/link";
-export default function ProductCard32({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
-  
-  useEffect(() => {
-    if (product && product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
-  }, [product]);
+export default function ProductCard32({
+  product,
+  parentClass = "card-product fl-item type-1 bg_white p-0",
+}) {
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,

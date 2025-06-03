@@ -5,12 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function Shopcard28({ product }) {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     addToWishlist,
@@ -20,11 +15,8 @@ export default function Shopcard28({ product }) {
     addProductToCart,
     isAddedToCartProducts,
   } = useContextElement();
-  
   useEffect(() => {
-    if (product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
+    setCurrentImage(product.imgSrc);
   }, [product]);
   return (
     <div className="card-product style-8">

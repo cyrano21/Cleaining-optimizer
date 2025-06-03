@@ -3,28 +3,10 @@ import Link from "next/link";
 import React from "react";
 
 export default function ProductSinglePrevNext({ currentId = 1 }) {
-  // Early return if no products data
-  if (!allProducts || allProducts.length === 0) {
-    return null;
-  }
-  
-  // Ensure currentId is a valid number
-  const validCurrentId = Number(currentId) || 1;
-  const maxProductId = allProducts.length;
-  
-  // Calculate previous and next IDs with bounds checking
-  const prevId = validCurrentId <= 1 ? maxProductId : validCurrentId - 1;
-  const nextId = validCurrentId >= maxProductId ? 1 : validCurrentId + 1;
-  
-  // Additional safety check to ensure IDs are valid
-  if (!prevId || !nextId || isNaN(prevId) || isNaN(nextId)) {
-    return null;
-  }
-
   return (
     <div className="tf-breadcrumb-prev-next">
       <Link
-        href={`/product-detail/${prevId}`}
+        href={`/product-detail/${currentId <= 1 ? 1 : currentId - 1}`}
         className="tf-breadcrumb-prev hover-tooltip center"
       >
         <i className="icon icon-arrow-left" />
@@ -35,7 +17,9 @@ export default function ProductSinglePrevNext({ currentId = 1 }) {
         {/* <span className="tooltip">Back to Women</span> */}
       </a>
       <Link
-        href={`/product-detail/${nextId}`}
+        href={`/product-detail/${
+          currentId >= allProducts.length ? 1 : currentId + 1
+        }`}
         className="tf-breadcrumb-next hover-tooltip center"
       >
         <i className="icon icon-arrow-right" />

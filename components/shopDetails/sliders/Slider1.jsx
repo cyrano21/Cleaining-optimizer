@@ -190,13 +190,10 @@ export default function Slider1({
               <Image
                 className="lazyload"
                 data-src={slide.src}
-                alt={slide.alt || ""}
+                alt={""}
                 src={slide.src} // Optional fallback for non-lazy loading
                 width={slide.width}
                 height={slide.height}
-                priority={index < 4} // Prioritize loading for first few images
-                loading="eager" // Load images eagerly
-                quality={100} // Use high quality
               />
             </div>
           </SwiperSlide>
@@ -230,13 +227,10 @@ export default function Slider1({
                 className="tf-image-zoom lazyload"
                 data-zoom={slide.src}
                 data-src={slide.src}
-                alt={slide.alt || "image"}
+                alt="image"
                 src={slide.src} // Optional fallback for non-lazy loading
                 width={slide.width}
                 height={slide.height}
-                priority={index < 2} // Prioritize loading for first few images
-                loading="eager" // Load images eagerly
-                quality={100} // Use high quality
               />
             </a>
           </SwiperSlide>

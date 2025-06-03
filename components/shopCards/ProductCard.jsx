@@ -5,12 +5,7 @@ import Link from "next/link";
 import { useContextElement } from "@/context/Context";
 import CountdownComponent from "../common/Countdown";
 export const ProductCard = ({ product }) => {
-  // Vérification de sécurité pour éviter les href undefined
-  if (!product || !product.id) {
-    return null;
-  }
-
-  const [currentImage, setCurrentImage] = useState(product.imgSrc || '');
+  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,
@@ -19,11 +14,8 @@ export const ProductCard = ({ product }) => {
     addToCompareItem,
     isAddedtoCompareItem,
   } = useContextElement();
-  
   useEffect(() => {
-    if (product.imgSrc) {
-      setCurrentImage(product.imgSrc);
-    }
+    setCurrentImage(product.imgSrc);
   }, [product]);
 
   return (
@@ -37,8 +29,6 @@ export const ProductCard = ({ product }) => {
             alt="image-product"
             width={720}
             height={1005}
-            loading="eager"
-            quality={80}
           />
           <Image
             className="lazyload img-hover"
@@ -49,8 +39,6 @@ export const ProductCard = ({ product }) => {
             alt="image-product"
             width={720}
             height={1005}
-            loading="lazy"
-            quality={80}
           />
         </Link>
         {product.soldOut ? (
@@ -156,8 +144,6 @@ export const ProductCard = ({ product }) => {
                   alt="image-product"
                   width={720}
                   height={1005}
-                  loading="lazy"
-                  quality={80}
                 />
               </li>
             ))}

@@ -40,13 +40,8 @@ export default function ShopGram() {
             }}
             modules={[Pagination]}
             pagination={{ clickable: true, el: ".spd105" }}
-          >            {galleryData.map((item, index) => {
-              // Vérification de sécurité pour éviter les href undefined
-              if (!item || !item.id) {
-                return null;
-              }
-              
-              return (
+          >
+            {galleryData.map((item, index) => (
               <SwiperSlide key={index}>
                 <div
                   className="gallery-item hover-img wow fadeInUp"
@@ -83,8 +78,7 @@ export default function ShopGram() {
                   )}
                 </div>
               </SwiperSlide>
-              );
-            })}
+            ))}
           </Swiper>
           <div className="sw-dots sw-pagination-gallery justify-content-center spd105" />
         </div>

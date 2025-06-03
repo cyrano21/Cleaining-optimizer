@@ -17,37 +17,6 @@ export default function HomesModal() {
               data-bs-dismiss="modal"
             />
           </div>
-          <div className="modal-body">
-            <div className="tf-modal-content">
-              <div className="tf-heading">
-                <h4 className="title">Ecomus Demos</h4>
-                <p>
-                  Ecomus comes with a beautiful collection of modern home pages.
-                </p>
-              </div>
-              <div className="demos-list">
-                {allHomepages.map((item, index) => (
-                  <div className="demos-item" key={index}>
-                    <Link href={item.path} className="image">
-                      <Image
-                        data-src={item.imgSrc}
-                        src={item.imgSrc}
-                        alt="image"
-                        width={400}
-                        height={300}
-                        style={{ height: "auto" }}
-                        loading="lazy"
-                        quality={80}
-                      />
-                    </Link>
-                    <h5 className="name">
-                      <Link href={item.path}>{item.title}</Link>
-                    </h5>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
           <div className="mega-menu">
             <div className="row-demo">
               {allHomepages.map((item, index) => (
@@ -61,9 +30,6 @@ export default function HomesModal() {
                         src={item.imgSrc}
                         width={300}
                         height={329}
-                        style={{ height: "auto" }}
-                        loading="lazy"
-                        quality={80}
                       />
                       {item.labels && (
                         <div className={`demo-label`}>
