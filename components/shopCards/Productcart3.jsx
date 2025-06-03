@@ -16,29 +16,36 @@ export default function Productcart3({ product }) {
     isAddedtoCompareItem,
   } = useContextElement();
 
+  // Debug: Log product data
+  console.log('Productcart3 - Product:', product);
+  console.log('Productcart3 - Current image:', currentImage);
+
   useEffect(() => {
     setCurrentImage(product.imgSrc);
   }, [product]);
 
   return (
     <div className="card-product style-3" key={product.id}>
-      <div className="card-product-wrapper">
-        <Link href={`/product-detail/${product.id}`} className="product-img">
+      <div className="card-product-wrapper">        <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
-            className="lazyload img-product"
+            className=" img-product"
             data-src={product.imgSrc}
             src={currentImage}
             alt="image-product"
             width="720"
             height="1005"
+ style={{ width: "100%", height: "auto" }}             onLoad={() => console.log(`Productcart3 - Main image loaded: ${currentImage}`)}
+            onError={(e) => console.error(`Productcart3 - Main image failed to load: ${currentImage}`, e)}
           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={product.imgHoverSrc}
             src={product.imgHoverSrc}
             alt="image-product"
             width="720"
             height="1005"
+ style={{ width: "100%", height: "auto" }}             onLoad={() => console.log(`Productcart3 - Hover image loaded: ${product.imgHoverSrc}`)}
+            onError={(e) => console.error(`Productcart3 - Hover image failed to load: ${product.imgHoverSrc}`, e)}
           />
         </Link>
         <div className="list-product-btn column-right">
@@ -138,13 +145,13 @@ export default function Productcart3({ product }) {
                   className={`swatch-value ${color.colorClass} ${color.bgClass}`}
                 />
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   src={color.imgSrc}
                   alt="image-product"
                   width={720}
                   height={1005}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

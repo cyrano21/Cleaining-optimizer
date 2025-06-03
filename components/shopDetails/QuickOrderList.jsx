@@ -140,7 +140,7 @@ export default function QuickOrderList() {
                                     src={product.imgSrc}
                                     width={713}
                                     height={1070}
-                                  />
+ style={{ width: "100%", height: "auto" }}                                   />
                                 </div>
                                 <span className="tf-variant-title">
                                   {product.title}

@@ -50,7 +50,7 @@ export default function Shopgram() {
                     width={400}
                     height={400}
                     src={image}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </SwiperSlide>

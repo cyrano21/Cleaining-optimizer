@@ -7,14 +7,14 @@ export default function Banner() {
       <div className="container">
         <div className="tf-banner-collection">
           <Image
-            className="lazyload"
-            data-src="/images/collections/banner-collection.jpg"
+            className=""
+            
             alt="img-banner"
             loading="lazy"
             src="/images/collections/banner-collection.jpg"
             width={2000}
             height={761}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-content">
             <div className="container wow fadeInUp" data-wow-delay="0s">
               <div className="sub fw-7 text_white">ECOMUS HEADPHONE DESIGN</div>

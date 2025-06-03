@@ -24,13 +24,13 @@ export default function CollectionsGrid() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/swm-cls1.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   width={593}
                   height={818}
                   src="/images/collections/swm-cls1.jpg"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -50,13 +50,13 @@ export default function CollectionsGrid() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/swm-cls2.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   width={593}
                   height={391}
                   src="/images/collections/swm-cls2.jpg"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -76,13 +76,13 @@ export default function CollectionsGrid() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/swm-cls3.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   width={593}
                   height={391}
                   src="/images/collections/swm-cls3.jpg"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -102,13 +102,13 @@ export default function CollectionsGrid() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/swm-cls4.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   width={593}
                   height={818}
                   src="/images/collections/swm-cls4.jpg"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link

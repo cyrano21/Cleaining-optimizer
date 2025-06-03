@@ -36,13 +36,13 @@ export default function BannerCollections() {
                 <a className="collection-inner">
                   <div className="collection-image img-style">
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={item.imageSrc}
                       alt={item.altText}
                       src={item.imageSrc}
                       width={690}
                       height={840}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="collection-content text-center">
                     <h5

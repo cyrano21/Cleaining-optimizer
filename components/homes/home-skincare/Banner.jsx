@@ -6,13 +6,13 @@ export default function Banner() {
     <section className="tf-slideshow slider-video position-relative">
       <div className="banner-wrapper">
         <Image
-          className="lazyload"
+          className=""
           src="/images/collections/banner-collection-1.jpg"
           data-src="/images/collections/banner-collection-1.jpg"
           alt="image-collection"
           width={1800}
           height={893}
-        />
+ style={{ width: "100%", height: "auto" }}         />
         <div className="box-content text-center">
           <div className="container">
             <p className="subheading text-white fw-7">ULTRA-PREMIUM SILK</p>

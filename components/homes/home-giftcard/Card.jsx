@@ -13,7 +13,7 @@ export default function Card() {
                 src="/images/shop/file/banner_giftcard_001.svg"
                 width={122}
                 height={122}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="text-md-start text-center">
               <h4 className="text-white fw-6">Professional gift solutions</h4>

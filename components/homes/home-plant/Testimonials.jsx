@@ -57,13 +57,13 @@ export default function Testimonials() {
                     <div className="author box-author">
                       <div className="box-img d-md-none">
                         <Image
-                          className="lazyload img-product"
+                          className=" img-product"
                           data-src={item.imgSrc}
                           alt="image-product"
                           src={item.imgSrc}
                           width={550}
                           height={584}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name text-white fw-6">
@@ -102,13 +102,13 @@ export default function Testimonials() {
                   <div className="box-img item-2 hover-img radius-10 o-hidden">
                     <div className="img-style">
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={src}
                         alt="img-slider"
                         src={src}
                         width={450}
                         height={478}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                   </div>
                 </SwiperSlide>

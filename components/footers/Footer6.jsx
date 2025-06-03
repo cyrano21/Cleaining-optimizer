@@ -39,7 +39,7 @@ export default function Footer6() {
                         src="/images/logo/logo.svg"
                         width={136}
                         height={21}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                   </div>
                   <ul>
@@ -194,7 +194,7 @@ export default function Footer6() {
                         width={image.width}
                         height={image.height}
                         alt={image.alt}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     ))}
                   </div>
                 </div>

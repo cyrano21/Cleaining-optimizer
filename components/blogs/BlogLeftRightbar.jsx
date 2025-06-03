@@ -18,13 +18,13 @@ export default function BlogLeftRightbar() {
                       <div className="article-thumb">
                         <Link href={`/blog-detail/${article.id}`}>
                           <Image
-                            className="lazyload"
+                            className=""
                             data-src={article.imgSrc}
                             alt={article.imgAlt}
                             src={article.imgSrc}
                             width={1100}
                             height={707}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </Link>
                         <div className="article-label">
                           <Link

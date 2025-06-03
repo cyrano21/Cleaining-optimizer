@@ -22,13 +22,13 @@ export default function Banner() {
           </div>
           <div className="widget-video wow fadeInUp" data-wow-delay="0s">
             <Image
-              className="lazyload"
-              data-src="/images/collections/banner-electric-bike-1.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/banner-electric-bike-1.jpg"
               width={2000}
               height={986}
-            />
+ style={{ width: "100%", height: "auto" }}             />
             <a
               onClick={() => setIsOpen(true)}
               className="popup-youtube bg-light text_black"

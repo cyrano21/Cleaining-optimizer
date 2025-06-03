@@ -35,13 +35,13 @@ export default function Collections() {
                     className="collection-image img-style radius-10"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={testimonial.imgSrc}
                       alt="collection-img"
                       src={testimonial.imgSrc}
                       width={600}
                       height={323}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div
                     className="collection-content text-start wow fadeInUp"

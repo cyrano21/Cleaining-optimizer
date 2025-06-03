@@ -74,16 +74,16 @@ export default function NewsletterModal() {
       id="newsletterPopup"
     >
       <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-top">
+        <div className="modal-content">          <div className="modal-top">
             <Image
-              className="lazyload"
-              data-src="/images/item/banner-newleter.jpg"
+              className=""
+              
               alt="home-01"
               width={938}
               height={538}
-              src="/images/item/banner-newleter.jpg"
-            />
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=938&h=538&auto=format&fit=crop"
+              priority
+ style={{ width: "100%", height: "auto" }}             />
             <span
               className="icon icon-close btn-hide-popup"
               data-bs-dismiss="modal"

@@ -15,13 +15,13 @@ export default function BlogList() {
                     <div className="article-thumb">
                       <Link href={`/blog-detail/${article.id}`}>
                         <Image
-                          className="lazyload"
+                          className=""
                           data-src={article.imgSrc}
                           alt={article.imgAlt}
                           src={article.imgSrc}
                           width={550}
                           height={354}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </Link>
                     </div>
                     <div className="article-content">
@@ -124,7 +124,7 @@ export default function BlogList() {
                                   src={article.imgSrc}
                                   width={1100}
                                   height={707}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </Link>
                             </div>
                             <div className="article-content">
@@ -175,7 +175,7 @@ export default function BlogList() {
                           src="/images/shop/file/img-1.jpg"
                           width={566}
                           height={566}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </li>
                       <li>
                         <Image
@@ -183,7 +183,7 @@ export default function BlogList() {
                           src="/images/shop/file/img-2.jpg"
                           width={566}
                           height={566}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </li>
                       <li>
                         <Image
@@ -191,7 +191,7 @@ export default function BlogList() {
                           src="/images/shop/file/img-3.jpg"
                           width={564}
                           height={566}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </li>
                       <li>
                         <Image
@@ -199,7 +199,7 @@ export default function BlogList() {
                           src="/images/shop/file/img-4.jpg"
                           width={566}
                           height={566}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </li>
                       <li>
                         <Image
@@ -207,7 +207,7 @@ export default function BlogList() {
                           src="/images/shop/file/img-5.jpg"
                           width={566}
                           height={566}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </li>
                       <li>
                         <Image
@@ -215,7 +215,7 @@ export default function BlogList() {
                           src="/images/shop/file/img-6.png"
                           width={960}
                           height={862}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </li>
                     </ul>
                   </div>

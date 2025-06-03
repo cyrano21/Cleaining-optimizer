@@ -15,13 +15,13 @@ export default function Lookbook() {
             <div className="wrap-lookbook lookbook-sw radius-10 o-hidden">
               <div className="image">
                 <Image
-                  className="lazyload"
-                  data-src="/images/shop/file/lookbook-5.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/shop/file/lookbook-5.jpg"
                   width={1000}
                   height={1138}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="navigation-sw-dot nav-next-lookbook snbp126">
                 <span />

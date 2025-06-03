@@ -1,0 +1,57 @@
+/* 
+ * custom-image-fixes.css
+ * Correctifs pour les problèmes d'affichage des images
+ */
+
+/* Assurer que les images s'affichent correctement */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Corriger l'aspect ratio des images dans les cartes produits */
+.img-product, 
+.product-image {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+/* S'assurer que les images de lazy loading s'affichent */
+.lazyload,
+.lazyloaded {
+  opacity: 1 !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Corriger l'affichage des images dans les sliders */
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Assurer que les images dans les carousels s'affichent */
+.carousel img,
+.slider img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Styles spécifiques pour les images de produit */
+.product-card img,
+.product-detail img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Assurer que les images dans les grilles s'affichent */
+.grid-item img,
+.grid-product img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

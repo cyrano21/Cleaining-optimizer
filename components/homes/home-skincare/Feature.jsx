@@ -31,13 +31,13 @@ export default function Feature() {
               <div className="widget-card-store radius-20 overflow-hidden type-1 align-items-center tf-grid-layout md-col-2">
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore4.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore4.jpg"
                     width={720}
                     height={539}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="store-item-info text-center">
                   <h5 className="store-heading text-white">
@@ -65,13 +65,13 @@ export default function Feature() {
               <div className="widget-card-store radius-20 overflow-hidden type-1 align-items-center tf-grid-layout md-col-2">
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore5.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore5.jpg"
                     width={720}
                     height={539}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="store-item-info text-center">
                   <h5 className="store-heading text-white">
@@ -99,13 +99,13 @@ export default function Feature() {
               <div className="widget-card-store radius-20 overflow-hidden type-1 align-items-center tf-grid-layout md-col-2">
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore6.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore6.jpg"
                     width={720}
                     height={539}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="store-item-info text-center">
                   <h5 className="store-heading text-white">

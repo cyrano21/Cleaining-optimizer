@@ -25,19 +25,19 @@ export default function Shopcard28({ product }) {
           <Image
             width={360}
             height={360}
-            className="lazyload img-product"
+            className=" img-product"
             data-src={product.imgSrc}
             src={currentImage}
             alt="image-product"
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
             width={360}
             height={360}
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={product.imgHoverSrc}
             src={product.imgHoverSrc}
             alt="image-product"
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="list-product-btn absolute-2">
           <a
@@ -113,11 +113,11 @@ export default function Shopcard28({ product }) {
                 <Image
                   width={360}
                   height={360}
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   src={color.imgSrc}
                   alt="image-product"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

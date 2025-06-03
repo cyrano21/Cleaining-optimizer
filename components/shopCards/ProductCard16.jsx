@@ -19,20 +19,20 @@ export default function ProductCaed16({ product }) {
       <div className="card-product-wrapper">
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
-            className="lazyload img-product"
+            className=" img-product"
             src={currentImage}
             alt="image-product"
             width={533}
             height={533}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={product.imgHoverSrc}
             alt="image-product"
             src={product.imgHoverSrc}
             width={533}
             height={533}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="list-product-btn absolute-2">
           <a
@@ -112,13 +112,13 @@ export default function ProductCaed16({ product }) {
                 <span className="tooltip">{color.name}</span>
                 <span className={`swatch-value ${color.colorClass}`} />
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   alt="image-product"
                   src={color.imgSrc}
                   width={533}
                   height={533}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

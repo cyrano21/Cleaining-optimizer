@@ -8,13 +8,13 @@ export default function About() {
           <div className="tf-grid-layout md-col-2 tf-img-with-text style-4">
             <div className="tf-image-wrap">
               <Image
-                className="lazyload w-100"
-                data-src="/images/collections/collection-69.jpg"
+                className=" w-100"
+                
                 alt="collection-img"
                 src="/images/collections/collection-69.jpg"
                 width={600}
                 height={499}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-content-wrap px-0 d-flex justify-content-center w-100">
               <div>
@@ -60,25 +60,25 @@ export default function About() {
               <div className="tf-image-wrap box-img item-1">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
+                    className=""
                     src="/images/collections/collection-71.jpg"
                     data-=""
                     alt="img-slider"
                     width={337}
                     height={388}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="tf-image-wrap box-img item-2">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
+                    className=""
                     src="/images/collections/collection-70.jpg"
                     data-=""
                     alt="img-slider"
                     width={400}
                     height={438}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

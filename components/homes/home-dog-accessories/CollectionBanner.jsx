@@ -11,37 +11,37 @@ export default function CollectionBanner() {
               <div className="box-img item-1 hover-img tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/dog-1.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/dog-1.jpg"
                     width={272}
                     height={325}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="box-img item-2 hover-img tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/dog-2.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/dog-2.jpg"
                     width={400}
                     height={539}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="box-img item-3 hover-img tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/dog-3.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/dog-3.jpg"
                     width={217}
                     height={219}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

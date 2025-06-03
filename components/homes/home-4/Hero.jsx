@@ -24,14 +24,14 @@ export default function Hero() {
           <SwiperSlide key={index}>
             <div className="wrap-slider">
               <Image
-                className="lazyload"
+                className=""
                 data-src={slide.imgSrc}
                 alt={slide.alt}
                 src={slide.imgSrc}
                 width={index === 0 ? 2000 : 1800}
                 height={index === 0 ? 1034 : 931}
                 priority
-              />
+ style={{ width: "100%", height: "auto" }}               />
               <div className="box-content">
                 <div className="container">
                   <div className="card-box bg_dark">

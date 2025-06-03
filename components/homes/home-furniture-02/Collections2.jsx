@@ -42,12 +42,12 @@ export default function Collections2() {
                   <div className="img-style">
                     <Link href={`/shop-default`}>
                       <Image
-                        className="lazyload"
+                        className=""
                         src={item.imgSrc}
                         alt="banner-collection"
                         width={920}
                         height={1112}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                   </div>
                   <div className="content">

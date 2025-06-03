@@ -16,13 +16,13 @@ export default function ShopCollections() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
+                    className=""
                     data-src={item.imgSrc}
                     alt={item.alt}
                     src={item.imgSrc}
                     width={460}
                     height={460}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="collection-content">
                   <Link

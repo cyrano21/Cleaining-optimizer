@@ -246,31 +246,31 @@ export default function Details27({ product }) {
                         src="/images/payments/visa.png"
                         width={48}
                         height={30}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                       <Image
                         alt=""
                         src="/images/payments/img-1.png"
                         width={49}
                         height={30}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                       <Image
                         alt=""
                         src="/images/payments/img-2.png"
                         width={48}
                         height={30}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                       <Image
                         alt=""
                         src="/images/payments/img-3.png"
                         width={57}
                         height={30}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                       <Image
                         alt=""
                         src="/images/payments/img-4.png"
                         width={49}
                         height={30}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                   </div>
                 </div>
@@ -286,12 +286,12 @@ export default function Details27({ product }) {
               <div className="tf-sticky-atc-img">
                 <Image
                   className="lazyloaded"
-                  data-src="/images/products/phone-detail1.jpg"
+                  
                   alt=""
                   src="/images/products/phone-detail1.jpg"
                   width={713}
                   height={713}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="tf-sticky-atc-title fw-5 d-xl-block d-none">
                 Emerald Pool - Elegant iPhone case

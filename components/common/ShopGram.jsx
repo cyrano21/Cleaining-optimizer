@@ -55,7 +55,7 @@ export default function ShopGram() {
                       alt={item.alt}
                       width={400}
                       height={400}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   {item.QuickAdd ? (
                     <a

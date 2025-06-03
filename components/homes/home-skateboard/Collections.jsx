@@ -15,13 +15,13 @@ export default function Collections() {
               <div className="collection-inner">
                 <Link href={item.href} className="collection-image img-style">
                   <Image
-                    className="lazyload"
+                    className=""
                     data-src={item.imgSrc}
                     alt={item.alt}
                     src={item.imgSrc}
                     width={item.width}
                     height={item.height}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="collection-content text-center">
                   <p className="subheading text-white">{item.subheading}</p>

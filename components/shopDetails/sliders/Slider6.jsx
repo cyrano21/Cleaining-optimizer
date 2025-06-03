@@ -207,13 +207,13 @@ export default function Slider6({ firstImage }) {
             <SwiperSlide className="swiper-slide stagger-item" key={index}>
               <div className="item">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={image.src}
                   alt={image.alt}
                   src={image.src}
                   width={image.width}
                   height={image.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </SwiperSlide>
           ))}
@@ -237,7 +237,7 @@ export default function Slider6({ firstImage }) {
                   {({ ref, open }) => (
                     <a className="item" onClick={open}>
                       <Image
-                        className="tf-image-zoom lazyload"
+                        className="tf-image-zoom "
                         ref={ref}
                         data-zoom={product.imgZoom}
                         data-src={product.imgSrc}
@@ -245,7 +245,7 @@ export default function Slider6({ firstImage }) {
                         src={product.imgSrc}
                         width={product.imgWidth}
                         height={product.imgHeight}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </a>
                   )}
                 </Item>

@@ -9,13 +9,13 @@ export default function OurStore() {
           <div className="tf-grid-layout md-col-2">
             <div className="tf-ourstore-img">
               <Image
-                className="lazyload"
-                data-src="/images/shop/store/ourstore2.png"
+                className=""
+                
                 alt="our-store"
                 src="/images/shop/store/ourstore2.png"
                 width={720}
                 height={506}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-ourstore-content">
               <h5 className="mb_24">Ecomus Paris</h5>
@@ -187,13 +187,13 @@ export default function OurStore() {
             </div>
             <div className="tf-ourstore-img">
               <Image
-                className="lazyload"
-                data-src="/images/shop/store/ourstore4.png"
+                className=""
+                
                 alt="our-store"
                 src="/images/shop/store/ourstore4.png"
                 width={550}
                 height={420}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </div>
         </div>
@@ -203,13 +203,13 @@ export default function OurStore() {
           <div className="tf-grid-layout md-col-2">
             <div className="tf-ourstore-img">
               <Image
-                className="lazyload"
-                data-src="/images/shop/store/ourstore3.png"
+                className=""
+                
                 alt="our-store"
                 src="/images/shop/store/ourstore3.png"
                 width={720}
                 height={506}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-ourstore-content">
               <h5 className="mb_24">Ecomus Dubai</h5>

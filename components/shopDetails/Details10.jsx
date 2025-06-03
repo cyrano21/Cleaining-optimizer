@@ -196,7 +196,7 @@ export default function Details10() {
                             src="/images/payments/paypal.png"
                             width={64}
                             height={18}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </a>
                         <a href="#" className="payment-more-option">
                           More payment options
@@ -216,7 +216,7 @@ export default function Details10() {
                           src="/images/item/compare.svg"
                           width={20}
                           height={20}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="text fw-6">Compare color</div>
                     </a>
@@ -304,7 +304,7 @@ export default function Details10() {
                           src={image.src}
                           width={image.width}
                           height={image.height}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       ))}
                     </div>
                   </div>

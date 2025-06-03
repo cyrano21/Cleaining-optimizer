@@ -43,7 +43,7 @@ export default function Header5({ isArrow, Linkfs = "", uppercase = false }) {
                   src="/images/logo/logo.svg"
                   width={136}
                   height={21}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <nav className="box-navigation text-center">
                 <ul className="box-nav-ul d-flex align-items-center justify-content-center gap-30">

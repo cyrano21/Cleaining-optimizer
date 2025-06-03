@@ -44,13 +44,13 @@ export default function Categories2() {
                       className="collection-image img-style"
                     >
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={collection.imgSrc}
                         alt={collection.imgAlt}
                         src={collection.imgSrc}
                         width={360}
                         height={432}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="collection-content">
                       <Link

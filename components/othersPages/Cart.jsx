@@ -74,7 +74,7 @@ export default function Cart() {
                             src={elm.imgSrc}
                             width={668}
                             height={932}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </Link>
                         <div className="cart-info">
                           <Link

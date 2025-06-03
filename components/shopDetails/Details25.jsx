@@ -119,7 +119,7 @@ export default function Details25({ product }) {
                             src="/images/payments/paypal.png"
                             width={64}
                             height={18}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </a>
                         <a href="#" className="payment-more-option">
                           More payment options
@@ -139,7 +139,7 @@ export default function Details25({ product }) {
                           src="/images/item/compare.svg"
                           width={20}
                           height={20}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="text fw-6">Compare color</div>
                     </a>
@@ -204,7 +204,7 @@ export default function Details25({ product }) {
                                   src={product.imgSrc}
                                   width={713}
                                   height={891}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </Link>
                             </div>
                             <div className="tf-product-bundle-infos">
@@ -267,7 +267,7 @@ export default function Details25({ product }) {
                           src={image.src}
                           width={image.width}
                           height={image.height}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       ))}
                     </div>
                   </div>

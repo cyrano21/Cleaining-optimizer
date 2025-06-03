@@ -8,14 +8,14 @@ export default function Banner2() {
       <div className="container hover-img">
         <div className="tf-banner-collection img-style radius-20">
           <Image
-            className="lazyload"
-            data-src="/images/collections/cls-book-store-7.jpg"
+            className=""
+            
             alt="img-banner"
             loading="lazy"
             src="/images/collections/cls-book-store-7.jpg"
             width="1600"
             height="608"
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-content">
             <div className="container wow fadeInUp" data-wow-delay="0s">
               <div className="sub fw-7 text_black-2">

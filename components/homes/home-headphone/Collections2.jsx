@@ -30,13 +30,13 @@ export default function Collections2() {
                     className="radius-20 collection-image img-style"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={collection.imgSrc}
                       alt={collection.alt}
                       src={collection.imgSrc}
                       width={600}
                       height={771}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div
                     className="collection-content wow fadeInUp"

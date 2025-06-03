@@ -40,13 +40,13 @@ export default function Categories() {
                       className="collection-image img-style radius-10"
                     >
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={slide.imgSrc}
                         alt={slide.altText}
                         src={slide.imgSrc}
                         width={320}
                         height={384}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="collection-content justify-content-end align-items-center">
                       <div className="bottom">

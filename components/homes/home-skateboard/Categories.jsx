@@ -49,13 +49,13 @@ export default function Categories() {
                   className="collection-image img-style rounded-0"
                 >
                   <Image
-                    className="lazyload"
+                    className=""
                     data-src={slide.imgSrc}
                     alt={slide.alt}
                     src={slide.imgSrc}
                     width={400}
                     height={555}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                   <span className="box-icon">
                     <i className="icon-icon icon-arrow1-top-left" />
                   </span>

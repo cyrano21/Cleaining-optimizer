@@ -119,13 +119,13 @@ export default function ProductSidebar() {
                         className="card-product-wrapper"
                       >
                         <Image
-                          className="img-product lazyload"
+                          className="img-product "
                           data-src={product.imgSrc}
                           alt={product.imgAlt}
                           src={product.imgSrc} // fallback for non-lazyloaded images
                           width={product.imgWidth}
                           height={product.imgHeight}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </Link>
                       <div className="card-product-info">
                         <a href="#" className="title link">
@@ -156,63 +156,63 @@ export default function ProductSidebar() {
                 <div className="grid-3 gap-4 mb_36">
                   <a href={`#`} className="item-gallery">
                     <Image
-                      className="lazyload"
-                      data-src="/images/shop/gallery/gallery-1.jpg"
+                      className=""
+                      
                       alt="img-gallery"
                       src="/images/shop/gallery/gallery-1.jpg"
                       width={600}
                       height={600}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                   <a href={`#`} className="item-gallery">
                     <Image
-                      className="lazyload"
-                      data-src="/images/shop/gallery/gallery-2.jpg"
+                      className=""
+                      
                       alt="img-gallery"
                       src="/images/shop/gallery/gallery-2.jpg"
                       width={600}
                       height={600}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                   <a href={`#`} className="item-gallery">
                     <Image
-                      className="lazyload"
-                      data-src="/images/shop/gallery/gallery-3.jpg"
+                      className=""
+                      
                       alt="img-gallery"
                       src="/images/shop/gallery/gallery-3.jpg"
                       width={400}
                       height={400}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                   <a href={`#`} className="item-gallery">
                     <Image
-                      className="lazyload"
-                      data-src="/images/shop/gallery/gallery-4.jpg"
+                      className=""
+                      
                       alt="img-gallery"
                       src="/images/shop/gallery/gallery-4.jpg"
                       width={600}
                       height={600}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                   <a href={`#`} className="item-gallery">
                     <Image
-                      className="lazyload"
-                      data-src="/images/shop/gallery/gallery-5.jpg"
+                      className=""
+                      
                       alt="img-gallery"
                       src="/images/shop/gallery/gallery-5.jpg"
                       width={400}
                       height={401}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                   <a href={`#`} className="item-gallery">
                     <Image
-                      className="lazyload"
-                      data-src="/images/shop/gallery/gallery-6.jpg"
+                      className=""
+                      
                       alt="img-gallery"
                       src="/images/shop/gallery/gallery-6.jpg"
                       width={400}
                       height={400}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                 </div>
               </div>

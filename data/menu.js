@@ -83,10 +83,9 @@ export const allHomepages = [
 
     labels: ["New"],
     name: "Home Food",
-  },
-  {
+  },  {
     href: "/home-camp-and-hike",
-    imgSrc: "/images/demo/home-camp-and-hike.png",
+    imgSrc: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=500&h=350&auto=format&fit=crop",
     alt: "home-camp-and-hike",
 
     labels: ["New"],
@@ -402,10 +401,9 @@ export const demoItems = [
     alt: "home-food",
     name: "Home Food",
     labels: [{ className: "demo-new", text: "New" }],
-  },
-  {
+  },  {
     href: "/home-camp-and-hike",
-    src: "/images/demo/home-camp-and-hike.png",
+    src: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=500&h=350&auto=format&fit=crop",
     alt: "home-camp-and-hike",
     name: "Home Camp And Hike",
     labels: [{ className: "demo-new", text: "New" }],

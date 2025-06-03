@@ -53,21 +53,21 @@ export default function SkinChange() {
             After
           </span>
           {/* <Image
-            className="lazyload"
-            data-src="/images/shop/file/skincare_before.jpg"
+            className=""
+            
             alt="image"
             src="/images/shop/file/skincare_before.jpg"
             width={750}
             height={407}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
-            className="lazyload"
-            data-src="/images/shop/file/skincare_after.jpg"
+            className=""
+            
             alt="image"
             src="/images/shop/file/skincare_after.jpg"
             width={750}
             height={407}
-          /> */}
+ style={{ width: "100%", height: "auto" }}           /> */}
           <ReactCompareSlider
             itemOne={
               <ReactCompareSliderImage

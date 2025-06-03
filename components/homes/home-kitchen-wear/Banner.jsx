@@ -28,13 +28,13 @@ export default function Banner() {
           </div>
           <div className="tf-image-wrap">
             <Image
-              className="lazyload"
-              data-src="/images/collections/kitchen-wear-4.png"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/kitchen-wear-4.png"
               width={800}
               height={533}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
         </div>
       </div>

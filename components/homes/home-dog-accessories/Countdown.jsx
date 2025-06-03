@@ -9,13 +9,13 @@ export default function Countdown() {
         <div className="tf-grid-layout gap-0 md-col-2 bg_f1f6e6 tf-img-with-text style-5">
           <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
             <Image
-              className="lazyload"
-              data-src="/images/collections/dog-9.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/dog-9.jpg"
               width={600}
               height={448}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="tf-content-wrap wow fadeInUp" data-wow-delay="0s">
             <div className="sub-heading fw-7">END OF SEASON SALE</div>

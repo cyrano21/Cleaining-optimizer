@@ -28,13 +28,13 @@ export default function Collections() {
                     className="collection-image img-style ceramic-collection o-hidden"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={slide.imgSrc}
                       alt={slide.imgAlt}
                       src={slide.imgSrc}
                       width={800}
                       height={584}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div
                     className="collection-content wow fadeInUp"

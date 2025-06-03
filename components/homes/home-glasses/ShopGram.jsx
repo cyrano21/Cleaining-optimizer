@@ -46,7 +46,7 @@ export default function ShopGram() {
                       src={slide.imgSrc}
                       width={400}
                       height={400}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   {slide.quickAdd ? (
                     <a

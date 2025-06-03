@@ -28,13 +28,13 @@ export default function Categories() {
                 >
                   <div className="collection-image img-style">
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={slide.imgSrc}
                       alt={slide.alt}
                       src={slide.imgSrc}
                       width={600}
                       height={666}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="collection-content">
                     <div className="top wow fadeInUp" data-wow-delay="0s">

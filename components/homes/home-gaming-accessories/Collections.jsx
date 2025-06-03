@@ -46,13 +46,13 @@ export default function Collections() {
                     className="collection-image mw-100 img-style radius-5"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={item.imgSrc}
                       alt="collection-img"
                       src={item.imgSrc}
                       width={160}
                       height={160}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div className="collection-content text-center">
                     <Link

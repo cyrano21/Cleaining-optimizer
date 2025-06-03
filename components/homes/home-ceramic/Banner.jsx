@@ -13,13 +13,13 @@ export default function Banner() {
               className="collection-image img-style ceramic-collection o-hidden"
             >
               <Image
-                className="lazyload"
-                data-src="/images/collections/collection-ceramic-3.png"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/collection-ceramic-3.png"
                 width={1600}
                 height={571}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </Link>
             <div
               className="collection-content text-center wow fadeInUp"

@@ -54,7 +54,7 @@ export default function Products2() {
                         alt={product.alt}
                         width={360}
                         height={554}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="list-product-btn absolute-2">
                       <a

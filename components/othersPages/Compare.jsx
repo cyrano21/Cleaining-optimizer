@@ -38,13 +38,13 @@ export default function Compare() {
                       href={`/product-detail/${elm.id}`}
                     >
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={elm.imgSrc}
                         alt="img-compare"
                         width={713}
                         height={1070}
                         src={elm.imgSrc}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <Link
                       className="tf-compare-title"

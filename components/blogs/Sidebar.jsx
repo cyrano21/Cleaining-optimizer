@@ -34,7 +34,7 @@ export default function Sidebar() {
                         src={article.imgSrc}
                         width={1100}
                         height={707}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                   </div>
                   <div className="article-content">
@@ -86,7 +86,7 @@ export default function Sidebar() {
                   src={image.src}
                   width={image.width}
                   height={image.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

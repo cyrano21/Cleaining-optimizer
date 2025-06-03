@@ -50,7 +50,7 @@ export default function Products() {
                         alt={product.title}
                         width={533}
                         height={379}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="list-product-btn">
                       <a

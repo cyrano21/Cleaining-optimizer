@@ -19,21 +19,21 @@ export default function ProductCard12({ product }) {
       <div className="card-product-wrapper">
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
-            className="lazyload img-product"
+            className=" img-product"
             data-src={product.imgSrc}
             alt="image-product"
             src={currentImage}
             width={360}
             height={334}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={product.imgHoverSrc}
             alt="image-product"
             src={product.imgHoverSrc}
             width={360}
             height={334}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="list-product-btn absolute-2">
           <a
@@ -117,13 +117,13 @@ export default function ProductCard12({ product }) {
               <span className="tooltip">{color.name}</span>
               <span className={`swatch-value ${color.colorClass}`} />
               <Image
-                className="lazyload"
+                className=""
                 data-src={color.imgSrc}
                 alt="image-product"
                 src={color.imgSrc}
                 width={360}
                 height={334}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </li>
           ))}
         </ul>

@@ -8,14 +8,14 @@ export default function Countdown() {
       <div className="container">
         <div className="tf-hero-image-liquid radius-10 o-hidden banner-countdown-v2">
           <Image
-            className="lazyload"
-            data-src="/images/slider/banner-countdown-2.png"
+            className=""
+            
             alt="img-banner"
             loading="lazy"
             src="/images/slider/banner-countdown-2.png"
             width={2000}
             height={822}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-content">
             <h2 className="heading font-young-serif">Bra Spotlight</h2>
             <p className="fs-14">Let's go from the top.</p>

@@ -70,7 +70,7 @@ export default function CurrencySelect({ topStart = false, light = false }) {
                 width="640"
                 height="480"
                 alt="image"
-              />
+ style={{ width: "100%", height: "auto" }}               />
               {selected.text}
             </div>
           </div>{" "}
@@ -111,7 +111,7 @@ export default function CurrencySelect({ topStart = false, light = false }) {
                       width="640"
                       height="480"
                       alt="image"
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                     {elm.text}
                   </span>
                 </a>

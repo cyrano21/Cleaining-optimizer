@@ -7,12 +7,12 @@ export default function Collections() {
     <section className="flat-spacing-4 section-cls-personalized-pod section-full-1">
       <Image
         className=""
-        data-src="/images/collections/bg-personalized-pod-1.jpg"
+        
         alt=""
         src="/images/collections/bg-personalized-pod-1.jpg"
         width={2800}
         height={1083}
-      />
+ style={{ width: "100%", height: "auto" }}       />
       <div className="container">
         <div className="flat-title gap-14">
           <span
@@ -30,13 +30,13 @@ export default function Collections() {
                 className="collection-image img-style radius-20"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/personalized-pod-1.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/personalized-pod-1.jpg"
                   width={360}
                   height={432}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -56,13 +56,13 @@ export default function Collections() {
                 className="collection-image img-style radius-20"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/personalized-pod-2.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/personalized-pod-2.jpg"
                   width={360}
                   height={432}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -82,13 +82,13 @@ export default function Collections() {
                 className="collection-image img-style radius-20"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/personalized-pod-3.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/personalized-pod-3.jpg"
                   width={360}
                   height={432}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -108,13 +108,13 @@ export default function Collections() {
                 className="collection-image img-style radius-20"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/personalized-pod-4.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/personalized-pod-4.jpg"
                   width={360}
                   height={432}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link

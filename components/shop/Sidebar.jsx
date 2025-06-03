@@ -52,12 +52,12 @@ export default function Sidebar() {
                   className="card-product-wrapper"
                 >
                   <Image
-                    className="lazyload img-product"
+                    className=" img-product"
                     alt="image-feature"
                     src={product.imgSrc}
                     width={product.width}
                     height={product.height}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="card-product-info">
                   <Link
@@ -167,12 +167,12 @@ export default function Sidebar() {
             {galleryItems.map((item, index) => (
               <a href="#" className="item-gallery" key={index}>
                 <Image
-                  className="lazyload"
+                  className=""
                   alt="img-gallery"
                   src={item.imgSrc}
                   width={item.width}
                   height={item.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </a>
             ))}
           </div>

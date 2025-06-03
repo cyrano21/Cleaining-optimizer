@@ -41,7 +41,7 @@ export default function ShopGram() {
                       width={image.width}
                       height={image.height}
                       className="lazyload img-hover"
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </div>
               </SwiperSlide>

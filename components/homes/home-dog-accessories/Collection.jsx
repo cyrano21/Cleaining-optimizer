@@ -11,13 +11,13 @@ export default function Collection() {
             data-wow-delay="0s"
           >
             <Image
-              className="lazyload"
-              data-src="/images/collections/dog-4.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/dog-4.jpg"
               width={800}
               height={831}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div
             className="tf-content-wrap place-self-center wow fadeInUp"

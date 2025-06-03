@@ -85,13 +85,13 @@ export default function Nav({ isArrow = true, textColor = "", Linkfs = "" }) {
                   <Link href={item.href}>
                     <div className="demo-image position-relative">
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={item.src}
                         alt={item.alt}
                         src={item.src}
                         width="300"
                         height="329"
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                       {item.labels && (
                         <div className="demo-label">
                           {item.labels.map((label, labelIndex) => (
@@ -165,13 +165,13 @@ export default function Nav({ isArrow = true, textColor = "", Linkfs = "" }) {
                       className="collection-image img-style"
                     >
                       <Image
-                        className="lazyload"
-                        data-src="/images/collections/collection-1.jpg"
+                        className=""
+                        
                         alt="collection-demo-1"
                         src="/images/collections/collection-1.jpg"
                         width="1000"
                         height="1215"
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="collection-content">
                       <Link
@@ -193,13 +193,13 @@ export default function Nav({ isArrow = true, textColor = "", Linkfs = "" }) {
                       className="collection-image img-style"
                     >
                       <Image
-                        className="lazyload"
-                        data-src="/images/collections/collection-2.jpg"
+                        className=""
+                        
                         alt="collection-demo-1"
                         src="/images/collections/collection-2.jpg"
                         width="500"
                         height="607"
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="collection-content">
                       <Link

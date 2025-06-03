@@ -37,14 +37,14 @@ export default function Categories() {
                           className="collection-image img-style radius-10"
                         >
                           <Image
-                            className="lazyload"
+                            className=""
                             data-src={item.imgSrc}
                             alt={item.alt}
                             loading="lazy"
                             src={item.imgSrc}
                             width={320}
                             height={289}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </Link>
                         <div className="collection-content justify-content-end align-items-center">
                           <div className="bottom">

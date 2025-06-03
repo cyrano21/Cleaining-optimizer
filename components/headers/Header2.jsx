@@ -46,7 +46,7 @@ export default function Header2({
                 src="/images/logo/logo.svg"
                 width="136"
                 height="21"
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </Link>
           </div>
           <div className="col-xl-6 tf-md-hidden">

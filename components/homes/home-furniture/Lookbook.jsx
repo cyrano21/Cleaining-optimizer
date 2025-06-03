@@ -40,13 +40,13 @@ export default function Lookbook() {
             <div className="wrap-lookbook lookbook-1">
               <div className="image">
                 <Image
-                  className="lazyload"
-                  data-src="/images/slider/009furniture-banner-10.jpg"
+                  className=""
+                  
                   alt="image-lookbook"
                   src="/images/slider/009furniture-banner-10.jpg"
                   width={2153}
                   height={1059}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="lookbook-item item-1">
                 <div className="inner">
@@ -86,13 +86,13 @@ export default function Lookbook() {
             <div className="wrap-lookbook lookbook-2">
               <div className="image">
                 <Image
-                  className="lazyload"
-                  data-src="/images/slider/009furniture-banner-11.jpg"
+                  className=""
+                  
                   alt="image-lookbook"
                   src="/images/slider/009furniture-banner-11.jpg"
                   width={1435}
                   height={706}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="lookbook-item item-1">
                 <div className="inner">
@@ -116,13 +116,13 @@ export default function Lookbook() {
             <div className="wrap-lookbook lookbook-3">
               <div className="image">
                 <Image
-                  className="lazyload"
-                  data-src="/images/slider/009furniture-banner-12.jpg"
+                  className=""
+                  
                   alt="image-lookbook"
                   src="/images/slider/009furniture-banner-12.jpg"
                   width={1435}
                   height={706}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="lookbook-item item-1">
                 <div className="inner">

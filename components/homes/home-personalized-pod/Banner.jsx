@@ -8,13 +8,13 @@ export default function Banner() {
       <div className="widget-card-store type-3 radius-20 overflow-hidden align-items-center tf-grid-layout md-col-2 type-bg-img">
         <div className="store-item-info">
           <Image
-            className="lazyload img-bg"
-            data-src="/images/shop/store/bg-personalized-pod-1.jpg"
+            className=" img-bg"
+            
             alt="store-img"
             src="/images/shop/store/bg-personalized-pod-1.jpg"
             width={1800}
             height={1076}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="wrap">
             <h5 className="store-heading text_white">
               Make this christmas <br /> truly special
@@ -37,13 +37,13 @@ export default function Banner() {
         </div>
         <div className="store-img">
           <Image
-            className="lazyload"
-            data-src="/images/shop/store/personalized-pod-1.jpg"
+            className=""
+            
             alt="store-img"
             src="/images/shop/store/personalized-pod-1.jpg"
             width={800}
             height={468}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </div>
       </div>
     </section>

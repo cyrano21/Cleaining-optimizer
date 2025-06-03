@@ -37,13 +37,13 @@ export default function Collection() {
             </div>
             <div className="tf-image-wrap">
               <Image
-                className="lazyload"
-                data-src="/images/collections/giftcard-6.jpg"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/giftcard-6.jpg"
                 width={800}
                 height={598}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </div>
         </div>

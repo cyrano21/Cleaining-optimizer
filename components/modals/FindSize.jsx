@@ -87,12 +87,12 @@ export default function FindSize() {
               <div>
                 <Image
                   className="sizechart lazyload"
-                  data-src="/images/shop/products/size_chart2.jpg"
+                  
                   alt="image"
                   src="/images/shop/products/size_chart2.jpg"
                   width={290}
                   height={290}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>

@@ -16,13 +16,13 @@ export default function CollectionsBanner2() {
             <div key={item.id} className="collection-item-centered hover-img">
               <Link href={item.href} className="img-style">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={item.imgSrc}
                   alt={item.alt}
                   src={item.imgSrc}
                   width={item.width}
                   height={item.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="content">
                 <Link

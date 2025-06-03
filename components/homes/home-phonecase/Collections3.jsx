@@ -14,13 +14,13 @@ export default function Collections3() {
           {galleryImages.map((image) => (
             <div key={image.id} className={`${image.id} tf-gallery-image`}>
               <Image
-                className="lazyload"
+                className=""
                 data-src={image.src}
                 alt={image.alt}
                 src={image.src}
                 width={image.width}
                 height={image.height}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           ))}
         </div>

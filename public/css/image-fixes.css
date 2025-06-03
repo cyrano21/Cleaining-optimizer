@@ -1,0 +1,47 @@
+/* Style pour corriger les problèmes de ratio d'aspect des images */
+.next-image-wrapper img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Correction pour les images de produits */
+.product-img img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 720/1005;
+  object-fit: cover;
+}
+
+/* Correction pour les images dans les cartes de produits */
+.product-card img {
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+
+/* Correction pour les images de placeholders */
+img[src^="/images/products/placeholder-"] {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 720/1005;
+  object-fit: cover;
+}
+
+/* Pour éviter les décalages de mise en page lors du chargement */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 720/1005;
+  height: auto !important;
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}

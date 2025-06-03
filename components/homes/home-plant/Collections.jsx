@@ -57,13 +57,13 @@ export default function Collections() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
+                    className=""
                     data-src={collection.imgSrc}
                     alt="collection-img"
                     src={collection.imgSrc}
                     width={360}
                     height={500}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                   <span className="box-icon">
                     <i className="icon-icon icon-arrow1-top-left" />
                   </span>

@@ -11,14 +11,14 @@ export default function Hero() {
         <SwiperSlide className="swiper-slide">
           <div className="wrap-slider">
             <Image
-              className="lazyload"
-              data-src="/images/slider/men-slide1.jpg"
+              className=""
+              
               alt="men-slideshow-01"
               src="/images/slider/men-slide1.jpg"
               width={2000}
               height={929}
               priority
-            />
+ style={{ width: "100%", height: "auto" }}             />
             <div className="lookbook-1">
               <div className="lookbook-item item-2">
                 <div className="inner">
@@ -42,13 +42,13 @@ export default function Hero() {
         <SwiperSlide className="swiper-slide">
           <div className="wrap-slider">
             <Image
-              className="lazyload"
-              data-src="/images/slider/men-slide2.jpg"
+              className=""
+              
               alt="men-slideshow-02"
               src="/images/slider/men-slide2.jpg"
               width={2000}
               height={929}
-            />
+ style={{ width: "100%", height: "auto" }}             />
             <div className="lookbook-2">
               <div className="lookbook-item item-1">
                 <div className="inner">

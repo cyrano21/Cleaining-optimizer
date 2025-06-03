@@ -57,7 +57,7 @@ export default function Products2() {
                         src={slide.imgSrc}
                         width={160}
                         height={160}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="info">
                       <div>

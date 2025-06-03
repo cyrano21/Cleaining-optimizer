@@ -28,13 +28,13 @@ export default function Hero() {
               <SwiperSlide className="swiper-slide" key={index}>
                 <div className="wrap-slider">
                   <Image
-                    className="lazyload"
+                    className=""
                     data-src={slide.imgSrc}
                     src={slide.imgSrc}
                     alt={slide.alt}
                     width={1600}
                     height={762}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                   <div className="box-content">
                     <div className="container">
                       <h2

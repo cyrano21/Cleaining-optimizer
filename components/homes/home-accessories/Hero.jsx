@@ -36,7 +36,7 @@ export default function Hero() {
                   src={slide.imgSrc}
                   alt={slide.alt}
                   priority
-                />
+ style={{ width: "100%", height: "auto" }}                 />
                 <div className="box-content text-center ">
                   <div className="container">
                     <h2 className="fade-item fade-item-1 heading">

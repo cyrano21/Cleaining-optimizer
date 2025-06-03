@@ -24,13 +24,13 @@ export default function HomesModal() {
                   <Link href={item.href}>
                     <div className="demo-image position-relative">
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={item.imgSrc}
                         alt={item.alt}
                         src={item.imgSrc}
                         width={300}
                         height={329}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                       {item.labels && (
                         <div className={`demo-label`}>
                           {item.labels.map((label, labelIndex) => (

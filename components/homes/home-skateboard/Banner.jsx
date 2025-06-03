@@ -30,13 +30,13 @@ export default function Banner() {
           </div>
           <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
             <Image
-              className="lazyload"
-              data-src="/images/collections/banner-wtext-stakeboard.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/banner-wtext-stakeboard.jpg"
               width={720}
               height={539}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
         </div>
       </div>

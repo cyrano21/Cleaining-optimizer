@@ -49,13 +49,13 @@ export default function StoreLocations() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore-map-1.png"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore-map-1.png"
                     width={720}
                     height={464}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -81,13 +81,13 @@ export default function StoreLocations() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore-map-2.png"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore-map-2.png"
                     width={720}
                     height={450}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -113,13 +113,13 @@ export default function StoreLocations() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore-map-3.png"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore-map-3.png"
                     width={720}
                     height={439}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

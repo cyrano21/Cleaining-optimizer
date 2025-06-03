@@ -150,7 +150,7 @@ export default function QuickAdd() {
                       src="/images/payments/paypal.png"
                       width={64}
                       height={18}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                   <a href="#" className="payment-more-option">
                     More payment options

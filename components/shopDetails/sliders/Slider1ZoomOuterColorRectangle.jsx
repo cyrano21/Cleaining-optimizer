@@ -189,13 +189,13 @@ export default function Slider1ZoomOuterColorRectangle({
           <SwiperSlide key={index} className="stagger-item">
             <div className="item">
               <Image
-                className="lazyload"
+                className=""
                 data-src={slide.src}
                 alt={""}
                 src={slide.src} // Optional fallback for non-lazy loading
                 width={slide.width}
                 height={slide.height}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </SwiperSlide>
         ))}
@@ -235,7 +235,7 @@ export default function Slider1ZoomOuterColorRectangle({
                     onClick={open}
                   >
                     <Image
-                      className="tf-image-zoom lazyload"
+                      className="tf-image-zoom "
                       data-zoom={slide.src}
                       data-src={slide.src}
                       ref={ref}
@@ -243,7 +243,7 @@ export default function Slider1ZoomOuterColorRectangle({
                       width={slide.width}
                       height={slide.height}
                       src={slide.src} // Optional fallback for non-lazy loading
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                 )}
               </Item>

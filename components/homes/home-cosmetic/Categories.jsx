@@ -18,13 +18,13 @@ export default function Categories() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/cls-cosmetic1.jpg"
+                    className=""
+                    
                     alt="collection-img"
                     src="/images/collections/cls-cosmetic1.jpg"
                     width={160}
                     height={160}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="sale-off fw-5">10% off</div>
               </div>
@@ -43,13 +43,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-cosmetic2.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-cosmetic2.jpg"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link
@@ -67,13 +67,13 @@ export default function Categories() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/cls-cosmetic3.jpg"
+                    className=""
+                    
                     alt="collection-img"
                     src="/images/collections/cls-cosmetic3.jpg"
                     width={160}
                     height={162}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="sale-off fw-5">Trending</div>
               </div>
@@ -92,13 +92,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-cosmetic4.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-cosmetic4.jpg"
                   width={160}
                   height={162}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link
@@ -115,13 +115,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-cosmetic5.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-cosmetic5.jpg"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link
@@ -138,13 +138,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-cosmetic6.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-cosmetic6.jpg"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link
@@ -162,13 +162,13 @@ export default function Categories() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/sale.jpg"
+                    className=""
+                    
                     alt="collection-img"
                     src="/images/collections/sale.jpg"
                     width={160}
                     height={160}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="sale-off fw-5">30% off</div>
               </div>
@@ -187,13 +187,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-cosmetic7.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-cosmetic7.jpg"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link
@@ -210,13 +210,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-cosmetic8.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-cosmetic8.jpg"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link

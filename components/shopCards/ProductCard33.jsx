@@ -23,15 +23,15 @@ const ProductCard33 = ({ product }) => {
       <div className="card-product-wrapper">
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
-            className="lazyload img-product"
+            className=" img-product"
             data-src={product.imgSrc}
             src={currentImage}
             alt="image-product"
             width={720}
             height={1005}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={
               product.imgHoverSrc ? product.imgHoverSrc : product.imgSrc
             }
@@ -39,7 +39,7 @@ const ProductCard33 = ({ product }) => {
             alt="image-product"
             width={720}
             height={1005}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="list-product-btn absolute-2">
           <a
@@ -130,13 +130,13 @@ const ProductCard33 = ({ product }) => {
                 <span className="tooltip">{color.name}</span>
                 <span className={`swatch-value ${color.colorClass}`} />
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   src={color.imgSrc}
                   alt="image-product"
                   width={720}
                   height={1005}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

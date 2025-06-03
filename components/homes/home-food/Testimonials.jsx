@@ -31,7 +31,7 @@ export default function Testimonials() {
                   src="/images/item/test-trust.png"
                   width="138"
                   height="34"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>

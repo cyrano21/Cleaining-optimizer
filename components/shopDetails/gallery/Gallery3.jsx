@@ -216,12 +216,12 @@ export default function Gallery3({ firstImage }) {
                   ref={ref}
                   className="tf-image-zoom lazyload values-beige"
                   data-zoom="/images/shop/products/hmgoepprod31.jpg"
-                  data-src="/images/shop/products/hmgoepprod31.jpg"
+                  
                   alt="image"
                   src="/images/shop/products/hmgoepprod31.jpg"
                   width={713}
                   height={1070}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </a>
             )}
           </Item>
@@ -250,7 +250,7 @@ export default function Gallery3({ firstImage }) {
                       width={image.width}
                       height={image.height}
                       src={image.src} // Optional fallback for non-lazy loading
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </a>
                 )}
               </Item>

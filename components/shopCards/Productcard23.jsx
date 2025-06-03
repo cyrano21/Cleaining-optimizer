@@ -18,19 +18,19 @@ export default function Productcard23({ product }) {
       <div className="card-product-wrapper">
         <a href="#" className="product-img">
           <Image
-            className="lazyload img-product"
+            className=" img-product"
             alt="image-product"
             src={currentImage}
             width={720}
             height={1005}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             alt="image-product"
             src={product.imgHoverSrc}
             width={720}
             height={1005}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </a>
       </div>
       <div className="card-product-info">
@@ -57,13 +57,13 @@ export default function Productcard23({ product }) {
                 <span className="tooltip">{color.name}</span>
                 <span className={`swatch-value ${color.colorClass}`} />
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   src={color.imgSrc}
                   alt="image-product"
                   width={720}
                   height={1005}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

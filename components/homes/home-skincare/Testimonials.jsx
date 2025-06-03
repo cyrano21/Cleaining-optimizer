@@ -28,13 +28,13 @@ export default function Testimonials() {
                   <div className="testimonial-item lg lg-2">
                     <div className="icon">
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={testimonial.iconSrc}
                         alt="quote icon"
                         src={testimonial.iconSrc}
                         width={37}
                         height={25}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="heading fs-12 mb_18">
                       {testimonial.heading}
@@ -48,13 +48,13 @@ export default function Testimonials() {
                     <div className="author box-author">
                       <div className="box-img d-md-none rounded-0">
                         <Image
-                          className="lazyload img-product"
+                          className=" img-product"
                           data-src={testimonial.authorImgSrc}
                           alt="author"
                           src={testimonial.authorImgSrc}
                           width={450}
                           height={513}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{testimonial.authorName}</div>
@@ -102,13 +102,13 @@ export default function Testimonials() {
                       >
                         <div className="img-style">
                           <Image
-                            className="lazyload"
+                            className=""
                             data-src={image.src}
                             alt={image.alt}
                             src={image.src}
                             width={image.width}
                             height={image.height}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                       </div>
                     ))}

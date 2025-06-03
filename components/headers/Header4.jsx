@@ -55,7 +55,7 @@ export default function Header4() {
                   src="/images/logo/logo@2x.png"
                   width={273}
                   height={42}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="col-xl-5 col-md-4 col-3">

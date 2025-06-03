@@ -16,13 +16,13 @@ export default function Banner() {
               data-wow-delay="0s"
             >
               <Image
-                className="lazyload"
-                data-src="/images/collections/collection-plant-1.jpg"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/collection-plant-1.jpg"
                 width={1410}
                 height={1096}
-              />
+ style={{ width: "100%", height: "auto" }}               />
               <a onClick={() => setIsOpen(true)} className="popup-youtube">
                 <i className="icon-play" />
               </a>

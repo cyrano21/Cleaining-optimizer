@@ -41,7 +41,7 @@ export default function Header18() {
                   src="/images/logo/logo-blue2.svg"
                   width={137}
                   height={22}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="col-md-4 col-6 tf-md-hidden">
@@ -70,7 +70,7 @@ export default function Header18() {
                                 src={product.imgSrc}
                                 width={product.imgWidth}
                                 height={product.imgHeight}
-                              />
+ style={{ width: "100%", height: "auto" }}                               />
                             </div>
                             <div className="box-content">
                               <p className="title link">{product.title}</p>
@@ -187,7 +187,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate1.jpg"
                             width={40}
                             height={48}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Accessories</span>
                       </Link>
@@ -203,7 +203,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate2.jpg"
                             width={40}
                             height={48}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Dog</span>
                       </Link>
@@ -219,7 +219,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate3.jpg"
                             width={40}
                             height={43}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Grocery</span>
                       </Link>
@@ -235,7 +235,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate4.png"
                             width={40}
                             height={48}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Handbag</span>
                       </Link>
@@ -254,7 +254,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate5.jpg"
                             width={40}
                             height={48}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Fashion</span>
                         <span className="btn-open-sub" />
@@ -275,7 +275,7 @@ export default function Header18() {
                                   src="/images/shop/cate/cate6.jpg"
                                   width={40}
                                   height={49}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </div>
                               <span>Mens</span>
                               <span className="btn-open-sub" />
@@ -293,7 +293,7 @@ export default function Header18() {
                                         src="/images/shop/cate/cate1.jpg"
                                         width={40}
                                         height={48}
-                                      />
+ style={{ width: "100%", height: "auto" }}                                       />
                                     </div>
                                     <span>Accessories</span>
                                   </Link>
@@ -309,7 +309,7 @@ export default function Header18() {
                                         src="/images/shop/cate/cate8.jpg"
                                         width={40}
                                         height={48}
-                                      />
+ style={{ width: "100%", height: "auto" }}                                       />
                                     </div>
                                     <span>Shoes</span>
                                   </Link>
@@ -331,7 +331,7 @@ export default function Header18() {
                                   src="/images/shop/cate/cate9.jpg"
                                   width={40}
                                   height={49}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </div>
                               <span>Womens</span>
                               <span className="btn-open-sub" />
@@ -349,7 +349,7 @@ export default function Header18() {
                                         src="/images/shop/cate/cate4.png"
                                         width={40}
                                         height={48}
-                                      />
+ style={{ width: "100%", height: "auto" }}                                       />
                                     </div>
                                     <span>Handbag</span>
                                   </Link>
@@ -365,7 +365,7 @@ export default function Header18() {
                                         src="/images/shop/cate/cate7.jpg"
                                         width={40}
                                         height={41}
-                                      />
+ style={{ width: "100%", height: "auto" }}                                       />
                                     </div>
                                     <span>Tee</span>
                                   </Link>
@@ -390,7 +390,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate6.jpg"
                             width={40}
                             height={49}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Men</span>
                         <span className="btn-open-sub" />
@@ -408,7 +408,7 @@ export default function Header18() {
                                   src="/images/shop/cate/cate1.jpg"
                                   width={40}
                                   height={48}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </div>
                               <span>Accessories</span>
                             </Link>
@@ -424,7 +424,7 @@ export default function Header18() {
                                   src="/images/shop/cate/cate8.jpg"
                                   width={40}
                                   height={48}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </div>
                               <span>Shoes</span>
                             </Link>
@@ -443,7 +443,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate7.jpg"
                             width={40}
                             height={41}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Tee</span>
                       </Link>
@@ -459,7 +459,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate8.jpg"
                             width={40}
                             height={48}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Shoes</span>
                       </Link>
@@ -478,7 +478,7 @@ export default function Header18() {
                             src="/images/shop/cate/cate9.jpg"
                             width={40}
                             height={49}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                         <span className="link">Women</span>
                         <span className="btn-open-sub" />
@@ -496,7 +496,7 @@ export default function Header18() {
                                   src="/images/shop/cate/cate4.png"
                                   width={40}
                                   height={48}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </div>
                               <span>Handbag</span>
                             </Link>
@@ -512,7 +512,7 @@ export default function Header18() {
                                   src="/images/shop/cate/cate7.jpg"
                                   width={40}
                                   height={41}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </div>
                               <span>Tee</span>
                             </Link>

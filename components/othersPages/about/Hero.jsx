@@ -5,13 +5,13 @@ export default function Hero() {
     <section className="tf-slideshow about-us-page position-relative">
       <div className="banner-wrapper">
         <Image
-          className="lazyload"
+          className=""
           src="/images/slider/about-banner-01.jpg"
           data-=""
           alt="image-collection"
           width={2000}
           height={1262}
-        />
+ style={{ width: "100%", height: "auto" }}         />
         <div className="box-content text-center">
           <div className="container">
             <div className="text text-white">

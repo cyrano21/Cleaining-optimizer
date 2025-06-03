@@ -27,25 +27,25 @@ export default function Collcetion2() {
           </div>
           <div className="tf-image-wrap">
             <Image
-              className="lazyload"
-              data-src="/images/collections/decor_img1.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/decor_img1.jpg"
               width={800}
               height={598}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
         </div>
         <div className="tf-grid-layout gap-0 rounded-0 md-col-2 tf-img-with-text style-3 bg-f5fbfd">
           <div className="tf-image-wrap">
             <Image
-              className="lazyload"
-              data-src="/images/collections/decor_img2.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/decor_img2.jpg"
               width={800}
               height={598}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="tf-content-wrap">
             <div>

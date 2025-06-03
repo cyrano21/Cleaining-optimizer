@@ -32,12 +32,12 @@ export default function Testimonials() {
                     <div className="icon">
                       <Image
                         className="lazyloaded"
-                        data-src="/images/item/quote.svg"
+                        
                         alt="image"
                         src="/images/item/quote.svg"
                         width={37}
                         height={25}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="rating">
                       <i className="icon-start" />
@@ -56,7 +56,7 @@ export default function Testimonials() {
                           src={testimonial.imgSrc}
                           width={750}
                           height={851}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{testimonial.name}</div>
@@ -98,7 +98,7 @@ export default function Testimonials() {
                       src={image.src}
                       width={image.width}
                       height={image.height}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </SwiperSlide>
               ))}

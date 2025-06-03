@@ -57,7 +57,7 @@ export default function Header21() {
                 src="/images/logo/logo-white@2x.png"
                 width="272"
                 height="42"
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </Link>
           </div>
           <div className="col-xxl-5 col-md-4 col-3">

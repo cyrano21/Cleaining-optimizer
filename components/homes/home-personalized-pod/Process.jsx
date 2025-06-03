@@ -10,12 +10,12 @@ export default function Process() {
     <section className="flat-spacing-4 section-cls-personalized-pod section-full-1">
       <Image
         className=""
-        data-src="/images/collections/bg-personalized-pod-2.png"
+        
         alt=""
         src="/images/collections/bg-personalized-pod-2.png"
         width={2000}
         height={770}
-      />
+ style={{ width: "100%", height: "auto" }}       />
       <div className="container">
         <div className="flat-title lg">
           <span className="title fw-6 text-center">How it works</span>
@@ -43,7 +43,7 @@ export default function Process() {
                           src={slide.imgSrc}
                           width={200}
                           height={200}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content bg_red-1">
                         <h5 className="text_white">{slide.title}</h5>
@@ -80,7 +80,7 @@ export default function Process() {
                         src={slide.imgSrc}
                         width={200}
                         height={200}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="content bg_red-1">
                       <h5 className="text_white">{slide.title}</h5>

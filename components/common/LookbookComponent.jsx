@@ -12,13 +12,13 @@ export default function LookbookComponent({ product = lookbookProducts[0] }) {
       <div className="lookbook-product">
         <Link href={`/product-detail/${product.id}`} className="image">
           <Image
-            className="lazyload"
+            className=""
             data-src={product.imgSrc}
             alt="lookbook-item"
             src={product.imgSrc}
             width={product.width}
             height={product.height}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="content-wrap">
           <div className="product-title">

@@ -281,7 +281,7 @@ export default function Footer8({ bgColor = "" }) {
                         width={image.width}
                         height={image.height}
                         alt={image.alt}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     ))}
                   </div>
                 </div>

@@ -10,13 +10,13 @@ export default function Lookbook() {
         <div className="wrap-lookbook lookbook-dog">
           <div className="image radius-10 o-hidden">
             <Image
-              className="lazyload"
-              data-src="/images/shop/file/lookbook-10.jpg"
+              className=""
+              
               alt="image-lookbook"
               src="/images/shop/file/lookbook-10.jpg"
               width={1400}
               height={686}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="lookbook-item item-1">
             <div className="inner">

@@ -14,13 +14,13 @@ export default function CollectionBanner() {
               data-wow-delay="0s"
             >
               <Image
-                className="lazyload"
-                data-src="/images/collections/collection-plant-7.jpg"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/collection-plant-7.jpg"
                 width={800}
                 height={622}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-content-wrap wow fadeInUp" data-wow-delay="0s">
               <span className="sub-heading text-uppercase fw-7 text_green-1">

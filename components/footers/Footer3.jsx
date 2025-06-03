@@ -226,7 +226,7 @@ export default function Footer3() {
                         width={image.width}
                         height={image.height}
                         alt={image.alt}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     ))}
                   </div>
                 </div>

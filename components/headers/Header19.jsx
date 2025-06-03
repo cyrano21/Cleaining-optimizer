@@ -24,7 +24,7 @@ export default function Header19() {
                 src="/images/logo/logo-green.png"
                 width={136}
                 height={21}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </a>
           </div>
           <div className="col-xl-9 col-md-4 col-6">
@@ -35,7 +35,7 @@ export default function Header19() {
                   src="/images/logo/logo-green.png"
                   width={136}
                   height={21}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <nav className="box-navigation text-center">
                 <ul className="box-nav-ul d-flex align-items-center justify-content-center gap-30">

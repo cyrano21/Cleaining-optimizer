@@ -6,13 +6,13 @@ export default function Banner() {
     <section className="banner-hero-collection-wrap">
       <Link href={`/shop-collection-sub.html`} className="img-wrap">
         <Image
-          className="lazyload"
-          data-src="images/slider/jewerly-4.jpg"
+          className=""
+          
           alt="fashion-slideshow"
-          src="/images/slider/jewerly-4.jpg"
+          src="images/slider/jewerly-4.jpg"
           width="1800"
           height="735"
-        />
+ style={{ width: "100%", height: "auto" }}         />
       </Link>
       <div className="box-content">
         <div className="container">

@@ -63,7 +63,7 @@ export default function OrderDetails() {
             src="/images/products/brown.jpg"
             width="720"
             height="1005"
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </figure>
         <div className="content">
           <div className="badge">In Progress</div>
@@ -169,7 +169,7 @@ export default function OrderDetails() {
                   src="/images/products/brown.jpg"
                   width="720"
                   height="1005"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </figure>
               <div className="content">
                 <div className="text-2 fw-6">Ribbed modal T-shirt</div>

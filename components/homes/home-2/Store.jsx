@@ -48,13 +48,13 @@ export default function Store() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore1.png"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore1.png"
                     width="720"
                     height="506"
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -80,13 +80,13 @@ export default function Store() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore2.png"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore2.png"
                     width="720"
                     height="506"
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -112,13 +112,13 @@ export default function Store() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore3.png"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore3.png"
                     width="720"
                     height="506"
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

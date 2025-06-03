@@ -46,13 +46,13 @@ export default function Testimonials() {
                 <div className="testimonial-item style-row">
                   <div className="image radius-5 o-hidden">
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={testimonial.imgSrc}
                       alt={testimonial.alt}
                       src={testimonial.imgSrc}
                       width={488}
                       height={620}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="content">
                     <div className="rating">
@@ -68,13 +68,13 @@ export default function Testimonials() {
                     <div className="product">
                       <div className="img-thumb radius-5 o-hidden">
                         <Image
-                          className="lazyload"
+                          className=""
                           data-src={testimonial.product.imgSrc}
                           alt={testimonial.product.title}
                           src={testimonial.product.imgSrc}
                           width={70}
                           height={56}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content-wrap">
                         <div className="product-title">

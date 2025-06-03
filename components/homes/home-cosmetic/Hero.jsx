@@ -52,7 +52,7 @@ export default function Hero() {
                     src={slide.imgSrc}
                     width={947}
                     height={1335}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="collection-content">
                   <Link

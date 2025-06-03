@@ -62,7 +62,7 @@ export default function Header7() {
                   src="/images/logo/women-logo.svg"
                   width={143}
                   height={21}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="col-xl-5 col-md-4 col-3">

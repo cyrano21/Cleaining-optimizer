@@ -37,7 +37,7 @@ export default function Brands() {
               <SwiperSlide key={index}>
                 <div className="brand-item-v2 hover-opacity">
                   <Image
-                    className="lazyload"
+                    className=""
                     style={{ opacity: "0.2" }}
                     data-src={brand.src}
                     alt={brand.alt}

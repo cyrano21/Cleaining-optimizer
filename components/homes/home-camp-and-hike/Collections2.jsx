@@ -22,13 +22,13 @@ export default function Collections2() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-camp-and-hike-1.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-camp-and-hike-1.jpg"
                   width={600}
                   height={545}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -48,13 +48,13 @@ export default function Collections2() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-camp-and-hike-2.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-camp-and-hike-2.jpg"
                   width={360}
                   height={327}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -74,13 +74,13 @@ export default function Collections2() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-camp-and-hike-3.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-camp-and-hike-3.jpg"
                   width={360}
                   height={327}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -100,13 +100,13 @@ export default function Collections2() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-camp-and-hike-4.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-camp-and-hike-4.jpg"
                   width={360}
                   height={327}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -126,13 +126,13 @@ export default function Collections2() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-camp-and-hike-5.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-camp-and-hike-5.jpg"
                   width={800}
                   height={550}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -152,13 +152,13 @@ export default function Collections2() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-camp-and-hike-6.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-camp-and-hike-6.jpg"
                   width={800}
                   height={550}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link

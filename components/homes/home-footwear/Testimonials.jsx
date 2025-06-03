@@ -68,13 +68,13 @@ export default function Testimonials() {
                     <div className="image">
                       <a href="#">
                         <Image
-                          className="lazyload"
+                          className=""
                           data-src={testimonial.product.imgSrc}
                           alt=""
                           src={testimonial.product.imgSrc}
                           width={360}
                           height={360}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </a>
                     </div>
                     <div className="content-wrap">

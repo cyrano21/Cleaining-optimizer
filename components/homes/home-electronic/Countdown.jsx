@@ -9,13 +9,13 @@ export default function Countdown() {
         <div className="tf-grid-layout gap-0 md-col-2 bg_primary tf-img-with-text style-5">
           <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
             <Image
-              className="lazyload"
-              data-src="/images/collections/collection-72.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/collection-72.jpg"
               width={800}
               height={598}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="tf-content-wrap wow fadeInUp" data-wow-delay="0s">
             <div className="sub-heading fw-7">ULTIMATE APPLE ACCESSORY.</div>

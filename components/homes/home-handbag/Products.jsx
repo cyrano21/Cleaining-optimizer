@@ -48,7 +48,7 @@ export default function Products() {
                     src={product.imgSrc}
                     width={668}
                     height={668}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                   <Image
                     className="lazyload img-hover"
                     data-src={product.imgHoverSrc}
@@ -56,7 +56,7 @@ export default function Products() {
                     src={product.imgHoverSrc}
                     width={668}
                     height={668}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="list-product-btn absolute-2">
                   <a

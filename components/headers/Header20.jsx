@@ -39,7 +39,7 @@ export default function Header20() {
                   src="/images/logo/logo.svg"
                   width={136}
                   height={21}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <nav className="box-navigation text-center">
                 <ul className="box-nav-ul d-flex align-items-center gap-30">

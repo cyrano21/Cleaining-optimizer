@@ -10,13 +10,13 @@ export default function Collection() {
             <Link href={`/shop-collection-sub`} className="collection-inner">
               <div className="collection-image img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/009furniture-banner-01.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/009furniture-banner-01.jpg"
                   width={1058}
                   height={1194}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="collection-content">
                 <div className="top wow fadeInUp" data-wow-delay="0s">
@@ -36,13 +36,13 @@ export default function Collection() {
             <Link href={`/shop-collection-sub`} className="collection-inner">
               <div className="collection-image img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/009furniture-banner-02.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/009furniture-banner-02.jpg"
                   width={1056}
                   height={575}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="collection-content justify-content-end">
                 <div className="bottom wow fadeInUp" data-wow-delay="0s">
@@ -59,13 +59,13 @@ export default function Collection() {
             <Link href={`/shop-collection-sub`} className="collection-inner">
               <div className="collection-image img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/009furniture-banner-03.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/009furniture-banner-03.jpg"
                   width={1056}
                   height={575}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="collection-content justify-content-end">
                 <div className="bottom wow fadeInUp" data-wow-delay="0s">

@@ -67,7 +67,7 @@ export default function VolumeDiscountGrid({ product }) {
                     src={item.imgSrc}
                     width={120}
                     height={152}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <h5 className="name">{item.name}</h5>
               </div>

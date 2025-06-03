@@ -48,13 +48,13 @@ export default function Features2() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore-stroller.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore-stroller.jpg"
                     width={720}
                     height={506}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -81,13 +81,13 @@ export default function Features2() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore-stroller2.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore-stroller2.jpg"
                     width={720}
                     height={506}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -114,13 +114,13 @@ export default function Features2() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore-stroller3.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore-stroller3.jpg"
                     width={720}
                     height={506}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

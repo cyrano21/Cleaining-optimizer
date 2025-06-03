@@ -7,13 +7,13 @@ export default function Location() {
         <div className="flat-location">
           <div className="banner-map">
             <Image
-              className="lazyload"
-              data-src="/images/country/map-1.jpg"
+              className=""
+              
               alt="map"
               src="/images/country/map-1.jpg"
               width={1600}
               height={747}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="content">
             <h3 className="heading wow fadeInUp" data-wow-delay="0s">

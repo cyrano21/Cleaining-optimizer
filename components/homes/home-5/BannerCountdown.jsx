@@ -6,14 +6,14 @@ export default function BannerCountdown() {
   return (
     <section className="tf-hero-image-liquid">
       <Image
-        className="lazyload"
-        data-src="/images/slider/banner-countdown.png"
+        className=""
+        
         alt="img-banner"
         loading="lazy"
         src="/images/slider/banner-countdown.png"
         width={1800}
         height={775}
-      />
+ style={{ width: "100%", height: "auto" }}       />
       <div className="box-content">
         <div className="container wow fadeInUp" data-wow-delay="0s">
           <h2 className="heading">Last Chance Offers</h2>

@@ -34,7 +34,7 @@ export default function Hero() {
                   width={2000}
                   height={898}
                   priority
-                />
+ style={{ width: "100%", height: "auto" }}                 />
                 <div className="box-content">
                   <div className="container">
                     <h1 className="fade-item fade-item-1 font-young-serif fw-6">

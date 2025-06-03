@@ -123,13 +123,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-49.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-49.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="tops" role="tabpanel">
@@ -138,13 +138,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-50.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-50.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="shirtsBlouses" role="tabpanel">
@@ -153,13 +153,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-51.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-51.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="pants" role="tabpanel">
@@ -168,13 +168,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-52.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-52.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="cardigans" role="tabpanel">
@@ -183,13 +183,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-53.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-53.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="blazers" role="tabpanel">
@@ -198,13 +198,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-54.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-54.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="overalls" role="tabpanel">
@@ -213,13 +213,13 @@ export default function Categories() {
                 className="fullwidth radius-10 o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-55.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/collection-55.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
           </div>

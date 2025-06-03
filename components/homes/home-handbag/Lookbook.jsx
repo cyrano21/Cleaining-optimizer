@@ -24,13 +24,13 @@ export default function Lookbook() {
         <div className="wrap-lookbook lookbook-handbag">
           <div className="image">
             <Image
-              className="lazyload"
-              data-src="/images/slider/bg_lookbook.jpg"
+              className=""
+              
               alt="image-lookbook"
               src="/images/slider/bg_lookbook.jpg"
               width={2000}
               height={765}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="lookbook-item item-1">
             <div className="inner">

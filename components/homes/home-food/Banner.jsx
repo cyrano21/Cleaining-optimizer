@@ -15,13 +15,13 @@ export default function Banner() {
           <div className="tf-grid-layout lg-col-2 tf-img-with-text-2">
             <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
               <Image
-                className="lazyload"
-                data-src="/images/collections/banner-cls-food1.jpg"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/banner-cls-food1.jpg"
                 width={800}
                 height={913}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-content-wrap wow fadeInUp" data-wow-delay="0s">
               <div className="item text-center text-md-start">
@@ -79,7 +79,7 @@ export default function Banner() {
                     src="/images/collections/cls-food.png"
                     width={220}
                     height={220}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="content text-center text-md-start">
                   <h5>Diverse and Delicious</h5>
@@ -97,7 +97,7 @@ export default function Banner() {
                     src="/images/collections/cls-food2.png"
                     width={220}
                     height={220}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="content text-center text-md-start">
                   <h5>Customizable and Convenient</h5>
@@ -115,7 +115,7 @@ export default function Banner() {
                     src="/images/collections/cls-food3.png"
                     width={220}
                     height={220}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="content text-center text-md-start">
                   <h5>Nutrient-Rich and Balanced</h5>
@@ -132,13 +132,13 @@ export default function Banner() {
               data-wow-delay="0s"
             >
               <Image
-                className="lazyload"
-                data-src="/images/collections/banner-cls-food2.png"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/banner-cls-food2.png"
                 width={800}
                 height={798}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </div>
         </div>

@@ -12,25 +12,25 @@ export default function Banner2() {
               <div className="box-img item-1 tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/img-w-text-footweart1.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/img-w-text-footweart1.jpg"
                     width={600}
                     height={607}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="box-img item-2 tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/img-w-text-footweart2.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/img-w-text-footweart2.jpg"
                     width={600}
                     height={618}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

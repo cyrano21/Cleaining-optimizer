@@ -52,7 +52,7 @@ export default function Lookbook() {
                                 src={product.imgSrc}
                                 width={product.imgWidth}
                                 height={product.imgHeight}
-                              />
+ style={{ width: "100%", height: "auto" }}                               />
                             </Link>
                           </div>
                           <div className="tf-product-bundle-infos">
@@ -99,13 +99,13 @@ export default function Lookbook() {
             <div className="wrap-lookbook lookbook-sw">
               <div className="image">
                 <Image
-                  className="lazyload"
-                  data-src="/images/shop/file/lookbook-6.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/shop/file/lookbook-6.jpg"
                   width={1400}
                   height={1941}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="navigation-sw-dot type-black nav-next-lookbook snbp134">
                 <span />

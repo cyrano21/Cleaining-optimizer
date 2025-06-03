@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import "../public/scss/main.scss";
 import "photoswipe/dist/photoswipe.css";
 import "rc-slider/assets/index.css";
+import "../public/css/custom-image-fixes.css";
+import "../public/css/image-fixes.css";
 import HomesModal from "@/components/modals/HomesModal";
 import Context from "@/context/Context";
 import QuickView from "@/components/modals/QuickView";

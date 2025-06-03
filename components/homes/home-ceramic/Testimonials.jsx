@@ -54,7 +54,7 @@ export default function Testimonials() {
                     alt={item.alt}
                     width={item.width}
                     height={item.height}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </SwiperSlide>
             ))}

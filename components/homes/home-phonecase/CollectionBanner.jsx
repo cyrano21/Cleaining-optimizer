@@ -31,13 +31,13 @@ export default function CollectionBanner() {
           </div>
           <div className="tf-image-wrap">
             <Image
-              className="lazyload"
-              data-src="/images/collections/phonecase-4.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/phonecase-4.jpg"
               width={800}
               height={598}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
         </div>
       </div>

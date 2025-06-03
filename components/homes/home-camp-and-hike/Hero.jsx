@@ -41,14 +41,15 @@ export default function Hero() {
       >
         {slides21.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="wrap-slider">
-              <Image
-                className="lazyload"
+            <div className="wrap-slider">              <Image
+                className=""
                 data-src={slide.imgSrc}
                 src={slide.imgSrc}
                 alt={slide.alt}
                 width={1000}
                 height={649}
+                priority
+                style={{ width: "100%", height: "auto" }}
               />
               <div className="box-content text-center">
                 <div className="container">

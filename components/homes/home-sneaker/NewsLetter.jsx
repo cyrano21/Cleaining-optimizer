@@ -46,13 +46,13 @@ export default function NewsLetter() {
     <section className="flat-spacing-24 pb_0 tf-slideshow tf-form-sneaker">
       <div className="banner-wrapper">
         <Image
-          className="lazyload"
-          data-src="/images/slider/bg-sneaker.jpg"
+          className=""
+          
           alt="collection-img"
           src="/images/slider/bg-sneaker.jpg"
           width={1920}
           height={589}
-        />
+ style={{ width: "100%", height: "auto" }}         />
         <div className="container-full">
           <div className="box-content bg_white">
             <div

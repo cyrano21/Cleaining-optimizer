@@ -31,13 +31,13 @@ export default function BannerCollections() {
                     className="collection-image img-style rounded-0"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={item.imgSrc}
                       alt={item.alt}
                       src={item.imgSrc}
                       width={1000}
                       height={806}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div
                     className="collection-content wow fadeInUp banner-glass-content"

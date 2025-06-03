@@ -195,24 +195,24 @@ export default function Slider4({
                   </div>
                 </div>
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={slide.src}
                   alt="image"
                   src={slide.src}
                   width="200"
                   height="250"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             ) : (
               <div className="item">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={slide.src}
                   alt={""}
                   src={slide.src} // Optional fallback for non-lazy loading
                   width={slide.width}
                   height={slide.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             )}
           </SwiperSlide>
@@ -265,14 +265,14 @@ export default function Slider4({
                     >
                       <Image
                         ref={ref}
-                        className="tf-image-zoom lazyload"
+                        className="tf-image-zoom "
                         data-zoom={slide.src}
                         data-src={slide.src}
                         alt="image"
                         src={slide.src} // Optional fallback for non-lazy loading
                         width={slide.width}
                         height={slide.height}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </a>
                   )}
                 </Item>

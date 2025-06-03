@@ -54,13 +54,13 @@ export default function Categories() {
                         className="collection-image img-style"
                       >
                         <Image
-                          className="lazyload"
+                          className=""
                           data-src={item.imgSrc}
                           alt={item.alt}
                           src={item.imgSrc}
                           width={600}
                           height={731}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </Link>
                       <div className="collection-content left-0">
                         <Link

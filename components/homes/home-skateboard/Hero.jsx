@@ -29,7 +29,7 @@ export default function Hero() {
                 width={1920}
                 height={1080}
                 priority
-              />
+ style={{ width: "100%", height: "auto" }}               />
               <div className="box-content">
                 <div className="container">
                   <div className="card-box-2">

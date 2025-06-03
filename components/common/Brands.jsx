@@ -40,13 +40,13 @@ export default function Brands({ parentClass = "flat-spacing-1" }) {
                 }`}
               >
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={brand.src}
                   alt={brand.alt}
                   src={brand.src}
                   width={brand.width}
                   height={brand.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </SwiperSlide>
           ))}

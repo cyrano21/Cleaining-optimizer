@@ -21,7 +21,7 @@ const FilterItem = ({ className, title, brands }) => (
                   src={brand.imgSrc}
                   width="200"
                   height="106"
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <Link href={`/shop-default`} target={brand.target || "_self"}>
                 {brand.text}

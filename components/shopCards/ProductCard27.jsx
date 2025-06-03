@@ -23,19 +23,19 @@ export default function ProductCard27({ product }) {
           <Image
             width={360}
             height={360}
-            className="lazyload img-product"
+            className=" img-product"
             data-src={product.imgSrc}
             src={currentImage}
             alt={product.alt}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
             width={360}
             height={360}
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={product.imgHoverSrc}
             src={product.imgHoverSrc}
             alt={product.alt}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </a>
         <div className="list-product-btn absolute-2">
           <a
@@ -114,11 +114,11 @@ export default function ProductCard27({ product }) {
                 <Image
                   width={360}
                   height={360}
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   src={color.imgSrc}
                   alt={product.alt}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

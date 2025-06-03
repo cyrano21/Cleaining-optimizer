@@ -39,7 +39,7 @@ export default function Testimonials() {
                         alt="quote icon"
                         width={37}
                         height={25}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="heading fs-12 mb_18">
                       OUR CUSTOMERS' RAVE REVIEWS
@@ -60,7 +60,7 @@ export default function Testimonials() {
                           alt="image-product"
                           width={750}
                           height={703}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{item.name}</div>
@@ -100,7 +100,7 @@ export default function Testimonials() {
                       alt={image.alt}
                       width={image.width}
                       height={image.height}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </SwiperSlide>
               ))}

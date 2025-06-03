@@ -25,14 +25,14 @@ export default function Hero() {
             <SwiperSlide key={index}>
               <div className="wrap-slider">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={slide.imgSrc}
                   alt={slide.imgAlt}
                   src={slide.imgSrc}
                   width={slide.imgWidth}
                   height={slide.imgHeight}
                   priority
-                />
+ style={{ width: "100%", height: "auto" }}                 />
                 <div className="box-content">
                   <div className="container">
                     <h2 className="fade-item fade-item-2 fw-6 heading">

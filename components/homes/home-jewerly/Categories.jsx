@@ -129,13 +129,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-1.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-1.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="tops" role="tabpanel">
@@ -144,13 +144,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-2.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-2.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="shirtsBlouses" role="tabpanel">
@@ -159,13 +159,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-3.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-3.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="pants" role="tabpanel">
@@ -174,13 +174,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-4.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-4.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="cardigans" role="tabpanel">
@@ -189,13 +189,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-5.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-5.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="blazers" role="tabpanel">
@@ -204,13 +204,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-6.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-6.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
             <div className="tab-pane" id="overalls" role="tabpanel">
@@ -219,13 +219,13 @@ export default function Categories() {
                 className="fullwidth o-hidden"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/jewerly-7.jpg"
+                  className=""
+                  
                   alt="image-shop"
                   src="/images/collections/jewerly-7.jpg"
                   width={720}
                   height={597}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
             </div>
           </div>

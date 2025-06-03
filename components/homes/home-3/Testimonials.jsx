@@ -29,7 +29,7 @@ export default function Testimonials() {
                       src={thumb.imgSrc}
                       width="550"
                       height="585"
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </SwiperSlide>
               ))}
@@ -71,7 +71,7 @@ export default function Testimonials() {
                           src={testimonial.imgSrc}
                           width="550"
                           height="585"
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{testimonial.name}</div>

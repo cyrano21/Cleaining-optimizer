@@ -12,13 +12,13 @@ export default function Store() {
         <div className="flat-location style-right">
           <div className="banner-map">
             <Image
-              className="lazyload"
-              data-src="/images/country/map-2.jpg"
+              className=""
+              
               alt="map"
               src="/images/country/map-2.jpg"
               width={1600}
               height={670}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="content">
             <h3

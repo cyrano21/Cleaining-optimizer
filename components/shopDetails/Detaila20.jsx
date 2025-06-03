@@ -219,7 +219,7 @@ export default function Detaila20({ product }) {
                             src="/images/payments/paypal.png"
                             width={64}
                             height={18}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </a>
                         <a href="#" className="payment-more-option">
                           More payment options
@@ -239,7 +239,7 @@ export default function Detaila20({ product }) {
                           src="/images/item/compare.svg"
                           width={20}
                           height={20}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="text fw-6">Compare color</div>
                     </a>
@@ -327,7 +327,7 @@ export default function Detaila20({ product }) {
                           src={image.src}
                           width={image.width}
                           height={image.height}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       ))}
                     </div>
                   </div>
@@ -353,7 +353,7 @@ export default function Detaila20({ product }) {
                       src="/images/shop/products/p-d1.png"
                       width={770}
                       height={1075}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="tf-product-fbt-plus">
                     <svg
@@ -373,7 +373,7 @@ export default function Detaila20({ product }) {
                       src="/images/shop/products/hmgoepprod.jpg"
                       width={713}
                       height={1070}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="tf-product-fbt-plus">
                     <svg
@@ -393,7 +393,7 @@ export default function Detaila20({ product }) {
                       src="/images/shop/products/hmgoepprod2.jpg"
                       width={713}
                       height={1070}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="tf-product-fbt-plus">
                     <svg
@@ -413,7 +413,7 @@ export default function Detaila20({ product }) {
                       src="/images/shop/products/hmgoepprod3.jpg"
                       width={713}
                       height={1070}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </div>
               </div>

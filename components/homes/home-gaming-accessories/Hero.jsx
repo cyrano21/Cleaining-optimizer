@@ -9,13 +9,13 @@ export default function Hero() {
   return (
     <section className="flat-spacing-5 slider-gaming-accessories">
       <Image
-        className="lazyload"
-        data-src="/images/slider/bg-slider-gaming-accessories.jpg"
+        className=""
+        
         alt="collection-img"
         src="/images/slider/bg-slider-gaming-accessories.jpg"
         width={2000}
         height={855}
-      />
+ style={{ width: "100%", height: "auto" }}       />
       <div className="container">
         <Swiper
           spaceBetween={15}
@@ -35,13 +35,13 @@ export default function Hero() {
                     className="collection-image img-style radius-10 o-hidden"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={slide.imgSrc}
                       alt={slide.alt}
                       src={slide.imgSrc}
                       width={800}
                       height={747}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div
                     className="collection-content text-start wow fadeInUp"

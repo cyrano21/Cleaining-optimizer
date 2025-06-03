@@ -7,6 +7,9 @@ import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Hero() {
+  // Debug: Log slides data
+  console.log('Hero Component - slidesData:', slidesData);
+  
   return (
     <div className="tf-slideshow slider-home-2 slider-effect-fade position-relative">
       <Swiper
@@ -32,17 +35,22 @@ export default function Hero() {
         }}
         className="tf-sw-slideshow"
       >
-        {slidesData.map((slide, index) => (
+        {slidesData.map((slide, index) => {
+          // Debug: Log each slide data
+          console.log(`Hero - Slide ${index}:`, slide);
+          console.log(`Hero - Image src: ${slide.src}`);
+          return (
           <SwiperSlide key={index}>
-            <div className="wrap-slider">
-              <Image
-                className="lazyload"
+            <div className="wrap-slider">              <Image
+                className=""
                 data-src={slide.src}
                 src={slide.src}
                 alt={slide.alt}
                 priority
                 width={2000}
                 height={1034}
+ style={{ width: "100%", height: "auto" }}                 onLoad={() => console.log(`Hero - Image loaded successfully: ${slide.src}`)}
+                onError={(e) => console.error(`Hero - Image failed to load: ${slide.src}`, e)}
               />
               <div className="box-content">
                 <div className="container">
@@ -64,9 +72,9 @@ export default function Hero() {
                   </Link>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </div>          </SwiperSlide>
+        );
+        })}
       </Swiper>
       <div className="wrap-pagination sw-absolute-2">
         <div className="container">

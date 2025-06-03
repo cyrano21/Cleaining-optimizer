@@ -217,7 +217,7 @@ export default function Checkout() {
                           src={elm.imgSrc}
                           width={720}
                           height={1005}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                         <span className="quantity">{elm.quantity}</span>
                       </figure>
                       <div className="content">

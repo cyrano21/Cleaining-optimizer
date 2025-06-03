@@ -21,17 +21,17 @@ export const ProductCard = ({ product }) => {
   return (
     <div className="card-product fl-item" key={product.id}>
       <div className="card-product-wrapper">
-        <Link href={`/product-detail/${product.id}`} className="product-img">
-          <Image
-            className="lazyload img-product"
+        <Link href={`/product-detail/${product.id}`} className="product-img">          <Image
+            className=" img-product"
             data-src={product.imgSrc}
             src={currentImage}
             alt="image-product"
             width={720}
             height={1005}
+            style={{ width: "100%", height: "auto" }}
           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             data-src={
               product.imgHoverSrc ? product.imgHoverSrc : product.imgSrc
             }
@@ -39,6 +39,7 @@ export const ProductCard = ({ product }) => {
             alt="image-product"
             width={720}
             height={1005}
+            style={{ width: "100%", height: "auto" }}
           />
         </Link>
         {product.soldOut ? (
@@ -138,13 +139,13 @@ export const ProductCard = ({ product }) => {
                 <span className="tooltip">{color.name}</span>
                 <span className={`swatch-value ${color.colorClass}`} />
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={color.imgSrc}
                   src={color.imgSrc}
                   alt="image-product"
                   width={720}
                   height={1005}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </li>
             ))}
           </ul>

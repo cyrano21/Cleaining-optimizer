@@ -1,26 +1,26 @@
 export const collections = [
   {
-    imgSrc: "/images/collections/collection-17.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800&auto=format&fit=crop",
     altText: "collection-img",
     title: "Clothing",
   },
   {
-    imgSrc: "/images/collections/collection-14.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=800&auto=format&fit=crop",
     altText: "collection-img",
     title: "Sunglasses",
   },
   {
-    imgSrc: "/images/collections/collection-18.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=800&auto=format&fit=crop",
     altText: "collection-demo-1",
     title: "Bags",
   },
   {
-    imgSrc: "/images/collections/collection-15.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop",
     altText: "collection-demo-1",
     title: "Fashion",
   },
   {
-    imgSrc: "/images/collections/collection-20.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=800&auto=format&fit=crop",
     altText: "collection-demo-1",
     title: "Accessories",
   },
@@ -28,19 +28,19 @@ export const collections = [
 
 export const slidesData = [
   {
-    imgSrc: "/images/collections/collection-27.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&auto=format&fit=crop",
     alt: "collection-img",
     title: "Modern Backpack",
     price: "$199",
   },
   {
-    imgSrc: "/images/collections/collection-28.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?q=80&w=800&auto=format&fit=crop",
     alt: "collection-img",
     title: "Season Collection",
     price: "$199",
   },
   {
-    imgSrc: "/images/collections/collection-26.jpg",
+    imgSrc: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800&auto=format&fit=crop",
     alt: "collection-img",
     title: "Stradivarius top trainers",
     price: "$199",
@@ -49,27 +49,27 @@ export const slidesData = [
 
 export const collectionData = [
   {
-    imgSrc: "/images/collections/collection-29.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     title: "Accessories",
   },
   {
-    imgSrc: "/images/collections/collection-30.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     title: "Sunglasses",
   },
   {
-    imgSrc: "/images/collections/collection-16.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     title: "Sneakers",
   },
   {
-    imgSrc: "/images/collections/collection-31.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Bags",
   },
   {
-    imgSrc: "/images/collections/collection-15.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     title: "Men",
   },
@@ -77,43 +77,43 @@ export const collectionData = [
 
 export const collectionData2 = [
   {
-    imgSrc: "/images/collections/collection-32.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     title: "Blazers",
     itemCount: "14 items",
   },
   {
-    imgSrc: "/images/collections/collection-33.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     title: "Sweaters",
     itemCount: "23 items",
   },
   {
-    imgSrc: "/images/collections/collection-34.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     title: "Sneakers",
     itemCount: "21 items",
   },
   {
-    imgSrc: "/images/collections/collection-35.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     title: "Clothing",
     itemCount: "31 items",
   },
   {
-    imgSrc: "/images/collections/collection-36.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     title: "Accessories",
     itemCount: "14 items",
   },
   {
-    imgSrc: "/images/collections/collection-37.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     title: "Men",
     itemCount: "9 items",
   },
   {
-    imgSrc: "/images/collections/collection-38.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     title: "Shoes",
     itemCount: "21 items",
@@ -122,7 +122,7 @@ export const collectionData2 = [
 
 export const collectionData3 = [
   {
-    imgSrc: "/images/collections/collection-circle-1.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 360,
@@ -130,7 +130,7 @@ export const collectionData3 = [
     itemCount: 23,
   },
   {
-    imgSrc: "/images/collections/collection-circle-2.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 360,
@@ -138,7 +138,7 @@ export const collectionData3 = [
     itemCount: 9,
   },
   {
-    imgSrc: "/images/collections/collection-circle-3.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 362,
@@ -146,7 +146,7 @@ export const collectionData3 = [
     itemCount: 31,
   },
   {
-    imgSrc: "/images/collections/collection-circle-4.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 362,
@@ -154,7 +154,7 @@ export const collectionData3 = [
     itemCount: 21,
   },
   {
-    imgSrc: "/images/collections/collection-circle-5.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 360,
@@ -162,7 +162,7 @@ export const collectionData3 = [
     itemCount: 5,
   },
   {
-    imgSrc: "/images/collections/collection-circle-6.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 360,
@@ -170,7 +170,7 @@ export const collectionData3 = [
     itemCount: 14,
   },
   {
-    imgSrc: "/images/collections/collection-circle-7.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 360,
@@ -180,7 +180,7 @@ export const collectionData3 = [
 ];
 export const recentCollectionData = [
   {
-    imgSrc: "/images/collections/collection-39.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     imgWidth: 1600,
     imgHeight: 1775,
@@ -188,7 +188,7 @@ export const recentCollectionData = [
     heading: "Essential Basics",
   },
   {
-    imgSrc: "/images/collections/collection-40.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     imgWidth: 1600,
     imgHeight: 1775,
@@ -196,7 +196,7 @@ export const recentCollectionData = [
     heading: "Athleisure Wear",
   },
   {
-    imgSrc: "/images/collections/collection-41.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     imgWidth: 1600,
     imgHeight: 1775,
@@ -204,7 +204,7 @@ export const recentCollectionData = [
     heading: "Seasonal Favorites",
   },
   {
-    imgSrc: "/images/collections/collection-39.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     imgWidth: 1600,
     imgHeight: 1775,
@@ -212,7 +212,7 @@ export const recentCollectionData = [
     heading: "Essential Basics",
   },
   {
-    imgSrc: "/images/collections/collection-40.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     imgWidth: 1600,
     imgHeight: 1775,
@@ -220,7 +220,7 @@ export const recentCollectionData = [
     heading: "Athleisure Wear",
   },
   {
-    imgSrc: "/images/collections/collection-41.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 1600,
     imgHeight: 1775,
@@ -230,14 +230,14 @@ export const recentCollectionData = [
 ];
 export const collectionData4 = [
   {
-    imgSrc: "/images/collections/collection-56.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     title: "Summer Style Guide",
     subheading: "UP TO 30% OFF",
     description: "Discover the season's hottest trends and elevate",
   },
   {
-    imgSrc: "/images/collections/collection-57.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     title: "Statement Accessories",
     subheading: "UP TO 30% OFF",
@@ -245,14 +245,14 @@ export const collectionData4 = [
       "Complete your look with our selection of statement accessories",
   },
   {
-    imgSrc: "/images/collections/collection-56.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     title: "Summer Style Guide",
     subheading: "UP TO 30% OFF",
     description: "Discover the season's hottest trends and elevate",
   },
   {
-    imgSrc: "/images/collections/collection-57.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     title: "Statement Accessories",
     subheading: "UP TO 30% OFF",
@@ -263,27 +263,27 @@ export const collectionData4 = [
 
 export const collections2 = [
   {
-    imgSrc: "/images/collections/collection-42.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Tops",
   },
   {
-    imgSrc: "/images/collections/collection-43.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     title: "Sweatshirts",
   },
   {
-    imgSrc: "/images/collections/collection-44.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     title: "Swim",
   },
   {
-    imgSrc: "/images/collections/collection-45.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     title: "Dresses",
   },
   {
-    imgSrc: "/images/collections/collection-46.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     title: "Cardigans",
   },
@@ -291,22 +291,22 @@ export const collections2 = [
 
 export const recentCollections = [
   {
-    imgSrc: "/images/collections/collection-47.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     heading: "The January Collection",
   },
   {
-    imgSrc: "/images/collections/collection-48.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     heading: "Olympia's picks",
   },
   {
-    imgSrc: "/images/collections/collection-47.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     heading: "The January Collection",
   },
   {
-    imgSrc: "/images/collections/collection-48.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     heading: "Olympia's picks",
   },
@@ -314,37 +314,37 @@ export const recentCollections = [
 
 export const collections3 = [
   {
-    imgSrc: "/images/collections/new-releases.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "New Releases",
   },
   {
-    imgSrc: "/images/collections/best-deals.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     title: "Best Deals",
   },
   {
-    imgSrc: "/images/collections/collection-circle-14.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "Open-Ear",
   },
   {
-    imgSrc: "/images/collections/collection-circle-15.png",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     title: "Earbuds",
   },
   {
-    imgSrc: "/images/collections/collection-circle-16.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     title: "Headphones",
   },
   {
-    imgSrc: "/images/collections/collection-circle-17.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     title: "Speakers",
   },
   {
-    imgSrc: "/images/collections/collection-circle-18.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "Head",
   },
@@ -352,37 +352,37 @@ export const collections3 = [
 
 export const recentCollections3 = [
   {
-    imgSrc: "/images/collections/collection-66.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     subheading: "HEADPHONE",
     heading: "Designed for All Occasions",
   },
   {
-    imgSrc: "/images/collections/collection-67.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     subheading: "30% OFF",
     heading: "Comfort, unlimited movement",
   },
   {
-    imgSrc: "/images/collections/collection-68.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     subheading: "FREE SHIPPING",
     heading: "Iconic design and brilliant acoustics",
   },
   {
-    imgSrc: "/images/collections/collection-66.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     subheading: "HEADPHONE",
     heading: "Designed for All Occasions",
   },
   {
-    imgSrc: "/images/collections/collection-67.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     subheading: "30% OFF",
     heading: "Comfort, unlimited movement",
   },
   {
-    imgSrc: "/images/collections/collection-68.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     subheading: "FREE SHIPPING",
     heading: "Iconic design and brilliant acoustics",
@@ -434,7 +434,7 @@ export const swiperSlides = [
 
 export const collectionSlides = [
   {
-    imgSrc: "/images/collections/giftcard-1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 383,
@@ -444,7 +444,7 @@ export const collectionSlides = [
     btnIconClass: "icon icon-arrow1-top-left",
   },
   {
-    imgSrc: "/images/collections/giftcard-2.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 383,
@@ -454,7 +454,7 @@ export const collectionSlides = [
     btnIconClass: "icon icon-arrow1-top-left",
   },
   {
-    imgSrc: "/images/collections/giftcard-3.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 383,
@@ -464,7 +464,7 @@ export const collectionSlides = [
     btnIconClass: "icon icon-arrow1-top-left",
   },
   {
-    imgSrc: "/images/collections/giftcard-4.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 383,
@@ -474,7 +474,7 @@ export const collectionSlides = [
     btnIconClass: "icon icon-arrow1-top-left",
   },
   {
-    imgSrc: "/images/collections/giftcard-5.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 382,
@@ -487,31 +487,31 @@ export const collectionSlides = [
 
 export const collectionData5 = [
   {
-    imgSrc: "/images/collections/009furniture-banner-04.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     altText: "collection-img",
     title: "Furniture",
     backgroundColor: "rounded-0",
   },
   {
-    imgSrc: "/images/collections/009furniture-banner-05.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     altText: "collection-img",
     title: "Lighting",
     backgroundColor: "rounded-0",
   },
   {
-    imgSrc: "/images/collections/009furniture-banner-06.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     altText: "collection-img",
     title: "Outdoor",
     backgroundColor: "rounded-0",
   },
   {
-    imgSrc: "/images/collections/009furniture-banner-07.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     altText: "collection-img",
     title: "Kitchen",
     backgroundColor: "rounded-0",
   },
   {
-    imgSrc: "/images/collections/009furniture-banner-08.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     altText: "collection-img",
     title: "Decor",
     backgroundColor: "rounded-0",
@@ -520,58 +520,58 @@ export const collectionData5 = [
 
 export const collections4 = [
   {
-    imgSrc: "/images/collections/furniture_cate7.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     title: "Urban Retreat",
   },
   {
-    imgSrc: "/images/collections/furniture_cate8.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Coastal Serenity",
   },
   {
-    imgSrc: "/images/collections/furniture_cate9.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Mid-Century Modern",
   },
   {
-    imgSrc: "/images/collections/furniture_cate7.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Urban Retreat",
   },
   {
-    imgSrc: "/images/collections/furniture_cate8.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Coastal Serenity",
   },
   {
-    imgSrc: "/images/collections/furniture_cate9.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     title: "Mid-Century Modern",
   },
 ];
 
 export const slides = [
   {
-    imgSrc: "/images/collections/categories-stakeboard1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     title: "SKATEBOARDS",
     count: "8 items",
   },
   {
-    imgSrc: "/images/collections/categories-stakeboard2.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     title: "ACCESSORIES",
     count: "8 items",
   },
   {
-    imgSrc: "/images/collections/categories-stakeboard3.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     title: "CLOTHING",
     count: "8 items",
   },
   {
-    imgSrc: "/images/collections/categories-stakeboard4.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     title: "SAFETY",
     count: "8 items",
   },
   {
-    imgSrc: "/images/collections/categories-stakeboard5.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "SURF",
     count: "8 items",
@@ -580,7 +580,7 @@ export const slides = [
 
 export const products = [
   {
-    imgSrc: "/images/collections/cate-stroller-1.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 500,
@@ -588,7 +588,7 @@ export const products = [
     count: "5 items",
   },
   {
-    imgSrc: "/images/collections/cate-stroller-2.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 500,
@@ -596,7 +596,7 @@ export const products = [
     count: "5 items",
   },
   {
-    imgSrc: "/images/collections/cate-stroller-3.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 500,
@@ -604,7 +604,7 @@ export const products = [
     count: "5 items",
   },
   {
-    imgSrc: "/images/collections/cate-stroller-4.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 500,
@@ -612,7 +612,7 @@ export const products = [
     count: "5 items",
   },
   {
-    imgSrc: "/images/collections/cate-stroller-5.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 499,
@@ -623,7 +623,7 @@ export const products = [
 
 export const collections5 = [
   {
-    imgSrc: "/images/collections/banner-stroller-1.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     imgWidth: 800,
     imgHeight: 845,
@@ -632,7 +632,7 @@ export const collections5 = [
     subtext: "New timeless colors, here to stay",
   },
   {
-    imgSrc: "/images/collections/banner-stroller-2.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     imgWidth: 800,
     imgHeight: 845,
@@ -641,7 +641,7 @@ export const collections5 = [
     subtext: "From footmuffs to seat liners, be ready for any weather.",
   },
   {
-    imgSrc: "/images/collections/banner-stroller-1.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     imgWidth: 800,
     imgHeight: 845,
@@ -650,7 +650,7 @@ export const collections5 = [
     subtext: "New timeless colors, here to stay",
   },
   {
-    imgSrc: "/images/collections/banner-stroller-2.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 800,
     imgHeight: 845,
@@ -662,17 +662,17 @@ export const collections5 = [
 
 export const swiperData = [
   {
-    imgSrc: "/images/shop/file/banner-gr-3.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "banner-collection",
     title: "Alvar Aalto Collection",
   },
   {
-    imgSrc: "/images/shop/file/banner-gr-4.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "banner-collection",
     title: "Kastehelmi Collection",
   },
   {
-    imgSrc: "/images/shop/file/banner-gr-4.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "banner-collection",
     title: "Kastehelmi Collection",
   },
@@ -680,43 +680,43 @@ export const swiperData = [
 
 export const swiperData2 = [
   {
-    imgSrc: "/images/collections/collection-circle-19.png",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     title: "Decor Objects",
     count: "11 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-20.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     title: "Lighting",
     count: "9 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-21.png",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     title: "Lighting",
     count: "9 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-22.png",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Plants",
     count: "8 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-23.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     title: "Throw Pillows",
     count: "7 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-24.png",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Clocks",
     count: "11 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-21.png",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     title: "Lighting",
     count: "9 items",
@@ -725,7 +725,7 @@ export const swiperData2 = [
 
 export const collectionItems = [
   {
-    imgSrc: "/images/collections/electronic-1.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 340,
@@ -733,7 +733,7 @@ export const collectionItems = [
     itemCount: "6 items",
   },
   {
-    imgSrc: "/images/collections/electronic-2.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 340,
@@ -741,7 +741,7 @@ export const collectionItems = [
     itemCount: "6 items",
   },
   {
-    imgSrc: "/images/collections/electronic-3.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 340,
@@ -749,7 +749,7 @@ export const collectionItems = [
     itemCount: "6 items",
   },
   {
-    imgSrc: "/images/collections/electronic-4.png",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 340,
@@ -757,7 +757,7 @@ export const collectionItems = [
     itemCount: "6 items",
   },
   {
-    imgSrc: "/images/collections/electronic-5.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 382,
@@ -765,7 +765,7 @@ export const collectionItems = [
     itemCount: "6 items",
   },
   {
-    imgSrc: "/images/collections/electronic-3.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 340,
@@ -776,7 +776,7 @@ export const collectionItems = [
 
 export const recentItems = [
   {
-    imgSrc: "/images/collections/electronic-6.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     imgWidth: 600,
     imgHeight: 570,
@@ -784,7 +784,7 @@ export const recentItems = [
     heading: "Smart Assistant",
   },
   {
-    imgSrc: "/images/collections/electronic-7.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 2000,
     imgHeight: 1901,
@@ -792,7 +792,7 @@ export const recentItems = [
     heading: "True Earbuds",
   },
   {
-    imgSrc: "/images/collections/electronic-6.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     imgWidth: 600,
     imgHeight: 570,
@@ -800,7 +800,7 @@ export const recentItems = [
     heading: "Smart Assistant",
   },
   {
-    imgSrc: "/images/collections/electronic-7.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 2000,
     imgHeight: 1901,
@@ -811,27 +811,27 @@ export const recentItems = [
 
 export const collections6 = [
   {
-    imgSrc: "/images/collections/setup-gear-1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     title: "Laptop Sleeves",
   },
   {
-    imgSrc: "/images/collections/setup-gear-2.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Bags",
   },
   {
-    imgSrc: "/images/collections/setup-gear-3.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Desk Organisers",
   },
   {
-    imgSrc: "/images/collections/setup-gear-4.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Accessories",
   },
   {
-    imgSrc: "/images/collections/setup-gear-2.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     title: "Bags",
   },
@@ -839,22 +839,22 @@ export const collections6 = [
 
 export const recentCollections4 = [
   {
-    imgSrc: "/images/collections/setup-gear-5.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "banner-collection",
     title: "Desk Mat Large",
   },
   {
-    imgSrc: "/images/collections/setup-gear-6.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "banner-collection",
     title: "Season Collection",
   },
   {
-    imgSrc: "/images/collections/setup-gear-5.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "banner-collection",
     title: "Desk Mat Large",
   },
   {
-    imgSrc: "/images/collections/setup-gear-6.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "banner-collection",
     title: "Season Collection",
   },
@@ -862,27 +862,27 @@ export const recentCollections4 = [
 
 export const slides2 = [
   {
-    imgSrc: "/images/collections/dog-5.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     altText: "collection-img",
     title: "WALK",
   },
   {
-    imgSrc: "/images/collections/dog-6.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     altText: "collection-img",
     title: "CARRY",
   },
   {
-    imgSrc: "/images/collections/dog-7.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     altText: "collection-img",
     title: "TOYS",
   },
   {
-    imgSrc: "/images/collections/dog-8.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     altText: "collection-img",
     title: "HOME",
   },
   {
-    imgSrc: "/images/collections/dog-6.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     altText: "collection-img",
     title: "CARRY",
   },
@@ -890,25 +890,25 @@ export const slides2 = [
 
 export const slides3 = [
   {
-    imgSrc: "/images/collections/kitchen-wear-1.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     heading: "Chef's Dutch Oven",
     subheading: "Start from $199",
   },
   {
-    imgSrc: "/images/collections/kitchen-wear-2.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     heading: "Swivel Peeler",
     subheading: "Start from $299",
   },
   {
-    imgSrc: "/images/collections/kitchen-wear-3.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     heading: "Bakeware Set",
     subheading: "Start from $399",
   },
   {
-    imgSrc: "/images/collections/kitchen-wear-2.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     heading: "Swivel Peeler",
     subheading: "Start from $299",
@@ -917,22 +917,22 @@ export const slides3 = [
 
 export const slides4 = [
   {
-    imgSrc: "/images/collections/kitchen-wear-5.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     title: "Cookwear",
   },
   {
-    imgSrc: "/images/collections/kitchen-wear-6.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     title: "Bakewear",
   },
   {
-    imgSrc: "/images/collections/kitchen-wear-7.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-demo-1",
     title: "Accessories",
   },
   {
-    imgSrc: "/images/collections/kitchen-wear-8.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-demo-1",
     title: "Bakewear",
   },
@@ -940,28 +940,28 @@ export const slides4 = [
 
 export const collectionsData = [
   {
-    imgSrc: "/images/collections/phonecase-1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     width: 600,
     height: 721,
     title: "Phone Cases",
   },
   {
-    imgSrc: "/images/collections/phonecase-2.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     width: 600,
     height: 720,
     title: "Watch Straps",
   },
   {
-    imgSrc: "/images/collections/phonecase-3.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-demo-1",
     width: 600,
     height: 720,
     title: "AirPods Cases",
   },
   {
-    imgSrc: "/images/collections/phonecase-1.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-demo-1",
     width: 600,
     height: 721,
@@ -971,37 +971,37 @@ export const collectionsData = [
 
 export const collectionData6 = [
   {
-    imgSrc: "/images/collections/paddle-boards-4.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     altText: "collection-img",
     title: "PADDLE BOARDS",
     cardClass: "bg_blue-1",
   },
   {
-    imgSrc: "/images/collections/paddle-boards-5.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     altText: "collection-img",
     title: "KAYAKS",
     cardClass: "bg_blue-1",
   },
   {
-    imgSrc: "/images/collections/paddle-boards-6.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     altText: "collection-img",
     title: "FLOATS",
     cardClass: "bg_blue-1",
   },
   {
-    imgSrc: "/images/collections/paddle-boards-7.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     altText: "collection-img",
     title: "SURFBOARDS",
     cardClass: "bg_blue-1",
   },
   {
-    imgSrc: "/images/collections/paddle-boards-8.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     altText: "collection-img",
     title: "ACCESSORIES",
     cardClass: "bg_blue-1",
   },
   {
-    imgSrc: "/images/collections/paddle-boards-6.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     altText: "collection-img",
     title: "FLOATS",
     cardClass: "bg_blue-1",
@@ -1010,22 +1010,22 @@ export const collectionData6 = [
 
 export const slides5 = [
   {
-    imgSrc: "/images/collections/glasses-1.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "Glasses",
   },
   {
-    imgSrc: "/images/collections/glasses-2.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "Sunglasses",
   },
   {
-    imgSrc: "/images/collections/glasses-1.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     title: "Glasses",
   },
   {
-    imgSrc: "/images/collections/glasses-2.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     title: "Sunglasses",
   },
@@ -1033,21 +1033,21 @@ export const slides5 = [
 
 export const slides6 = [
   {
-    imgSrc: "/images/shop/file/banner-gr-5.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "banner-collection",
     title: "Adjustable Fit",
     description:
       "Our most versatile frame options with nose pads you can tweak based on your nose shape",
   },
   {
-    imgSrc: "/images/shop/file/banner-gr-6.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "banner-collection",
     title: "Low-Bridge Fit",
     description:
       "Our most versatile frame options with nose pads you can tweak based on your nose shape",
   },
   {
-    imgSrc: "/images/shop/file/banner-gr-7.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "banner-collection",
     title: "Standard Fit",
     description:
@@ -1057,31 +1057,31 @@ export const slides6 = [
 
 export const slides7 = [
   {
-    imgSrc: "/images/collections/glasses-3.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     title: "Eyeglasses",
     count: "6 items",
   },
   {
-    imgSrc: "/images/collections/glasses-4.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     title: "Progressives",
     count: "6 items",
   },
   {
-    imgSrc: "/images/collections/glasses-5.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     title: "Sunglasses",
     count: "6 items",
   },
   {
-    imgSrc: "/images/collections/glasses-6.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     title: "Essentials",
     count: "6 items",
   },
   {
-    imgSrc: "/images/collections/glasses-4.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     title: "Progressives",
     count: "6 items",
@@ -1090,37 +1090,37 @@ export const slides7 = [
 
 export const collectionItems2 = [
   {
-    imgSrc: "/images/collections/collection-circle-25.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     title: "Shop Clothing",
     count: "23 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-26.png",
+    imgSrc: "/images/products/placeholder-7.jpg",
     title: "Shop Stickers",
     count: "9 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-27.png",
+    imgSrc: "/images/products/placeholder-4.jpg",
     title: "Gift Cards",
     count: "31 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-28.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Shop Phonecases",
     count: "21 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-29.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Shop Pillows",
     count: "5 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-30.png",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Shop Posters",
     count: "14 items",
   },
   {
-    imgSrc: "/images/collections/collection-circle-27.png",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Gift Cards",
     count: "31 items",
   },
@@ -1128,22 +1128,22 @@ export const collectionItems2 = [
 
 export const recentItems2 = [
   {
-    imgSrc: "/images/collections/pod-store-5.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Desert Vibes Tee",
     price: "Start from $12",
   },
   {
-    imgSrc: "/images/collections/pod-store-6.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     title: "Personalized Gifts",
     price: "Start from $20",
   },
   {
-    imgSrc: "/images/collections/pod-store-7.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     title: "Custom Pet Portrait",
     price: "Start from $30",
   },
   {
-    imgSrc: "/images/collections/pod-store-6.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Personalized Gifts",
     price: "Start from $20",
   },
@@ -1151,28 +1151,28 @@ export const recentItems2 = [
 
 export const recentCollections5 = [
   {
-    imgSrc: "/images/collections/banner-collection-handbag1.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     subheading: "SCULPTURAL LINES",
     heading: "Grace Collection",
     wowDelay: "0s",
   },
   {
-    imgSrc: "/images/collections/banner-collection-handbag2.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     subheading: "NEW FASHION",
     heading: "Handbag Collection",
     wowDelay: "0s",
   },
   {
-    imgSrc: "/images/collections/banner-collection-handbag1.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     subheading: "SCULPTURAL LINES",
     heading: "Grace Collection",
     wowDelay: "0s",
   },
   {
-    imgSrc: "/images/collections/banner-collection-handbag2.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     subheading: "NEW FASHION",
     heading: "Handbag Collection",
@@ -1181,23 +1181,23 @@ export const recentCollections5 = [
 ];
 export const collections7 = [
   {
-    imgSrc: "/images/collections/cls_tee1.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "banner-collection",
     text: "OUTERWEAR",
   },
   {
-    imgSrc: "/images/collections/cls_tee2.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "banner-collection",
     text: "TEES",
   },
 
   {
-    imgSrc: "/images/collections/cls_tee3.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "banner-collection",
     text: "ACCESSORIES",
   },
   {
-    imgSrc: "/images/collections/cls_tee2.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "banner-collection",
     text: "TEES",
   },
@@ -1205,27 +1205,27 @@ export const collections7 = [
 
 export const collectionItems4 = [
   {
-    imgSrc: "/images/collections/sneaker-1.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "ALL SNEAKERS",
   },
   {
-    imgSrc: "/images/collections/sneaker-2.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     title: "MEN",
   },
   {
-    imgSrc: "/images/collections/sneaker-3.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     title: "WOMEN",
   },
   {
-    imgSrc: "/images/collections/sneaker-4.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     title: "KID",
   },
   {
-    imgSrc: "/images/collections/sneaker-2.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     title: "MEN",
   },
@@ -1233,26 +1233,26 @@ export const collectionItems4 = [
 
 export const collections8 = [
   {
-    imgSrc: "/images/collections/kid_bn1.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     heading: "Girls",
     subheading: "Up to 60% off clothes",
   },
   {
-    imgSrc: "/images/collections/kid_bn2.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     heading: "Baby and Mom",
     subheading: "Baby and mom accessories",
   },
 
   {
-    imgSrc: "/images/collections/kid_bn4.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     heading: "Boys",
     subheading: "Free shipping",
   },
   {
-    imgSrc: "/images/collections/kid_bn2.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     heading: "Baby and Mom",
     subheading: "Baby and mom accessories",
@@ -1261,32 +1261,32 @@ export const collections8 = [
 
 export const collectionSlides2 = [
   {
-    imgSrc: "/images/collections/collection-14.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     title: "Accessories",
   },
   {
-    imgSrc: "/images/collections/collection-15.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     title: "Men",
   },
   {
-    imgSrc: "/images/collections/collection-16.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-demo-1",
     title: "Shoes",
   },
   {
-    imgSrc: "/images/collections/collection-17.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-demo-1",
     title: "New Arrival",
   },
   {
-    imgSrc: "/images/collections/collection-18.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-demo-1",
     title: "Handbag",
   },
   {
-    imgSrc: "/images/collections/collection-19.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-demo-1",
     title: "Women",
   },
@@ -1294,32 +1294,32 @@ export const collectionSlides2 = [
 
 export const collectionItems3 = [
   {
-    imgSrc: "/images/collections/collection-8.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     title: "Women",
   },
   {
-    imgSrc: "/images/collections/collection-9.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     title: "Women",
   },
   {
-    imgSrc: "/images/collections/collection-10.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     title: "Women",
   },
   {
-    imgSrc: "/images/collections/collection-11.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     title: "Women",
   },
   {
-    imgSrc: "/images/collections/collection-12.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     title: "Women",
   },
   {
-    imgSrc: "/images/collections/collection-13.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "Women",
   },
@@ -1328,7 +1328,7 @@ export const collectionItems3 = [
 export const collectionItems5 = [
   {
     itemClass: "item-1",
-    imgSrc: "/images/collections/collection-21.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     width: 1000,
     height: 1379,
@@ -1337,7 +1337,7 @@ export const collectionItems5 = [
   },
   {
     itemClass: "item-2",
-    imgSrc: "/images/collections/collection-22.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     width: 1000,
     height: 659,
@@ -1346,7 +1346,7 @@ export const collectionItems5 = [
   },
   {
     itemClass: "item-3",
-    imgSrc: "/images/collections/collection-23.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     width: 400,
     height: 264,
@@ -1355,7 +1355,7 @@ export const collectionItems5 = [
   },
   {
     itemClass: "item-4",
-    imgSrc: "/images/collections/collection-24.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     width: 1000,
     height: 1379,
@@ -1375,7 +1375,7 @@ export const collectionItems6 = [
 export const collectionItems7 = [
   {
     itemClass: "item-1",
-    imgSrc: "/images/collections/collection-59.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     imgWidth: 600,
     imgHeight: 406,
@@ -1383,7 +1383,7 @@ export const collectionItems7 = [
   },
   {
     itemClass: "item-2",
-    imgSrc: "/images/collections/collection-60.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1391,7 +1391,7 @@ export const collectionItems7 = [
   },
   {
     itemClass: "item-3",
-    imgSrc: "/images/collections/collection-61.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1399,7 +1399,7 @@ export const collectionItems7 = [
   },
   {
     itemClass: "item-4",
-    imgSrc: "/images/collections/collection-62.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1407,7 +1407,7 @@ export const collectionItems7 = [
   },
   {
     itemClass: "item-5",
-    imgSrc: "/images/collections/collection-63.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 360,
     imgHeight: 510,
@@ -1415,7 +1415,7 @@ export const collectionItems7 = [
   },
   {
     itemClass: "item-6",
-    imgSrc: "/images/collections/collection-64.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     imgWidth: 600,
     imgHeight: 406,
@@ -1426,7 +1426,7 @@ export const collectionItems7 = [
 export const collectionItems8 = [
   {
     itemClass: "item-1",
-    imgSrc: "/images/collections/cls-activewear1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     imgAlt: "collection-img",
     imgWidth: 1440,
     imgHeight: 1480,
@@ -1434,7 +1434,7 @@ export const collectionItems8 = [
   },
   {
     itemClass: "item-2",
-    imgSrc: "/images/collections/cls-activewear2.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 1440,
     imgHeight: 716,
@@ -1442,7 +1442,7 @@ export const collectionItems8 = [
   },
   {
     itemClass: "item-3",
-    imgSrc: "/images/collections/cls-activewear3.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     imgWidth: 1440,
     imgHeight: 716,
@@ -1452,7 +1452,7 @@ export const collectionItems8 = [
 
 export const collectionItems9 = [
   {
-    imgSrc: "/images/collections/furniture_cate1.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     imgAlt: "collection-img",
     imgWidth: 920,
     imgHeight: 1020,
@@ -1460,7 +1460,7 @@ export const collectionItems9 = [
     subheading: "Up to 60% off clothes",
   },
   {
-    imgSrc: "/images/collections/furniture_cate2.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 920,
     imgHeight: 1020,
@@ -1468,7 +1468,7 @@ export const collectionItems9 = [
     subheading: "Modern lighting is poised",
   },
   {
-    imgSrc: "/images/collections/furniture_cate3.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     imgWidth: 920,
     imgHeight: 1020,
@@ -1476,7 +1476,7 @@ export const collectionItems9 = [
     subheading: "Free shipping",
   },
   {
-    imgSrc: "/images/collections/furniture_cate4.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     imgAlt: "collection-img",
     imgWidth: 920,
     imgHeight: 1020,
@@ -1484,7 +1484,7 @@ export const collectionItems9 = [
     subheading: "Up to 60% off sofa",
   },
   {
-    imgSrc: "/images/collections/furniture_cate5.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     imgWidth: 920,
     imgHeight: 1020,
@@ -1492,7 +1492,7 @@ export const collectionItems9 = [
     subheading: "Up to 60% off table",
   },
   {
-    imgSrc: "/images/collections/furniture_cate6.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     imgWidth: 920,
     imgHeight: 1020,
@@ -1505,7 +1505,7 @@ export const collectionItems10 = [
   {
     id: "item-1",
     href: "/shop-women",
-    imgSrc: "/images/collections/cls-handbag1.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     imgWidth: 1000,
     imgHeight: 1379,
@@ -1514,7 +1514,7 @@ export const collectionItems10 = [
   {
     id: "item-2",
     href: "/shop-default",
-    imgSrc: "/images/collections/cls-handbag2.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     imgWidth: 1000,
     imgHeight: 659,
@@ -1523,7 +1523,7 @@ export const collectionItems10 = [
   {
     id: "item-3",
     href: "/shop-default",
-    imgSrc: "/images/collections/cls-handbag3.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     imgWidth: 1000,
     imgHeight: 659,
@@ -1532,7 +1532,7 @@ export const collectionItems10 = [
   {
     id: "item-4",
     href: "/home-men",
-    imgSrc: "/images/collections/cls-handbag4.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     imgWidth: 1000,
     imgHeight: 1379,
@@ -1544,7 +1544,7 @@ export const collectionItemsV5 = [
   {
     id: "item-1",
     href: "/shop-default",
-    imgSrc: "/images/collections/jewerly-8.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 406,
@@ -1553,7 +1553,7 @@ export const collectionItemsV5 = [
   {
     id: "item-2",
     href: "/shop-default",
-    imgSrc: "/images/collections/jewerly-9.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1562,7 +1562,7 @@ export const collectionItemsV5 = [
   {
     id: "item-3",
     href: "/shop-default",
-    imgSrc: "/images/collections/jewerly-10.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1571,7 +1571,7 @@ export const collectionItemsV5 = [
   {
     id: "item-4",
     href: "/shop-default",
-    imgSrc: "/images/collections/jewerly-11.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1580,7 +1580,7 @@ export const collectionItemsV5 = [
   {
     id: "item-5",
     href: "/shop-default",
-    imgSrc: "/images/collections/jewerly-12.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     imgWidth: 320,
     imgHeight: 453,
@@ -1589,7 +1589,7 @@ export const collectionItemsV5 = [
   {
     id: "item-6",
     href: "/shop-default",
-    imgSrc: "/images/collections/jewerly-13.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 406,
@@ -1601,7 +1601,7 @@ export const collectionItemsStyle2 = [
   {
     id: "item-1",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/men_cls1.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 835,
@@ -1610,7 +1610,7 @@ export const collectionItemsStyle2 = [
   {
     id: "item-2",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/men_cls2.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 835,
@@ -1619,7 +1619,7 @@ export const collectionItemsStyle2 = [
   {
     id: "item-3",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/men_cls3.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 396,
@@ -1628,7 +1628,7 @@ export const collectionItemsStyle2 = [
   {
     id: "item-4",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/men_cls4.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 399,
@@ -1640,7 +1640,7 @@ export const collectionItemsV2 = [
   {
     id: "item-1",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/paddle-boards-1.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     imgWidth: 1400,
     imgHeight: 1581,
@@ -1652,7 +1652,7 @@ export const collectionItemsV2 = [
   {
     id: "item-2",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/paddle-boards-2.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     imgWidth: 1400,
     imgHeight: 762,
@@ -1664,7 +1664,7 @@ export const collectionItemsV2 = [
   {
     id: "item-3",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/paddle-boards-3.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     imgWidth: 1400,
     imgHeight: 762,
@@ -1679,7 +1679,7 @@ export const collectionItems11 = [
   {
     id: "item-1",
     href: "/shop-women",
-    imgSrc: "/images/collections/phonecase-5.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 835,
@@ -1689,7 +1689,7 @@ export const collectionItems11 = [
   {
     id: "item-2",
     href: "/shop-default",
-    imgSrc: "/images/collections/phonecase-6.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 399,
@@ -1699,7 +1699,7 @@ export const collectionItems11 = [
   {
     id: "item-3",
     href: "/shop-default",
-    imgSrc: "/images/collections/phonecase-8.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 399,
@@ -1709,7 +1709,7 @@ export const collectionItems11 = [
   {
     id: "item-4",
     href: "/home-men",
-    imgSrc: "/images/collections/phonecase-7.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     imgWidth: 600,
     imgHeight: 835,
@@ -1721,49 +1721,49 @@ export const collectionItems11 = [
 export const galleryImages = [
   {
     id: "item-1",
-    src: "/images/collections/gallery-image-1.jpg",
+    src: "/images/products/placeholder-2.jpg",
     alt: "img",
     width: 385,
     height: 385,
   },
   {
     id: "item-2",
-    src: "/images/collections/gallery-image-2.jpg",
+    src: "/images/products/placeholder-7.jpg",
     alt: "img",
     width: 385,
     height: 385,
   },
   {
     id: "item-3",
-    src: "/images/collections/gallery-image-3.jpg",
+    src: "/images/products/placeholder-6.jpg",
     alt: "img",
     width: 385,
     height: 385,
   },
   {
     id: "item-4",
-    src: "/images/collections/gallery-image-4.jpg",
+    src: "/images/products/placeholder-9.jpg",
     alt: "img",
     width: 385,
     height: 385,
   },
   {
     id: "item-5",
-    src: "/images/collections/gallery-image-5.jpg",
+    src: "/images/products/placeholder-2.jpg",
     alt: "img",
     width: 385,
     height: 385,
   },
   {
     id: "item-6",
-    src: "/images/collections/gallery-image-6.jpg",
+    src: "/images/products/placeholder-3.jpg",
     alt: "img",
     width: 385,
     height: 385,
   },
   {
     id: "item-7",
-    src: "/images/collections/gallery-image-7.jpg",
+    src: "/images/products/placeholder-9.jpg",
     alt: "img",
     width: 385,
     height: 385,
@@ -1774,7 +1774,7 @@ export const collectionItems12 = [
   {
     id: "item-1",
     href: "/shop-collection-list",
-    imgSrc: "/images/collections/pod-store-1.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     width: 800,
     height: 726,
@@ -1783,7 +1783,7 @@ export const collectionItems12 = [
   {
     id: "item-2",
     href: "/shop-collection-list",
-    imgSrc: "/images/collections/pod-store-2.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     width: 360,
     height: 327,
@@ -1792,7 +1792,7 @@ export const collectionItems12 = [
   {
     id: "item-3",
     href: "/shop-collection-list",
-    imgSrc: "/images/collections/pod-store-3.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     width: 360,
     height: 327,
@@ -1801,7 +1801,7 @@ export const collectionItems12 = [
   {
     id: "item-4",
     href: "/shop-collection-list",
-    imgSrc: "/images/collections/pod-store-4.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     width: 800,
     height: 348,
@@ -1813,7 +1813,7 @@ export const collectionLines = [
   {
     id: "item-1",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-stakeboard1.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     width: 458,
     height: 498,
@@ -1823,7 +1823,7 @@ export const collectionLines = [
   {
     id: "item-2",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-stakeboard2.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     width: 458,
     height: 498,
@@ -1833,7 +1833,7 @@ export const collectionLines = [
   {
     id: "item-3",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-stakeboard3.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     width: 458,
     height: 498,
@@ -1846,7 +1846,7 @@ export const collectionItems13 = [
   {
     id: "item-1",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/sneaker-5.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     width: 1400,
     height: 1581,
@@ -1859,7 +1859,7 @@ export const collectionItems13 = [
   {
     id: "item-2",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/sneaker-6.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     width: 1400,
     height: 762,
@@ -1871,7 +1871,7 @@ export const collectionItems13 = [
   {
     id: "item-3",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/sneaker-7.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     width: 1400,
     height: 762,
@@ -1886,7 +1886,7 @@ export const collectionItems14 = [
   {
     id: "item-1",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/cls-sock3.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "banner-collection",
     width: 800,
     height: 541,
@@ -1895,7 +1895,7 @@ export const collectionItems14 = [
   {
     id: "item-2",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/cls-sock4.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "banner-collection",
     width: 800,
     height: 541,
@@ -1904,7 +1904,7 @@ export const collectionItems14 = [
   {
     id: "item-3",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/cls-sock5.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "banner-collection",
     width: 800,
     height: 542,
@@ -1913,7 +1913,7 @@ export const collectionItems14 = [
   {
     id: "item-4",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/cls-sock6.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "banner-collection",
     width: 800,
     height: 542,
@@ -1925,7 +1925,7 @@ export const collectionCircles = [
   {
     id: "circle-1",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-circle-8.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     width: 160,
     height: 160,
@@ -1934,7 +1934,7 @@ export const collectionCircles = [
   {
     id: "circle-2",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-circle-9.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     width: 160,
     height: 160,
@@ -1943,7 +1943,7 @@ export const collectionCircles = [
   {
     id: "circle-3",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-circle-10.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     width: 160,
     height: 162,
@@ -1952,7 +1952,7 @@ export const collectionCircles = [
   {
     id: "circle-4",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-circle-11.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     width: 160,
     height: 162,
@@ -1961,7 +1961,7 @@ export const collectionCircles = [
   {
     id: "circle-5",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-circle-12.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     width: 160,
     height: 160,
@@ -1970,7 +1970,7 @@ export const collectionCircles = [
   {
     id: "circle-6",
     href: "/shop-collection-sub",
-    imgSrc: "/images/collections/collection-circle-13.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     width: 160,
     height: 160,
@@ -2033,28 +2033,28 @@ export const collections12 = [
 
 export const collectionsV4 = [
   {
-    imgSrc: "/images/collections/accessories2_b1.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     title: "UV charger",
     description: "Every piece is made to last beyond the season",
     wowDelay: "0s",
   },
   {
-    imgSrc: "/images/collections/accessories2_b2.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     title: "Ness Headphone",
     description: "Every piece is made to last beyond the season",
     wowDelay: "0s",
   },
   {
-    imgSrc: "/images/collections/accessories2_b1.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-img",
     title: "UV charger",
     description: "Every piece is made to last beyond the season",
     wowDelay: "0s",
   },
   {
-    imgSrc: "/images/collections/accessories2_b2.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     alt: "collection-img",
     title: "Ness Headphone",
     description: "Every piece is made to last beyond the season",
@@ -2064,37 +2064,37 @@ export const collectionsV4 = [
 
 export const slides12 = [
   {
-    imgSrc: "/images/collections/vegetable.png",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     title: "Vegetables",
   },
   {
-    imgSrc: "/images/collections/dairy.png",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "collection-img",
     title: "Best Deals",
   },
   {
-    imgSrc: "/images/collections/package-foods.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     title: "Package Foods",
   },
   {
-    imgSrc: "/images/collections/beverage.png",
+    imgSrc: "/images/products/placeholder-5.jpg",
     imgAlt: "collection-img",
     title: "Beverages",
   },
   {
-    imgSrc: "/images/collections/meat.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     title: "Meat",
   },
   {
-    imgSrc: "/images/collections/fruit.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     title: "Fruit",
   },
   {
-    imgSrc: "/images/collections/package-foods.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "collection-img",
     title: "Mixed food",
   },
@@ -2102,7 +2102,7 @@ export const slides12 = [
 
 export const slides13 = [
   {
-    imgSrc: "/images/collections/banner-collection-grocery.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     imgAlt: "collection-img",
     subheading: "FREE DELIVERY",
     heading: "Organic Ingredients\n Made Easy",
@@ -2110,14 +2110,14 @@ export const slides13 = [
     color: "text-white",
   },
   {
-    imgSrc: "/images/collections/banner-collection-grocery2.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     imgAlt: "collection-img",
     subheading: "SALE UP TO 30% OFF",
     heading: "For Juice Lovers\n Everywhere",
     buttonClass: "btn-color-6",
   },
   {
-    imgSrc: "/images/collections/banner-collection-grocery.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     imgAlt: "collection-img",
     subheading: "FREE DELIVERY",
     heading: "Organic Ingredients\n Made Easy",
@@ -2125,7 +2125,7 @@ export const slides13 = [
     color: "text-white",
   },
   {
-    imgSrc: "/images/collections/banner-collection-grocery2.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     imgAlt: "collection-img",
     subheading: "SALE UP TO 30% OFF",
     heading: "For Juice Lovers\n Everywhere",
@@ -2167,28 +2167,28 @@ export const iconBoxes = [
 export const collections9 = [
   {
     id: 1,
-    imageSrc: "/images/collections/banner1-bb.jpg",
+    imageSrc: "/images/products/placeholder-10.jpg",
     altText: "collection-img",
     title: "Hot Deals",
     description: "100s of styles to keep cool.",
   },
   {
     id: 2,
-    imageSrc: "/images/collections/banner2-bb.jpg",
+    imageSrc: "/images/products/placeholder-5.jpg",
     altText: "collection-img",
     title: "Tees Sale",
     description: "Bright bodysuits, too.",
   },
   {
     id: 3,
-    imageSrc: "/images/collections/banner3-bb.jpg",
+    imageSrc: "/images/products/placeholder-7.jpg",
     altText: "collection-img",
     title: "Baby Specials",
     description: "Save on 1-piece loves.",
   },
   {
     id: 2,
-    imageSrc: "/images/collections/banner2-bb.jpg",
+    imageSrc: "/images/products/placeholder-10.jpg",
     altText: "collection-img",
     title: "Tees Sale",
     description: "Bright bodysuits, too.",
@@ -2197,49 +2197,49 @@ export const collections9 = [
 
 export const collections10 = [
   {
-    imgSrc: "/images/collections/circle-bb1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Baby Clothing",
   },
   {
-    imgSrc: "/images/collections/circle-bb2.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Baby Toys",
   },
   {
-    imgSrc: "/images/collections/circle-bb3.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Car Seats",
   },
   {
-    imgSrc: "/images/collections/circle-bb4.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     title: "Strollers",
   },
   {
-    imgSrc: "/images/collections/circle-bb5.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Baby Health",
   },
   {
-    imgSrc: "/images/collections/circle-bb3.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Car Seats",
   },
 ];
 
 export const collections11 = [
   {
-    imgSrc: "/images/collections/banner-cls-baby1.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     title: "Smiley<br /> Baseball Cap",
     subtext: "Cute and Breathable",
   },
   {
-    imgSrc: "/images/collections/banner-cls-baby2.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     title: "Bear<br /> Blanket",
     subtext: "Soft and adorable",
   },
   {
-    imgSrc: "/images/collections/banner-cls-baby1.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     title: "Smiley<br /> Baseball Cap",
     subtext: "Cute and Breathable",
   },
   {
-    imgSrc: "/images/collections/banner-cls-baby2.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Bear<br /> Blanket",
     subtext: "Soft and adorable",
   },
@@ -2247,13 +2247,13 @@ export const collections11 = [
 
 export const slidesData2 = [
   {
-    imgSrc: "/images/collections/collection-ceramic-1.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     imgAlt: "Ceramic Kitchenware",
     heading: "Ceramic Kitchenware",
     subtext: "Elevate your living space with timeless ceramic pieces",
   },
   {
-    imgSrc: "/images/collections/collection-ceramic-2.png",
+    imgSrc: "/images/products/placeholder-7.jpg",
     imgAlt: "Functional Art",
     heading: "Functional Art for Everyday Life",
     subtext: "Bring the beauty of the outdoors inside",
@@ -2262,27 +2262,27 @@ export const slidesData2 = [
 
 export const collections13 = [
   {
-    imgSrc: "/images/collections/collection-plant-2.jpg",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "All Plants",
     itemsCount: 14,
   },
   {
-    imgSrc: "/images/collections/collection-plant-3.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Pet-Friendly Plants",
     itemsCount: 14,
   },
   {
-    imgSrc: "/images/collections/collection-plant-4.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     title: "For Beginners",
     itemsCount: 14,
   },
   {
-    imgSrc: "/images/collections/collection-plant-5.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     title: "Flowering Plants",
     itemsCount: 14,
   },
   {
-    imgSrc: "/images/collections/collection-plant-6.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Decor Planters",
     itemsCount: 14,
   },
@@ -2290,12 +2290,12 @@ export const collections13 = [
 
 export const swiperData3 = [
   {
-    imgSrc: "/images/collections/swm-banner1.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "banner-collection",
     title: "An endless summer with Tigerlily!",
   },
   {
-    imgSrc: "/images/collections/swm-banner2.jpg",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "banner-collection",
     title: "Our hottest styles now on sale.",
   },
@@ -2303,21 +2303,21 @@ export const swiperData3 = [
 
 export const slidesData3 = [
   {
-    imgSrc: "/images/shop/file/electric-bike-1.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "banner-collection",
     subTitle: "A BEAST OF A BIKE",
     title: "Ecomus RadRover",
     description: "Built for adventures big and small.",
   },
   {
-    imgSrc: "/images/shop/file/electric-bike-2.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "banner-collection",
     subTitle: "FULLY-LOADED SIDEKICK",
     title: "Ecomus RadRunner",
     description: "A better question is what can't this bike do.",
   },
   {
-    imgSrc: "/images/shop/file/electric-bike-3.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "banner-collection",
     subTitle: "THE ELEVATED RIDE",
     title: "Ecomus Elevated",
@@ -2327,27 +2327,27 @@ export const slidesData3 = [
 
 export const collectionSlides3 = [
   {
-    imgSrc: "/images/collections/cls-electric-bike-1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     title: "Off-road",
   },
   {
-    imgSrc: "/images/collections/cls-electric-bike-2.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     title: "Off-road",
   },
   {
-    imgSrc: "/images/collections/cls-electric-bike-3.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     title: "Off-road",
   },
   {
-    imgSrc: "/images/collections/cls-electric-bike-4.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-img",
     title: "Off-road",
   },
   {
-    imgSrc: "/images/collections/cls-electric-bike-5.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     title: "Off-road",
   },
@@ -2355,13 +2355,13 @@ export const collectionSlides3 = [
 
 export const collectionSlides4 = [
   {
-    imgSrc: "/images/collections/cls-electric-bike-6.jpg",
+    imgSrc: "/images/products/placeholder-2.jpg",
     alt: "collection-img",
     heading: "Ride more trails in less time",
     subtext: "Ride more trails in less time",
   },
   {
-    imgSrc: "/images/collections/cls-electric-bike-7.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     heading: "The future of freeride is here",
     subtext: "Enhance the experience of every ride.",
@@ -2370,7 +2370,7 @@ export const collectionSlides4 = [
 export const slides21 = [
   {
     id: 1,
-    imgSrc: "/images/collections/banner-cls-footwear-4.jpg",
+    imgSrc: "/images/products/placeholder-5.jpg",
     alt: "collection-img",
     title: "Sale-30% Off \n Footwear",
     subtitle: "Conscious Comfort Shoes",
@@ -2378,7 +2378,7 @@ export const slides21 = [
   },
   {
     id: 2,
-    imgSrc: "/images/collections/banner-cls-footwear-5.jpg",
+    imgSrc: "/images/products/placeholder-9.jpg",
     alt: "collection-img",
     title: "End of \n Season Sale",
     subtitle: "Conscious Comfort Shoes",
@@ -2386,7 +2386,7 @@ export const slides21 = [
   },
   {
     id: 3,
-    imgSrc: "/images/collections/banner-cls-footwear-6.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     title: "Breeze \n Beachcomber",
     subtitle: "Conscious Comfort Shoes",
@@ -2396,17 +2396,17 @@ export const slides21 = [
 
 export const collectionItems18 = [
   {
-    imgSrc: "/images/collections/cls-personalized-pod-1.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Make every moment special",
     description: "Personalized products for every occasion.",
   },
   {
-    imgSrc: "/images/collections/cls-personalized-pod-2.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Unique gifts, endless possibilities",
     description: "Surprise your loved ones with personalization",
   },
   {
-    imgSrc: "/images/collections/cls-personalized-pod-3.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     title: "High-Quality, Free Customization",
     description: "From concept to creation, we make it easy!",
   },
@@ -2414,22 +2414,22 @@ export const collectionItems18 = [
 
 export const collectionData8 = [
   {
-    imgSrc: "/images/collections/pickleball-clothing.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     title: "Clothing",
   },
   {
-    imgSrc: "/images/collections/pickleball-paddles.jpg",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     title: "Paddles",
   },
   {
-    imgSrc: "/images/collections/pickleball-accessories.jpg",
+    imgSrc: "/images/products/placeholder-1.jpg",
     alt: "collection-demo-1",
     title: "Accessories",
   },
   {
-    imgSrc: "/images/collections/pickleball-men.jpg",
+    imgSrc: "/images/products/placeholder-4.jpg",
     alt: "collection-demo-1",
     title: "Men",
   },
@@ -2438,14 +2438,14 @@ export const collectionData8 = [
 export const collectionData9 = [
   {
     id: 1,
-    imgSrc: "/images/collections/banner-cls-pickleball2.jpg",
+    imgSrc: "/images/products/placeholder-7.jpg",
     alt: "collection-img",
     title: "SLK Series",
     description: "The lineup you know and love just got a bold new update",
   },
   {
     id: 2,
-    imgSrc: "/images/collections/banner-cls-pickleball3.jpg",
+    imgSrc: "/images/products/placeholder-10.jpg",
     alt: "collection-img",
     title: "Motion Pro",
     description:
@@ -2455,19 +2455,19 @@ export const collectionData9 = [
 
 export const collectionData10 = [
   {
-    imgSrc: "/images/collections/cls-book-store-7.png",
+    imgSrc: "/images/products/placeholder-3.jpg",
     alt: "collection-img",
     subheading: "30% OFF",
     heading: "Endless Pages, <br/>Endless Possibilities",
   },
   {
-    imgSrc: "/images/collections/cls-book-store-8.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     subheading: "FREE DELIVERY",
     heading: "For the Love of <br/>Reading",
   },
   {
-    imgSrc: "/images/collections/cls-book-store-9.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     alt: "collection-img",
     subheading: "MUST HAVE",
     heading: "Dive into the World <br/>of Words",
@@ -2476,32 +2476,32 @@ export const collectionData10 = [
 
 export const collectionData11 = [
   {
-    imgSrc: "/images/collections/cls-book-store-1.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Fantasy",
     itemsCount: 23,
   },
   {
-    imgSrc: "/images/collections/cls-book-store-2.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Romance",
     itemsCount: 9,
   },
   {
-    imgSrc: "/images/collections/cls-book-store-3.png",
+    imgSrc: "/images/products/placeholder-5.jpg",
     title: "Architecture",
     itemsCount: 31,
   },
   {
-    imgSrc: "/images/collections/cls-book-store-4.png",
+    imgSrc: "/images/products/placeholder-6.jpg",
     title: "Children's Fiction",
     itemsCount: 21,
   },
   {
-    imgSrc: "/images/collections/cls-book-store-5.png",
+    imgSrc: "/images/products/placeholder-9.jpg",
     title: "Comics & Graphic",
     itemsCount: 5,
   },
   {
-    imgSrc: "/images/collections/cls-book-store-6.png",
+    imgSrc: "/images/products/placeholder-4.jpg",
     title: "Westerns",
     itemsCount: 14,
   },
@@ -2509,31 +2509,31 @@ export const collectionData11 = [
 
 export const collectionData12 = [
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-1.png",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Controllers",
   },
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-2.png",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Keyboards",
   },
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-3.png",
+    imgSrc: "/images/products/placeholder-2.jpg",
     title: "Mice",
   },
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-4.png",
+    imgSrc: "/images/products/placeholder-1.jpg",
     title: "Headsets",
   },
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-5.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Flight simulation",
   },
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-6.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Race simulation",
   },
   {
-    imgSrc: "/images/collections/cls-gaming-accessories-7.png",
+    imgSrc: "/images/products/placeholder-8.jpg",
     title: "Monitor",
   },
 ];

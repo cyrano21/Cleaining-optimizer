@@ -13,13 +13,13 @@ export default function Products() {
               <Link href={`/shop-collection-sub`} className="collection-inner">
                 <div className="collection-image img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/sneaker-8.jpg"
+                    className=""
+                    
                     alt="collection-img"
                     src="/images/collections/sneaker-8.jpg"
                     width={600}
                     height={805}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="collection-content justify-content-end">
                   <div className="bottom wow fadeInUp" data-wow-delay="0s">

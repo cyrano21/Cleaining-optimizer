@@ -24,7 +24,7 @@ export default function BoughtTogether() {
                 src="/images/shop/products/p-d1.png"
                 width={770}
                 height={1075}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </a>
           </div>
           <div className="tf-product-bundle-infos">
@@ -71,7 +71,7 @@ export default function BoughtTogether() {
                 src="/images/shop/products/hmgoepprod.jpg"
                 width={713}
                 height={1070}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </a>
           </div>
           <div className="tf-product-bundle-infos">
@@ -97,7 +97,7 @@ export default function BoughtTogether() {
                 src="/images/shop/products/hmgoepprod2.jpg"
                 width={713}
                 height={1070}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </a>
           </div>
           <div className="tf-product-bundle-infos">

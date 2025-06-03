@@ -50,13 +50,13 @@ export default function Locations() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore7.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore7.jpg"
                     width="1150"
                     height="808"
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -81,13 +81,13 @@ export default function Locations() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore8.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore8.jpg"
                     width="720"
                     height="506"
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>
@@ -112,13 +112,13 @@ export default function Locations() {
                 </div>
                 <div className="store-img">
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/store/ourstore9.jpg"
+                    className=""
+                    
                     alt="store-img"
                     src="/images/shop/store/ourstore9.jpg"
                     width="720"
                     height="506"
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

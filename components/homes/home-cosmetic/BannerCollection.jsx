@@ -11,13 +11,13 @@ export default function BannerCollection() {
             <a href="#" className="collection-inner">
               <div className="img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-banner-cosmetic1.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-banner-cosmetic1.jpg"
                   width={600}
                   height={574}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="collection-content position-relative text-center bg_dark-pink">
                 <h5
@@ -39,13 +39,13 @@ export default function BannerCollection() {
             <a href="#" className="collection-inner">
               <div className="img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-banner-cosmetic2.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-banner-cosmetic2.jpg"
                   width={600}
                   height={574}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="collection-content position-relative text-center bg_dark-yellow">
                 <h5
@@ -67,13 +67,13 @@ export default function BannerCollection() {
             <a href="#" className="collection-inner">
               <div className="img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-banner-cosmetic3.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-banner-cosmetic3.jpg"
                   width={600}
                   height={574}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="collection-content position-relative text-center bg_violet-2">
                 <h5

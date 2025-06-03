@@ -58,7 +58,7 @@ export default function BestSell() {
                                 width={1409}
                                 height={1001}
                                 ref={ref}
-                              />
+ style={{ width: "100%", height: "auto" }}                               />
                             </a>
                           )}
                         </Item>
@@ -362,31 +362,31 @@ export default function BestSell() {
                             src="/images/payments/visa.png"
                             width={48}
                             height={30}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                           <Image
                             alt="image"
                             src="/images/payments/img-1.png"
                             width={49}
                             height={30}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                           <Image
                             alt="image"
                             src="/images/payments/img-2.png"
                             width={48}
                             height={30}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                           <Image
                             alt="image"
                             src="/images/payments/img-3.png"
                             width={57}
                             height={30}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                           <Image
                             alt="image"
                             src="/images/payments/img-4.png"
                             width={49}
                             height={30}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                       </div>
                       <div>

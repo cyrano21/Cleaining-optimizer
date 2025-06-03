@@ -13,13 +13,13 @@ export default function Testimonials() {
       <div className="container">
         <div className="wrapper-thumbs-testimonial-v2 flat-thumbs-testimonial flat-thumbs-testimonial-v2 testimonial-gaming-accessories">
           <Image
-            className="lazyload"
-            data-src="/images/slider/bg-gaming-accessories-testi.png"
+            className=""
+            
             alt="image-product"
             src="/images/slider/bg-gaming-accessories-testi.png"
             width={2000}
             height={772}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-left">
             <Swiper
               spaceBetween={30}
@@ -66,13 +66,13 @@ export default function Testimonials() {
                     <div className="author box-author">
                       <div className="box-img d-md-none">
                         <Image
-                          className="lazyload img-product"
+                          className=" img-product"
                           data-src={testimonial.imgSrc}
                           alt="image-product"
                           src={testimonial.imgSrc}
                           width={450}
                           height={478}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name text-white fw-6">
@@ -114,13 +114,13 @@ export default function Testimonials() {
                   <div className="box-img item-2 hover-img radius-10 o-hidden">
                     <div className="img-style">
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={testimonial.imgSrc}
                         alt="img-slider"
                         src={testimonial.imgSrc}
                         width={450}
                         height={478}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                   </div>
                 </SwiperSlide>

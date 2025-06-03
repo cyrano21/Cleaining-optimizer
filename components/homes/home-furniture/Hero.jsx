@@ -47,14 +47,14 @@ export default function Hero() {
               </div>
               <div className="img-slider">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={slide.imgSrc}
                   alt={slide.altText}
                   src={slide.imgSrc}
                   width={1890}
                   height={1580}
                   priority
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </SwiperSlide>

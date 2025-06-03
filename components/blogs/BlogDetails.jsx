@@ -27,13 +27,13 @@ export default function BlogDetails({ blog }) {
                   </div>
                   <div className="image">
                     <Image
-                      className="lazyload"
-                      data-src="/images/blog/blog-detail.jpg"
+                      className=""
+                      
                       alt="image"
                       src="/images/blog/blog-detail.jpg"
                       width={1100}
                       height={707}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </div>
                 <blockquote>
@@ -43,7 +43,7 @@ export default function BlogDetails({ blog }) {
                       src="/images/item/quote.svg"
                       width={37}
                       height={25}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="text">
                     Typography is the work of typesetters, compositors,
@@ -58,23 +58,23 @@ export default function BlogDetails({ blog }) {
                 <div className="grid-image">
                   <div>
                     <Image
-                      className="lazyload"
-                      data-src="/images/blog/blog-detail-1.jpg"
+                      className=""
+                      
                       alt="image"
                       src="/images/blog/blog-detail-1.jpg"
                       width={705}
                       height={538}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div>
                     <Image
-                      className="lazyload"
-                      data-src="/images/blog/blog-detail-2.jpg"
+                      className=""
+                      
                       alt="image"
                       src="/images/blog/blog-detail-2.jpg"
                       width={705}
                       height={538}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </div>
                 <div className="desc">

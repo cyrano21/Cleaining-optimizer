@@ -49,7 +49,7 @@ export default function Hero() {
                       width={800}
                       height={1021}
                       priority
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                 </div>
               </div>

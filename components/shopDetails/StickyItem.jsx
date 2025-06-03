@@ -21,7 +21,7 @@ export default function StickyItem({ soldOut = false }) {
                 src={products4[2].imgSrc}
                 width={770}
                 height={1075}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-sticky-atc-title fw-5 d-xl-block d-none">
               {products4[2].title}

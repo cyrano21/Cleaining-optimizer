@@ -40,13 +40,13 @@ export default function Blog() {
                   <div className="article-thumb rounded-0">
                     <Link href={`/blog-detail/${article.id}`}>
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={article.imgSrc}
                         alt="img-blog"
                         src={article.imgSrc}
                         width={550}
                         height={354}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="article-label">
                       <Link

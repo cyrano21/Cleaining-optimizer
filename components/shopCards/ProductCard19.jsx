@@ -20,19 +20,19 @@ export default function ProductCard19({ product, white = true }) {
       <div className="card-product-wrapper rounded-0">
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
-            className="lazyload img-product"
+            className=" img-product"
             src={currentImage}
             alt="image-product"
             width={720}
             height={1005}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
-            className="lazyload img-hover"
+            className=" img-hover"
             src={product.imgHoverSrc}
             alt="image-product"
             width={720}
             height={1005}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="list-product-btn absolute-2">
           <a
@@ -117,12 +117,12 @@ export default function ProductCard19({ product, white = true }) {
               <span className="tooltip">{color.name}</span>
               <span className={`swatch-value ${color.colorClass}`} />
               <Image
-                className="lazyload"
+                className=""
                 src={color.imgSrc}
                 alt="image-product"
                 width={720}
                 height={1005}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </li>
           ))}
         </ul>

@@ -89,13 +89,13 @@ export default function NewsLetter() {
           </div>
           <div className="store-img">
             <Image
-              className="lazyload"
-              data-src="/images/shop/store/footwear-1.jpg"
+              className=""
+              
               alt="store-img"
               src="/images/shop/store/footwear-1.jpg"
               width={1100}
               height={667}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
         </div>
       </div>

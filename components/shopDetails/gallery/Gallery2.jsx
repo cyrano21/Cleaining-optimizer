@@ -107,7 +107,7 @@ export default function Gallery2({ firstImage }) {
                   width={image.width}
                   height={image.height}
                   src={image.src} // Optional fallback for non-lazy loading
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </a>
             )}
           </Item>

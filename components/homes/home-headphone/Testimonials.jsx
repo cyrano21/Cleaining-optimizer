@@ -35,7 +35,7 @@ export default function Testimonials() {
                       alt={slide.altText}
                       width={slide.width}
                       height={slide.height}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </SwiperSlide>
               ))}
@@ -79,7 +79,7 @@ export default function Testimonials() {
                           alt="image-product"
                           width={550}
                           height={585}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{slide.author}</div>

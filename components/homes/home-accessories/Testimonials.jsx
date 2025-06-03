@@ -71,11 +71,11 @@ export default function Testimonials() {
                         <Image
                           width={450}
                           height={475}
-                          className="lazyload img-product"
+                          className=" img-product"
                           data-src={testimonial.imgSrc}
                           src={testimonial.imgSrc}
                           alt={testimonial.imgAlt}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name text-white fw-6">
@@ -118,11 +118,11 @@ export default function Testimonials() {
                       <Image
                         width={450}
                         height={475}
-                        className="lazyload"
+                        className=""
                         data-src={slide.imgSrc}
                         src={slide.imgSrc}
                         alt={slide.imgAlt}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                   </div>
                 </SwiperSlide>

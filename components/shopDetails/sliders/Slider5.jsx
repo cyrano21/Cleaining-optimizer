@@ -255,13 +255,13 @@ export default function Slider5({
                 </div>
               )}
               <Image
-                className="lazyload"
+                className=""
                 data-src={slide.src}
                 alt={""}
                 src={slide.src}
                 width={slide.width}
                 height={slide.height}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </SwiperSlide>
         ))}
@@ -323,14 +323,14 @@ export default function Slider5({
                     <a onClick={open} className="item">
                       <Image
                         ref={ref}
-                        className="tf-image-zoom lazyload"
+                        className="tf-image-zoom "
                         data-zoom={slide.src}
                         data-src={slide.src}
                         alt="image"
                         src={slide.src}
                         width={slide.width}
                         height={slide.height}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </a>
                   )}
                 </Item>

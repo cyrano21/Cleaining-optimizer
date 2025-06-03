@@ -1097,18 +1097,16 @@ export const testimonials19 = [
   },
 ];
 
-export const testimonialData3 = [
-  {
-    icon: "/images/slider/icon1.svg",
+export const testimonialData3 = [  {
+    icon: "https://img.icons8.com/fluency/48/quote-left.png",
     heading: "OUR CUSTOMER'S RAVE REVIEWS",
     text: "I've ordered from a lot of places, a lot! and I must say that this place here has the best shipping experience ever. Thank you guys so much for this ♥️",
     author: "Vincent Pahm",
     purchaseItem: "Aglaonema Siam",
     imgSrc: "/images/slider/stroller-testi1.jpg",
     rating: 5,
-  },
-  {
-    icon: "/images/slider/icon1.svg",
+  },  {
+    icon: "https://img.icons8.com/fluency/48/quote-left.png",
     heading: "UR CUSTOMER'S RAVE REVIEWS",
     text: "Love my new indoor plant! It arrived healthy and adds a refreshing touch to my home. Super easy to care for, highly recommended!",
     author: "Robert Smith",

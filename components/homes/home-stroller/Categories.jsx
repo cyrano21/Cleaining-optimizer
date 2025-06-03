@@ -62,13 +62,13 @@ export default function Categories() {
                     className="collection-image img-style"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={product.imgSrc}
                       alt={product.imgAlt}
                       src={product.imgSrc}
                       width={product.imgWidth}
                       height={product.imgHeight}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                     <span className="box-icon">
                       <i className="icon-icon icon-arrow1-top-left" />
                     </span>

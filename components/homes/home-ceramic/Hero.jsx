@@ -8,13 +8,13 @@ export default function Hero() {
       <section className="tf-sw-slideshow slider-effect-fade slider-video position-relative ceramic-hero">
         <div className="wrap-slider">
           <Image
-            className="lazyload"
-            data-src="/images/slider/ceramic-1.jpg"
+            className=""
+            
             alt="fashion-slideshow"
             src="/images/slider/ceramic-1.jpg"
             width={1800}
             height={888}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-content">
             <div className="container">
               <h2 className="fade-item fade-item-2 heading text-white">

@@ -29,7 +29,7 @@ export default function ProductsCard21({ product }) {
             src={currentImage}
             width={product.width}
             height={product.height}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <Image
             className="lazyload img-hover"
             data-src={product.imgHoverSrc}
@@ -37,7 +37,7 @@ export default function ProductsCard21({ product }) {
             src={product.imgHoverSrc}
             width={product.width}
             height={product.height}
-          />
+ style={{ width: "100%", height: "auto" }}           />
         </Link>
         <div className="list-product-btn">
           <a

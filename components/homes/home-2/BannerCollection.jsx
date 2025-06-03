@@ -29,13 +29,13 @@ export default function BannerCollection() {
                   <div className="img-style">
                     <Link href={`/shop-default`}>
                       <Image
-                        className="lazyload"
+                        className=""
                         data-src={slide.imgSrc}
                         alt={slide.alt}
                         src={slide.imgSrc}
                         width="1000"
                         height="727"
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                   </div>
                   <div className="content">

@@ -241,14 +241,14 @@ export default function Slider2({
               data-pswp-height={slide.height}
             >
               <Image
-                className="tf-image-zoom lazyload"
+                className="tf-image-zoom "
                 data-zoom={slide.src}
                 data-src={slide.src}
                 alt="image"
                 src={slide.src} // Optional fallback for non-lazy loading
                 width={slide.width}
                 height={slide.height}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </a>
           </SwiperSlide>
         ))}
@@ -278,13 +278,13 @@ export default function Slider2({
           <SwiperSlide key={index} className="stagger-item">
             <div className="item">
               <Image
-                className="lazyload"
+                className=""
                 data-src={slide.src}
                 alt={""}
                 src={slide.src} // Optional fallback for non-lazy loading
                 width={slide.width}
                 height={slide.height}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </SwiperSlide>
         ))}

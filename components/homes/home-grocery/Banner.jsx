@@ -12,37 +12,37 @@ export default function Banner() {
               <div className="box-img item-1 hover-img tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/img-w-text-grocery1.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/img-w-text-grocery1.jpg"
                     width={470}
                     height={420}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="box-img item-2 hover-img tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/img-w-text-grocery2.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/img-w-text-grocery2.jpg"
                     width={600}
                     height={713}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="box-img item-3 hover-img tf-image-wrap">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/img-w-text-grocery3.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/collections/img-w-text-grocery3.jpg"
                     width={706}
                     height={628}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

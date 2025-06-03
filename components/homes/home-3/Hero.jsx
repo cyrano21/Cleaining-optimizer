@@ -40,7 +40,7 @@ export default function Hero() {
                     width="631"
                     height="806"
                     priority
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="collection-content">
                   <Link

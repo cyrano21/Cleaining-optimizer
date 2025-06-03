@@ -23,13 +23,13 @@ export default function Banner2() {
           </div>
           <div className="store-img">
             <Image
-              className="lazyload"
-              data-src="/images/shop/store/ceramic-1.jpg"
+              className=""
+              
               alt="store-img"
               src="/images/shop/store/ceramic-1.jpg"
               width={800}
               height={598}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
         </div>
       </div>

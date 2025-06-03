@@ -80,7 +80,7 @@ export default function Products() {
                               src={product.imgSrc}
                               width={360}
                               height={384}
-                            />
+ style={{ width: "100%", height: "auto" }}                             />
                             <Image
                               className="lazyload img-hover"
                               data-src={product.imgHoverSrc}
@@ -88,7 +88,7 @@ export default function Products() {
                               src={product.imgHoverSrc}
                               width={360}
                               height={384}
-                            />
+ style={{ width: "100%", height: "auto" }}                             />
                           </a>
                           <div className="list-product-btn">
                             <a

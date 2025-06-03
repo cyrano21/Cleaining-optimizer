@@ -9,23 +9,23 @@ export default function BannerCollection() {
           <div className="d-flex gap-30">
             <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
               <Image
-                className="lazyload"
-                data-src="/images/collections/banner-sneaker-1.jpg"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/banner-sneaker-1.jpg"
                 width={336}
                 height={481}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
             <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
               <Image
-                className="lazyload"
-                data-src="/images/collections/banner-sneaker-2.jpg"
+                className=""
+                
                 alt="collection-img"
                 src="/images/collections/banner-sneaker-2.jpg"
                 width={336}
                 height={481}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </div>
           </div>
           <div className="tf-content-wrap wow fadeInUp" data-wow-delay="0s">

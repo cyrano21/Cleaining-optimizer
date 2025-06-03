@@ -51,7 +51,7 @@ export default function ShopGram() {
                       src={item.imgSrc}
                       width={item.imgWidth}
                       height={item.imgHeight}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   {item.detail ? (
                     <Link

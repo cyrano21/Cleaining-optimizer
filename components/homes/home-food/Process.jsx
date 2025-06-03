@@ -39,7 +39,7 @@ export default function Process() {
                     alt={slide.alt}
                     width={476}
                     height={476}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="content bg_light-green-4">
                   <h5>{slide.title}</h5>

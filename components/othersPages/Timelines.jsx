@@ -24,13 +24,13 @@ export default function Timelines() {
               </div>
               <div className="tf-timeline-image">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-=""
                   alt="image"
                   src="/images/shop/file/timeline1.jpg"
                   width={800}
                   height={593}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>
@@ -51,13 +51,13 @@ export default function Timelines() {
               </div>
               <div className="tf-timeline-image">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-=""
                   alt="image"
                   src="/images/shop/file/timeline2.jpg"
                   width={800}
                   height={593}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>
@@ -76,13 +76,13 @@ export default function Timelines() {
               </div>
               <div className="tf-timeline-image">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-=""
                   alt="image"
                   src="/images/shop/file/timeline3.jpg"
                   width={800}
                   height={593}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>
@@ -102,13 +102,13 @@ export default function Timelines() {
               </div>
               <div className="tf-timeline-image">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-=""
                   alt="image"
                   src="/images/shop/file/timeline4.jpg"
                   width={800}
                   height={593}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>

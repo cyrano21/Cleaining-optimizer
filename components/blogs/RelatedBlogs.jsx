@@ -39,8 +39,8 @@ export default function RelatedBlogs() {
                         alt={article.alt}
                         width={550}
                         height={354}
-                        className="lazyload"
-                      />
+                        className=""
+ style={{ width: "100%", height: "auto" }}                       />
                     </Link>
                     <div className="article-label">
                       <Link

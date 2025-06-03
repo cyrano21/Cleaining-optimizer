@@ -7,14 +7,14 @@ export default function CollectionBanner() {
       <div className="container">
         <div className="tf-banner-collection">
           <Image
-            className="lazyload"
-            data-src="/images/collections/banner-collection-3.jpg"
+            className=""
+            
             alt="img-banner"
             loading="lazy"
             src="/images/collections/banner-collection-3.jpg"
             width={1400}
             height={532}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-content">
             <div className="container wow fadeInUp" data-wow-delay="0s">
               <div className="sub fw-7 text_white">

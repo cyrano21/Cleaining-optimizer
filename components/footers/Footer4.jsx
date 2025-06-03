@@ -290,7 +290,7 @@ export default function Footer4({ bgColor = "" }) {
                         width={image.width}
                         height={image.height}
                         alt={image.alt}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     ))}
                   </div>
                 </div>

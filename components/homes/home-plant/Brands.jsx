@@ -39,13 +39,13 @@ export default function Brands() {
             <SwiperSlide key={index}>
               <div className="brand-item border-0">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={brand.imgSrc}
                   alt={brand.alt}
                   src={brand.imgSrc}
                   width={brand.width}
                   height={brand.height}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </SwiperSlide>
           ))}

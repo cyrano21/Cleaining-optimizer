@@ -45,13 +45,13 @@ export default function Categories() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
+                    className=""
                     data-src={collection.imgSrc}
                     alt="collection-img"
                     src={collection.imgSrc}
                     width={320}
                     height={320}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="collection-content text-center">
                   <Link href={`/shop-default`} className="link title fw-5">

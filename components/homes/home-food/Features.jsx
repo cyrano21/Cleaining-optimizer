@@ -39,7 +39,7 @@ export default function Features() {
                         src={slide.src}
                         width={slide.width}
                         height={slide.height}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="content">
                       <Link
@@ -74,7 +74,7 @@ export default function Features() {
                       src={slide.src}
                       width={slide.width}
                       height={slide.height}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                   <div className="content">
                     <Link href="/shop-default" className="title link fw-normal">

@@ -35,13 +35,13 @@ export default function Collections() {
                 <div className="banner-gr-item text-center hover-img type-1">
                   <Link href={`/shop-default`} className="img-style">
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={banner.imgSrc}
                       alt={banner.alt}
                       src={banner.imgSrc}
                       width={800}
                       height={844}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div className="content">
                     <p className="sub-title">{banner.subTitle}</p>

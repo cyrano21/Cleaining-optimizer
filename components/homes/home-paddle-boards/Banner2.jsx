@@ -10,13 +10,13 @@ export default function Banner2() {
             <div className="hover-img tf-image-wrap radius-10">
               <div className="img-style">
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/paddle-boards-9.jpg"
+                  className=""
+                  
                   alt="img-slider"
                   src="/images/collections/paddle-boards-9.jpg"
                   width={800}
                   height={622}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
             </div>
           </div>

@@ -28,27 +28,27 @@ export default function Hero() {
               <div className="box-img item-1 hover-img">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/slider/te2.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/slider/te2.jpg"
                     width="367"
                     height="480"
                     priority
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
               <div className="box-img item-2 hover-img">
                 <div className="img-style">
                   <Image
-                    className="lazyload"
-                    data-src="/images/slider/te1.jpg"
+                    className=""
+                    
                     alt="img-slider"
                     src="/images/slider/te1.jpg"
                     width="611"
                     height="858"
                     priority
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </div>

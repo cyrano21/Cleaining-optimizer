@@ -8,13 +8,13 @@ export default function Collection() {
         <div className="tf-grid-layout md-col-2 tf-img-with-text style-1">
           <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
             <Image
-              className="lazyload"
-              data-src="/images/collections/collection-58.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/collection-58.jpg"
               width={800}
               height={760}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div className="tf-content-wrap wow fadeInUp" data-wow-delay="0s">
             <div className="heading">

@@ -36,13 +36,13 @@ export default function Banner() {
                     className="collection-image img-style radius-0 o-hidden"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={slide.imgSrc}
                       alt={slide.alt}
                       src={slide.imgSrc}
                       width={1000}
                       height={977}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div
                     className="collection-content wow fadeInUp banner-glass-content"

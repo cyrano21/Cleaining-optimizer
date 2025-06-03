@@ -10,13 +10,13 @@ export default function Collections() {
   return (
     <section className="flat-spacing-18 feature-electric-bike">
       <Image
-        className="lazyload"
+        className=""
         src="/images/slider/bg-electric-bike-1.jpg"
         data-=""
         alt="image-collection"
         width={1920}
         height={972}
-      />
+ style={{ width: "100%", height: "auto" }}       />
       <div className="container">
         <div className="flat-title wow fadeInUp" data-wow-delay="0s">
           <span className="title fw-6">Perfect Electric Bike</span>
@@ -42,13 +42,13 @@ export default function Collections() {
                 <div className="banner-gr-item text-center type-2 radius-20">
                   <Link href={`/shop-default`} className="img-style">
                     <Image
-                      className="lazyload radius-20"
+                      className=" radius-20"
                       data-src={slide.imgSrc}
                       alt={slide.alt}
                       src={slide.imgSrc}
                       width={550}
                       height={483}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div className="content">
                     <p className="sub-title fw-7 mb_10 font-sora">

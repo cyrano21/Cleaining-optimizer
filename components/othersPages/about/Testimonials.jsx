@@ -38,7 +38,7 @@ export default function Testimonials() {
                         alt="Quote"
                         width={37}
                         height={25}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="rating">
                       {[...Array(testimonial.rating)].map((_, i) => (
@@ -53,7 +53,7 @@ export default function Testimonials() {
                           alt="Author"
                           width={750}
                           height={851}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{testimonial.authorName}</div>
@@ -92,7 +92,7 @@ export default function Testimonials() {
                       width={image.width}
                       height={image.height}
                       className="lazyload img-product"
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </div>
                 </SwiperSlide>
               ))}

@@ -35,13 +35,13 @@ export default function Collections() {
                     className="collection-image img-style"
                   >
                     <Image
-                      className="lazyload"
+                      className=""
                       data-src={collection.imgSrc}
                       alt={collection.alt}
                       src={collection.imgSrc}
                       width={124}
                       height={125}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div className="collection-content text-center">
                     <Link

@@ -20,13 +20,13 @@ export default function Lookbook() {
         <SwiperSlide className="swiper-slide">
           <div className="wrap-slider">
             <Image
-              className="lazyload"
-              data-src="/images/shop/file/lookbook-7.jpg"
+              className=""
+              
               alt="men-slideshow-01"
               src="/images/shop/file/lookbook-7.jpg"
               width={1800}
               height={851}
-            />
+ style={{ width: "100%", height: "auto" }}             />
             <div className="lookbook-1">
               <div className="lookbook-item item-1">
                 <div className="inner">
@@ -82,13 +82,13 @@ export default function Lookbook() {
         <SwiperSlide className="swiper-slide">
           <div className="wrap-slider">
             <Image
-              className="lazyload"
-              data-src="/images/shop/file/lookbook-8.jpg"
+              className=""
+              
               alt="men-slideshow-02"
               src="/images/shop/file/lookbook-8.jpg"
               width={1800}
               height={852}
-            />
+ style={{ width: "100%", height: "auto" }}             />
             <div className="lookbook-1">
               <div className="lookbook-item item-1">
                 <div className="inner">
@@ -144,13 +144,13 @@ export default function Lookbook() {
         <SwiperSlide className="swiper-slide">
           <div className="wrap-slider">
             <Image
-              className="lazyload"
-              data-src="/images/shop/file/lookbook-9.jpg"
+              className=""
+              
               alt="men-slideshow-01"
               src="/images/shop/file/lookbook-9.jpg"
               width={1800}
               height={852}
-            />
+ style={{ width: "100%", height: "auto" }}             />
             <div className="lookbook-1">
               <div className="lookbook-item item-1">
                 <div className="inner">

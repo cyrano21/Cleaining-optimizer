@@ -18,7 +18,7 @@ export default function BuyXgetY() {
                   src="/images/products/gaming-detail1.jpg"
                   width={713}
                   height={713}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="content">
                 <Link href={`/product-detail`} className="name fs-16 link fw-5">
@@ -50,7 +50,7 @@ export default function BuyXgetY() {
                   src="/images/products/headphone-2.png"
                   width={533}
                   height={399}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </div>
               <div className="content">
                 <Link href={`/product-detail`} className="name fs-16 link fw-5">

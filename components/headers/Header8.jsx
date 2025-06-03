@@ -38,7 +38,7 @@ export default function Header8() {
                 src="/images/logo/logo-white@2x.png"
                 width={272}
                 height={42}
-              />
+ style={{ width: "100%", height: "auto" }}               />
             </Link>
           </div>
           <div className="col-xl-6 tf-md-hidden">

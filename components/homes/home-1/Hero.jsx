@@ -24,7 +24,7 @@ export default function Hero() {
                 src={slide.imgSrc}
                 width="2000"
                 height="1125"
-              />
+ style={{ width: "100%", height: "auto" }}               />
               <div className="box-content">
                 <div className="container">
                   <h1 className="fade-item fade-item-1">

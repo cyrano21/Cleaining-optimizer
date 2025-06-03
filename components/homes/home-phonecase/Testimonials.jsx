@@ -39,13 +39,13 @@ export default function Testimonials() {
                   <div className="testimonial-item lg lg-2">
                     <div className="icon">
                       <Image
-                        className="lazyloaded"
+                        className="ed"
                         data-src={testimonial.quoteSrc}
                         src={testimonial.quoteSrc}
                         width={37}
                         height={25}
                         alt="quote icon"
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <div className="heading fs-12 mb_18">
                       {testimonial.heading}
@@ -61,13 +61,13 @@ export default function Testimonials() {
                     <div className="author box-author">
                       <div className="box-img d-md-none rounded-0">
                         <Image
-                          className="lazyload img-product"
+                          className=" img-product"
                           data-src={testimonial.imgSrc}
                           src={testimonial.imgSrc}
                           alt="author image"
                           width={450}
                           height={513}
-                        />
+ style={{ width: "100%", height: "auto" }}                         />
                       </div>
                       <div className="content">
                         <div className="name">{testimonial.author}</div>
@@ -119,13 +119,13 @@ export default function Testimonials() {
                       >
                         <div className="img-style">
                           <Image
-                            className="lazyload"
+                            className=""
                             data-src={image.src}
                             alt={image.alt}
                             src={image.src}
                             width={image.width}
                             height={image.height}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </div>
                       </div>
                     ))}

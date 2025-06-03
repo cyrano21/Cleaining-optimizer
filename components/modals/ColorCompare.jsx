@@ -32,13 +32,13 @@ export default function ColorCompare() {
                     Remove
                   </label>
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/products/hmgoepprod2.jpg"
+                    className=""
+                    
                     alt="img-compare"
                     src="/images/shop/products/hmgoepprod2.jpg"
                     width={713}
                     height={1070}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="tf-compare-color-bottom">
                   <div className="tf-compare-color-color">
@@ -75,13 +75,13 @@ export default function ColorCompare() {
                     Remove
                   </label>
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/products/hmgoepprod12.jpg"
+                    className=""
+                    
                     alt="image"
                     src="/images/shop/products/hmgoepprod12.jpg"
                     width={768}
                     height={1152}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="tf-compare-color-bottom">
                   <div className="tf-compare-color-color">
@@ -119,13 +119,13 @@ export default function ColorCompare() {
                     Remove
                   </label>
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/products/hmgoepprod7.jpg"
+                    className=""
+                    
                     alt="image"
                     src="/images/shop/products/hmgoepprod7.jpg"
                     width={713}
                     height={1070}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="tf-compare-color-bottom">
                   <div className="tf-compare-color-color">
@@ -162,13 +162,13 @@ export default function ColorCompare() {
                     Remove
                   </label>
                   <Image
-                    className="lazyload"
-                    data-src="/images/shop/products/hmgoepprod14.jpg"
+                    className=""
+                    
                     alt="image"
                     src="/images/shop/products/hmgoepprod14.jpg"
                     width={768}
                     height={1152}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
                 <div className="tf-compare-color-bottom">
                   <div className="tf-compare-color-color">

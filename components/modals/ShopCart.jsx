@@ -178,7 +178,7 @@ export default function ShopCart() {
                                   src={elm.imgSrc}
                                   width={720}
                                   height={1005}
-                                />
+ style={{ width: "100%", height: "auto" }}                                 />
                               </Link>
                             </div>
                             <div className="tf-minicart-recommendations-item-infos flex-grow-1">

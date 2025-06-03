@@ -7,12 +7,12 @@ export default function Categories() {
     <section className="flat-spacing-4 section-cls-personalized-pod section-full-1">
       <Image
         className=""
-        data-src="/images/collections/bg-personalized-pod-3.png"
+        
         alt=""
         src="/images/collections/bg-personalized-pod-3.png"
         width={2000}
         height={1101}
-      />
+ style={{ width: "100%", height: "auto" }}       />
       <div className="container">
         <div className="flat-title gap-14">
           <span
@@ -33,13 +33,13 @@ export default function Categories() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-personalized-pod-4.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-personalized-pod-4.jpg"
                   width={600}
                   height={835}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -62,13 +62,13 @@ export default function Categories() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-personalized-pod-5.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-personalized-pod-5.jpg"
                   width={600}
                   height={396}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -91,13 +91,13 @@ export default function Categories() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-personalized-pod-6.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-personalized-pod-6.jpg"
                   width={600}
                   height={399}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link
@@ -120,13 +120,13 @@ export default function Categories() {
                 className="collection-image img-style rounded-0"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/cls-personalized-pod-7.jpg"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/cls-personalized-pod-7.jpg"
                   width={600}
                   height={835}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content">
                 <Link

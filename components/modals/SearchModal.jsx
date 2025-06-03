@@ -83,7 +83,7 @@ export default function SearchModal() {
                             src={product.imgSrc}
                             width={product.imgWidth}
                             height={product.imgHeight}
-                          />
+ style={{ width: "100%", height: "auto" }}                           />
                         </Link>
                       </div>
                       <div className="content">

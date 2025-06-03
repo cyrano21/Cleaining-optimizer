@@ -47,7 +47,7 @@ export default function Categories() {
                       data-src={collection.imgSrc}
                       alt={collection.alt}
                       src={collection.imgSrc}
-                    />
+ style={{ width: "100%", height: "auto" }}                     />
                   </Link>
                   <div className="collection-content text-center">
                     <Link

@@ -41,7 +41,7 @@ export default function ShopGram() {
                     src={item.src}
                     width={400}
                     height={400}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </div>
               </div>
             </SwiperSlide>

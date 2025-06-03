@@ -36,7 +36,7 @@ export default function Hero() {
                 width={1800}
                 height={766}
                 priority
-              />
+ style={{ width: "100%", height: "auto" }}               />
               <Image
                 className="lazyload img-mb"
                 data-src={slide.imgSrcMb}
@@ -45,7 +45,7 @@ export default function Hero() {
                 width={600}
                 height={600}
                 priority
-              />
+ style={{ width: "100%", height: "auto" }}               />
               <div className="box-content">
                 <div className="container">
                   <h2 className="fade-item fade-item-1 heading">

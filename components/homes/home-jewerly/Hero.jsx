@@ -31,14 +31,14 @@ export default function Hero() {
             <SwiperSlide key={index}>
               <div className="wrap-slider">
                 <Image
-                  className="lazyload"
+                  className=""
                   data-src={item.imgSrc}
                   alt={item.alt}
                   src={item.imgSrc}
                   width={1800}
                   height={785}
                   priority
-                />
+ style={{ width: "100%", height: "auto" }}                 />
                 <div className="box-content text-center">
                   <div className="container">
                     <h1 className="fade-item fade-item-1 text-white heading font-poppins fw-8">

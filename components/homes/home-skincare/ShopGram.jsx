@@ -49,7 +49,7 @@ export default function ShopGram() {
                         src={slide.src}
                         width={400}
                         height={400}
-                      />
+ style={{ width: "100%", height: "auto" }}                       />
                     </div>
                     <a
                       href="#quick_add"

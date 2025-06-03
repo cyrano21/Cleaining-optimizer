@@ -8,13 +8,13 @@ export default function Banner() {
         <div className="tf-banner-collection text-center">
           <Image
             className="lazyload radius-10"
-            data-src="/images/collections/banner-collection-2.jpg"
+            
             alt="img-banner"
             loading="lazy"
             src="/images/collections/banner-collection-2.jpg"
             width={1400}
             height={325}
-          />
+ style={{ width: "100%", height: "auto" }}           />
           <div className="box-content w-100">
             <div className="container wow fadeInUp" data-wow-delay="0s">
               <h2 className="heading fw-6 text_white">

@@ -46,7 +46,7 @@ export default function Products() {
                     src={product.imgSrc}
                     width={533}
                     height={533}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="list-product-btn absolute-2">
                   <a

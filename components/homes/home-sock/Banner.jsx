@@ -7,13 +7,13 @@ export default function Banner() {
       <div className="wrap-slider">
         <Image
           className="lazyload img-dk"
-          data-src="/images/slider/banner_image_sock.jpg"
+          
           alt="slideshow"
           loading="lazy"
           src="/images/slider/banner_image_sock.jpg"
           width={3840}
           height={1424}
-        />
+ style={{ width: "100%", height: "auto" }}         />
         <div className="box-content text-center text-md-start">
           <div className="container">
             <p className="subheading text-14 fw-6 letter-2">

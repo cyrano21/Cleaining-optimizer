@@ -8,13 +8,13 @@ export default function CollectionBanner() {
         <div className="tf-grid-layout md-col-2 tf-img-with-text">
           <div className="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
             <Image
-              className="lazyload"
-              data-src="/images/collections/kitchen-wear-9.jpg"
+              className=""
+              
               alt="collection-img"
               src="/images/collections/kitchen-wear-9.jpg"
               width={800}
               height={885}
-            />
+ style={{ width: "100%", height: "auto" }}             />
           </div>
           <div
             className="tf-content-wrap w-100 wow fadeInUp"

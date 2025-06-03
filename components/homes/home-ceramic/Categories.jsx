@@ -17,13 +17,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/new.png"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/new.png"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link href={`/shop-collection-sub`} className="link title fw-6">
@@ -37,13 +37,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-ceramic-4.png"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-ceramic-4.png"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link href={`/shop-collection-sub`} className="link title fw-6">
@@ -57,13 +57,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-ceramic-5.png"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-ceramic-5.png"
                   width={160}
                   height={162}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link href={`/shop-collection-sub`} className="link title fw-6">
@@ -77,13 +77,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-ceramic-6.png"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-ceramic-6.png"
                   width={160}
                   height={162}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link href={`/shop-collection-sub`} className="link title fw-6">
@@ -97,13 +97,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-ceramic-7.png"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-ceramic-7.png"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link href={`/shop-collection-sub`} className="link title fw-6">
@@ -117,13 +117,13 @@ export default function Categories() {
                 className="collection-image img-style"
               >
                 <Image
-                  className="lazyload"
-                  data-src="/images/collections/collection-ceramic-8.png"
+                  className=""
+                  
                   alt="collection-img"
                   src="/images/collections/collection-ceramic-8.png"
                   width={160}
                   height={160}
-                />
+ style={{ width: "100%", height: "auto" }}                 />
               </Link>
               <div className="collection-content text-center">
                 <Link href={`/shop-collection-sub`} className="link title fw-6">
@@ -138,13 +138,13 @@ export default function Categories() {
                   className="collection-image img-style"
                 >
                   <Image
-                    className="lazyload"
-                    data-src="/images/collections/sale.jpg"
+                    className=""
+                    
                     alt="collection-img"
                     src="/images/collections/sale.jpg"
                     width={160}
                     height={160}
-                  />
+ style={{ width: "100%", height: "auto" }}                   />
                 </Link>
                 <div className="sale-off fw-5">30% off</div>
               </div>
