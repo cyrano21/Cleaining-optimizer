@@ -35,8 +35,24 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [mounted, setMounted] = useState(false);
+
+  // Éviter l'erreur d'hydratation en attendant le montage côté client
+  useEffect(() => {
+    setMounted(true);
+    
+    // Récupérer le thème depuis localStorage après le montage
+    if (typeof window !== "undefined") {
+      const storedTheme = localStorage.getItem(storageKey) as Theme;
+      if (storedTheme) {
+        setTheme(storedTheme);
+      }
+    }
+  }, [storageKey]);
 
   useEffect(() => {
+    if (!mounted || typeof window === "undefined") return;
+    
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
@@ -52,15 +68,26 @@ export function ThemeProvider({
     }
 
     root.classList.add(theme);
-  }, [theme, enableSystem]);
+  }, [theme, enableSystem, mounted]);
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(storageKey, theme);
+      }
       setTheme(theme);
     },
   };
+
+  // Éviter le rendu côté serveur pour éviter l'erreur d'hydratation
+  if (!mounted) {
+    return (
+      <ThemeProviderContext.Provider {...props} value={initialState}>
+        {children}
+      </ThemeProviderContext.Provider>
+    );
+  }
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>

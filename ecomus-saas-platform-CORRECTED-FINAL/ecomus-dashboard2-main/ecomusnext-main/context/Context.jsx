@@ -16,6 +16,12 @@ export default function Context({ children }) {
   const [quickViewItem, setQuickViewItem] = useState(allProducts[0]);
   const [quickAddItem, setQuickAddItem] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  // Éviter l'erreur d'hydratation en attendant le montage côté client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   useEffect(() => {
     const subtotal = cartProducts.reduce((accumulator, product) => {
       return accumulator + product.quantity * product.price;
@@ -92,25 +98,34 @@ export default function Context({ children }) {
     return false;
   };
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("cartList"));
+    if (!mounted || typeof window === "undefined") return;
+    
+    const items = JSON.parse(localStorage.getItem("cartList") || "[]");
     if (items?.length) {
       setCartProducts(items);
     }
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
+    if (!mounted || typeof window === "undefined") return;
+    
     localStorage.setItem("cartList", JSON.stringify(cartProducts));
-  }, [cartProducts]);
+  }, [cartProducts, mounted]);
+  
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("wishlist"));
+    if (!mounted || typeof window === "undefined") return;
+    
+    const items = JSON.parse(localStorage.getItem("wishlist") || "[]");
     if (items?.length) {
       setWishList(items);
     }
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
+    if (!mounted || typeof window === "undefined") return;
+    
     localStorage.setItem("wishlist", JSON.stringify(wishList));
-  }, [wishList]);
+  }, [wishList, mounted]);
 
   const contextElement = {
     cartProducts,

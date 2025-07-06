@@ -261,6 +261,7 @@
     padding: 85px 0px 60px;
   }
   .tf-slideshow {
+    padding-top: 64px; /* Compensation pour le header absolu sur tablette */
     .card-box-2 {
       .title {
         font-size: 20px;

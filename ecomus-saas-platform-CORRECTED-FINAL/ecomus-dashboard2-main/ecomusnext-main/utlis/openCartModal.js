@@ -1,4 +1,9 @@
 export const openCartModal = () => {
+  // Vérifier si nous sommes côté client
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return;
+  }
+  
   const bootstrap = require("bootstrap"); // dynamically import bootstrap
   const modalElements = document.querySelectorAll(".modal.show");
   modalElements.forEach((modal) => {
@@ -17,14 +22,18 @@ export const openCartModal = () => {
       offcanvasInstance.hide();
     }
   });
-  var myModal = new bootstrap.Modal(document.getElementById("shoppingCart"), {
+  
+  const cartElement = document.getElementById("shoppingCart");
+  if (!cartElement) {
+    return;
+  }
+  
+  var myModal = new bootstrap.Modal(cartElement, {
     keyboard: false,
   });
 
   myModal.show();
-  document
-    .getElementById("shoppingCart")
-    .addEventListener("hidden.bs.modal", () => {
-      myModal.hide();
-    });
+  cartElement.addEventListener("hidden.bs.modal", () => {
+    myModal.hide();
+  });
 };
