@@ -1,0 +1,45 @@
+{
+  "ollama": {
+    "baseUrl": "http://localhost:11434",
+    "models": ["llama3.2", "codellama"],
+    "timeout": 30000,
+    "retries": 3
+  },
+  "huggingface": {
+    "apiKey": "YOUR_HUGGING_FACE_API_KEY",
+    "baseUrl": "https://api-inference.huggingface.co",
+    "models": {
+      "text": "microsoft/DialoGPT-medium",
+      "image": "stabilityai/stable-diffusion-2-1",
+      "embedding": "sentence-transformers/all-MiniLM-L6-v2"
+    }
+  },
+  "chat": {
+    "maxTokens": 2048,
+    "temperature": 0.7,
+    "contextWindow": 4096,
+    "systemPrompt": "Tu es un assistant IA spécialisé dans l'e-commerce. Tu aides les clients à trouver des produits, répondre à leurs questions et améliorer leur expérience d'achat. Sois professionnel, utile et amical.",
+    "ecommerceContext": {
+      "store": "Ecomus",
+      "categories": ["Mode", "Électronique", "Maison", "Beauté", "Sport"],
+      "features": ["Visualisation 3D", "IA générative", "Recommandations personnalisées"]
+    }
+  },
+  "generation": {
+    "productDescription": {
+      "maxLength": 500,
+      "tone": "professional",
+      "includeKeywords": true
+    },
+    "images": {
+      "format": "jpg",
+      "quality": "high",
+      "dimensions": "1024x1024"
+    }
+  },
+  "monitoring": {
+    "logLevel": "info",
+    "metricsEnabled": true,
+    "analyticsEnabled": true
+  }
+}
