@@ -1,0 +1,8 @@
+/images/slider/icon1.svg
+   Source: data\testimonials.js
+
+/images/shop/products/p-1.png
+   Source: test-images.js
+
+/images/shop/products/p-2.png
+   Source: test-images.js
