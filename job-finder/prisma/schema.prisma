@@ -1,0 +1,142 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modèles pour l'application de recherche d'emploi
+
+enum UserRole {
+  FREE
+  PRO
+  COACH
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  role          UserRole  @default(FREE)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  cvs           CV[]
+  coverLetters  CoverLetter[]
+  profile       Profile?
+  favoriteJobs  FavoriteJob[]
+  subscription  Subscription?
+}
+
+model CV {
+  id            String    @id @default(uuid())
+  title         String
+  template      String    @default("professional")
+  content       Json
+  userId        String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coverLetters  CoverLetter[]
+}
+
+model CoverLetter {
+  id            String    @id @default(uuid())
+  title         String
+  content       String    @db.Text
+  company       String?
+  position      String?
+  tone          String    @default("formal")
+  language      String    @default("french")
+  cvId          String?
+  userId        String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv            CV?       @relation(fields: [cvId], references: [id], onDelete: SetNull)
+}
+
+model Profile {
+  id            String    @id @default(uuid())
+  slug          String    @unique
+  title         String
+  bio           String    @db.Text
+  socialLinks   Json?
+  projects      Json?
+  userId        String    @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Job {
+  id            String    @id @default(uuid())
+  title         String
+  company       String
+  location      String
+  description   String    @db.Text
+  salary        String?
+  contractType  String?
+  experienceLevel String?
+  url           String
+  source        String
+  latitude      Float?
+  longitude     Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  favoriteBy    FavoriteJob[]
+}
+
+model FavoriteJob {
+  id            String    @id @default(uuid())
+  userId        String
+  jobId         String
+  matchScore    Float?
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job           Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, jobId])
+}
+
+model Subscription {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  stripeCustomerId String  @unique
+  stripeSubscriptionId String @unique
+  stripePriceId String
+  stripeCurrentPeriodEnd DateTime
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AICoachingSession {
+  id            String    @id @default(uuid())
+  type          String    // interview, cv_review, letter_review, etc.
+  content       Json
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
