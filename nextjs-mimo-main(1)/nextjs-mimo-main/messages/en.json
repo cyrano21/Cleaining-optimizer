@@ -1,0 +1,25 @@
+{
+  "form": {
+    "title": "Contact Us",
+    "name": "Name",
+    "name_placeholder": "Your name",
+    "name_required": "Name is required",
+    "email": "Email",
+    "email_placeholder": "your@email.com",
+    "email_required": "Email is required",
+    "email_invalid": "Please enter a valid email",
+    "subject": "Subject",
+    "subject_placeholder": "Message subject",
+    "subject_required": "Subject is required",
+    "message": "Message",
+    "message_placeholder": "Your message...",
+    "message_required": "Message is required",
+    "submit": "Send",
+    "success": "Thank you for your message! We'll get back to you as soon as possible.",
+    "error": "An error occurred. Please try again later.",
+    "language": "Language",
+    "english": "English",
+    "french": "French",
+    "select_language": "Select a language"
+  }
+}

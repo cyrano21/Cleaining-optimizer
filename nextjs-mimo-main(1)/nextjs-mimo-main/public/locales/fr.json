@@ -1,0 +1,24 @@
+{
+  "form": {
+    "title": "Formulaire de contact",
+    "fields": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "name_placeholder": "Votre nom complet",
+      "email_placeholder": "votre@email.com"
+    },
+    "errors": {
+      "nameRequired": "Le nom est requis.",
+      "emailRequired": "L'e-mail est requis.",
+      "emailInvalid": "Veuillez entrer un e-mail valide."
+    },
+    "submit": {
+      "default": "Envoyer",
+      "sending": "Envoi en cours..."
+    },
+    "status": {
+      "success": "Merci ! Votre message a été envoyé.",
+      "error": "Une erreur s'est produite lors de l'envoi."
+    }
+  }
+}

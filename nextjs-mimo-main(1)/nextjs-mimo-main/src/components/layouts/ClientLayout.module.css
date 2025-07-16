@@ -1,0 +1,101 @@
+.lessonDark {
+  background-color: #0f172a; /* slate-900 - cohérent avec le thème global */
+  color: #f8fafc; /* slate-50 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lessonLight {
+  background-color: #ffffff;
+  color: #0f172a; /* slate-900 - meilleur contraste */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Styles spécifiques pour les titres de module */
+.lessonDark :global(.module-title) {
+  color: #f8fafc !important; /* slate-50 - cohérent */
+  font-weight: 700;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+.lessonLight :global(.module-title) {
+  color: #0f172a !important; /* slate-900 - cohérent */
+  font-weight: 700;
+  text-shadow: none;
+}
+
+/* Styles pour les éléments de navigation */
+.lessonDark :global(.lesson-tabs button),
+.lessonDark :global(.module-tabs button) {
+  color: #e2e8f0; /* slate-200 */
+  border-color: #334155; /* slate-700 */
+}
+
+.lessonDark :global(.lesson-tabs button.active),
+.lessonDark :global(.module-tabs button.active) {
+  color: #818cf8; /* indigo-400 */
+  background-color: #1e293b; /* slate-800 */
+  border-color: #4f46e5; /* indigo-600 */
+}
+
+.lessonLight :global(.lesson-tabs button),
+.lessonLight :global(.module-tabs button) {
+  color: #334155; /* slate-700 */
+  border-color: #e2e8f0; /* slate-200 */
+}
+
+.lessonLight :global(.lesson-tabs button.active),
+.lessonLight :global(.module-tabs button.active) {
+  color: #4f46e5; /* indigo-600 */
+  background-color: #f8fafc; /* slate-50 */
+  border-color: #4f46e5; /* indigo-600 */
+}
+
+/* Styles pour les composants de quiz et d'exercice */
+.lessonDark :global(.quiz-option),
+.lessonDark :global(.exercise-option) {
+  background-color: #1e293b; /* slate-800 */
+  color: #f8fafc; /* slate-50 */
+  border: 1px solid #334155; /* slate-700 */
+}
+
+.lessonDark :global(.quiz-option.selected),
+.lessonDark :global(.exercise-option.selected) {
+  background-color: #312e81; /* indigo-900 */
+  border: 1px solid #6366f1; /* indigo-500 */
+  color: #e0e7ff; /* indigo-100 */
+}
+
+.lessonLight :global(.quiz-option),
+.lessonLight :global(.exercise-option) {
+  background-color: #ffffff;
+  color: #0f172a; /* slate-900 */
+  border: 1px solid #e2e8f0; /* slate-200 */
+}
+
+.lessonLight :global(.quiz-option.selected),
+.lessonLight :global(.exercise-option.selected) {
+  background-color: #e0e7ff; /* indigo-100 */
+  border: 1px solid #4f46e5; /* indigo-600 */
+  color: #312e81; /* indigo-900 */
+}
+
+/* Styles pour les boutons d'action dans les quiz et exercices */
+.lessonDark :global(.action-button) {
+  background-color: #4f46e5; /* indigo-600 */
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.lessonLight :global(.action-button) {
+  background-color: #4f46e5; /* indigo-600 */
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,25 @@
+{
+  "form": {
+    "title": "Contactez-nous",
+    "name": "Nom",
+    "name_placeholder": "Votre nom",
+    "name_required": "Le nom est requis",
+    "email": "Email",
+    "email_placeholder": "votre@email.com",
+    "email_required": "L'email est requis",
+    "email_invalid": "Veuillez entrer un email valide",
+    "subject": "Sujet",
+    "subject_placeholder": "Objet de votre message",
+    "subject_required": "Le sujet est requis",
+    "message": "Message",
+    "message_placeholder": "Votre message...",
+    "message_required": "Le message est requis",
+    "submit": "Envoyer",
+    "success": "Merci pour votre message ! Nous vous répondrons dès que possible.",
+    "error": "Une erreur est survenue. Veuillez réessayer plus tard.",
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français",
+    "select_language": "Sélectionnez une langue"
+  }
+}

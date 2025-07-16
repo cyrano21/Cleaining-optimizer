@@ -1,0 +1,24 @@
+{
+  "form": {
+    "title": "Contact form",
+    "fields": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "name_placeholder": "Your full name",
+      "email_placeholder": "you@example.com"
+    },
+    "errors": {
+      "nameRequired": "Name is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address."
+    },
+    "submit": {
+      "default": "Send",
+      "sending": "Sending..."
+    },
+    "status": {
+      "success": "Thank you! Your message has been sent.",
+      "error": "An error occurred while sending your message."
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Puisque vous êtes déjà sur working-version, poussez-la d'abord
+git push -u origin working-version
+
+# Passez à la branche main
+git checkout main
+
+# Réinitialisez main pour qu'elle soit identique à working-version
+git reset --hard working-version
+
+# Forcez le push dans main
+git push --force origin main
