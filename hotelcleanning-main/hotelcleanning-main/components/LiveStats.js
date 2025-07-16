@@ -1,5 +1,5 @@
 // components/LiveStats.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 export default function LiveStats({ rooms, staffList }) {
   const [animatedStats, setAnimatedStats] = useState({
@@ -17,7 +17,7 @@ export default function LiveStats({ rooms, staffList }) {
   const [isVisible, setIsVisible] = useState(false);
 
   // Calculer les statistiques en temps réel
-  const calculateStats = () => {
+  const calculateStats = useCallback(() => {
     const total = rooms.length;
     const cleaned = rooms.filter(r => r.cleaned).length;
     const controlled = rooms.filter(r => r.controlled).length;
@@ -44,7 +44,7 @@ export default function LiveStats({ rooms, staffList }) {
       efficiency,
       avgTime,
     };
-  };
+  }, [rooms]);
 
   // Animation des nombres
   const animateNumber = (from, to, duration = 1000) => {

@@ -1,5 +1,5 @@
 // components/NotificationCenter.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 export default function NotificationCenter({ 
   rooms, 
@@ -17,28 +17,7 @@ export default function NotificationCenter({
 
   const [unreadCount, setUnreadCount] = useState(0);
 
-  useEffect(() => {
-    // Charger les paramètres sauvegardés
-    const savedSettings = localStorage.getItem("notificationSettings");
-    if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
-    }
-    
-    // Vérifications automatiques
-    if (settings.autoCheck) {
-      const interval = setInterval(() => {
-        checkForAlerts();
-      }, settings.reminderInterval * 60 * 1000);
-      
-      return () => clearInterval(interval);
-    }
-  }, [settings.autoCheck, settings.reminderInterval, rooms, staffList, checkForAlerts]);
-
-  useEffect(() => {
-    setUnreadCount(notifications.filter(n => !n.read).length);
-  }, [notifications]);
-
-  const checkForAlerts = () => {
+  const checkForAlerts = useCallback(() => {
     const alerts = [];
     const now = new Date();
 
@@ -96,7 +75,28 @@ export default function NotificationCenter({
     if (alerts.length > 0) {
       setNotifications(prev => [...alerts, ...prev.slice(0, 47)]); // Max 50 notifications
     }
-  };
+  }, [rooms, staffList, setNotifications]);
+
+  useEffect(() => {
+    // Charger les paramètres sauvegardés
+    const savedSettings = localStorage.getItem("notificationSettings");
+    if (savedSettings) {
+      setSettings(JSON.parse(savedSettings));
+    }
+    
+    // Vérifications automatiques
+    if (settings.autoCheck) {
+      const interval = setInterval(() => {
+        checkForAlerts();
+      }, settings.reminderInterval * 60 * 1000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [settings.autoCheck, settings.reminderInterval, checkForAlerts]);
+
+  useEffect(() => {
+    setUnreadCount(notifications.filter(n => !n.read).length);
+  }, [notifications]);
 
   const addNotification = (notification) => {
     const newNotification = {
@@ -169,7 +169,7 @@ export default function NotificationCenter({
       {/* Bouton de notification flottant */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-20 right-4 z-50 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative"
+        className="fixed top-20 right-4 z-50 bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
         title="Centre de notifications"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

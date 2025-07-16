@@ -1,5 +1,5 @@
 // components/ThemeManager.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 export default function ThemeManager({ currentTheme, onThemeChange }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,7 @@ export default function ThemeManager({ currentTheme, onThemeChange }) {
     accent: "#06b6d4",
   });
 
-  const themes = {
+  const themes = useMemo(() => ({
     default: {
       name: "🌈 Coloré (Défaut)",
       gradient: "from-pink-400 via-purple-500 to-indigo-600",
@@ -74,7 +74,7 @@ export default function ThemeManager({ currentTheme, onThemeChange }) {
       textPrimary: "text-gray-800",
       textSecondary: "text-gray-600",
     }
-  };
+  }), []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("hotelTheme");
