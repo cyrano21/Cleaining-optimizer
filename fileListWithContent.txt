@@ -1,0 +1,1528 @@
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\app\api\distribution.js
+----------------------------------------
+// API pour la distribution des tâches
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\app\api\rooms.js
+----------------------------------------
+// API pour gérer les chambres
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\app\api\staff.js
+----------------------------------------
+// API pour gérer le personnel
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\app\globals.css
+----------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\app\layout.js
+----------------------------------------
+// app/layout.js
+
+export const metadata = {
+  title: "Hotel Cleaning Management",
+  description: "Manage hotel room cleaning efficiently",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\app\page.js
+----------------------------------------
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { AppProvider, useAppContext } from "../context/AppContext";
+import SimulationForm from "../components/SimulationForm";
+import RoomGrid from "../components/RoomGrid";
+import StaffList from "../components/StaffList";
+import TaskDistribution from "../components/TaskDistribution";
+import DailyReport from "../components/DailyReport";
+
+function HomeContent() {
+  const { rooms, setRooms, staff, setStaff } = useAppContext();
+  const [distribution, setDistribution] = useState({});
+  const [report, setReport] = useState({});
+
+  useEffect(() => {
+    if (rooms.length && staff.length) {
+      const initialDistribution = {};
+      staff.forEach((employee) => {
+        initialDistribution[employee.name] = {
+          departures: [],
+          stayovers: [],
+          total: 0,
+        };
+      });
+      setDistribution(initialDistribution);
+    }
+  }, [rooms, staff]);
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">
+        Hôtel Cleaning Optimizer
+      </h1>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <SimulationForm setRooms={setRooms} />
+        <RoomGrid rooms={rooms} />
+      </div>
+
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <StaffList staff={staff} setStaff={setStaff} />
+        <DailyReport
+          rooms={rooms}
+          distribution={distribution}
+          report={report}
+          setReport={setReport}
+        />
+      </div>
+
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <TaskDistribution
+          rooms={rooms}
+          staff={staff}
+          distribution={distribution}
+          setDistribution={setDistribution}
+        />
+      </div>
+
+      <button className="mt-8 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+        Réinitialiser l'Application
+      </button>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <AppProvider>
+      <HomeContent />
+    </AppProvider>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\DailyReport.js
+----------------------------------------
+"use client";
+
+import React, { useMemo } from "react";
+import { useAppContext } from "../context/AppContext";
+
+export default function DailyReport() {
+  const { rooms } = useAppContext();
+
+  const report = useMemo(() => {
+    const totalRooms = rooms.length;
+    const departures = rooms.filter(
+      (room) => room.status === "departure"
+    ).length;
+    const stayovers = rooms.filter((room) => room.status === "stayover").length;
+    const dndRefusals = rooms.filter(
+      (room) => room.status === "dnd" || room.status === "refusal"
+    ).length;
+    const vacant = rooms.filter(
+      (room) => room.status === "blank" || room.status === ""
+    ).length;
+    const outOfOrder = rooms.filter(
+      (room) => room.status === "out_of_order"
+    ).length;
+
+    return {
+      totalRooms,
+      departures,
+      stayovers,
+      dndRefusals,
+      vacant,
+      outOfOrder,
+    };
+  }, [rooms]);
+
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6 col-span-2">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        Rapport Journalier
+      </h2>
+      <p>Total des chambres: {report.totalRooms}</p>
+      <p>Départs: {report.departures}</p>
+      <p>Recouches: {report.stayovers}</p>
+      <p>DND/Refus: {report.dndRefusals}</p>
+      <p>Chambres vides: {report.vacant}</p>
+      <p>Hors service: {report.outOfOrder}</p>
+    </div>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\Layout.js
+----------------------------------------
+export default function Layout({ children }) {
+    return (
+        <>
+            <div className="container mx-auto px-4 py-8">
+                {children}
+            </div>
+        </>
+    );
+}
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\ManualAssignment.js
+----------------------------------------
+import React, { useState } from "react";
+import { useAppContext } from "../context/AppContext";
+
+const ManualAssignment = () => {
+  const { rooms, setRooms } = useAppContext();
+  const [selectedRooms, setSelectedRooms] = useState([]);
+  const [roomStatus, setRoomStatus] = useState("departure");
+  const [changeSheets, setChangeSheets] = useState(false);
+  const [roomNotes, setRoomNotes] = useState("");
+  const [lateCheckout, setLateCheckout] = useState("");
+
+  const handleAssign = () => {
+    const updatedRooms = rooms.map((room) => {
+      if (selectedRooms.includes(room.number)) {
+        return {
+          ...room,
+          status: roomStatus,
+          changeSheets,
+          notes: roomNotes,
+          lateCheckout,
+        };
+      }
+      return room;
+    });
+    setRooms(updatedRooms);
+    clearSelection();
+  };
+
+  const clearSelection = () => {
+    setSelectedRooms([]);
+    setRoomStatus("departure");
+    setChangeSheets(false);
+    setRoomNotes("");
+    setLateCheckout("");
+  };
+
+  const markAsControlled = () => {
+    const updatedRooms = rooms.map((room) => {
+      if (selectedRooms.includes(room.number)) {
+        return {
+          ...room,
+          controlled: true,
+        };
+      }
+      return room;
+    });
+    setRooms(updatedRooms);
+    clearSelection();
+  };
+
+  const addStarToRoom = () => {
+    const updatedRooms = rooms.map((room) => {
+      if (selectedRooms.includes(room.number)) {
+        return {
+          ...room,
+          star: true,
+        };
+      }
+      return room;
+    });
+    setRooms(updatedRooms);
+    clearSelection();
+  };
+
+  return (
+    <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8" w-tid="22">
+      <div className="bg-white shadow-lg rounded-lg p-6" w-tid="23">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800" w-tid="24">
+          Assignation manuelle des chambres
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" w-tid="25">
+          <select
+            id="roomStatusSelect"
+            className="w-full bg-gray-200 border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            value={roomStatus}
+            onChange={(e) => setRoomStatus(e.target.value)}
+            w-tid="26"
+          >
+            <option value="departure" w-tid="27">
+              Départ (Orange)
+            </option>
+            <option value="stayover" w-tid="28">
+              Recouche (Vert)
+            </option>
+            <option value="blank" w-tid="29">
+              Libre et Propre (Blanc)
+            </option>
+          </select>
+          <div className="flex items-center" w-tid="30">
+            <input
+              type="checkbox"
+              id="changeSheets"
+              name="changeSheets"
+              className="mr-2 leading-tight"
+              checked={changeSheets}
+              onChange={() => setChangeSheets(!changeSheets)}
+              w-tid="31"
+            />
+            <label for="changeSheets" className="text-sm" w-tid="32">
+              Changement de draps (3ème jour)
+            </label>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" w-tid="33">
+          <input
+            type="text"
+            id="roomNotes"
+            placeholder="Notes (ex: LP)"
+            className="w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            value={roomNotes}
+            onChange={(e) => setRoomNotes(e.target.value)}
+            w-tid="34"
+          />
+          <input
+            type="text"
+            id="lateCheckout"
+            placeholder="Départ tardif (ex: 14:00)"
+            className="w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            value={lateCheckout}
+            onChange={(e) => setLateCheckout(e.target.value)}
+            w-tid="35"
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4" w-tid="36">
+          <button
+            onClick={handleAssign}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+            w-tid="37"
+          >
+            Assigner
+          </button>
+          <button
+            onClick={clearSelection}
+            className="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+            w-tid="38"
+          >
+            Effacer sélection
+          </button>
+          <button
+            onClick={markAsControlled}
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+            w-tid="39"
+          >
+            Marquer contrôlée
+          </button>
+        </div>
+        <button
+          onClick={addStarToRoom}
+          className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+          w-tid="40"
+        >
+          Ajouter une étoile (Recouche avec changement de draps)
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ManualAssignment;
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\RoomGrid.js
+----------------------------------------
+"use client";
+
+import { useState } from "react";
+import { useAppContext } from "../context/AppContext";
+
+export default function RoomGrid() {
+  const { rooms, setRooms } = useAppContext();
+  const [selectedRooms, setSelectedRooms] = useState([]);
+
+  function toggleRoomSelection(roomNumber) {
+    setSelectedRooms((prev) =>
+      prev.includes(roomNumber)
+        ? prev.filter((num) => num !== roomNumber)
+        : [...prev, roomNumber]
+    );
+  }
+
+  function changeRoomStatus(roomNumber, newStatus) {
+    setRooms((prev) =>
+      prev.map((room) =>
+        room.number === roomNumber ? { ...room, status: newStatus } : room
+      )
+    );
+  }
+
+  function toggleRoomStar(roomNumber) {
+    setRooms((prev) =>
+      prev.map((room) =>
+        room.number === roomNumber
+          ? { ...room, isStarred: !room.isStarred }
+          : room
+      )
+    );
+  }
+
+  function toggleRoomBar(roomNumber) {
+    setRooms((prev) =>
+      prev.map((room) =>
+        room.number === roomNumber
+          ? { ...room, isBarred: !room.isBarred }
+          : room
+      )
+    );
+  }
+
+  function addNote(roomNumber, note) {
+    setRooms((prev) =>
+      prev.map((room) =>
+        room.number === roomNumber
+          ? { ...room, notes: room.notes + " " + note }
+          : room
+      )
+    );
+  }
+
+  if (rooms.length === 0) {
+    return <div>Loading rooms...</div>;
+  }
+
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6 col-span-2">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        État des chambres
+      </h2>
+      <div className="grid grid-cols-3 gap-2 h-[calc(100vh-200px)] overflow-y-auto">
+        {rooms.map((room) => (
+          <div key={room.number} className="space-y-2">
+            <div
+              className={
+                "flex flex-col border border-gray-300 rounded-lg overflow-hidden " +
+                (selectedRooms.includes(room.number) ? "bg-gray-200" : "")
+              }
+              onClick={() => toggleRoomSelection(room.number)}
+            >
+              <div className="p-2 text-center font-bold cursor-pointer bg-white">
+                {room.number} {room.type}
+              </div>
+              <div className="flex flex-col p-1 text-xs">
+                <div>{room.notes}</div>
+                {room.isStarred && (
+                  <div className="bg-yellow-100 p-1 rounded mt-1">⭐</div>
+                )}
+                <button
+                  className="bg-blue-500 text-white rounded px-2 py-1 text-xs mt-1"
+                  onClick={() => changeRoomStatus(room.number, "departure")}
+                >
+                  Départ
+                </button>
+                <button
+                  className="bg-green-500 text-white rounded px-2 py-1 text-xs mt-1"
+                  onClick={() => changeRoomStatus(room.number, "stayover")}
+                >
+                  Recouche
+                </button>
+                <button
+                  className="bg-yellow-500 text-white rounded px-2 py-1 text-xs mt-1"
+                  onClick={() => toggleRoomStar(room.number)}
+                >
+                  ⭐
+                </button>
+                <button
+                  className="bg-red-500 text-white rounded px-2 py-1 text-xs mt-1"
+                  onClick={() => toggleRoomBar(room.number)}
+                >
+                  Barrer
+                </button>
+                <input
+                  type="text"
+                  placeholder="Ajouter une note"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      addNote(room.number, e.target.value);
+                      e.target.value = "";
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\SimulationForm.js
+----------------------------------------
+"use client";
+
+import { useState } from "react";
+import { useAppContext } from "../context/AppContext";
+
+export default function SimulationForm() {
+  const { rooms, setRooms } = useAppContext();
+  const [departures, setDepartures] = useState(0);
+  const [stayovers, setStayovers] = useState(0);
+
+  function simulateReport() {
+    setRooms((prev) => {
+      const newRooms = [...prev];
+      let departureCount = 0;
+      let stayoverCount = 0;
+
+      // Réinitialiser d'abord tous les statuts
+      newRooms.forEach((room) => {
+        room.status = "blank";
+      });
+
+      // Ensuite, attribuer les statuts de départ et de recouche
+      for (let i = 0; i < newRooms.length; i++) {
+        if (departureCount < departures) {
+          newRooms[i].status = "departure";
+          departureCount++;
+        } else if (stayoverCount < stayovers) {
+          newRooms[i].status = "stayover";
+          stayoverCount++;
+        } else {
+          break; // Sortir de la boucle si tous les départs et recouches ont été attribués
+        }
+      }
+
+      return newRooms;
+    });
+  }
+
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6 col-span-1">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        Simulation de rapport
+      </h2>
+      <div className="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label
+            htmlFor="departures"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Nombre de départs
+          </label>
+          <input
+            type="number"
+            id="departures"
+            name="departures"
+            min="0"
+            max="119"
+            value={departures}
+            onChange={(e) => setDepartures(parseInt(e.target.value))}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="stayovers"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Nombre de recouches
+          </label>
+          <input
+            type="number"
+            id="stayovers"
+            name="stayovers"
+            min="0"
+            max="119"
+            value={stayovers}
+            onChange={(e) => setStayovers(parseInt(e.target.value))}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+        </div>
+      </div>
+      <button
+        onClick={simulateReport}
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+      >
+        Simuler le rapport
+      </button>
+    </div>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\StaffList.js
+----------------------------------------
+"use client";
+
+import { useState } from "react";
+
+export default function StaffList({ staff, setStaff }) {
+  const [newStaffName, setNewStaffName] = useState("");
+  const [newStaffContract, setNewStaffContract] = useState("6h");
+  const [newStaffPreferredFloor, setNewStaffPreferredFloor] = useState("");
+
+  function addStaff(e) {
+    e.preventDefault();
+    if (newStaffName) {
+      const newStaff = {
+        name: newStaffName,
+        contract: newStaffContract,
+        preferredFloor: newStaffPreferredFloor,
+      };
+      const updatedStaff = [...(staff || []), newStaff];
+      setStaff(updatedStaff);
+      localStorage.setItem("hotelStaff", JSON.stringify(updatedStaff));
+      setNewStaffName("");
+      setNewStaffContract("6h");
+      setNewStaffPreferredFloor("");
+    }
+  }
+
+  function removeStaff(name) {
+    const updatedStaff = (staff || []).filter((s) => s.name !== name);
+    setStaff(updatedStaff);
+    localStorage.setItem("hotelStaff", JSON.stringify(updatedStaff));
+  }
+
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6 col-span-1">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        Liste du Personnel
+      </h2>
+      <p>Nombre total d'employés: {staff ? staff.length : 0}</p>
+      <form onSubmit={addStaff}>
+        <input
+          type="text"
+          value={newStaffName}
+          onChange={(e) => setNewStaffName(e.target.value)}
+          placeholder="Nom de l'employé"
+          className="w-full p-2 mb-2 border rounded"
+        />
+        <select
+          value={newStaffContract}
+          onChange={(e) => setNewStaffContract(e.target.value)}
+          className="w-full p-2 mb-2 border rounded"
+        >
+          <option value="5h">5h</option>
+          <option value="6h">6h</option>
+        </select>
+        <input
+          type="text"
+          value={newStaffPreferredFloor}
+          onChange={(e) => setNewStaffPreferredFloor(e.target.value)}
+          placeholder="Étage préféré"
+          className="w-full p-2 mb-2 border rounded"
+        />
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+        >
+          Ajouter
+        </button>
+      </form>
+      <ul>
+        {staff &&
+          staff.map((employee, index) => (
+            <li key={index} className="flex justify-between items-center mt-2">
+              <span>{employee.name}</span>
+              <span>Contrat: {employee.contract}</span>
+              <span>
+                Étage préféré: {employee.preferredFloor || "Non spécifié"}
+              </span>
+              <button
+                onClick={() => removeStaff(employee.name)}
+                className="bg-red-500 text-white px-2 py-1 rounded"
+              >
+                Supprimer
+              </button>
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\components\TaskDistribution.js
+----------------------------------------
+"use client";
+
+import { useState, useEffect } from "react";
+
+export default function TaskDistribution({
+  rooms = [],
+  staff = [],
+  distribution = {},
+  setDistribution,
+}) {
+  function distributeRooms() {
+    if (!rooms.length || !staff.length) return;
+
+    const newDistribution = {};
+    const departures = rooms.filter((room) => room.status === "departure");
+    const stayovers = rooms.filter((room) => room.status === "stayover");
+
+    staff.forEach((employee) => {
+      newDistribution[employee.name] = {
+        departures: [],
+        stayovers: [],
+        total: 0,
+      };
+    });
+
+    // Distribution des départs
+    departures.forEach((room, index) => {
+      const employeeIndex = index % staff.length;
+      const employeeName = staff[employeeIndex].name;
+      newDistribution[employeeName].departures.push(room.number);
+      newDistribution[employeeName].total += 1;
+    });
+
+    // Distribution des recouches
+    stayovers.forEach((room, index) => {
+      const employeeIndex = index % staff.length;
+      const employeeName = staff[employeeIndex].name;
+      if (
+        newDistribution[employeeName].total <
+        (staff[employeeIndex].contract === "6h" ? 18 : 15)
+      ) {
+        newDistribution[employeeName].stayovers.push(room.number);
+        newDistribution[employeeName].total += 1;
+      }
+    });
+
+    setDistribution(newDistribution);
+  }
+
+  useEffect(() => {
+    distributeRooms();
+  }, [rooms, staff]);
+
+  if (!distribution || Object.keys(distribution).length === 0) {
+    return <div>Loading task distribution...</div>;
+  }
+
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6 col-span-2">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+        Distribution des Tâches
+      </h2>
+      <button
+        onClick={distributeRooms}
+        className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+      >
+        Redistribuer les Chambres
+      </button>
+      <ul>
+        {Object.entries(distribution).map(([name, tasks]) => (
+          <li key={name} className="mt-4">
+            <h3 className="text-xl font-bold">{name}</h3>
+            <p>
+              Départs: {tasks.departures.join(", ")} ({tasks.departures.length})
+            </p>
+            <p>
+              Recouches: {tasks.stayovers.join(", ")} ({tasks.stayovers.length})
+            </p>
+            <p>Total: {tasks.total}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\context\AppContext.js
+----------------------------------------
+"use client";
+import React, { createContext, useContext, useState, useEffect } from "react";
+
+const AppContext = createContext();
+
+const generateRooms = () => {
+  const rooms = [];
+  for (let floor = 1; floor <= 6; floor++) {
+    for (let room = 1; room <= 20; room++) {
+      if (floor === 6 && room === 16) continue; // Pas de chambre 616
+      const roomNumber = floor * 100 + room;
+      rooms.push({
+        number: roomNumber,
+        status: "",
+        color: "",
+        type: roomNumber < 320 ? "TWTW" : "KING",
+        notes: [],
+        lateCheckout: "",
+        changeSheets: false,
+        controlled: false,
+        star: false,
+      });
+    }
+  }
+  return rooms;
+};
+
+export const AppProvider = ({ children }) => {
+  const [rooms, setRooms] = useState(generateRooms());
+  const [staff, setStaff] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedStaff = localStorage.getItem("hotelStaff");
+      if (storedStaff) {
+        setStaff(JSON.parse(storedStaff));
+      }
+    }
+  }, []);
+
+  return (
+    <AppContext.Provider value={{ rooms, setRooms, staff, setStaff }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (context === undefined) {
+    throw new Error("useAppContext must be used within an AppProvider");
+  }
+  return context;
+};
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\hooks\useRooms.js
+----------------------------------------
+import { useState, useEffect } from 'react';
+
+export function useRooms() {
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        // Logique d'initialisation des chambres
+        const newRooms = [];
+        for (let floor = 1; floor <= 6; floor++) {
+            for (let room = 1; room <= 20; room++) {
+                if (floor === 6 && room === 16) continue; // Pas de chambre 616
+                const roomNumber = floor * 100 + room;
+                newRooms.push({
+                    number: roomNumber,
+                    type: roomNumber <= 320 ? 'TWTW' : 'KING',
+                    status: 'blank',
+                    notes: '',
+                    isStarred: false,
+                    isBarred: false,
+                    isControlled: false
+                });
+            }
+        }
+        setRooms(newRooms);
+    }, []);
+
+    return [rooms, setRooms];
+}
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\hooks\useStaff.js
+----------------------------------------
+import { useState, useEffect } from 'react';
+
+export function useStaff() {
+    const [staff, setStaff] = useState([]);
+
+    useEffect(() => {
+        // Logique de chargement du personnel depuis le stockage local
+        const savedStaff = JSON.parse(localStorage.getItem('hotelStaff')) || [];
+        setStaff(savedStaff);
+    }, []);
+
+    return [staff, setStaff];
+}
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\listFilesWithContent.js
+----------------------------------------
+const fs = require("fs");
+const path = require("path");
+
+// Fonction pour lister les fichiers et dossiers récursivement et extraire le contenu des fichiers pertinents
+const listFilesWithContent = (dir, filelist = []) => {
+  const files = fs.readdirSync(dir);
+  files.forEach((file) => {
+    const filepath = path.join(dir, file);
+    if (fs.statSync(filepath).isDirectory()) {
+      if (!filepath.includes("node_modules") && !filepath.includes(".next")) {
+        filelist = listFilesWithContent(filepath, filelist);
+      }
+    } else {
+      if ([".js", ".jsx", ".css"].includes(path.extname(filepath))) {
+        const content = fs.readFileSync(filepath, "utf-8");
+        filelist.push({ filepath, content });
+      }
+    }
+  });
+  return filelist;
+};
+
+// Chemin du répertoire de votre projet
+const projectDir = path.resolve(__dirname);
+
+// Lister les fichiers et dossiers avec leur contenu
+const filesWithContent = listFilesWithContent(projectDir);
+
+// Créer un fichier de sortie
+const outputFile = "fileListWithContent.txt";
+const outputStream = fs.createWriteStream(outputFile, { flags: "w" });
+
+// Écrire les fichiers et leur contenu dans le fichier de sortie
+filesWithContent.forEach(({ filepath, content }) => {
+  outputStream.write(`File: ${filepath}\n`);
+  outputStream.write("----------------------------------------\n");
+  outputStream.write(content);
+  outputStream.write("\n\n");
+});
+
+outputStream.end();
+console.log(`Liste des fichiers et contenu enregistrée dans ${outputFile}`);
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\postcss.config.js
+----------------------------------------
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\setup.js
+----------------------------------------
+const fs = require("fs");
+const path = require("path");
+
+// Structure des dossiers et fichiers à créer
+const structure = {
+  pages: {
+    "index.js": `import { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
+import RoomGrid from '../components/RoomGrid';
+import StaffList from '../components/StaffList';
+import TaskDistribution from '../components/TaskDistribution';
+import DailyReport from '../components/DailyReport';
+import SimulationForm from '../components/SimulationForm';
+
+export default function Home() {
+    const [rooms, setRooms] = useState([]);
+    const [staff, setStaff] = useState([]);
+    const [distribution, setDistribution] = useState({});
+    const [report, setReport] = useState({});
+
+    useEffect(() => {
+        // Initialiser les chambres et le personnel
+        initializeRooms();
+        loadStaffFromLocalStorage();
+    }, []);
+
+    function initializeRooms() {
+        // Logique d'initialisation des chambres
+        const newRooms = [];
+        for (let floor = 1; floor <= 6; floor++) {
+            for (let room = 1; room <= 20; room++) {
+                if (floor === 6 && room === 16) continue; // Pas de chambre 616
+                const roomNumber = floor * 100 + room;
+                newRooms.push({
+                    number: roomNumber,
+                    type: roomNumber <= 320 ? 'TWTW' : 'KING',
+                    status: 'blank',
+                    notes: '',
+                    isStarred: false,
+                    isBarred: false,
+                    isControlled: false
+                });
+            }
+        }
+        setRooms(newRooms);
+    }
+
+    function loadStaffFromLocalStorage() {
+        // Logique de chargement du personnel depuis le stockage local
+        const savedStaff = JSON.parse(localStorage.getItem('hotelStaff')) || [];
+        setStaff(savedStaff);
+    }
+
+    function resetApplication() {
+        initializeRooms();
+        setDistribution({});
+        setReport({});
+    }
+
+    return (
+        <Layout>
+            <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">Hôtel Cleaning Optimizer</h1>
+            <SimulationForm setRooms={setRooms} />
+            <RoomGrid rooms={rooms} setRooms={setRooms} />
+            <StaffList staff={staff} setStaff={setStaff} />
+            <TaskDistribution rooms={rooms} staff={staff} distribution={distribution} setDistribution={setDistribution} />
+            <DailyReport rooms={rooms} distribution={distribution} report={report} setReport={setReport} />
+            <button onClick={resetApplication} className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                Réinitialiser l'Application
+            </button>
+        </Layout>
+    );
+}`,
+    api: {
+      "rooms.js": `// API pour gérer les chambres`,
+      "staff.js": `// API pour gérer le personnel`,
+      "distribution.js": `// API pour la distribution des tâches`,
+    },
+  },
+  components: {
+    "Layout.js": `export default function Layout({ children }) {
+    return (
+        <>
+            <div className="container mx-auto px-4 py-8">
+                {children}
+            </div>
+        </>
+    );
+}`,
+    "RoomGrid.js": `import { useState } from 'react';
+
+export default function RoomGrid({ rooms, setRooms }) {
+    const [selectedRooms, setSelectedRooms] = useState([]);
+
+    function toggleRoomSelection(roomNumber) {
+        setSelectedRooms(prev =>
+            prev.includes(roomNumber)
+                ? prev.filter(num => num !== roomNumber)
+                : [...prev, roomNumber]
+        );
+    }
+
+    function changeRoomStatus(roomNumber, newStatus) {
+        setRooms(prev =>
+            prev.map(room =>
+                room.number === roomNumber ? { ...room, status: newStatus } : room
+            )
+        );
+    }
+
+    function toggleRoomStar(roomNumber) {
+        setRooms(prev =>
+            prev.map(room =>
+                room.number === roomNumber ? { ...room, isStarred: !room.isStarred } : room
+            )
+        );
+    }
+
+    function toggleRoomBar(roomNumber) {
+        setRooms(prev =>
+            prev.map(room =>
+                room.number === roomNumber ? { ...room, isBarred: !room.isBarred } : room
+            )
+        );
+    }
+
+    function addNote(roomNumber, note) {
+        setRooms(prev =>
+            prev.map(room =>
+                room.number === roomNumber ? { ...room, notes: room.notes + ' ' + note } : room
+            )
+        );
+    }
+
+    return (
+        <div className="bg-white shadow-lg rounded-lg p-6 col-span-2">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">État des chambres</h2>
+            <div className="grid grid-cols-3 gap-2 h-[calc(100vh-200px)] overflow-y-auto">
+                {rooms.map(room => (
+                    <div key={room.number} className="space-y-2">
+                        <div
+                            className={'flex flex-col border border-gray-300 rounded-lg overflow-hidden ' +
+                                (selectedRooms.includes(room.number) ? 'bg-gray-200' : '')
+                            }
+                            onClick={() => toggleRoomSelection(room.number)}
+                        >
+                            <div className="p-2 text-center font-bold cursor-pointer bg-white">
+                                {room.number} {room.type}
+                            </div>
+                            <div className="flex flex-col p-1 text-xs">
+                                <div>{room.notes}</div>
+                                {room.isStarred && <div className="bg-yellow-100 p-1 rounded mt-1">⭐</div>}
+                                <button
+                                    className="bg-blue-500 text-white rounded px-2 py-1 text-xs mt-1"
+                                    onClick={() => changeRoomStatus(room.number, 'departure')}
+                                >
+                                    Départ
+                                </button>
+                                <button
+                                    className="bg-green-500 text-white rounded px-2 py-1 text-xs mt-1"
+                                    onClick={() => changeRoomStatus(room.number, 'stayover')}
+                                >
+                                    Recouche
+                                </button>
+                                <button
+                                    className="bg-yellow-500 text-white rounded px-2 py-1 text-xs mt-1"
+                                    onClick={() => toggleRoomStar(room.number)}
+                                >
+                                    ⭐
+                                </button>
+                                <button
+                                    className="bg-red-500 text-white rounded px-2 py-1 text-xs mt-1"
+                                    onClick={() => toggleRoomBar(room.number)}
+                                >
+                                    Barrer
+                                </button>
+                                <input
+                                    type="text"
+                                    placeholder="Ajouter une note"
+                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    onKeyDown={e => {
+                                        if (e.key === 'Enter') {
+                                            addNote(room.number, e.target.value);
+                                            e.target.value = '';
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}`,
+    "StaffList.js": `import { useState } from 'react';
+
+export default function StaffList({ staff, setStaff }) {
+    const [newStaffName, setNewStaffName] = useState('');
+    const [newStaffContract, setNewStaffContract] = useState('6h');
+    const [newStaffPreferredFloor, setNewStaffPreferredFloor] = useState('');
+
+    function addStaff(e) {
+        e.preventDefault();
+        if (newStaffName) {
+            const newStaff = {
+                name: newStaffName,
+                contract: newStaffContract,
+                preferredFloor: newStaffPreferredFloor,
+            };
+            setStaff(prev => [...prev, newStaff]);
+            localStorage.setItem('hotelStaff', JSON.stringify([...staff, newStaff]));
+            setNewStaffName('');
+            setNewStaffContract('6h');
+            setNewStaffPreferredFloor('');
+        }
+    }
+
+    function removeStaff(name) {
+        setStaff(prev => prev.filter(s => s.name !== name));
+        localStorage.setItem('hotelStaff', JSON.stringify(staff.filter(s => s.name !== name)));
+    }
+
+    return (
+        <div className="bg-white shadow-lg rounded-lg p-6 col-span-1">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Liste du Personnel</h2>
+            <p>Nombre total d'employés: {staff.length}</p>
+            <form onSubmit={addStaff}>
+                <input
+                    type="text"
+                    value={newStaffName}
+                    onChange={e => setNewStaffName(e.target.value)}
+                    placeholder="Nom de l'employé"
+                    className="w-full p-2 mb-2 border rounded"
+                />
+                <select
+                    value={newStaffContract}
+                    onChange={e => setNewStaffContract(e.target.value)}
+                    className="w-full p-2 mb-2 border rounded"
+                >
+                    <option value="5h">5h</option>
+                    <option value="6h">6h</option>
+                </select>
+                <input
+                    type="text"
+                    value={newStaffPreferredFloor}
+                    onChange={e => setNewStaffPreferredFloor(e.target.value)}
+                    placeholder="Étage préféré"
+                    className="w-full p-2 mb-2 border rounded"
+                />
+                <button
+                    type="submit"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+                >
+                    Ajouter
+                </button>
+            </form>
+            <ul>
+                {staff.map((employee, index) => (
+                    <li key={index} className="flex justify-between items-center mt-2">
+                        <span>{employee.name}</span>
+                        <span>Contrat: {employee.contract}</span>
+                        <span>Étage préféré: {employee.preferredFloor || 'Non spécifié'}</span>
+                        <button
+                            onClick={() => removeStaff(employee.name)}
+                            className="bg-red-500 text-white px-2 py-1 rounded"
+                        >
+                            Supprimer
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}`,
+    "TaskDistribution.js": `import { useState, useEffect } from 'react';
+
+export default function TaskDistribution({ rooms, staff, distribution, setDistribution }) {
+    function distributeRooms() {
+        const newDistribution = {};
+        const departures = rooms.filter(room => room.status === 'departure');
+        const stayovers = rooms.filter(room => room.status === 'stayover');
+
+        staff.forEach(employee => {
+            newDistribution[employee.name] = { departures: [], stayovers: [], total: 0 };
+        });
+
+        // Distribution des départs
+        departures.forEach((room, index) => {
+            const employeeIndex = index % staff.length;
+            const employeeName = staff[employeeIndex].name;
+            newDistribution[employeeName].departures.push(room.number);
+            newDistribution[employeeName].total += 1;
+        });
+
+        // Distribution des recouches
+        stayovers.forEach((room, index) => {
+            const employeeIndex = index % staff.length;
+            const employeeName = staff[employeeIndex].name;
+            if (newDistribution[employeeName].total < (staff[employeeIndex].contract === '6h' ? 18 : 15)) {
+                newDistribution[employeeName].stayovers.push(room.number);
+                newDistribution[employeeName].total += 1;
+            }
+        });
+
+        setDistribution(newDistribution);
+    }
+
+    useEffect(() => {
+        distributeRooms();
+    }, [rooms, staff]);
+
+    return (
+        <div className="bg-white shadow-lg rounded-lg p-6 col-span-2">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Distribution des Tâches</h2>
+            <button
+                onClick={distributeRooms}
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+            >
+                Redistribuer les Chambres
+            </button>
+            <ul>
+                {Object.entries(distribution).map(([name, tasks]) => (
+                    <li key={name} className="mt-4">
+                        <h3 className="text-xl font-bold">{name}</h3>
+                        <p>Départs: {tasks.departures.join(', ')} ({tasks.departures.length})</p>
+                        <p>Recouches: {tasks.stayovers.join(', ')} ({tasks.stayovers.length})</p>
+                        <p>Total: {tasks.total}</p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}`,
+    "DailyReport.js": `import { useEffect } from 'react';
+
+export default function DailyReport({ rooms, distribution, report, setReport }) {
+    useEffect(() => {
+        updateDailyReport();
+    }, [rooms, distribution]);
+
+    function updateDailyReport() {
+        const newReport = {
+            totalRooms: rooms.length,
+            departures: rooms.filter(room => room.status === 'departure').length,
+            stayovers: rooms.filter(room => room.status === 'stayover').length,
+            dndRefusals: rooms.filter(room => room.notes.includes('DND') || room.notes.includes('Refus')).length,
+            controlled: rooms.filter(room => room.isControlled).length,
+        };
+        setReport(newReport);
+    }
+
+    return (
+        <div className="bg-white shadow-lg rounded-lg p-6 col-span-2">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Rapport Journalier</h2>
+            <p>Total des chambres: {report.totalRooms}</p>
+            <p>Départs: {report.departures}</p>
+            <p>Recouches: {report.stayovers}</p>
+            <p>DND/Refus: {report.dndRefusals}</p>
+            <p>Chambres contrôlées: {report.controlled}</p>
+        </div>
+    );
+}`,
+    "SimulationForm.js": `import { useState } from 'react';
+
+export default function SimulationForm({ setRooms }) {
+    const [departures, setDepartures] = useState(0);
+    const [stayovers, setStayovers] = useState(0);
+
+    function simulateReport() {
+        setRooms(prev => {
+            const newRooms = [...prev];
+            let departureCount = 0;
+            let stayoverCount = 0;
+            newRooms.forEach((room, index) => {
+                if (departureCount < departures) {
+                    room.status = 'departure';
+                    departureCount++;
+                } else if (stayoverCount < stayovers) {
+                    room.status = 'stayover';
+                    stayoverCount++;
+                } else {
+                    room.status = 'blank';
+                }
+            });
+            return newRooms;
+        });
+    }
+
+    return (
+        <div className="bg-white shadow-lg rounded-lg p-6 col-span-1">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Simulation de rapport</h2>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label htmlFor="departures" className="block text-sm font-medium text-gray-700">Nombre de départs</label>
+                    <input
+                        type="number"
+                        id="departures"
+                        name="departures"
+                        min="0"
+                        max="119"
+                        value={departures}
+                        onChange={e => setDepartures(parseInt(e.target.value))}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="stayovers" className="block text-sm font-medium text-gray-700">Nombre de recouches</label>
+                    <input
+                        type="number"
+                        id="stayovers"
+                        name="stayovers"
+                        min="0"
+                        max="119"
+                        value={stayovers}
+                        onChange={e => setStayovers(parseInt(e.target.value))}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    />
+                </div>
+            </div>
+            <button
+                onClick={simulateReport}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+            >
+                Simuler le rapport
+            </button>
+        </div>
+    );
+}`,
+  },
+  hooks: {
+    "useRooms.js": `import { useState, useEffect } from 'react';
+
+export function useRooms() {
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        // Logique d'initialisation des chambres
+        const newRooms = [];
+        for (let floor = 1; floor <= 6; floor++) {
+            for (let room = 1; room <= 20; room++) {
+                if (floor === 6 && room === 16) continue; // Pas de chambre 616
+                const roomNumber = floor * 100 + room;
+                newRooms.push({
+                    number: roomNumber,
+                    type: roomNumber <= 320 ? 'TWTW' : 'KING',
+                    status: 'blank',
+                    notes: '',
+                    isStarred: false,
+                    isBarred: false,
+                    isControlled: false
+                });
+            }
+        }
+        setRooms(newRooms);
+    }, []);
+
+    return [rooms, setRooms];
+}`,
+    "useStaff.js": `import { useState, useEffect } from 'react';
+
+export function useStaff() {
+    const [staff, setStaff] = useState([]);
+
+    useEffect(() => {
+        // Logique de chargement du personnel depuis le stockage local
+        const savedStaff = JSON.parse(localStorage.getItem('hotelStaff')) || [];
+        setStaff(savedStaff);
+    }, []);
+
+    return [staff, setStaff];
+}`,
+  },
+  context: {
+    "AppContext.js": `import { createContext, useContext, useState } from 'react';
+
+const AppContext = createContext();
+
+export function AppWrapper({ children }) {
+    const [rooms, setRooms] = useState([]);
+    const [staff, setStaff] = useState([]);
+
+    return (
+        <AppContext.Provider value={{ rooms, setRooms, staff, setStaff }}>
+            {children}
+        </AppContext.Provider>
+    );
+}
+
+export function useAppContext() {
+    return useContext(AppContext);
+}`,
+  },
+  utils: {
+    "roomUtils.js": `// Fonctions utilitaires pour les chambres`,
+    "distributionUtils.js": `// Fonctions utilitaires pour la distribution`,
+  },
+  styles: {
+    "globals.css": `@tailwind base;
+@tailwind components;
+@tailwind utilities;`,
+  },
+  "next.config.mjs": `const nextConfig = {
+    reactStrictMode: true,
+    swcMinify: true,
+}
+
+export default nextConfig`,
+  "tailwind.config.js": `/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+        './pages/**/*.{js,ts,jsx,tsx}',
+        './components/**/*.{js,ts,jsx,tsx}',
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+}`,
+  "postcss.config.mjs": `module.exports = {
+    plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+    },
+}`,
+  ".gitignore": `node_modules
+.next
+out
+`,
+  "jsconfig.json": `{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/components/*": ["components/*"],
+            "@/pages/*": ["pages/*"],
+            "@/hooks/*": ["hooks/*"],
+            "@/context/*": ["context/*"],
+            "@/utils/*": ["utils/*"]
+        }
+    }
+}`,
+  ".eslintrc.json": `{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "react/react-in-jsx-scope": "off"
+    }
+}`,
+};
+
+// Fonction pour créer les fichiers et dossiers
+function createStructure(basePath, structure) {
+  Object.keys(structure).forEach((key) => {
+    const fullPath = path.join(basePath, key);
+    if (typeof structure[key] === "string") {
+      fs.writeFileSync(fullPath, structure[key]);
+    } else {
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath);
+      }
+      createStructure(fullPath, structure[key]);
+    }
+  });
+}
+
+// Chemin de base (racine de l'application)
+const basePath = "c:/Users/Louis Olivier/Documents/hotel_cleaning/";
+
+// Créer la structure des fichiers et dossiers
+createStructure(basePath, structure);
+
+console.log("Structure de fichiers créée avec succès.");
+
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\styles\globals.css
+----------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\tailwind.config.js
+----------------------------------------
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+        './pages/**/*.{js,ts,jsx,tsx}',
+        './components/**/*.{js,ts,jsx,tsx}',
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+}
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\utils\distributionUtils.js
+----------------------------------------
+// Fonctions utilitaires pour la distribution
+
+File: C:\Users\Louis Olivier\Documents\hotel_cleaning\utils\roomUtils.js
+----------------------------------------
+// Fonctions utilitaires pour les chambres
+

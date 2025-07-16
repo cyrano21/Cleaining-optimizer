@@ -1,0 +1,66 @@
+<analysis>
+The previous AI engineer began by analyzing an existing Next.js application, confirming its purpose: automating hotel cleaning management via paper schedule scanning, color detection, and OCR. Initial work involved resolving ESLint errors and implementing enhanced color detection and general UI/UX improvements, including fixing a React hydration error.
+
+The core challenge handed over to the AI was a mobile responsiveness issue where the room assignment selection area (ManualAssignment component) disappeared. The AI initially hypothesized a main page layout issue. In an attempt to fix this, the AI made significant changes to  and , introducing a new communication system and new dashboard selector buttons, and even a new component .
+
+However, the user immediately corrected the AI, stating that these new additions were redundant and broke the existing UI. The user clarified that the problem was the *disappearance/malfunction of existing* dashboard selectors (Gouvernante dropdown, Tous les étages dropdown) and that the application was already designed to be mobile-first with existing dashboard logic. The AI recognized its misunderstanding and the necessity to revert its changes and focus on restoring and fixing the *original* broken elements.
+</analysis>
+
+<product_requirements>
+The Hôtel Cleaning Optimizer Pro application addresses inefficient manual hotel room cleaning. Its core functionality includes scanning paper schedules with color codes (orange, green, white, red, blue, yellow, purple, etc.) to detect room states (Libre, Départ, Recouche) and special info (LP, timings), and room numbers. It aims to intelligently assign rooms to staff based on contract hours and floor preferences, optimizing task distribution and tracking progress. Commercial goals include digitalizing planning, eliminating manual data entry, optimizing efficiency, and ensuring traceability, making the app commercially viable.
+
+Current improvements focus on color detection accuracy, image import, design, UI/UX, and mobile responsiveness. Specific issues tackled include a React hydration error, restricted mobile view of room tables, truncated selection labels, and the current critical issue of the missing room assignment selection area on mobile. The user emphasizes the need for existing Gouvernante and Femme de chambre dashboard selectors to function correctly, especially for mobile-first Femme de chambre views.
+</product_requirements>
+
+<key_technical_concepts>
+-   **Next.js:** Frontend framework for React applications with server-side rendering.
+-   **React:** JavaScript library for building user interfaces.
+-   **Tailwind CSS:** Utility-first CSS framework for styling and responsive design.
+-   **Tesseract.js:** JavaScript library for Optical Character Recognition (OCR) in the browser.
+-   **Image Processing:** Core functionality for scanning, color detection, and image import.
+-   **ESLint:** Static code analysis tool for JavaScript.
+</key_technical_concepts>
+
+<code_architecture>
+The application is a Next.js frontend, with no backend or database interaction indicated in the trajectory.
+
+**Detailed Directory Structure:**
+
+
+**Key Files and Changes:**
+*   : Manages project dependencies and scripts. Used for initial setup and building.
+*   : ESLint configuration. Modified to resolve build issues by disabling strict rules.
+*   : Contains core logic for image scanning, color detection, and OCR using Tesseract.js. Previously analyzed and improved for extended capabilities and precision.
+*   : Handles image/document import, integrating with . Updated to use improved detection.
+*   : Displays room tables. Updated to reflect new color information.
+*    (inferred): Main application component, handles layout and global state. Modified to fix a React hydration error.
+*   : The main application page. Initially observed to contain . Was extensively modified by the AI to add new dashboard selector buttons, integrate a new  component, and implement new toggle logic. These changes were identified by the user as incorrect and needing to be reverted, as they broke existing functionality and introduced new, unnecessary UI elements.
+*   : Global styles. Modified for general UI/UX improvements and responsive adjustments.
+*   : Component for manual room assignment dashboard selection. It was examined and initially believed to be correct, with the issue being in the main layout. Later, it was modified by the AI to include communication features. This component's original display issue is the primary focus, and the AI's recent changes will likely need to be reverted.
+*   : A new component created by the AI for a mobile-optimized Femme de chambre view. This creation was a misunderstanding of the user's request, as existing dashboard logic was expected to be repaired, not replaced, and will likely be removed.
+</code_architecture>
+
+<pending_tasks>
+-   **Current Fix**: Restore the application to its state before the AI's recent modifications that broke existing dashboard selectors and re-implement a proper fix for the missing room assignment selection area (specifically the original Gouvernante and Tous les étages dropdowns) on mobile.
+-   **Phase 1**: Optimize color detection and scan recognition algorithm.
+-   **Phase 2**: Improve image import (more formats, error handling, preview, validation).
+-   **Phase 3**: Implement fluid animations for a modern UI/UX design.
+-   **Phase 4**: Add advanced commercial features (analytics dashboard, professional report export, notifications, backup).
+</pending_tasks>
+
+<current_work>
+The previous AI engineer was attempting to resolve a critical mobile responsiveness bug where the room assignment selection area and related dashboard selectors were missing or non-functional. The initial diagnosis focused on layout issues affecting the  component.
+
+In an effort to fix this, the AI incorrectly assumed new dashboard functionality was required and made significant modifications:
+1.  It edited  to introduce new Gouvernante and Femme de chambre toggle buttons in the header, and integrated new dashboard logic.
+2.  It created a new component  for the Femme de chambre view.
+3.  It modified  to include a communication system.
+
+After these changes, the application was functioning, and the new dashboard selectors and communication features were visible via . However, the user immediately clarified that these changes were *incorrect*, the CSS was broken (though AI later found CSS okay), and the AI had fundamentally misunderstood the problem. The user stated that existing dashboard selectors were the issue, not new ones.
+
+The current state is that the AI has introduced new UI elements and logic that do not align with the user's original problem description, and has been explicitly instructed to revert these changes and fix the *original* broken Gouvernante and Tous les étages dropdown selectors and associated dashboard functionality. The AI has acknowledged its mistake and needs to restore the application to its prior state to address the actual issue.
+</current_work>
+
+<optional_next_step>
+Revert the recent changes to  and , and remove  to restore the original application state.
+</optional_next_step>
