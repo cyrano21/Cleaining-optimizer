@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 export default function ManualAssignment({
   staff,
@@ -86,3 +87,23 @@ export default function ManualAssignment({
     </div>
   );
 }
+
+ManualAssignment.propTypes = {
+  staff: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  assignRoom: PropTypes.func.isRequired,
+  manualAssignmentActive: PropTypes.bool.isRequired,
+  setManualAssignmentActive: PropTypes.func.isRequired,
+  selectedEmployee: PropTypes.string.isRequired,
+  setSelectedEmployee: PropTypes.func.isRequired,
+};

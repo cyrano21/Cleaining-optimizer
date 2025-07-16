@@ -1,5 +1,6 @@
 // components/StaffManagement.js
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 export default function StaffManagement({ staffList, addStaff }) {
   const [staffName, setStaffName] = useState("");
@@ -75,3 +76,15 @@ export default function StaffManagement({ staffList, addStaff }) {
     </div>
   );
 }
+
+StaffManagement.propTypes = {
+  staffList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      contractType: PropTypes.string.isRequired,
+      preferredFloor: PropTypes.string,
+    })
+  ).isRequired,
+  addStaff: PropTypes.func.isRequired,
+};

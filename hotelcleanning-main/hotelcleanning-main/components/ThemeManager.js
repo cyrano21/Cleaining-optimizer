@@ -81,7 +81,7 @@ export default function ThemeManager({ currentTheme, onThemeChange }) {
     if (savedTheme && themes[savedTheme]) {
       onThemeChange(savedTheme);
     }
-  }, []);
+  }, [themes, onThemeChange]);
 
   const handleThemeChange = (themeKey) => {
     onThemeChange(themeKey);

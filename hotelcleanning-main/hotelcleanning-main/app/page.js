@@ -775,6 +775,18 @@ export default function HomePage() {
     return filtered;
   };
 
+  // Logique de filtrage selon l'original : userRole détermine tout
+  const getFilteredRooms = () => {
+    if (userRole === "gouvernante") {
+      // Gouvernante voit toutes les chambres
+      return rooms;
+    } else {
+      // Femme de chambre ne voit que ses chambres assignées
+      return rooms.filter(room => room.assignedTo === userRole);
+    }
+  };
+
+  const filteredRoomsByRole = getFilteredRooms();
   const filteredRooms = applyFilters(filteredRoomsByRole, activeFilters);
 
   // Filtrer les chambres selon la recherche
@@ -836,19 +848,6 @@ export default function HomePage() {
   };
 
   const currentThemeData = themes[currentTheme] || themes.default;
-
-  // Logique de filtrage selon l'original : userRole détermine tout
-  const getFilteredRooms = () => {
-    if (userRole === "gouvernante") {
-      // Gouvernante voit toutes les chambres
-      return rooms;
-    } else {
-      // Femme de chambre ne voit que ses chambres assignées
-      return rooms.filter(room => room.assignedTo === userRole);
-    }
-  };
-
-  const filteredRoomsByRole = getFilteredRooms();
 
   return (
     <PageTransition isLoading={isLoading}>

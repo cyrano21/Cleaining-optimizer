@@ -1,5 +1,6 @@
 // components/RoomGrid.js
 import React from "react";
+import PropTypes from 'prop-types';
 
 export default function RoomGrid({
   rooms,
@@ -173,3 +174,31 @@ export default function RoomGrid({
     </div>
   );
 }
+
+RoomGrid.propTypes = {
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      checked: PropTypes.bool,
+      controlled: PropTypes.bool,
+      star: PropTypes.bool,
+      assignedTo: PropTypes.string,
+    })
+  ).isRequired,
+  onRoomClick: PropTypes.func.isRequired,
+  toggleStar: PropTypes.func.isRequired,
+  toggleCleaned: PropTypes.func.isRequired,
+  toggleControlled: PropTypes.func.isRequired,
+  staffList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  handleNoteChange: PropTypes.func.isRequired,
+  selectedNote: PropTypes.object.isRequired,
+  manualAssignmentActive: PropTypes.bool.isRequired,
+  selectedEmployee: PropTypes.string.isRequired,
+  selectedDashboard: PropTypes.string.isRequired,
+};

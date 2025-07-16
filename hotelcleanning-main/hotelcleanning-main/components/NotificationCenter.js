@@ -32,7 +32,7 @@ export default function NotificationCenter({
       
       return () => clearInterval(interval);
     }
-  }, [settings.autoCheck, settings.reminderInterval, rooms, staffList]);
+  }, [settings.autoCheck, settings.reminderInterval, rooms, staffList, checkForAlerts]);
 
   useEffect(() => {
     setUnreadCount(notifications.filter(n => !n.read).length);

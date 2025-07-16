@@ -98,7 +98,7 @@ export default function LiveStats({ rooms, staffList }) {
         animate();
       }
     });
-  }, [rooms, staffList]);
+  }, [rooms, staffList, animatedStats, calculateStats]);
 
   const getEfficiencyColor = (efficiency) => {
     if (efficiency >= 80) return "text-green-600 bg-green-100";

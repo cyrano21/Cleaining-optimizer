@@ -1,5 +1,6 @@
 // components/RoomDistribution.js
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 const RoomDistribution = ({ rooms, setRooms, staffList }) => {
   const [distributionList, setDistributionList] = useState([]);
@@ -60,6 +61,23 @@ const RoomDistribution = ({ rooms, setRooms, staffList }) => {
       </div>
     </div>
   );
+};
+
+RoomDistribution.propTypes = {
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      assignedTo: PropTypes.string,
+    })
+  ).isRequired,
+  setRooms: PropTypes.func.isRequired,
+  staffList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default RoomDistribution;

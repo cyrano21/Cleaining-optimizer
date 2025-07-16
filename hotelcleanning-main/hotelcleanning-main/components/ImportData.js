@@ -1,5 +1,6 @@
 // components/ImportData.js
 import React, { useState, useRef } from "react";
+import PropTypes from 'prop-types';
 
 export default function ImportData({ onImport }) {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -411,3 +412,7 @@ export default function ImportData({ onImport }) {
     </div>
   );
 }
+
+ImportData.propTypes = {
+  onImport: PropTypes.func.isRequired,
+};

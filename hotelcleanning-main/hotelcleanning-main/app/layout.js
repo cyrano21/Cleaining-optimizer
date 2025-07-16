@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import PropTypes from 'prop-types';
 
 export const metadata = {
   title: "Hotel Cleaning Management",
@@ -12,3 +13,7 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+RootLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};

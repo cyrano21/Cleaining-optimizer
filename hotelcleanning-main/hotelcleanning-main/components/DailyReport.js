@@ -1,5 +1,6 @@
 // components/DailyReport.js
 import React from "react";
+import PropTypes from 'prop-types';
 
 export default function DailyReport({ rooms, selectedNote }) {
   const totalRooms = rooms.length;
@@ -17,6 +18,24 @@ export default function DailyReport({ rooms, selectedNote }) {
       <h2 className="text-2xl font-bold mb-4 text-indigo-600">
         Rapport journalier
       </h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="bg-blue-50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-blue-600">{totalRooms}</div>
+          <div className="text-blue-500">Total Chambres</div>
+        </div>
+        <div className="bg-red-50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-red-600">{departures}</div>
+          <div className="text-red-500">Départs</div>
+        </div>
+        <div className="bg-green-50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-green-600">{recouches}</div>
+          <div className="text-green-500">Recouches</div>
+        </div>
+        <div className="bg-yellow-50 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-yellow-600">{dndOrRefus}</div>
+          <div className="text-yellow-500">DND/Refus</div>
+        </div>
+      </div>
       <div className="flex space-x-4">
         <div className="w-1/2">
           <h3 className="text-lg font-semibold mb-2 text-indigo-500">
@@ -83,3 +102,15 @@ export default function DailyReport({ rooms, selectedNote }) {
     </div>
   );
 }
+
+DailyReport.propTypes = {
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      checked: PropTypes.bool.isRequired,
+      star: PropTypes.bool,
+    })
+  ).isRequired,
+  selectedNote: PropTypes.object.isRequired,
+};

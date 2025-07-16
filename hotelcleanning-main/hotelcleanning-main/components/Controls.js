@@ -1,5 +1,6 @@
 // components/Controls.js
 import React from "react";
+import PropTypes from 'prop-types';
 
 const Controls = ({ onReset, onGenerateReport }) => {
   return (
@@ -10,7 +11,7 @@ const Controls = ({ onReset, onGenerateReport }) => {
           onClick={onReset}
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
         >
-          Réinitialiser l'application
+          Réinitialiser l&apos;application
         </button>
         <button
           onClick={onGenerateReport}
@@ -21,6 +22,11 @@ const Controls = ({ onReset, onGenerateReport }) => {
       </div>
     </div>
   );
+};
+
+Controls.propTypes = {
+  onReset: PropTypes.func.isRequired,
+  onGenerateReport: PropTypes.func.isRequired,
 };
 
 export default Controls;

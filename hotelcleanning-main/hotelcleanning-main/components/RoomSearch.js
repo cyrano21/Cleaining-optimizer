@@ -1,5 +1,6 @@
 // components/RoomSearch.js
 import React from "react";
+import PropTypes from 'prop-types';
 
 const RoomSearch = ({ rooms, searchQuery, setSearchQuery }) => {
   const handleSearch = (query) => {
@@ -149,6 +150,18 @@ const RoomSearch = ({ rooms, searchQuery, setSearchQuery }) => {
       )}
     </div>
   );
+};
+
+RoomSearch.propTypes = {
+  rooms: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      assignedTo: PropTypes.string,
+      notes: PropTypes.string,
+    })
+  ).isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  setSearchQuery: PropTypes.func.isRequired,
 };
 
 export default RoomSearch;
