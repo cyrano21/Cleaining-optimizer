@@ -1,0 +1,35 @@
+{
+  "name": "ecomus",
+  "version": "1.0.0",
+  "main": "audit-stores.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:dashboard\" \"npm run dev:frontend\"",
+    "dev:dashboard": "cd ecommerce-dashboard-core && npm run dev",
+    "dev:frontend": "cd ecomusnext-main && npm run dev",
+    "build": "npm run build:dashboard && npm run build:frontend",
+    "build:dashboard": "cd ecommerce-dashboard-core && npm run build",
+    "build:frontend": "cd ecomusnext-main && npm run build",
+    "start": "concurrently \"npm run start:dashboard\" \"npm run start:frontend\"",
+    "start:dashboard": "cd ecommerce-dashboard-core && npm run start",
+    "start:frontend": "cd ecomusnext-main && npm run start",
+    "install:all": "npm install && cd ecommerce-dashboard-core && npm install && cd ../ecomusnext-main && npm install",
+    "clean": "npm run clean:dashboard && npm run clean:frontend",
+    "clean:dashboard": "cd ecommerce-dashboard-core && npm run clean",
+    "clean:frontend": "cd ecomusnext-main && rm -rf .next node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.0.1",
+    "mongodb": "^6.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.13",
+    "@types/react": "19.1.8",
+    "concurrently": "^8.2.2",
+    "typescript": "5.8.3"
+  }
+}

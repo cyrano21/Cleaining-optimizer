@@ -1,0 +1,613 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* ===== Variables CSS pour une meilleure maintenance ===== */
+:root {
+  /* Spacing mobile-first */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Breakpoints harmonisés */
+  --mobile: 480px;
+  --tablet: 768px;
+  --desktop: 1024px;
+  --wide: 1280px;
+
+  /* Animations fluides */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Z-index hierarchy */
+  --z-dropdown: 10;
+  --z-overlay: 20;
+  --z-modal: 30;
+  --z-sidebar: 40;
+  --z-notification: 50;
+  --z-tooltip: 60;
+}
+
+/* ===== Classes utilitaires responsives ===== */
+@layer components {
+  /* Container responsive avec padding adaptatif */
+  .container-responsive {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 100%;
+  }
+
+  @screen sm {
+    .container-responsive {
+      max-width: 640px;
+    }
+  }
+
+  @screen md {
+    .container-responsive {
+      max-width: 768px;
+    }
+  }
+
+  @screen lg {
+    .container-responsive {
+      max-width: 1024px;
+    }
+  }
+
+  @screen xl {
+    .container-responsive {
+      max-width: 1280px;
+    }
+  }
+
+  /* Grille responsive */
+  .grid-responsive {
+    @apply grid gap-4 sm:gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  /* Carte responsive avec glassmorphism */
+  .card-responsive {
+    @apply rounded-lg sm:rounded-xl p-4 sm:p-6 transition-all duration-300;
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-md;
+    @apply border border-gray-200/50 dark:border-gray-700/50;
+    @apply shadow-sm hover:shadow-md;
+  }
+
+  /* Bouton responsive */
+  .btn-responsive {
+    @apply px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base;
+    @apply rounded-md sm:rounded-lg font-medium;
+    @apply transition-all duration-200 transform active:scale-95;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  /* Texte responsive */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  /* Espacement responsive */
+  .space-responsive-sm {
+    @apply space-y-2 sm:space-y-3 md:space-y-4;
+  }
+
+  .space-responsive-md {
+    @apply space-y-3 sm:space-y-4 md:space-y-6;
+  }
+
+  .space-responsive-lg {
+    @apply space-y-4 sm:space-y-6 md:space-y-8;
+  }
+
+  /* Image responsive avec aspect ratio */
+  .img-responsive {
+    @apply w-full h-auto object-cover rounded-lg;
+  }
+
+  /* Tableau responsive */
+  .table-responsive {
+    @apply w-full overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0;
+  }
+
+  .table-responsive table {
+    @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+  }
+
+  /* Modal responsive */
+  .modal-responsive {
+    @apply w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto;
+    @apply p-4 sm:p-6 m-4 sm:m-6;
+  }
+}
+
+/* ===== Améliorations des composants existants ===== */
+/* ===== Améliorations des composants existants ===== */
+@layer utilities {
+  /* Classes pour thèmes dynamiques */
+  .theme-bg-gradient {
+    background: linear-gradient(
+      to bottom right,
+      var(--dashboard-primary, #7c3aed),
+      var(--dashboard-secondary, #a855f7),
+      var(--dashboard-accent, #c084fc)
+    );
+    background-size: 300% 300%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .theme-text-gradient {
+    background: linear-gradient(
+      to right,
+      var(--dashboard-primary, #7c3aed),
+      var(--dashboard-secondary, #a855f7),
+      var(--dashboard-accent, #c084fc)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .theme-card {
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-button {
+    background: linear-gradient(
+      135deg,
+      var(--dashboard-primary, #7c3aed),
+      var(--dashboard-secondary, #a855f7)
+    );
+    transition: all var(--dashboard-animation-duration, 0.3s)
+      var(--dashboard-animation-easing, ease);
+  }
+
+  .theme-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+}
+
+/* Amélioration des sidebars pour mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    @apply fixed -translate-x-full z-40;
+    width: min(90vw, 320px);
+  }
+
+  .sidebar.open {
+    @apply translate-x-0 shadow-2xl;
+  }
+
+  /* Overlay pour mobile */
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-30;
+    @apply opacity-0 invisible transition-all duration-300;
+  }
+
+  .sidebar-overlay.active {
+    @apply opacity-100 visible;
+  }
+
+  .main-content {
+    @apply ml-0 w-full;
+  }
+
+  /* Navigation mobile améliorée */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900;
+    @apply border-t border-gray-200 dark:border-gray-700;
+    @apply px-4 py-2 z-40;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    @apply translate-x-0 relative;
+  }
+
+  .sidebar-overlay {
+    @apply hidden;
+  }
+
+  .main-content {
+    @apply ml-64 transition-all duration-300;
+  }
+
+  .main-content.sidebar-collapsed {
+    @apply ml-16;
+  }
+
+  .mobile-nav {
+    @apply hidden;
+  }
+}
+
+/* ===== Animations fluides ===== */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 300ms ease-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 200ms ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 200ms ease-out;
+}
+
+/* ===== Scrollbar personnalisée ===== */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* ===== Focus styles accessibles ===== */
+.focus-visible-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+}
+
+/* ===== Safe area pour les appareils avec encoche ===== */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ===== Amélioration de la lisibilité ===== */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* ===== Grille fluide pour les dashboards ===== */
+.dashboard-grid {
+  @apply grid gap-4 sm:gap-6;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+/* ===== Performance: Réduction des re-layouts ===== */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* ===== Touch-friendly pour mobile ===== */
+
+/* ===== Variables CSS standards ===== */
+:root {
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 217.2 91.2% 59.8%;
+}
+
+/* ===== Classes existantes du projet ===== */
+/* Product Grid Classes */
+.product-grid {
+  @apply grid gap-4 sm:gap-6 md:gap-8;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    @apply gap-3;
+  }
+}
+
+.product-card {
+  @apply card-responsive cursor-pointer;
+  @apply hover:transform hover:-translate-y-1;
+}
+
+.product-image {
+  @apply relative overflow-hidden rounded-lg;
+  aspect-ratio: 1 / 1;
+}
+
+.product-image img {
+  @apply img-responsive transition-transform duration-300;
+  @apply group-hover:scale-110;
+}
+
+.product-info {
+  @apply space-responsive-sm mt-3;
+}
+
+.product-title {
+  @apply text-responsive-base font-medium text-gray-900 dark:text-gray-100;
+  @apply line-clamp-2;
+}
+
+.product-price {
+  @apply text-responsive-lg font-semibold text-primary;
+}
+
+.product-original-price {
+  @apply text-responsive-sm text-gray-500 line-through;
+}
+
+.product-rating {
+  @apply flex items-center gap-1 text-responsive-xs;
+}
+
+/* Dashboard Stats Cards */
+.stats-grid {
+  @apply dashboard-grid;
+}
+
+.stat-card {
+  @apply card-responsive;
+  @apply flex flex-col sm:flex-row items-start sm:items-center justify-between;
+}
+
+.stat-icon {
+  @apply p-2 sm:p-3 rounded-lg bg-primary/10;
+  @apply mb-3 sm:mb-0;
+}
+
+.stat-content {
+  @apply flex-1;
+}
+
+.stat-label {
+  @apply text-responsive-sm text-gray-600 dark:text-gray-400;
+}
+
+.stat-value {
+  @apply text-responsive-2xl font-bold text-gray-900 dark:text-gray-100;
+}
+
+.stat-change {
+  @apply text-responsive-xs font-medium;
+  @apply flex items-center gap-1 mt-1;
+}
+
+/* Tables responsives */
+@media (max-width: 768px) {
+  .table-responsive table {
+    @apply block;
+  }
+
+  .table-responsive thead {
+    @apply hidden;
+  }
+
+  .table-responsive tbody {
+    @apply block;
+  }
+
+  .table-responsive tr {
+    @apply block border border-gray-200 dark:border-gray-700 rounded-lg mb-3 p-4;
+  }
+
+  .table-responsive td {
+    @apply block text-right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .table-responsive td:before {
+    content: attr(data-label);
+    @apply absolute left-4 text-left font-medium text-gray-600 dark:text-gray-400;
+  }
+}
+
+/* Forms responsives */
+.form-group {
+  @apply space-y-2;
+}
+
+.form-label {
+  @apply text-responsive-sm font-medium text-gray-700 dark:text-gray-300;
+}
+
+.form-input {
+  @apply w-full px-3 py-2 sm:px-4 sm:py-2.5;
+  @apply text-responsive-sm;
+  @apply rounded-lg border border-gray-300 dark:border-gray-600;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+  @apply transition-all duration-200;
+}
+
+.form-textarea {
+  @apply form-input;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-select {
+  @apply form-input appearance-none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break {
+    page-break-after: always;
+  }
+
+  .sidebar,
+  .mobile-nav,
+  .header {
+    display: none !important;
+  }
+
+  .main-content {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .card-responsive {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+}

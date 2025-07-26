@@ -1,0 +1,6 @@
+=== SEED LOG - 2025-07-08T20:05:50.434Z ===
+[2025-07-08T20:05:50.463Z] 🔗 Connexion à MongoDB...
+[2025-07-08T20:05:50.917Z] ❌ Erreur: querySrv ENOTFOUND _mongodb._tcp.cluster0.mongodb.net
+[2025-07-08T20:05:50.946Z] Stack: Error: querySrv ENOTFOUND _mongodb._tcp.cluster0.mongodb.net
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:291:17)
+[2025-07-08T20:05:50.994Z] 🔌 Connexion fermée

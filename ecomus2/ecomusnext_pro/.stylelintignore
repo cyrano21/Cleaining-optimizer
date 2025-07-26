@@ -1,0 +1,29 @@
+# Ignore JavaScript and TypeScript files
+**/*.js
+**/*.jsx
+**/*.ts
+**/*.tsx
+**/*.json
+
+# Ignore build directories
+node_modules/
+dist/
+build/
+.next/
+out/
+
+# Ignore configuration files
+*.config.js
+*.config.ts
+
+# Ignore components and pages (React/Next.js files)
+components/
+pages/
+app/
+src/
+
+# Only analyze actual CSS files
+!**/*.css
+!**/*.scss
+!**/*.sass
+!**/*.less

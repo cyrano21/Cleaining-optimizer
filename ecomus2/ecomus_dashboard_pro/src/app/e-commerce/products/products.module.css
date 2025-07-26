@@ -1,0 +1,39 @@
+/* Styles pour la page produits e-commerce */
+
+.product-variant-button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: #d1d5db; /* gray-300 */
+  background-color: #f3f4f6; /* gray-100 par défaut */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Couleurs spécifiques pour les variantes */
+.product-variant-button[data-variant-color="#000000"] {
+  background-color: #000000;
+}
+
+.product-variant-button[data-variant-color="#FFFFFF"] {
+  background-color: #ffffff;
+  border-color: #9ca3af; /* Bordure plus visible pour le blanc */
+}
+
+.product-variant-button[data-variant-color="#0066CC"] {
+  background-color: #0066cc;
+}
+
+.product-variant-button:hover {
+  transform: scale(1.05);
+}
+
+.product-variant-button.selected {
+  border-color: var(--color-primary, #3b82f6);
+  transform: scale(1.1);
+}
+
+.product-variant-button:focus {
+  outline: 2px solid var(--color-primary, #3b82f6);
+  outline-offset: 2px;
+}

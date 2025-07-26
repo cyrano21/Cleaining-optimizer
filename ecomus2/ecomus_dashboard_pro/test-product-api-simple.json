@@ -1,0 +1,61 @@
+{
+  "title": "Gaming Headset Pro MAX - Test API Médias",
+  "slug": "gaming-headset-api-test-1750851700",
+  "description": "Casque gaming avec médias complets : images, 3D, vidéos, 360°",
+  "price": 299.99,
+  "comparePrice": 399.99,
+  "sku": "API-GMH-TEST",
+  "quantity": 50,
+  "images": [
+    "https://res.cloudinary.com/demo/image/upload/c_scale,w_800/gaming_headset_front.jpg",
+    "https://res.cloudinary.com/demo/image/upload/c_scale,w_800/gaming_headset_side.jpg"
+  ],
+  "media3D": [
+    {
+      "modelUrl": "https://res.cloudinary.com/demo/raw/upload/gaming_headset.glb",
+      "textureUrls": [
+        "https://res.cloudinary.com/demo/image/upload/headset_diffuse.jpg",
+        "https://res.cloudinary.com/demo/image/upload/headset_normal.jpg"
+      ],
+      "type": "glb",
+      "previewImage": "https://res.cloudinary.com/demo/image/upload/headset_preview.jpg",
+      "modelSize": 2048576,
+      "animations": ["idle", "rotate"]
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://res.cloudinary.com/demo/video/upload/q_auto/gaming_headset_demo.mp4",
+      "type": "upload",
+      "thumbnail": "https://res.cloudinary.com/demo/video/upload/gaming_headset_demo.jpg",
+      "duration": 45,
+      "title": "Démonstration Gaming Headset"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "type": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "duration": 180,
+      "title": "Test Audio Gaming"
+    }
+  ],
+  "views360": [
+    {
+      "id": "main_360",
+      "name": "Vue 360° Principale",
+      "images": [
+        "https://res.cloudinary.com/demo/image/upload/headset_360_01.jpg",
+        "https://res.cloudinary.com/demo/image/upload/headset_360_02.jpg",
+        "https://res.cloudinary.com/demo/image/upload/headset_360_03.jpg",
+        "https://res.cloudinary.com/demo/image/upload/headset_360_04.jpg"
+      ],
+      "autoRotate": true,
+      "rotationSpeed": 2,
+      "zoomEnabled": true,
+      "description": "Vue 360° complète du casque gaming"
+    }
+  ],
+  "tags": ["gaming", "headset", "3d", "multimedia", "test"],
+  "status": "active",
+  "storeId": "685ba4ab66267b0af88dcf01"
+}

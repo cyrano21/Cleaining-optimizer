@@ -1,0 +1,47 @@
+/* Dashboard Bootstrap Layout */
+.dashboard-main-content {
+  margin-left: 0;
+}
+
+@media (min-width: 992px) {
+  .dashboard-main-content {
+    margin-left: 18rem;
+  }
+}
+
+.dashboard-sidebar-fixed {
+  width: 18rem;
+  background-color: #212529;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+/* Custom button styles for sidebar */
+.sidebar-nav-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-nav-btn:hover {
+  transform: translateX(2px);
+}
+
+.sidebar-nav-btn.active {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  box-shadow: 0 0.125rem 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Header search input */
+.dashboard-search {
+  border: none;
+  background-color: #f8f9fa;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard-search:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}

@@ -1,0 +1,65 @@
+/* 
+ * @stylelint-disable property-no-physical
+ * Chart component styles 
+ * Note: Nous utilisons des propriétés logiques plutôt que physiques
+ * inline-size au lieu de width, block-size au lieu de height
+ */
+.chart-container {
+  inline-size: 100%;
+}
+
+.chart-pulse {
+  inline-size: 100%;
+  animation: pulse 2s infinite;
+}
+
+.chart-bg {
+  height: 100%;
+  background-color: #e5e7eb; /* bg-gray-200 */
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+/* Custom margins for recharts components */
+.custom-margin {
+  top: 5px;
+  right: 30px;
+  left: 20px;
+  bottom: 5px;
+}
+
+.custom-pie-margin {
+  top: 10px;
+  right: 30px;
+  left: 0;
+  bottom: 0;
+}
+
+.custom-bar-margin {
+  top: 20px;
+  right: 30px;
+  left: 20px;
+  bottom: 5px;
+}
+
+/* Style du tooltip pour les graphiques */
+.chart-tooltip {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Style tooltip simple */
+.chart-tooltip-simple {
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.chart-block-size {
+  block-size: 100%;
+  width: 100%;
+}

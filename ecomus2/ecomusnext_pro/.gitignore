@@ -1,0 +1,202 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+node_modules/
+**/node_modules/
+
+# testing
+/coverage
+*.test.js.snap
+
+# next.js
+/.next/
+/out/
+.next/
+out/
+
+# production
+/build
+/dist
+build/
+dist/
+
+# misc
+.DS_Store
+*.pem
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# local env files
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# database
+*.db
+*.sqlite
+*.sqlite3
+
+# prisma
+prisma/migrations/
+
+# supabase
+supabase/.branches
+supabase/.temp
+supabase/logs
+
+# cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# logs
+logs/
+*.log
+
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# coverage directory used by tools like istanbul
+coverage/
+.nyc_output
+
+# project specific
+/app/dashboard2/node_modules/
+/app/dashboard2/selected-documents-2025-06-07-07-17/
+/ecomusnext2/.env
+/app/dashboard2/.env.local
+
+# fichiers d'environnement dans tous les sous-dossiers
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/config.local.js
+**/config.local.json
+
+# node_modules dans tous les sous-dossiers
+**/node_modules/
+**/dist/
+**/build/
+**/.next/
+**/out/
+
+# fichiers de cache dans tous les sous-dossiers
+**/.cache/
+**/coverage/
+**/*.log
+**/.DS_Store
+**/Thumbs.db
+
+# fichiers temporaires dans tous les sous-dossiers
+**/*.tmp
+**/*.temp
+**/*.swp
+**/*.swo
+**/*~
+
+# fichiers de sauvegarde dans tous les sous-dossiers
+**/*.backup
+**/*.bak
+**/*.orig
+
+# bases de données dans tous les sous-dossiers
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# dossiers spécifiques problématiques
+app/dashboard2/.env*
+app/dashboard2/node_modules/
+app/dashboard2/dist/
+app/dashboard2/build/
+app/dashboard2/.next/
+components/dashboard/.env*
+ecommerce/.env*
+lib/.env*
+db/.env*
+data/.env*
+
+# dossier ecomusnext2 et tous ses sous-dossiers
+ecomusnext2/
+ecomusnext2/**
+ecomusnext2/.env*
+ecomusnext2/node_modules/
+ecomusnext2/dist/
+ecomusnext2/build/
+ecomusnext2/.next/
+ecomusnext2/out/
+ecomusnext2/**/.env*
+ecomusnext2/**/node_modules/
+ecomusnext2/**/dist/
+ecomusnext2/**/build/
+ecomusnext2/**/.next/
+ecomusnext2/**/out/
+ecomusnext2/**/*.log
+ecomusnext2/**/.cache/
+ecomusnext2/**/coverage/
+
+# backup files
+*.backup
+*.bak
+*.orig
+
+# package manager lock files (keep only one)
+# yarn.lock
+# pnpm-lock.yaml
+
+# generated files
+/public/sw.js
+/public/workbox-*.js
+/public/worker-*.js
+/public/fallback-*.js
+
+# storybook
+.storybook/
+storybook-static/
+
+# documentation
+/docs/build/
+
+# uploads and user content
+/uploads/
+/public/uploads/
+/storage/

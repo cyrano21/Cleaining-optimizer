@@ -1,0 +1,4 @@
+[2025-06-20T23:53:34.687Z] SESSION:1750463614672 - ❌ VIOLATION : Réponse sans lecture obligatoire des règles
+[2025-06-20T23:54:48.271Z] SESSION:1750463688187 - ❌ VIOLATION : Réponse sans lecture obligatoire des règles
+[2025-06-20T23:54:48.304Z] SESSION:1750463688187 - ❌ VIOLATION : Réponse sans lecture obligatoire des règles
+[2025-06-20T23:54:48.309Z] SESSION:1750463688187 - ❌ VIOLATION : Réponse sans lecture obligatoire des règles

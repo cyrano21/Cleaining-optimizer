@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-06-12T00:44:01.067Z",
+  "version": "2.0.0-multi-store",
+  "environment": "development",
+  "checks": {
+    "environment": true,
+    "database": false,
+    "roles": false,
+    "dashboards": true
+  },
+  "recommendations": [
+    "Démarrez MongoDB et vérifiez la connexion",
+    "Initialisez les rôles système avec: node scripts/init-roles-simple.js"
+  ]
+}

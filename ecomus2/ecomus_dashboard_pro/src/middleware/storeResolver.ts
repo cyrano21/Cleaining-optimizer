@@ -1,0 +1,284 @@
+import { NextRequest, NextResponse } from "next/server";
+
+/**
+ * 🏪 STORE RESOLVER MIDDLEWARE
+ * 
+ * Résout les routes /store/[slug] vers les stores actives
+ * Injecte les données de customisation dans les headers
+ * Redirige vers 404 si store inactive ou inexistante
+ * 
+ * IMPORTANT: Utilise l'API publique au lieu de MongoDB direct
+ * car le middleware Next.js s'exécute dans l'Edge Runtime
+ */
+
+export interface StoreData {
+  _id: string;
+  name: string;
+  slug: string;
+  homeTheme: string;
+  homeTemplate: string;
+  homeName: string;
+  homeDescription: string;
+  isActive: boolean;
+  vendor?: string;
+  customizations?: {
+    colors?: {
+      primary?: string;
+      secondary?: string;
+      accent?: string;
+    };
+    fonts?: {
+      primary?: string;
+      secondary?: string;
+    };
+    logo?: string;
+    favicon?: string;
+    customCSS?: string;
+    customJS?: string;
+  };
+  seo?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    ogImage?: string;
+    canonicalUrl?: string;
+  };
+  analytics?: {
+    googleAnalyticsId?: string;
+    facebookPixelId?: string;
+    hotjarId?: string;
+  };
+  category?: string;
+  tags?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+/**
+ * Cache en mémoire pour éviter les requêtes API répétées
+ * TTL: 2 minutes (plus court car c'est du middleware)
+ */
+const storeCache = new Map<string, { data: StoreData; timestamp: number }>();
+const CACHE_TTL = 2 * 60 * 1000; // 2 minutes
+
+/**
+ * Récupère les données d'une store par slug avec cache
+ * Utilise l'API publique au lieu de MongoDB direct
+ */
+async function getStoreBySlug(slug: string, origin: string): Promise<StoreData | null> {
+  try {
+    // Vérifier le cache
+    const cached = storeCache.get(slug);
+    if (cached && (Date.now() - cached.timestamp) < CACHE_TTL) {
+      return cached.data;
+    }
+
+    // Appel à l'API publique
+    const response = await fetch(`${origin}/api/public/stores/${slug}`, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Store-Resolver-Middleware/1.0',
+      },
+    });
+    
+    if (!response.ok) {
+      if (response.status === 404) {
+        return null;
+      }
+      console.error(`Erreur API store ${slug}:`, response.status, response.statusText);
+      return null;
+    }
+
+    const result = await response.json();
+    
+    if (!result.success || !result.data) {
+      return null;
+    }
+
+    const storeData = result.data as StoreData;    // Mettre en cache
+    storeCache.set(slug, {
+      data: storeData,
+      timestamp: Date.now()
+    });
+    
+    return storeData;
+    
+  } catch (error) {
+    console.error('Erreur lors de la récupération de la store:', error);
+    return null;
+  }
+}
+
+/**
+ * Nettoie le cache périmé
+ */
+function cleanExpiredCache() {
+  const now = Date.now();
+  for (const [key, value] of storeCache.entries()) {
+    if (now - value.timestamp > CACHE_TTL) {
+      storeCache.delete(key);
+    }
+  }
+}
+
+/**
+ * Valide si un homeTemplate existe dans la structure
+ */
+function validateHomeTemplate(homeTemplate: string): boolean {
+  const validTemplates = [
+    'home-02', 'home-03', 'home-accessories', 'home-activewear',
+    'home-baby', 'home-bookstore', 'home-camp-and-hike', 'home-ceramic',
+    'home-cosmetic', 'home-decor', 'home-dog-accessories', 'home-electric-bike',
+    'home-electronic', 'home-food', 'home-footwear', 'home-furniture',
+    'home-furniture-02', 'home-gaming-accessories', 'home-giftcard',
+    'home-glasses', 'home-grocery', 'home-handbag', 'home-headphone',
+    'home-healthcare', 'home-jewelry', 'home-kitchen-utensils',
+    'home-landing-page', 'home-lingerie', 'home-marble', 'home-marijuana',
+    'home-medical', 'home-nails', 'home-organic', 'home-outdoor-gear',
+    'home-pajamas', 'home-pet', 'home-pillow', 'home-plant', 'home-socks',
+    'home-stroller', 'home-surfboard', 'home-swimwear', 'home-underwear',
+    'home-watch'
+  ];
+  
+  return validTemplates.includes(homeTemplate);
+}
+
+/**
+ * Middleware principal pour résoudre les stores
+ */
+export async function storeResolver(request: NextRequest): Promise<NextResponse | null> {
+  const { pathname } = request.nextUrl;
+
+  // Nettoyer le cache périodiquement (toutes les 100 requêtes environ)
+  if (Math.random() < 0.01) {
+    cleanExpiredCache();
+  }
+
+  // Vérifier si c'est une route de store
+  const storeMatch = pathname.match(/^\/store\/([^\/]+)$/);
+  if (!storeMatch) {
+    return null; // Pas une route de store, continuer
+  }
+
+  const slug = storeMatch[1];
+    // Récupérer les données de la store
+  const storeData = await getStoreBySlug(slug, request.nextUrl.origin);
+  
+  if (!storeData) {
+    // Store non trouvée ou inactive, rediriger vers 404
+    return NextResponse.redirect(new URL('/404', request.url));
+  }
+
+  // Valider le homeTemplate
+  if (!validateHomeTemplate(storeData.homeTemplate)) {
+    console.error(`Template invalide pour la store ${slug}: ${storeData.homeTemplate}`);
+    return NextResponse.redirect(new URL('/404', request.url));
+  }
+
+  // Créer la response avec les headers personnalisés
+  const response = NextResponse.next();
+  
+  // Injecter les données de la store dans les headers
+  response.headers.set('x-store-id', storeData._id);
+  response.headers.set('x-store-name', storeData.name);
+  response.headers.set('x-store-slug', storeData.slug);
+  response.headers.set('x-store-theme', storeData.homeTheme);
+  response.headers.set('x-store-template', storeData.homeTemplate);
+  response.headers.set('x-store-title', storeData.homeName);
+  response.headers.set('x-store-description', storeData.homeDescription);
+  
+  // Injecter les customisations
+  if (storeData.customizations) {
+    response.headers.set('x-store-customizations', JSON.stringify(storeData.customizations));
+  }
+  
+  // Injecter les données SEO
+  if (storeData.seo) {
+    response.headers.set('x-store-seo', JSON.stringify(storeData.seo));
+  }
+  
+  // Injecter les analytics
+  if (storeData.analytics) {
+    response.headers.set('x-store-analytics', JSON.stringify(storeData.analytics));
+  }
+  
+  // Injecter les métadonnées
+  if (storeData.category) {
+    response.headers.set('x-store-category', storeData.category);
+  }
+  
+  if (storeData.tags && storeData.tags.length > 0) {
+    response.headers.set('x-store-tags', JSON.stringify(storeData.tags));
+  }
+  
+  if (storeData.vendor) {
+    response.headers.set('x-store-vendor', storeData.vendor);
+  }
+
+  return response;
+}
+
+/**
+ * Utilitaire pour extraire les données de store depuis les headers
+ */
+export function extractStoreDataFromHeaders(headers: Headers): Partial<StoreData> {
+  const storeData: Partial<StoreData> = {};
+  
+  const storeId = headers.get('x-store-id');
+  const storeName = headers.get('x-store-name');
+  const storeSlug = headers.get('x-store-slug');
+  const storeTheme = headers.get('x-store-theme');
+  const storeTemplate = headers.get('x-store-template');
+  const storeTitle = headers.get('x-store-title');
+  const storeDescription = headers.get('x-store-description');
+  const storeCustomizations = headers.get('x-store-customizations');
+  const storeSeo = headers.get('x-store-seo');
+  const storeAnalytics = headers.get('x-store-analytics');
+  const storeCategory = headers.get('x-store-category');
+  const storeTags = headers.get('x-store-tags');
+  const storeVendor = headers.get('x-store-vendor');
+  
+  if (storeId) storeData._id = storeId;
+  if (storeName) storeData.name = storeName;
+  if (storeSlug) storeData.slug = storeSlug;
+  if (storeTheme) storeData.homeTheme = storeTheme;
+  if (storeTemplate) storeData.homeTemplate = storeTemplate;
+  if (storeTitle) storeData.homeName = storeTitle;
+  if (storeDescription) storeData.homeDescription = storeDescription;
+  if (storeCategory) storeData.category = storeCategory;
+  if (storeVendor) storeData.vendor = storeVendor;
+  
+  if (storeCustomizations) {
+    try {
+      storeData.customizations = JSON.parse(storeCustomizations);
+    } catch (e) {
+      console.error('Erreur parsing customizations:', e);
+    }
+  }
+  
+  if (storeSeo) {
+    try {
+      storeData.seo = JSON.parse(storeSeo);
+    } catch (e) {
+      console.error('Erreur parsing SEO:', e);
+    }
+  }
+  
+  if (storeAnalytics) {
+    try {
+      storeData.analytics = JSON.parse(storeAnalytics);
+    } catch (e) {
+      console.error('Erreur parsing analytics:', e);
+    }
+  }
+  
+  if (storeTags) {
+    try {
+      storeData.tags = JSON.parse(storeTags);
+    } catch (e) {
+      console.error('Erreur parsing tags:', e);
+    }
+  }
+  
+  return storeData;
+}

@@ -1,0 +1,23 @@
+# Ignore TypeScript files
+*.ts
+*.tsx
+
+# Ignore JavaScript files
+*.js
+*.jsx
+
+# Ignore Next.js build files
+.next/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore build directories
+build/
+dist/
+
+# Only analyze CSS and SCSS files
+!*.css
+!*.scss
+!*.sass
+!*.less

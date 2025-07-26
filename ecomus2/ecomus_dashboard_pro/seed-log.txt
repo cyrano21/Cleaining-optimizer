@@ -1,0 +1,10 @@
+=== SEED LOG - 2025-07-08T20:13:40.717Z ===
+[2025-07-08T20:13:40.718Z] 🔗 Connexion à MongoDB...
+[2025-07-08T20:13:41.043Z] ✅ Connecté à MongoDB
+[2025-07-08T20:13:41.051Z] 🔍 Recherche des stores...
+[2025-07-08T20:13:41.138Z] 📊 Nombre de stores trouvées: 52
+[2025-07-08T20:13:41.214Z] 🏪 Utilisation de la store: Ecomus Store (ecomus-store)
+[2025-07-08T20:13:41.238Z] 📝 Mise à jour de la store...
+[2025-07-08T20:13:41.297Z] ✅ Store mise à jour avec succès!
+[2025-07-08T20:13:41.306Z] 📊 Données ajoutées: 2 catégories, 2 produits
+[2025-07-08T20:13:41.323Z] 🔌 Connexion fermée

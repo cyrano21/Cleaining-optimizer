@@ -1,0 +1,33 @@
+{
+  "welcome_message": "Welcome to our E-commerce Platform!",
+  "greeting": "Hello, {name}!",
+  "common": {
+    "shop_now": "Shop Now",
+    "view_cart": "View Cart",
+    "login": "Login",
+    "register": "Register",
+    "my_account": "My Account",
+    "logout": "Logout"
+  },
+  "header": {
+    "search_placeholder": "Search for products..."
+  },
+  "footer": {
+    "copyright": "© 2024 Ecomus SaaS. All rights reserved."
+  },
+  "login_modal": {
+    "title": "Ecomus Login",
+    "quick_login_title": "🚀 Quick Login:",
+    "admin_button": "👑 Admin",
+    "vendor_button": "🏪 Vendor",
+    "client_button": "👤 Client",
+    "error_incorrect_credentials": "Email or password incorrect",
+    "error_generic": "An error occurred",
+    "email_label": "Email *",
+    "password_label": "Password *",
+    "forgot_password_link": "Forgot your password?",
+    "logging_in_button": "Logging in...",
+    "login_button": "Login",
+    "register_link": "New customer? Create your account"
+  }
+}

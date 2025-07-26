@@ -1,0 +1,62 @@
+/* ThemeSettingsModal custom styles */
+
+.colorPresetButton {
+  position: relative;
+  height: 3rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.colorPresetButton:hover {
+  transform: scale(1.05);
+}
+
+.colorPresetButtonActive {
+  border-color: #111827;
+  box-shadow: 0 0 0 2px #111827;
+}
+
+.colorPresetButtonInactive {
+  border-color: #e5e7eb;
+}
+
+.colorPresetButtonInactive:hover {
+  border-color: #d1d5db;
+}
+
+.colorPresetIndicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.colorPresetDot {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* Color presets */
+.colorBlue { background-color: #3b82f6; }
+.colorViolet { background-color: #8b5cf6; }
+.colorGreen { background-color: #10b981; }
+.colorOrange { background-color: #f59e0b; }
+.colorRed { background-color: #ef4444; }
+.colorPink { background-color: #ec4899; }
+.colorIndigo { background-color: #6366f1; }
+.colorCyan { background-color: #06b6d4; }
+
+/* Font preview styles */
+.fontInter { font-family: 'Inter', sans-serif; }
+.fontRoboto { font-family: 'Roboto', sans-serif; }
+.fontOpenSans { font-family: 'Open Sans', sans-serif; }
+.fontLato { font-family: 'Lato', sans-serif; }
+.fontMontserrat { font-family: 'Montserrat', sans-serif; }
+.fontPoppins { font-family: 'Poppins', sans-serif; }
+.fontNunito { font-family: 'Nunito', sans-serif; }
+.fontSourceSans { font-family: 'Source Sans Pro', sans-serif; }
