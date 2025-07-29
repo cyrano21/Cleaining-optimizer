@@ -19,6 +19,8 @@ import {
   Zap,
   Database,
   FlameIcon,
+  GitBranch,
+  Palette,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -36,6 +38,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
+import { GitExplorer } from "@/features/git"
 
 // Define the interface for a single playground item, icon is now a string
 interface PlaygroundData {
@@ -86,6 +89,14 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
                 <Link href="/dashboard">
                   <LayoutDashboard className="h-4 w-4" />
                   <span>Dashboard</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={pathname === "/visual-editor"} tooltip="Visual Editor">
+                <Link href="/visual-editor">
+                  <Palette className="h-4 w-4" />
+                  <span>Visual Editor</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -166,6 +177,18 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>
+            <GitBranch className="h-4 w-4 mr-2" />
+            Git
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <div className="px-2">
+              <GitExplorer className="border-0 shadow-none" />
+            </div>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

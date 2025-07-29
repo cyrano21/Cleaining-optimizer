@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server'
-import { WebSocketServer } from 'ws'
+import { WebSocketServer, WebSocket } from 'ws'
 import { HuggingFaceAI, HUGGINGFACE_MODELS } from '@/lib/huggingface-ai'
 import { OllamaAI, OLLAMA_MODELS } from '@/lib/ollama-ai'
 import { GeminiAI, GEMINI_MODELS } from '@/lib/gemini-ai'
 
 interface ChatMessage {
-  role: 'user' | 'assistant'
+  role: 'user' | 'assistant' | 'system'
   content: string
 }
 
@@ -14,6 +14,16 @@ interface StreamRequest {
   provider?: 'huggingface' | 'ollama' | 'gemini'
   model?: string
   sessionId?: string
+}
+
+interface StreamingOptions {
+  temperature?: number;
+  maxTokens?: number;
+  top_p?: number;
+}
+
+interface StreamingAI {
+  generateStreamingResponse(messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>, options: StreamingOptions): AsyncIterable<string>
 }
 
 interface WSMessage {
@@ -41,15 +51,15 @@ function initializeWebSocketServer() {
     
     console.log('🚀 WebSocket server initialized on port 8080')
     
-    wss.on('connection', (ws, req) => {
+    wss.on('connection', (ws) => {
       console.log('📡 New WebSocket connection established')
       
       ws.on('message', async (data) => {
         try {
           const request: StreamRequest = JSON.parse(data.toString())
           await handleStreamingChat(ws, request)
-        } catch (error) {
-          console.error('❌ WebSocket message error:', error)
+        } catch (_error) {
+          console.error('❌ WebSocket message error:', _error)
           ws.send(JSON.stringify({
             type: 'error',
             error: 'Invalid message format'
@@ -70,7 +80,7 @@ function initializeWebSocketServer() {
   return wss
 }
 
-async function handleStreamingChat(ws: any, request: StreamRequest) {
+async function handleStreamingChat(ws: WebSocket, request: StreamRequest) {
   const { messages, provider = 'ollama', model, sessionId } = request
   
   try {
@@ -94,7 +104,7 @@ async function handleStreamingChat(ws: any, request: StreamRequest) {
 Always provide clear, practical answers. When showing code, use proper formatting with language-specific syntax.
 Keep responses concise but comprehensive. Use code blocks with language specification when providing code examples.`
 
-    const fullMessages = [{ role: "system", content: systemPrompt }, ...messages]
+    const fullMessages = [{ role: "system" as const, content: systemPrompt }, ...messages] as Array<{ role: 'user' | 'assistant' | 'system'; content: string }>
     
     // Initialize AI provider
     let ai: HuggingFaceAI | OllamaAI | GeminiAI
@@ -108,9 +118,9 @@ Keep responses concise but comprehensive. Use code blocks with language specific
     }
     
     // Check if AI provider supports streaming
-    if (typeof ai.generateStreamingResponse === 'function') {
+    if ('generateStreamingResponse' in ai && typeof ai.generateStreamingResponse === 'function') {
       // Use streaming if available
-      const stream = ai.generateStreamingResponse(fullMessages, {
+      const stream = (ai as StreamingAI).generateStreamingResponse(fullMessages, {
         temperature: 0.7,
         maxTokens: 2048,
         top_p: 0.9
@@ -165,13 +175,13 @@ Keep responses concise but comprehensive. Use code blocks with language specific
       } as WSMessage))
     }
     
-  } catch (error) {
-    console.error('❌ Streaming chat error:', error)
+  } catch (_error) {
+    console.error('❌ Streaming chat error:', _error)
     
     if (ws.readyState === ws.OPEN) {
       ws.send(JSON.stringify({
         type: 'error',
-        error: error instanceof Error ? error.message : 'Unknown error occurred',
+        error: _error instanceof Error ? _error.message : 'Unknown error occurred',
         sessionId
       } as WSMessage))
     }
@@ -193,7 +203,6 @@ function getDefaultModel(provider: string): string {
 
 // HTTP endpoint for WebSocket upgrade
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url)
   const upgrade = request.headers.get('upgrade')
   
   if (upgrade !== 'websocket') {
@@ -212,9 +221,8 @@ export async function GET(request: NextRequest) {
 }
 
 // Handle WebSocket upgrade
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    const body = await request.json()
     
     // For non-WebSocket requests, provide fallback
     return new Response(JSON.stringify({
@@ -226,7 +234,7 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/json'
       }
     })
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({
       error: 'Invalid request format'
     }), {

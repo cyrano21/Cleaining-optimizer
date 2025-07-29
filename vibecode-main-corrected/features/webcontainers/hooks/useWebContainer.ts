@@ -24,15 +24,17 @@ export const useWebContainer = ({ templateData }: UseWebContainerProps): UseWebC
 
   useEffect(() => {
     let mounted = true;
+    let initializationStarted = false;
 
     async function initializeWebContainer() {
+      // Prevent multiple initialization attempts
+      if (initializationStarted || instance) {
+        return;
+      }
+      
+      initializationStarted = true;
+      
       try {
-        if (instance) {
-          console.log('⚠️ Instance WebContainer déjà existante, réutilisation.');
-          setIsLoading(false);
-          return;
-        }
-
         // Check if we're in a browser environment
         if (typeof window === 'undefined') {
           throw new Error('WebContainer can only be initialized in the browser');
@@ -43,13 +45,18 @@ export const useWebContainer = ({ templateData }: UseWebContainerProps): UseWebC
           throw new Error('WebContainer requires cross-origin isolation. Please ensure COOP and COEP headers are set.');
         }
         
-        console.log('🔍 Utilisation du service WebContainer singleton...');
+        console.log('🔍 Initialisation WebContainer via service singleton...');
         const webcontainerInstance = await WebContainerService.getWebContainer();
         
-        if (!mounted) return;
+        if (!mounted) {
+          // If component unmounted during initialization, release the instance
+          WebContainerService.releaseInstance();
+          return;
+        }
         
-        console.log('✅ WebContainer récupéré du service singleton:', webcontainerInstance);
+        console.log('✅ WebContainer initialisé avec succès');
         setInstance(webcontainerInstance);
+        setError(null);
         setIsLoading(false);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Failed to initialize WebContainer';
@@ -61,20 +68,22 @@ export const useWebContainer = ({ templateData }: UseWebContainerProps): UseWebC
       }
     }
 
-    // Only initialize in browser environment
-    if (typeof window !== 'undefined') {
+    // Only initialize in browser environment and if not already initialized
+    if (typeof window !== 'undefined' && !instance) {
       initializeWebContainer();
-    } else {
+    } else if (typeof window === 'undefined') {
       setIsLoading(false);
       setError('WebContainer can only be used in the browser');
     }
 
     return () => {
       mounted = false;
-      // Use the service to properly release the instance
-      WebContainerService.releaseInstance();
+      // Only release if we have an instance
+      if (instance) {
+        WebContainerService.releaseInstance();
+      }
     };
-  }, []);
+  }, []); // Remove instance dependency to prevent re-initialization
 
   const writeFileSync = useCallback(async (path: string, content: string): Promise<void> => {
     if (!instance) {

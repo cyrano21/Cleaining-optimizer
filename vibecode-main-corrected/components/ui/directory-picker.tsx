@@ -27,7 +27,9 @@ export function DirectoryPicker({
     try {
       // Vérifier si l'API File System Access est supportée
       if ('showDirectoryPicker' in window) {
-        const directoryHandle = await (window as any).showDirectoryPicker({
+        const directoryHandle = await (window as Window & {
+          showDirectoryPicker: (options?: { mode?: string }) => Promise<FileSystemDirectoryHandle>
+        }).showDirectoryPicker({
           mode: 'readwrite'
         });
         

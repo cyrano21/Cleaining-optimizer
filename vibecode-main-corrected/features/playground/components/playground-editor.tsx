@@ -349,7 +349,7 @@ export const PlaygroundEditor = ({
     configureMonaco(monaco)
     
     // Register AI commands for quick fixes
-    registerAICommands(monaco, editor)
+    registerAICommands(monaco)
 
     // Keyboard shortcuts
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Space, () => {

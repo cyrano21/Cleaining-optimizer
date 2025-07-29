@@ -8,11 +8,7 @@ interface ChatMessage {
   content: string
 }
 
-interface ChatRequest {
-  messages: ChatMessage[]
-  provider?: 'huggingface' | 'ollama' | 'gemini'
-  model?: string
-}
+
 
 interface EnhancePromptRequest {
   prompt: string

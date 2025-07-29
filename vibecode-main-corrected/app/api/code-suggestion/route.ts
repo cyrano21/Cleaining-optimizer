@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { HuggingFaceAI, HUGGINGFACE_MODELS } from "@/lib/huggingface-ai"
 
 interface CodeSuggestionRequest {
   fileContent: string
@@ -38,7 +39,14 @@ export async function POST(request: NextRequest) {
     const prompt = buildPrompt(context, suggestionType)
 
     // Call AI service (replace with your AI service)
-    const suggestion = await generateSuggestion(prompt)
+    let suggestion: string
+    try {
+      suggestion = await generateSuggestion(prompt)
+    } catch (aiError) {
+       console.error("AI service error:", aiError)
+       // Always provide a fallback suggestion instead of throwing error
+       suggestion = await generateHuggingFaceSuggestion(prompt)
+     }
 
     return NextResponse.json({
       suggestion,
@@ -53,7 +61,30 @@ export async function POST(request: NextRequest) {
   } catch (error: unknown) {
     console.error("Context analysis error:", error)
     const errorMessage = error instanceof Error ? error.message : "Unknown error"
-    return NextResponse.json({ error: "Internal server error", message: errorMessage }, { status: 500 })
+    
+    // Always return a valid response with fallback suggestion
+    return NextResponse.json({
+      suggestion: "// Unable to generate suggestion at this time",
+      context: {
+        language: "unknown",
+        framework: "unknown",
+        beforeContext: "",
+        currentLine: "",
+        afterContext: "",
+        cursorPosition: { line: 0, column: 0 },
+        isInFunction: false,
+        isInClass: false,
+        isAfterComment: false,
+        incompletePatterns: []
+      },
+      metadata: {
+        language: "unknown",
+        framework: "unknown",
+        position: { line: 0, column: 0 },
+        generatedAt: new Date().toISOString(),
+        error: errorMessage
+      },
+    })
   }
 }
 
@@ -140,12 +171,12 @@ async function generateSuggestion(prompt: string): Promise<string> {
       })
       
       if (!healthCheck.ok) {
-        console.log("Ollama service not responding, using fallback")
-        return generateFallbackSuggestion(prompt)
+        console.log("Ollama service not responding, using Hugging Face fallback")
+        return generateHuggingFaceSuggestion(prompt)
       }
     } catch (healthError) {
-      console.log("Ollama service not available, using fallback:", healthError)
-      return generateFallbackSuggestion(prompt)
+      console.log("Ollama service not available, using Hugging Face fallback:", healthError)
+      return generateHuggingFaceSuggestion(prompt)
     }
     
     // Add timeout to prevent hanging requests
@@ -153,7 +184,7 @@ async function generateSuggestion(prompt: string): Promise<string> {
     const timeoutId = setTimeout(() => controller.abort(), 30000) // Reduced to 30 seconds
     
     const requestBody = {
-      model: "ArturBieniek/qwen3-coder:latest",
+      model: "mistral:latest",
       prompt,
       stream: false,
       options: {
@@ -180,7 +211,7 @@ async function generateSuggestion(prompt: string): Promise<string> {
 
     if (!response.ok) {
       console.error(`AI service error: ${response.status} ${response.statusText}`)
-      return generateFallbackSuggestion(prompt)
+      return generateHuggingFaceSuggestion(prompt)
     }
 
     const data = await response.json()
@@ -198,6 +229,34 @@ async function generateSuggestion(prompt: string): Promise<string> {
     return suggestion || "// No suggestion generated"
   } catch (error) {
     console.error("AI generation error:", error)
+    return generateHuggingFaceSuggestion(prompt)
+  }
+}
+
+/**
+ * Generate a suggestion using Hugging Face when Ollama is unavailable
+ */
+async function generateHuggingFaceSuggestion(prompt: string): Promise<string> {
+  try {
+    console.log("Generating suggestion with Hugging Face...")
+    
+    // Initialize Hugging Face AI with Kimi K2 model
+    const hfAI = new HuggingFaceAI(HUGGINGFACE_MODELS.KIMIK2)
+    
+    // Create a code generation prompt
+    const codePrompt = `You are a helpful coding assistant. Generate a code suggestion based on the following context:\n\n${prompt}\n\nProvide only the code suggestion without explanations.`
+    
+    // Try to generate code using Hugging Face
+    const suggestion = await hfAI.generateCode(codePrompt, 'typescript')
+    
+    if (suggestion && suggestion.trim()) {
+      return suggestion.trim()
+    } else {
+      console.log("Hugging Face returned empty suggestion, using text fallback")
+      return generateFallbackSuggestion(prompt)
+    }
+  } catch (error) {
+    console.error("Hugging Face generation error:", error)
     return generateFallbackSuggestion(prompt)
   }
 }

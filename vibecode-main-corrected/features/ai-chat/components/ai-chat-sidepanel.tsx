@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { ChatMessage as BaseChatMessage } from '@/lib/types/chat';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -27,6 +28,7 @@ import {
   Search,
   Filter,
   Download,
+  Square,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
@@ -54,6 +56,11 @@ import {
 import { EnhancedCodeBlock } from "./ai-chat-code-blocks";
 import { EnhancedFilePreview } from "./file-preview";
 import { ClineAgent } from "./cline-agent";
+import { SessionManager } from "./session-manager";
+import { AIModelSelector } from "./ai-model-selector";
+import { useStreamingChat } from "../hooks/useStreamingChat";
+import { useChatSessions } from "../hooks/useChatSessions";
+import { useChatMessages } from "../hooks/useChatMessages";
 import "katex/dist/katex.min.css";
 
 interface FileAttachment {
@@ -69,6 +76,7 @@ interface FileAttachment {
 
 interface CodeSuggestion {
   id: string;
+  text: string;
   title: string;
   description: string;
   code: string;
@@ -77,16 +85,15 @@ interface CodeSuggestion {
   fileName?: string;
   confidence?: number;
   category?: "optimization" | "bug_fix" | "feature" | "refactor" | "security";
+  type?: 'quick_reply' | 'action' | 'command';
+  action?: string;
 }
 
-interface ChatMessage {
+interface ChatMessage extends Omit<BaseChatMessage, 'role'> {
   role: "user" | "assistant";
-  content: string;
-  id: string;
   timestamp: Date;
   attachments?: FileAttachment[];
   suggestions?: CodeSuggestion[];
-  type?: "chat" | "code_review" | "suggestion" | "error_fix" | "optimization";
   tokens?: number;
   model?: string;
 }
@@ -319,16 +326,130 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
   const [attachments, setAttachments] = useState<FileAttachment[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [chatMode, setChatMode] = useState<
-    "chat" | "agent" | "review" | "fix" | "optimize"
+    "chat" | "agent" | "review" | "fix" | "optimize" | "sessions"
   >("chat");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState<string>("all");
   // const [showSettings, setShowSettings] = useState(false);
   const [autoSave, setAutoSave] = useState(true);
   const [streamResponse, setStreamResponse] = useState(true);
+  const [aiProvider, setAiProvider] = useState<string>("ollama");
+  const [aiModel, setAiModel] = useState<string>("");
+
+  // Session management hooks
+  const {
+    sessions,
+    currentSession,
+    createSession,
+    updateSession,
+    deleteSession,
+    setCurrentSession
+  } = useChatSessions();
+
+  const {
+    messages: sessionMessages,
+    loading: messagesLoading,
+    error: messagesError,
+    fetchMessages,
+    createMessage,
+    updateMessage,
+    deleteMessage,
+    clearMessages
+  } = useChatMessages(currentSession?.id);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Streaming chat hook
+  const {
+    isStreaming,
+    currentStreamingMessage,
+    sendStreamingMessage,
+    stopStreaming,
+    cleanup
+  } = useStreamingChat({
+    onMessageUpdate: (message) => {
+      // Update the current streaming message in real-time
+      if (message.role === 'system') return; // Skip system messages
+      
+      const localMessage: ChatMessage = {
+        ...message,
+        role: message.role as 'user' | 'assistant',
+        timestamp: message.timestamp || new Date(),
+        attachments: message.attachments ? message.attachments.map(att => ({
+          ...att,
+          language: 'text'
+        })) as FileAttachment[] : undefined,
+        suggestions: message.suggestions ? message.suggestions.map(sug => ({
+          ...sug,
+          title: sug.text || sug.id,
+          description: sug.text || sug.id,
+          code: '',
+          language: 'text'
+        })) as CodeSuggestion[] : undefined
+      };
+      
+      setMessages(prev => {
+        const lastMessage = prev[prev.length - 1];
+        if (lastMessage && lastMessage.role === 'assistant' && lastMessage.id === localMessage.id) {
+          return [...prev.slice(0, -1), localMessage];
+        } else {
+          return [...prev, localMessage];
+        }
+      });
+    },
+    onError: (error) => {
+      console.error('Streaming error:', error);
+      setIsLoading(false);
+      setMessages(prev => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: `Error: ${error}`,
+          timestamp: new Date(),
+          id: Date.now().toString(),
+        },
+      ]);
+    },
+    onComplete: () => {
+      setIsLoading(false);
+      // The message is already saved via onMessageUpdate
+    }
+  });
+
+  // Cleanup WebSocket on unmount
+  useEffect(() => {
+    return () => {
+      cleanup();
+    };
+  }, [cleanup]);
+
+  // Sync session messages with local messages state
+  useEffect(() => {
+    if (currentSession && sessionMessages) {
+      const convertedMessages: ChatMessage[] = sessionMessages.map(msg => ({
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+        id: msg.id,
+        timestamp: new Date(msg.createdAt),
+        attachments: Array.isArray(msg.attachments) ? msg.attachments as unknown as FileAttachment[] : undefined,
+        type: (msg.metadata as any)?.type || "chat",
+        tokens: (msg.metadata as any)?.tokens,
+        model: (msg.metadata as any)?.model
+      }));
+      setMessages(convertedMessages);
+    } else if (!currentSession) {
+      setMessages([]);
+    }
+  }, [currentSession, sessionMessages]);
+
+  // Update AI provider and model based on current session
+  useEffect(() => {
+    if (currentSession) {
+      setAiProvider(currentSession.aiProvider);
+      setAiModel(currentSession.aiModel);
+    }
+  }, [currentSession]);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -579,6 +700,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
       ) {
         suggestions.push({
           id: "security-headers",
+          text: "Add Security Headers",
           title: "Add Security Headers",
           description: "Implement security headers for web applications",
           code: `// Security headers middleware\nconst securityHeaders = {\n  'X-Content-Type-Options': 'nosniff',\n  'X-Frame-Options': 'DENY',\n  'X-XSS-Protection': '1; mode=block',\n  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',\n  'Content-Security-Policy': \"default-src 'self'\"\n};\n\napp.use((req, res, next) => {\n  Object.entries(securityHeaders).forEach(([key, value]) => {\n    res.setHeader(key, value);\n  });\n  next();\n});`,
@@ -596,6 +718,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
       ) {
         suggestions.push({
           id: "performance-optimization",
+          text: "Performance Optimization",
           title: "Performance Optimization",
           description:
             "Optimize component rendering with React.memo and useMemo",
@@ -614,6 +737,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
       ) {
         suggestions.push({
           id: "error-boundary",
+          text: "Add Error Boundary",
           title: "Add Error Boundary",
           description: "Comprehensive error boundary for React applications",
           code: `import React from 'react';\n\nclass ErrorBoundary extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = { hasError: false, error: null, errorInfo: null };\n  }\n\n  static getDerivedStateFromError(error) {\n    return { hasError: true };\n  }\n\n  componentDidCatch(error, errorInfo) {\n    this.setState({\n      error: error,\n      errorInfo: errorInfo\n    });\n    \n    // Log error to monitoring service\n    console.error('Error caught by boundary:', error, errorInfo);\n  }\n\n  render() {\n    if (this.state.hasError) {\n      return (\n        <div className=\"error-boundary\">\n          <h2>Something went wrong.</h2>\n          <details style={{ whiteSpace: 'pre-wrap' }}>\n            {this.state.error && this.state.error.toString()}\n            <br />\n            {this.state.errorInfo.componentStack}\n          </details>\n        </div>\n      );\n    }\n\n    return this.props.children;\n  }\n}`,
@@ -628,6 +752,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
       if (activeFileLanguage === "typescript" || activeFileLanguage === "tsx") {
         suggestions.push({
           id: "advanced-types",
+          text: "Advanced TypeScript Types",
           title: "Advanced TypeScript Types",
           description: "Improve type safety with advanced TypeScript patterns",
           code: `// Utility types for better type safety\ntype DeepReadonly<T> = {\n  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];\n};\n\ntype NonNullable<T> = T extends null | undefined ? never : T;\n\ntype ApiResponse<T> = {\n  data: T;\n  status: 'success' | 'error';\n  message?: string;\n  timestamp: Date;\n};\n\n// Generic hook with proper typing\nfunction useApi<T>(url: string): {\n  data: T | null;\n  loading: boolean;\n  error: string | null;\n  refetch: () => Promise<void>;\n} {\n  const [data, setData] = useState<T | null>(null);\n  const [loading, setLoading] = useState(false);\n  const [error, setError] = useState<string | null>(null);\n\n  const refetch = useCallback(async () => {\n    setLoading(true);\n    setError(null);\n    try {\n      const response = await fetch(url);\n      const result: ApiResponse<T> = await response.json();\n      setData(result.data);\n    } catch (err) {\n      setError(err instanceof Error ? err.message : 'Unknown error');\n    } finally {\n      setLoading(false);\n    }\n  }, [url]);\n\n  return { data, loading, error, refetch };\n}`,
@@ -645,6 +770,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
         if (file.content.includes("TODO") || file.content.includes("FIXME")) {
           suggestions.push({
             id: `todo-${file.id}`,
+            text: `Complete TODO in ${file.name}`,
             title: `Complete TODO in ${file.name}`,
             description: "Implementation for the TODO comment",
             code: `// Implementation for TODO\nconst implementation = async () => {\n  try {\n    // Add your logic here\n    const result = await performOperation();\n    return { success: true, data: result };\n  } catch (error) {\n    console.error('Operation failed:', error);\n    return { success: false, error: error.message };\n  }\n};`,
@@ -661,6 +787,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
         ) {
           suggestions.push({
             id: `logging-${file.id}`,
+            text: `Improve Logging in ${file.name}`,
             title: `Improve Logging in ${file.name}`,
             description: "Replace console.log with proper logging",
             code: `// Improved logging utility\nconst logger = {\n  info: (message, data) => {\n    console.info(\`[INFO] \${new Date().toISOString()}: \${message}\`, data);\n  },\n  warn: (message, data) => {\n    console.warn(\`[WARN] \${new Date().toISOString()}: \${message}\`, data);\n  },\n  error: (message, error) => {\n    console.error(\`[ERROR] \${new Date().toISOString()}: \${message}\`, error);\n  },\n  debug: (message, data) => {\n    if (process.env.NODE_ENV === 'development') {\n      console.debug(\`[DEBUG] \${new Date().toISOString()}: \${message}\`, data);\n    }\n  }\n};\n\n// Usage: logger.info('User logged in', { userId: 123 });`,
@@ -709,7 +836,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || isStreaming) return;
 
     const messageType =
       chatMode === "chat"
@@ -719,6 +846,22 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
         : chatMode === "fix"
         ? "error_fix"
         : "optimization";
+
+    let activeSession = currentSession;
+
+    // Create a new session if none exists
+    if (!activeSession) {
+      activeSession = await createSession({
+        title: input.trim().substring(0, 50) || "New Chat",
+        aiProvider,
+        aiModel: aiModel || (aiProvider === "ollama" ? "llama3.2:latest" : aiProvider === "gemini" ? "gemini-pro" : "microsoft/DialoGPT-medium")
+      });
+      if (!activeSession) {
+        console.error("Failed to create session");
+        return;
+      }
+    }
+
     const newMessage: ChatMessage = {
       role: "user",
       content: input.trim(),
@@ -729,12 +872,27 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
     };
 
     setMessages((prev) => [...prev, newMessage]);
+    const currentInput = input.trim();
     setInput("");
     setIsLoading(true);
 
+    // Save user message to database
+    if (activeSession) {
+      await createMessage({
+        sessionId: activeSession.id,
+        role: "user",
+        content: currentInput,
+        metadata: {
+          type: messageType,
+          attachments: attachments.length > 0 ? attachments : [],
+          attachmentCount: attachments.length
+        }
+      });
+    }
+
     try {
       // Prepare enhanced context
-      let contextualMessage = getChatModePrompt(chatMode, input.trim());
+      let contextualMessage = getChatModePrompt(chatMode, currentInput);
 
       if (attachments.length > 0) {
         contextualMessage += "\n\nAttached files:\n";
@@ -748,50 +906,88 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
         });
       }
 
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: contextualMessage,
-          history: messages.slice(-10).map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-          stream: streamResponse,
-          mode: chatMode,
-        }),
-      });
+      // Use streaming if enabled, otherwise fallback to regular API
+      if (streamResponse) {
+        const messageHistory = [...messages, newMessage].slice(-10).map((msg) => ({
+          id: msg.id,
+          role: msg.role,
+          content: msg.content,
+        }));
+        
+        // Replace user message content with contextual message
+        messageHistory[messageHistory.length - 1].content = contextualMessage;
+        
+        await sendStreamingMessage(messageHistory, aiProvider, aiModel);
+        
+        // Clear attachments after sending
+        setAttachments([]);
+      } else {
+        // Fallback to regular API
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: contextualMessage,
+            history: messages.slice(-10).map((msg) => ({
+              role: msg.role,
+              content: msg.content,
+            })),
+            stream: false,
+            mode: chatMode,
+            provider: aiProvider,
+            model: aiModel,
+          }),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        const suggestions = generateCodeSuggestions(input.trim(), attachments);
+        if (response.ok) {
+          const data = await response.json();
+          const suggestions = generateCodeSuggestions(currentInput, attachments);
 
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
+          const assistantMessage: ChatMessage = {
+            role: "assistant" as const,
             content: data.response,
             timestamp: new Date(),
             suggestions: suggestions.length > 0 ? suggestions : undefined,
             id: Date.now().toString(),
-            type: messageType,
+            type: messageType as "suggestion" | "optimization" | "chat" | "code_review" | "error_fix",
             tokens: data.tokens,
             model: data.model || "AI Assistant",
-          },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content:
-              "Sorry, I encountered an error while processing your request. Please try again.",
-            timestamp: new Date(),
-            id: Date.now().toString(),
-          },
-        ]);
+          };
+
+          setMessages((prev) => [...prev, assistantMessage]);
+          
+          // Save assistant message to database
+          if (activeSession) {
+            await createMessage({
+              sessionId: activeSession.id,
+              role: "assistant",
+              content: data.response,
+              metadata: {
+                type: messageType,
+                model: data.model || aiModel,
+                tokens: data.tokens
+              }
+            });
+          }
+          
+          // Clear attachments after sending
+          setAttachments([]);
+        } else {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content:
+                "Sorry, I encountered an error while processing your request. Please try again.",
+              timestamp: new Date(),
+              id: Date.now().toString(),
+            },
+          ]);
+        }
+        
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error sending message:", error);
@@ -861,6 +1057,22 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  const handleNewChat = () => {
+    setMessages([]);
+    setAttachments([]);
+    // Clear current session to start fresh
+    if (currentSession) {
+      setCurrentSession(null);
+    }
+  };
+
+  const handleSessionSelect = (sessionId: string) => {
+    const session = sessions.find(s => s.id === sessionId);
+    if (session) {
+      setCurrentSession(session);
+    }
   };
 
   const filteredMessages = messages
@@ -978,7 +1190,16 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                       <Settings className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="w-64">
+                    <div className="p-2">
+                      <AIModelSelector
+                        currentProvider={aiProvider as 'ollama' | 'gemini' | 'huggingface'}
+                        currentModel={aiModel}
+                        onProviderChange={(provider) => setAiProvider(provider)}
+                        onModelChange={(model) => setAiModel(model)}
+                      />
+                    </div>
+                    <DropdownMenuSeparator />
                     <DropdownMenuCheckboxItem
                       checked={autoSave}
                       onCheckedChange={setAutoSave}
@@ -1016,14 +1237,18 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
             {/* Enhanced Controls */}
             <Tabs
               value={chatMode}
-              onValueChange={(value) => setChatMode(value as "chat" | "agent" | "review" | "fix" | "optimize")}
+              onValueChange={(value) => setChatMode(value as "chat" | "agent" | "review" | "fix" | "optimize" | "sessions")}
               className="px-6"
             >
               <div className="flex items-center justify-between mb-4">
-                <TabsList className="grid w-full grid-cols-5 max-w-md">
+                <TabsList className="grid w-full grid-cols-6 max-w-lg">
                   <TabsTrigger value="chat" className="flex items-center gap-1">
                     <MessageSquare className="h-3 w-3" />
                     Chat
+                  </TabsTrigger>
+                  <TabsTrigger value="sessions" className="flex items-center gap-1">
+                    <Terminal className="h-3 w-3" />
+                    Sessions
                   </TabsTrigger>
                   <TabsTrigger value="agent" className="flex items-center gap-1">
                     <Brain className="h-3 w-3" />
@@ -1101,6 +1326,17 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
               currentFile={activeFileName}
               projectStructure={{}}
             />
+          ) : chatMode === "sessions" ? (
+            <div className="flex-1 overflow-hidden">
+              <SessionManager 
+                className="h-full"
+                onSessionSelect={(session) => {
+                  handleSessionSelect(session.id);
+                  // Switch back to chat mode after selecting a session
+                  setChatMode('chat');
+                }}
+              />
+            </div>
           ) : (
             <div className="flex-1 overflow-y-auto bg-zinc-950">
             <div className="p-6 space-y-6">
@@ -1295,7 +1531,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                 </div>
               ))}
 
-              {isLoading && (
+              {(isLoading || isStreaming) && (
                 <div className="flex items-start gap-4 justify-start">
                   <div className="relative w-10 h-10 border rounded-full flex flex-col justify-center items-center">
                     <Brain className="h-5 w-5 text-zinc-400" />
@@ -1303,7 +1539,9 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                   <div className="bg-zinc-900/80 backdrop-blur-sm border border-zinc-800/50 p-5 rounded-xl rounded-bl-md flex items-center gap-3">
                     <Loader2 className="h-4 w-4 animate-spin text-blue-400" />
                     <span className="text-sm text-zinc-300">
-                      {chatMode === "review"
+                      {isStreaming
+                        ? "Streaming response..."
+                        : chatMode === "review"
                         ? "Analyzing code structure and patterns..."
                         : chatMode === "fix"
                         ? "Identifying issues and solutions..."
@@ -1311,6 +1549,16 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                         ? "Analyzing performance bottlenecks..."
                         : "Processing your request..."}
                     </span>
+                    {isStreaming && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={stopStreaming}
+                        className="h-6 w-6 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                      >
+                        <Square className="h-3 w-3" />
+                      </Button>
+                    )}
                   </div>
                 </div>
               )}
@@ -1406,17 +1654,27 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                   </kbd>
                 </div>
               </div>
-              <Button
-                type="submit"
-                disabled={isLoading || !input.trim()}
-                className="h-11 px-4 bg-blue-600 hover:bg-blue-700 text-white border-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Send className="h-4 w-4" />
-                )}
-              </Button>
+              {isStreaming ? (
+                <Button
+                  type="button"
+                  onClick={stopStreaming}
+                  className="h-11 px-4 bg-red-600 hover:bg-red-700 text-white border-0 transition-colors"
+                >
+                  <Square className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isLoading || !input.trim()}
+                  className="h-11 px-4 bg-blue-600 hover:bg-blue-700 text-white border-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="h-4 w-4" />
+                  )}
+                </Button>
+              )}
             </div>
           </form>
 

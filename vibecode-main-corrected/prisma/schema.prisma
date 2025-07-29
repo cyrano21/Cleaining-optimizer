@@ -31,10 +31,11 @@ model User {
 
   myPlayground StarMark[]
   
-   chatMessages ChatMessage[] // New relation for chat messages
+  chatMessages ChatMessage[] // Relation for chat messages
+  chatSessions ChatSession[] // Relation for chat sessions
 
   staredPlayground Playground[]
-   createdAt    DateTime       @default(now())
+  createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 }
 
@@ -78,6 +79,7 @@ model Playground {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Starmark  StarMark[]
+  chatSessions ChatSession[] // Relation for chat sessions linked to this project
   userId String 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -108,15 +110,43 @@ model TemplateFile {
 }
 
 
-// New model for AI chat messages
-model ChatMessage {
-  id        String   @id @default(cuid()) @map("_id")
-  userId    String
-  role      String   // "user" or "assistant"
-  content   String
-  createdAt DateTime @default(now())
+// Enhanced model for AI chat sessions
+model ChatSession {
+  id           String   @id @default(cuid()) @map("_id")
+  userId       String
+  playgroundId String?  // Optional link to playground/project
+  title        String   @default("New Chat")
+  description  String?
+  aiProvider   String   @default("ollama") // ollama, gemini, huggingface
+  aiModel      String   @default("llama3.2:latest")
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  playground   Playground?  @relation(fields: [playgroundId], references: [id], onDelete: SetNull)
+  messages     ChatMessage[]
 
   @@index([userId])
+  @@index([playgroundId])
+}
+
+// Enhanced model for AI chat messages
+model ChatMessage {
+  id          String      @id @default(cuid()) @map("_id")
+  sessionId   String
+  userId      String
+  role        String      // "user" or "assistant" or "system"
+  content     String
+  attachments Json?       // File attachments, images, etc.
+  metadata    Json?       // Additional data (streaming info, model used, etc.)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  session     ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionId])
+  @@index([createdAt])
 }

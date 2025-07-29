@@ -11,6 +11,11 @@ const TerminalComponent = dynamic(() => import("./terminal"), {
   ssr: false,
   loading: () => <div className="flex items-center justify-center h-32"><div className="text-sm text-muted-foreground">Loading terminal...</div></div>
 });
+
+const EnhancedTerminal = dynamic(() => import("./enhanced-terminal"), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-32"><div className="text-sm text-muted-foreground">Loading enhanced terminal...</div></div>
+});
 import { WebContainer } from "@webcontainer/api";
 
 interface WebContainerPreviewProps {
@@ -127,12 +132,14 @@ const WebContainerPreview: React.FC<WebContainerPreviewProps> = ({
         }));
         setCurrentStep(2);
 
-        // Step 2: Mount files
+        // Step 2: Mount files using WebContainerService to ensure Next.js config
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal("📁 Mounting files to WebContainer...\r\n");
         }
         
-        await instance.mount(files);
+        // Use WebContainerService to mount files with automatic Next.js config creation
+        const webContainerService = (await import('../service/webContainerService')).default;
+        await webContainerService.mountFiles(files);
         
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal("✅ Files mounted successfully\r\n");
@@ -352,9 +359,9 @@ const WebContainerPreview: React.FC<WebContainerPreviewProps> = ({
             />
           </div>
           
-          {/* Terminal at bottom when preview is ready */}
+          {/* Enhanced Terminal at bottom when preview is ready */}
           <div className="h-64 border-t">
-            <TerminalComponent 
+            <EnhancedTerminal 
               ref={terminalRef}
               webContainerInstance={instance}
               theme="dark"

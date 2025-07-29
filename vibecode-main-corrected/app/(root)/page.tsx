@@ -11,7 +11,7 @@ export default function Home() {
       <Image src={"/hero.svg"} alt="Hero-Section" height={500}  width={500}/>
       
       <h1 className=" z-20 text-6xl mt-5 font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 dark:from-rose-400 dark:via-red-400 dark:to-pink-400 tracking-tight leading-[1.3] ">
-        Vibe Code With with Intelligence
+        Vibe Code with Intelligence
       </h1>
       </div>
      
@@ -22,12 +22,26 @@ export default function Home() {
         It is designed to help you write, debug, and optimize your code
         efficiently.
       </p>
-      <Link href={"/dashboard"}>
-        <Button variant={"brand"} className="mb-4" size={"lg"}>
-          Get Started
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Button>
-      </Link>
+      <div className="flex flex-col sm:flex-row gap-4 items-center">
+        <Link href={"/dashboard"}>
+          <Button variant={"brand"} className="mb-4" size={"lg"}>
+            Get Started
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Button>
+        </Link>
+        <Link href={"/lovable-clone"}>
+          <Button variant={"default"} className="mb-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" size={"lg"}>
+            Try Lovable Clone
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Button>
+        </Link>
+        <Link href={"/visual-editor"}>
+          <Button variant={"outline"} className="mb-4" size={"lg"}>
+            Try Visual Editor
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,74 @@
+{
+  "name": "Vibecode - AI-Powered Web IDE",
+  "short_name": "Vibecode",
+  "description": "Un IDE web moderne avec IA intégrée pour le développement collaboratif",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#3b82f6",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouveau Playground",
+      "short_name": "Nouveau",
+      "description": "Créer un nouveau playground de code",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/add-new.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Chat IA",
+      "short_name": "IA",
+      "description": "Ouvrir l'assistant IA",
+      "url": "/playground/new?tab=ai-chat",
+      "icons": [
+        {
+          "src": "/logo.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/vibe-code-editor-thumbnail.svg",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Interface principale de Vibecode"
+    }
+  ],
+  "features": [
+    "Cross Platform",
+    "AI Assistant",
+    "Real-time Collaboration",
+    "WebContainers",
+    "Multi-language Support"
+  ],
+  "prefer_related_applications": false
+}

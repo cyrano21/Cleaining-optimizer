@@ -8,7 +8,7 @@ export class OllamaAI {
   private baseUrl: string
   private model: string
 
-  constructor(baseUrl: string = 'http://localhost:11434', model: string = 'codellama:7b') {
+  constructor(baseUrl: string = 'http://localhost:11434', model: string = 'mistral:latest') {
     this.baseUrl = baseUrl
     this.model = model
   }
@@ -102,6 +102,65 @@ export class OllamaAI {
     }
   }
 
+  async *generateStreamingResponse(messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>, options: OllamaOptions = {}) {
+    try {
+      // Check if Ollama is available first
+      const healthCheck = await this.checkHealth()
+      if (!healthCheck) {
+        throw new Error('Ollama server is not available. Please make sure Ollama is running on ' + this.baseUrl)
+      }
+
+      const response = await fetch(`${this.baseUrl}/api/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: this.model,
+          messages: messages,
+          stream: true,
+          options: {
+            temperature: options.temperature || 0.2,
+            top_p: options.top_p || 0.9,
+            num_predict: options.maxTokens || 2048
+          }
+        })
+      })
+
+      if (!response.ok || !response.body) {
+        throw new Error(`Ollama API error: ${response.statusText}`)
+      }
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+      
+      let done = false
+      while (!done) {
+        const { value, done: doneReading } = await reader.read()
+        done = doneReading
+        
+        if (value) {
+          const chunk = decoder.decode(value, { stream: true })
+          const lines = chunk.split('\n').filter(line => line.trim())
+          
+          for (const line of lines) {
+            try {
+              const data = JSON.parse(line)
+              if (data.message?.content) {
+                yield data.message.content
+              }
+            } catch {
+                 // Skip invalid JSON
+               }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Ollama AI Streaming Error:', error)
+      throw error
+    }
+  }
+
   async listModels() {
     try {
       const response = await fetch(`${this.baseUrl}/api/tags`)
@@ -153,7 +212,7 @@ Provide the corrected code with explanation of what was wrong.`
 
 // RTX 3090 optimized models
 export const OLLAMA_MODELS = {
-  CODE: 'codellama:7b',
+  CODE: 'mistral:latest',
   CODE_LARGE: 'codellama:13b',
   CODE_HUGE: 'codellama:34b',
   MIXTRAL: 'mixtral:8x7b',

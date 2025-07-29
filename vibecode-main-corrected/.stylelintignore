@@ -1,0 +1,14 @@
+# Ignore TypeScript files
+*.ts
+*.tsx
+
+# Ignore Next.js files
+.next/
+out/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore build outputs
+build/
+dist/

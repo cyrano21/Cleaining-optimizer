@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "@/components/ui/toggle-theme";
+import { MobileNavigation } from "@/components/ui/mobile-navigation";
 import UserButton from "../auth/components/user-button";
 
 export function Header() {
@@ -45,6 +46,10 @@ export function Header() {
                     </span>
                   </Link>
                   <span className="text-zinc-300 dark:text-zinc-700">|</span>
+                  {/* Mobile Navigation */}
+                  <div className="sm:hidden">
+                    <MobileNavigation />
+                  </div>
                   {/* Desktop Navigation Links */}
                   <div className="hidden sm:flex items-center gap-4">
                     <Link

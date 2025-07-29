@@ -47,10 +47,13 @@ interface ChatMessage {
 
 interface CodeSuggestion {
   id: string
+  text: string
   title: string
   description: string
   code: string
   language: string
+  type: "suggestion" | "optimization" | "chat" | "code_review" | "error_fix"
+  action: string
   insertPosition?: { line: number; column: number }
   fileName?: string
 }
@@ -361,10 +364,13 @@ export const FileAttachmentChat: React.FC<FileAttachmentChatProps> = ({ isOpen, 
         if (file.content.includes("TODO") || file.content.includes("FIXME")) {
           suggestions.push({
             id: `todo-${file.id}`,
+            text: `Complete TODO in ${file.name}`,
             title: `Complete TODO in ${file.name}`,
             description: "Implementation for the TODO comment",
             code: `// Implementation for TODO\nconst implementation = () => {\n  // Add your logic here\n  return true;\n};`,
             language: file.language,
+            type: "suggestion" as const,
+            action: "implement",
             fileName: file.name,
           })
         }
@@ -372,9 +378,12 @@ export const FileAttachmentChat: React.FC<FileAttachmentChatProps> = ({ isOpen, 
         if (file.content.includes("function") && !file.content.includes("return")) {
           suggestions.push({
             id: `return-${file.id}`,
+            text: `Add return statement to ${file.name}`,
             title: `Add return statement to ${file.name}`,
             description: "Add missing return statement to function",
             code: `return result;`,
+            type: "suggestion" as const,
+            action: "fix",
             language: file.language,
             fileName: file.name,
           })
@@ -383,10 +392,13 @@ export const FileAttachmentChat: React.FC<FileAttachmentChatProps> = ({ isOpen, 
         if (file.language === "jsx" || file.language === "tsx") {
           suggestions.push({
             id: `hook-${file.id}`,
+            text: `Add React hooks to ${file.name}`,
             title: `Add React hooks to ${file.name}`,
             description: "Add useState and useEffect hooks",
             code: `const [state, setState] = useState(null);\n\nuseEffect(() => {\n  // Effect logic here\n}, []);`,
             language: file.language,
+            type: "suggestion" as const,
+            action: "add",
             fileName: file.name,
           })
         }
@@ -397,20 +409,26 @@ export const FileAttachmentChat: React.FC<FileAttachmentChatProps> = ({ isOpen, 
     if (content.toLowerCase().includes("error handling")) {
       suggestions.push({
         id: "error-handling",
+        text: "Add Error Handling",
         title: "Add Error Handling",
         description: "Comprehensive error handling pattern",
-        code: `try {\n  // Your code here\n  const result = await operation();\n  return result;\n} catch (error) {\n  console.error('Operation failed:', error);\n  throw new Error(\`Operation failed: \${error.message}\`);\n}`,
+        code: `try {\n  // Your code here\n  const result = await operation();\n  return result;\n} catch (error) {\n  console.error('Operation failed:', error);\n  throw new Error(\`Operation failed: \${error.message}\`)\n}`,
         language: "javascript",
+        type: "suggestion" as const,
+        action: "add",
       })
     }
 
     if (content.toLowerCase().includes("validation")) {
       suggestions.push({
         id: "validation",
+        text: "Add Input Validation",
         title: "Add Input Validation",
         description: "Input validation function",
         code: `const validateInput = (input) => {\n  if (!input || typeof input !== 'string') {\n    throw new Error('Invalid input: must be a non-empty string');\n  }\n  \n  if (input.length < 3) {\n    throw new Error('Input too short: minimum 3 characters');\n  }\n  \n  return input.trim();\n};`,
         language: "javascript",
+        type: "suggestion" as const,
+        action: "add",
       })
     }
 

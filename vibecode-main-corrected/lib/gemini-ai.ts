@@ -165,6 +165,49 @@ Provide a structured response with specific actions to take.`
       return false
     }
   }
+
+  async *generateStreamingResponse(messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>, options: {
+    temperature?: number;
+    maxTokens?: number;
+    top_p?: number;
+  } = {}): AsyncIterable<string> {
+    try {
+      const model = this.genAI.getGenerativeModel({ model: this.model })
+      
+      // Convert messages to Gemini format
+      const conversation = messages.map(msg => {
+        if (msg.role === 'system') {
+          return { role: 'user', parts: [{ text: `System: ${msg.content}` }] }
+        }
+        return {
+          role: msg.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: msg.content }]
+        }
+      })
+
+      const generationConfig = {
+        temperature: options.temperature || 0.7,
+        topP: options.top_p || 0.8,
+        maxOutputTokens: options.maxTokens || 2048,
+      }
+
+      const chat = model.startChat({
+        generationConfig,
+        history: conversation.slice(0, -1), // All messages except the last one
+      })
+
+      const lastMessage = conversation[conversation.length - 1]
+      const result = await chat.sendMessageStream(lastMessage.parts[0].text)
+      
+      for await (const chunk of result.stream) {
+        const text = chunk.text()
+        if (text) yield text
+      }
+    } catch (error) {
+      console.error('Gemini AI Streaming Error:', error)
+      throw error
+    }
+  }
 }
 
 // Available Gemini models

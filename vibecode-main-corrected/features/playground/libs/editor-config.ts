@@ -146,7 +146,7 @@ export const createCodeActionsProvider = (monaco: Monaco) => {
 };
 
 // Register AI fix command
-export const registerAICommands = (monaco: Monaco, editor: import('monaco-editor').editor.IStandaloneCodeEditor) => {
+export const registerAICommands = (monaco: Monaco) => {
   const huggingFaceAI = new HuggingFaceAI();
   let ollamaAI: OllamaAI | null = null;
   
@@ -156,8 +156,8 @@ export const registerAICommands = (monaco: Monaco, editor: import('monaco-editor
     console.warn('Ollama not available, using HuggingFace as fallback:', error);
   }
 
-  // Register the AI fix command
-  editor.addAction({
+  // Register the AI fix command globally
+  monaco.editor.addEditorAction({
     id: 'ai.fixError',
     label: 'Corriger avec l\'IA',
     keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF],
@@ -170,19 +170,23 @@ export const registerAICommands = (monaco: Monaco, editor: import('monaco-editor
       const { error, code, range, language } = params as {
         error: string;
         code: string;
-        range: import('monaco-editor').Range;
+        range?: import('monaco-editor').Range;
         language: string;
       };
       
+      // Show loading indicator only if range is provided
+      let loadingDecoration: string[] = [];
+      
       try {
-        // Show loading indicator
-        const loadingDecoration = editor.deltaDecorations([], [{
-          range: new monaco.Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn),
-          options: {
-            className: 'ai-fixing-decoration',
-            hoverMessage: { value: '🤖 L\'IA corrige le code...' }
-          }
-        }]);
+        if (range) {
+          loadingDecoration = editor.deltaDecorations([], [{
+            range: new monaco.Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn),
+            options: {
+              className: 'ai-fixing-decoration',
+              hoverMessage: { value: '🤖 L\'IA corrige le code...' }
+            }
+          }]);
+        }
         
         let fixedCode = '';
         
@@ -205,47 +209,68 @@ export const registerAICommands = (monaco: Monaco, editor: import('monaco-editor
         }
         
         // Remove loading decoration
-        editor.deltaDecorations(loadingDecoration, []);
+        if (loadingDecoration.length > 0) {
+          editor.deltaDecorations(loadingDecoration, []);
+        }
         
         if (typeof fixedCode === 'string' && fixedCode.trim()) {
           // Extract just the code part if the response includes explanation
           const codeMatch = fixedCode.match(/```(?:typescript|javascript|tsx|jsx)?\n([\s\S]*?)\n```/);
           const cleanCode = codeMatch ? codeMatch[1] : fixedCode;
           
-          // Apply the fix
-          editor.executeEdits('ai-fix', [{
-            range: new monaco.Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn),
-            text: cleanCode.trim()
-          }]);
-          
-          // Show success message
-          const successDecoration = editor.deltaDecorations([], [{
-            range: new monaco.Range(range.startLineNumber, range.startColumn, range.startLineNumber + cleanCode.split('\n').length - 1, 1),
-            options: {
-              className: 'ai-success-decoration',
-              hoverMessage: { value: '✅ Corrigé par l\'IA' }
+          if (range) {
+            // Apply the fix
+            editor.executeEdits('ai-fix', [{
+              range: new monaco.Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn),
+              text: cleanCode.trim()
+            }]);
+            
+            // Show success message
+            const successDecoration = editor.deltaDecorations([], [{
+              range: new monaco.Range(range.startLineNumber, range.startColumn, range.startLineNumber + cleanCode.split('\n').length - 1, 1),
+              options: {
+                className: 'ai-success-decoration',
+                hoverMessage: { value: '✅ Corrigé par l\'IA' }
+              }
+            }]);
+            
+            // Remove success decoration after 3 seconds
+            setTimeout(() => {
+              editor.deltaDecorations(successDecoration, []);
+            }, 3000);
+          } else {
+            // If no range provided, replace all content
+            const model = editor.getModel();
+            if (model) {
+              const fullRange = model.getFullModelRange();
+              editor.executeEdits('ai-fix', [{
+                range: fullRange,
+                text: cleanCode.trim()
+              }]);
             }
-          }]);
-          
-          // Remove success decoration after 3 seconds
-          setTimeout(() => {
-            editor.deltaDecorations(successDecoration, []);
-          }, 3000);
+          }
         }
       } catch (error) {
         console.error('AI fix failed:', error);
-        // Show error message
-        const errorDecoration = editor.deltaDecorations([], [{
-          range: new monaco.Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn),
-          options: {
-            className: 'ai-error-decoration',
-            hoverMessage: { value: '❌ Échec de la correction IA: ' + (error as Error).message }
-          }
-        }]);
+        // Remove loading decoration if it exists
+        if (loadingDecoration.length > 0) {
+          editor.deltaDecorations(loadingDecoration, []);
+        }
         
-        setTimeout(() => {
-          editor.deltaDecorations(errorDecoration, []);
-        }, 5000);
+        // Show error message only if range is available
+        if (range) {
+          const errorDecoration = editor.deltaDecorations([], [{
+            range: new monaco.Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn),
+            options: {
+              className: 'ai-error-decoration',
+              hoverMessage: { value: '❌ Échec de la correction IA: ' + (error as Error).message }
+            }
+          }]);
+          
+          setTimeout(() => {
+            editor.deltaDecorations(errorDecoration, []);
+          }, 5000);
+        }
       }
     }
   });

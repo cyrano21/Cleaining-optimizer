@@ -41,7 +41,7 @@ export function ClineAgent({ currentFile, projectStructure }: ClineAgentProps) {
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [executingActions, setExecutingActions] = useState<Set<string>>(new Set())
-  const [provider, setProvider] = useState<'huggingface' | 'ollama'>('ollama')
+  const [provider, setProvider] = useState<'huggingface' | 'ollama' | 'gemini'>('ollama')
   const [model, setModel] = useState('ArturBieniek/qwen3-coder:latest')
   const [mode, setMode] = useState<'manual' | 'auto'>('manual')
   const [agentMode, setAgentMode] = useState<'chat' | 'agent'>('agent')
